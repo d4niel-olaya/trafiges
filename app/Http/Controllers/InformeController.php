@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InformeController extends Controller
 {
@@ -12,7 +13,8 @@ class InformeController extends Controller
     public function index()
     {
         //
-        return view("informes.index");
+        $informes = DB::table("informes")->select("id","matricula","fechaAccidente","nombreCliente","abogadoAsociado","peritoAsignado", "tipoInforme", "companiaSeguros")->orderBy("fechaAccidente","desc")->get();    
+        return view("informes.index", ["informes" => $informes]);
     }
 
     /**
@@ -37,7 +39,8 @@ class InformeController extends Controller
     public function show(string $id)
     {
         //
-        return view("informes.show");
+        $informe= DB::table("informes")->orderBy("fechaAccidente","desc")->where("id","=", $id)->get();    
+        return view("informes.show", ["informes" => $informe]);
     }
 
     /**

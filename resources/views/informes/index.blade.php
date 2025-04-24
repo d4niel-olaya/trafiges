@@ -51,28 +51,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b transition-colors hover:bg-muted/50">
-                        <td class="p-4 align-middle font-medium">INF-7986</td>
-                        <td class="p-4 align-middle">0245GHJ</td>
-                        <td class="p-4 align-middle">2025-04-12</td>
-                        <td class="p-4 align-middle">Juan Pérez</td>
-                        <td class="p-4 align-middle">Pedro Sánchez</td>
-                        <td class="p-4 align-middle">Laura Fernández</td>
-                        <td class="p-4 align-middle">Accidente de tráfico</td>
-                        <td class="p-4 align-middle">Mutua Madrileña</td>
-                        <td class="p-4 align-middle">
-                            <div class="flex justify-end space-x-2"><button button onclick="location.href='/informes/1'" class="inline-flex items-center justify-center h-10 w-10 rounded-md hover:bg-accent hover:text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4">
-                                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
-                                        <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
-                                        <path d="M10 9H8"></path>
-                                        <path d="M16 13H8"></path>
-                                        <path d="M16 17H8"></path>
-                                    </svg></button><button onclick="location.href='/informes/1/edit'" class="inline-flex items-center justify-center h-10 w-10 rounded-md hover:bg-accent hover:text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil h-4 w-4">
-                                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path>
-                                        <path d="m15 5 4 4"></path>
-                                    </svg></button></div>
-                        </td>
-                    </tr>
+                    @foreach ($informes as $informe)
+                        <tr class="border-b transition-colors hover:bg-muted/50">
+                            <td class="p-4 align-middle font-medium">{{$informe->id}}</td>
+                            <td class="p-4 align-middle">{{$informe->matricula}}</td>
+                            <td class="p-4 align-middle">{{$informe->fechaAccidente}}</td>
+                            <td class="p-4 align-middle">{{$informe->nombreCliente}}</td>
+                            <td class="p-4 align-middle">{{$informe->abogadoAsociado}}</td>
+                            <td class="p-4 align-middle">{{$informe->peritoAsignado}}</td>
+                            <td class="p-4 align-middle">{{$informe->tipoInforme}}</td>
+                            <td class="p-4 align-middle">{{$informe->companiaSeguros}}</td>
+                            <td class="p-4 align-middle">
+                                <div class="flex justify-end space-x-2"><button button onclick="location.href='/informes/{{$informe->id}}'" class="inline-flex items-center justify-center h-10 w-10 rounded-md hover:bg-accent hover:text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4">
+                                            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                            <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                            <path d="M10 9H8"></path>
+                                            <path d="M16 13H8"></path>
+                                            <path d="M16 17H8"></path>
+                                        </svg></button><button onclick="location.href='/informes/{{$informe->id}}/edit'" class="inline-flex items-center justify-center h-10 w-10 rounded-md hover:bg-accent hover:text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil h-4 w-4">
+                                            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path>
+                                            <path d="m15 5 4 4"></path>
+                                        </svg></button></div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
