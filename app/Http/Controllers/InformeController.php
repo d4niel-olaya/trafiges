@@ -23,6 +23,7 @@ class InformeController extends Controller
     public function create()
     {
         //
+        return view("informes.create");
     }
 
     /**
@@ -40,7 +41,8 @@ class InformeController extends Controller
     {
         //
         $informe= DB::table("informes")->orderBy("fechaAccidente","desc")->where("id","=", $id)->get();    
-        return view("informes.show", ["informes" => $informe]);
+     
+        return view("informes.show", ["informe" => $informe]);
     }
 
     /**
@@ -49,7 +51,10 @@ class InformeController extends Controller
     public function edit(string $id)
     {
         //
-        return view("informes.edit");
+        $informe= DB::table("informes")->orderBy("fechaAccidente","desc")->where("id","=", $id)->get();    
+        
+        //return $informe;
+        return view("informes.edit",["informe" => $informe]);
     }
 
     /**

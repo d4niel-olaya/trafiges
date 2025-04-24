@@ -11,7 +11,7 @@
             <p class="text-sm text-gray-500">Visualización de informes mediante pestañas</p>
         </div>
         <div class="flex flex-wrap justify-end gap-2">
-            <button button onclick="location.href='/informes/1/edit'" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+            <button button onclick="location.href='/informes/{{$informe[0]->id}}/edit'" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil mr-2 h-4 w-4">
                     <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path>
                     <path d="m15 5 4 4"></path>
@@ -46,7 +46,7 @@
     <div class="bg-white shadow rounded-lg overflow-hidden">
         <div class="flex items-start justify-between p-6 border-b border-gray-200">
             <div>
-                <h2 class="text-xl font-semibold text-gray-900">Informe INF-7986</h2>
+                <h2 class="text-xl font-semibold text-gray-900">Informe {{$informe[0]->id}}</h2>
                 <p class="mt-1 text-sm text-gray-500">Modifique la información del informe.</p>
             </div>
         </div>
@@ -65,37 +65,37 @@
                         <div class="p-6 pt-0 grid grid-cols-2 gap-4">
                             <div>
                                 <h3 class="font-medium text-sm text-muted-foreground mb-1">Matrícula</h3>
-                                <p>0245GHJ</p>
+                                <p>{{$informe[0]->matricula}}</p>
                             </div>
                             <div>
                                 <h3 class="font-medium text-sm text-muted-foreground mb-1">Fecha de Accidente</h3>
-                                <p>11/4/2025</p>
+                                <p>{{$informe[0]->fechaAccidente}}</p>
                             </div>
                             <div>
                                 <h3 class="font-medium text-sm text-muted-foreground mb-1">Cliente</h3>
-                                <p>Juan Pérez</p>
+                                <p>{{$informe[0]->nombreCliente}}</p>
                             </div>
                             <div>
                                 <h3 class="font-medium text-sm text-muted-foreground mb-1">Abogado Asociado</h3>
-                                <p>Pedro Sánchez</p>
+                                <p>{{$informe[0]->abogadoAsociado}}</p>
                             </div>
                             <div>
                                 <h3 class="font-medium text-sm text-muted-foreground mb-1">Perito Asignado</h3>
-                                <p>Laura Fernández</p>
+                                <p>{{$informe[0]->peritoAsignado}}</p>
                             </div>
                             <div>
                                 <h3 class="font-medium text-sm text-muted-foreground mb-1">Tipo de Informe</h3>
-                                <p>Accidente de tráfico</p>
+                                <p>{{$informe[0]->tipoInforme}}</p>
                             </div>
                             <div>
                                 <h3 class="font-medium text-sm text-muted-foreground mb-1">Compañía de Seguros</h3>
-                                <p>Mutua Madrileña</p>
+                                <p>{{$informe[0]->companiaSeguros}}</p>
                             </div>
                             <div>
                                 <h3 class="font-medium text-sm text-muted-foreground mb-1">Estado</h3>
                                 <div class="flex items-center">
                                     <div class="h-2 w-2 rounded-full bg-amber-500 mr-2"></div>
-                                    <p>Pendiente</p>
+                                    <p>{{$informe[0]->estado}}</p>
                                 </div>
                             </div>
                         </div>
