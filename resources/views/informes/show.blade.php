@@ -5,10 +5,35 @@
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="mb-6 flex items-center justify-between">
+    <div class="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
             <h2 class="text-xl font-semibold text-gray-800">Vista de Informe</h2>
             <p class="text-sm text-gray-500">Visualización de informes mediante pestañas</p>
+        </div>
+        <div class="flex flex-wrap justify-end gap-2">
+            <button button onclick="location.href='/informes/1/edit'" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil mr-2 h-4 w-4">
+                    <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path>
+                    <path d="m15 5 4 4"></path>
+                </svg>
+                Editar
+            </button>
+            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download mr-2 h-4 w-4">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" x2="12" y1="15" y2="3"></line>
+                </svg>
+                Exportar
+            </button>
+            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-printer mr-2 h-4 w-4">
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"></path>
+                    <rect x="6" y="14" width="12" height="8" rx="1"></rect>
+                </svg>
+                Imprimir
+            </button>
         </div>
         <button class="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors focus:outline-none" onclick="window.history.back()">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left mr-2">
@@ -37,7 +62,43 @@
                 </div>
                 <div class="py-6 tab-content">
                     <div id="datos-generales-content" class="tab-panel">
-                        <p>Aquí irá el formulario de Datos Generales.</p>
+                        <div class="p-6 pt-0 grid grid-cols-2 gap-4">
+                            <div>
+                                <h3 class="font-medium text-sm text-muted-foreground mb-1">Matrícula</h3>
+                                <p>0245GHJ</p>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-sm text-muted-foreground mb-1">Fecha de Accidente</h3>
+                                <p>11/4/2025</p>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-sm text-muted-foreground mb-1">Cliente</h3>
+                                <p>Juan Pérez</p>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-sm text-muted-foreground mb-1">Abogado Asociado</h3>
+                                <p>Pedro Sánchez</p>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-sm text-muted-foreground mb-1">Perito Asignado</h3>
+                                <p>Laura Fernández</p>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-sm text-muted-foreground mb-1">Tipo de Informe</h3>
+                                <p>Accidente de tráfico</p>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-sm text-muted-foreground mb-1">Compañía de Seguros</h3>
+                                <p>Mutua Madrileña</p>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-sm text-muted-foreground mb-1">Estado</h3>
+                                <div class="flex items-center">
+                                    <div class="h-2 w-2 rounded-full bg-amber-500 mr-2"></div>
+                                    <p>Pendiente</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div id="vehiculos-content" class="tab-panel hidden">
                         <p>Aquí irá el formulario de Vehículos.</p>
