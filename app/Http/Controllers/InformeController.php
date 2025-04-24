@@ -37,6 +37,7 @@ class InformeController extends Controller
     public function show(string $id)
     {
         //
+        return view("informes.show");
     }
 
     /**
@@ -45,6 +46,7 @@ class InformeController extends Controller
     public function edit(string $id)
     {
         //
+        return view("informes.edit");
     }
 
     /**
