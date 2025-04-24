@@ -50,6 +50,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('logs', [LogController::class, 'index'])->name('logs.index');
         Route::get('backups', [BackupController::class, 'index'])->name('backups.index');
     });
+
+    Route::get('/exportar', [InformeController::class, 'exportar']);
 });
 
 Route::get('/', function () {

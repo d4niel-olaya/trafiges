@@ -18,7 +18,7 @@
                 </svg>
                 Editar
             </button>
-            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+            <button id="btnExportar" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download mr-2 h-4 w-4">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                     <polyline points="7 10 12 15 17 10"></polyline>
@@ -184,6 +184,42 @@
 
         // Mostrar la primera pestaña por defecto
         showTab('datos-generales-content');
+
+
+        document.getElementById("btnExportar").addEventListener("click", function() {
+            // Aquí puedes agregar la lógica para exportar el informe
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        fetch('/exportar', {
+            method: 'GET', // o 'GET', según como esté configurado tu PHP
+            headers: {
+            //responseType: 'blob'
+            'X-CSRF-TOKEN': csrfToken,
+            'Content-Type': 'blob', // Solo si estás enviando JSON
+                // Agrega aquí cualquier cabecera necesaria si tu backend la necesita
+            },
+            // body: JSON.stringify({ nombre: 'Juan', ... }) // si necesitas mandar datos
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al generar el documento');
+            }
+            return response.blob();
+        })
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'documento_generado.odt';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => {
+            console.error('Hubo un problema con la descarga:', error);
+        });
+
+        });
     });
 </script>
 @endsection
