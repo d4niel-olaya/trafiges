@@ -53,6 +53,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::get('/exportar', [ExportController::class, 'exportar']);
+    //Route::post('/informes/update', [InformeController::class,'update'])->name('informes.update');
 });
 
 Route::get('/', function () {

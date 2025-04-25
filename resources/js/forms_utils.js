@@ -232,3 +232,35 @@ export function formularioAJson(divId) {
     return formData;
 }
 
+export function inputsAJson(listaIds) {
+    const formData = {};
+
+    listaIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return; // Si no existe el elemento, lo salta
+
+        const name = el.name;
+        let value = el.value;
+
+        if (!name) return;
+
+        // Si es checkbox o radio
+        if (el.type === 'checkbox') {
+            value = el.checked;
+        } else if (el.type === 'radio') {
+            if (!el.checked) return;
+        }
+
+        // Si el campo ya existe (caso checkboxes con mismo name)
+        if (formData[name]) {
+            if (!Array.isArray(formData[name])) {
+                formData[name] = [formData[name]];
+            }
+            formData[name].push(value);
+        } else {
+            formData[name] = value;
+        }
+    });
+
+    return formData;
+}

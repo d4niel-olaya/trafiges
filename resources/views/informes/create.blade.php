@@ -51,8 +51,8 @@
                                                 </svg></div>
                                         </div>
                                     </div>
-                                    <div class="mb-6"><label for="cliente" class="block text-sm font-medium text-gray-700 mb-2">Cliente</label>
-                                        <div class="relative"><input type="text" id="cliente" name="cliente" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"  ><button class="absolute inset-y-0 right-10 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5 text-gray-400">
+                                    <div class="mb-6"><label for="nombreCliente" class="block text-sm font-medium text-gray-700 mb-2">Cliente</label>
+                                        <div class="relative"><input type="text" id="nombreCliente" name="nombreCliente" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"  ><button class="absolute inset-y-0 right-10 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5 text-gray-400">
                                                     <circle cx="11" cy="11" r="8"></circle>
                                                     <path d="m21 21-4.3-4.3"></path>
                                                 </svg></button><button class="absolute inset-y-0 right-0 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-5 w-5 text-gray-400">
@@ -66,9 +66,7 @@
                                                 <option value="María López">María López</option>
                                                 <option value="Carlos Ruiz">Carlos Ruiz</option>
                                             </select>
-                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"><svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
-                                                </svg></div>
+                                            
                                         </div>
                                     </div>
                                     <div class="mb-6"><label for="peritoAsignado" class="block text-sm font-medium text-gray-700 mb-2">Perito Asignado</label>
@@ -77,9 +75,7 @@
                                                 <option value="Javier García">Javier García</option>
                                                 <option value="Ana Martínez">Ana Martínez</option>
                                             </select>
-                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"><svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
-                                                </svg></div>
+                                         
                                         </div>
                                     </div>
                                     <div class="mb-6"><label for="tipoInforme" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Informe</label>
@@ -88,13 +84,11 @@
                                                 <option value="Daños materiales">Daños materiales</option>
                                                 <option value="Lesiones personales">Lesiones personales</option>
                                             </select>
-                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"><svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
-                                                </svg></div>
+                                           
                                         </div>
                                     </div>
                                     <div class="mb-6"><label for="companiaSeguros" class="block text-sm font-medium text-gray-700 mb-2">Compañía de Seguros</label>
-                                        <div class="relative"><input type="text" id="companiaSeguros" name="companiaSeguros"   class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="Mutua Madrileña"><button class="absolute inset-y-0 right-10 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5 text-gray-400">
+                                        <div class="relative"><input type="text" id="companiaSeguros" name="companiaSeguros" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="Mutua Madrileña"><button class="absolute inset-y-0 right-10 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5 text-gray-400">
                                                     <circle cx="11" cy="11" r="8"></circle>
                                                     <path d="m21 21-4.3-4.3"></path>
                                                 </svg></button><button class="absolute inset-y-0 right-0 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-5 w-5 text-gray-400">
@@ -126,13 +120,15 @@
                                         </div>
                                     </div>
                                     <div class="mb-6"><label for="tipoColision" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Colisión</label>
-                                        <div class="relative"><input type="text" id="tipoColision" name="tipoColision"   placeholder="Seleccionar tipo de colisión" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value=""><button class="absolute inset-y-0 right-10 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5 text-gray-400">
-                                                    <circle cx="11" cy="11" r="8"></circle>
-                                                    <path d="m21 21-4.3-4.3"></path>
-                                                </svg></button><button class="absolute inset-y-0 right-0 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-5 w-5 text-gray-400">
-                                                    <path d="M5 12h14"></path>
-                                                    <path d="M12 5v14"></path>
-                                                </svg></button></div>
+                                        <div class="relative">
+                                            <select id="tipoColision" name="tipoColision" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
+                                                <option value="Frontal">Frontal</option>
+                                                <option value="Lateral izquierdo">Lateral izquierdo</option>
+                                                <option value="Lateral derecho">Lateral derecho</option>
+                                                <option value="Trasera">Trasera</option>
+                                                <option value="Multiple">Multiple</option>
+                                            </select>
+                                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -466,7 +462,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-gray-50 px-6 py-4 flex justify-end space-x-3 border-t border-gray-200"><button type="button" class="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Cancelar</button><button type="button" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Guardar Cambios</button></div>
+        <div class="bg-gray-50 px-6 py-4 flex justify-end space-x-3 border-t border-gray-200"><button type="button" class="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Cancelar</button><button type="button" id="btnGuardarCambios" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Guardar Cambios</button></div>
     </div>
 </div>
 <script>

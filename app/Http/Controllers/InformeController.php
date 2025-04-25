@@ -60,9 +60,71 @@ class InformeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        // $request->merge([
+        //     'vehiculo1' => (array) $request->vehiculo1,
+        //     'vehiculo2' => (array) $request->vehiculo2,
+        //     'resultadosBiomecanicos' => (array) $request->resultadosBiomecanicos,
+        // ]);
+        $validatedData = $request->validate([
+            'id' => 'required|string',
+            'matricula' => 'required|string',
+            'fechaAccidente' => 'required|date',
+            'nombreCliente' => 'required|string',
+            'abogadoAsociado' => 'required|string',
+            'peritoAsignado' => 'required|string',
+            'tipoInforme' => 'required|string',
+            'coordenadasGeograficas' => 'nullable|string',
+            'fechaEntregaAbogado' => 'nullable|date',
+            'fechaEntregaCliente' => 'nullable|date',
+            'companiaSeguros' => 'nullable|string',
+            'tipoColision' => 'nullable|string',
+            'vehiculo1' => 'required|array',
+            'vehiculo2' => 'required|array',
+            'resultadosBiomecanicos' => 'required|array',
+        ]);
+    
+        // Convertir los datos de vehículos y resultados biomecánicos a JSON
+        $datosCompletos = json_encode([
+            'id' => $validatedData['id'],
+            'matricula' => $validatedData['matricula'],
+            'fechaAccidente' => $validatedData['fechaAccidente'],
+            'nombreCliente' => $validatedData['nombreCliente'],
+            'abogadoAsociado' => $validatedData['abogadoAsociado'],
+            'peritoAsignado' => $validatedData['peritoAsignado'],
+            'tipoInforme' => $validatedData['tipoInforme'],
+            'coordenadasGeograficas' => $validatedData['coordenadasGeograficas'],
+            'fechaEntregaAbogado' => $validatedData['fechaEntregaAbogado'],
+            'fechaEntregaCliente' => $validatedData['fechaEntregaCliente'],
+            'companiaSeguros' => $validatedData['companiaSeguros'],
+            'tipoColision' => $validatedData['tipoColision'],
+            'vehiculo1' => $validatedData['vehiculo1'],
+            'vehiculo2' => $validatedData['vehiculo2'],
+            'resultadosBiomecanicos' => $validatedData['resultadosBiomecanicos'],
+        ]);
+    
+        // Actualizar el informe en la base de datos
+        DB::table('informes')
+            ->where('id', $validatedData['id'])
+            ->update([
+                'matricula' => $validatedData['matricula'],
+                'fechaAccidente' => $validatedData['fechaAccidente'],
+                'nombreCliente' => $validatedData['nombreCliente'],
+                'abogadoAsociado' => $validatedData['abogadoAsociado'],
+                'peritoAsignado' => $validatedData['peritoAsignado'],
+                'tipoInforme' => $validatedData['tipoInforme'],
+                'coordenadasGeograficas' => $validatedData['coordenadasGeograficas'],
+                'fechaEntregaAbogado' => $validatedData['fechaEntregaAbogado'],
+                'fechaEntregaCliente' => $validatedData['fechaEntregaCliente'],
+                'companiaSeguros' => $validatedData['companiaSeguros'],
+                'tipoColision' => $validatedData['tipoColision'],
+                'datos' => $datosCompletos,
+                'updated_at' => now(),
+            ]);
+    
+            //return response()->json(['message' => 'Informe actualizado correctamente', 'id' => $input['id']]);
+           return response()->json(['message' => 'Informe actualizado correctamente', 'id']);
     }
 
     /**

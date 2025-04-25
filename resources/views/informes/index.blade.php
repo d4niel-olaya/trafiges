@@ -10,7 +10,7 @@
         <div class="flex flex-wrap gap-2"><button class="inline-flex items-center justify-center gap-2 px-3 h-9 rounded-md border text-sm font-medium bg-background hover:bg-accent hover:text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mouse h-4 w-4">
                     <rect x="5" y="2" width="14" height="20" rx="7"></rect>
                     <path d="M12 6v4"></path>
-                </svg><span>Inicio</span></button><button class="inline-flex items-center justify-center gap-2 px-4 h-10 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-medium"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4">
+                </svg><span>Inicio</span></button><button onclick="location.href='/informes/create'" class="inline-flex items-center justify-center gap-2 px-4 h-10 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-medium"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4">
                     <path d="M5 12h14"></path>
                     <path d="M12 5v14"></path>
                 </svg>Nuevo Informe</button><button class="inline-flex items-center justify-center gap-2 px-4 h-10 rounded-md border text-sm font-medium bg-background hover:bg-accent hover:text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-4 w-4">
@@ -62,7 +62,7 @@
                             <td class="p-4 align-middle">{{$informe->tipoInforme}}</td>
                             <td class="p-4 align-middle">{{$informe->companiaSeguros}}</td>
                             <td class="p-4 align-middle">
-                                <div class="flex justify-end space-x-2"><button button onclick="location.href='/informes/{{$informe->id}}'" class="inline-flex items-center justify-center h-10 w-10 rounded-md hover:bg-accent hover:text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4">
+                                <div class="flex justify-end space-x-2"><button onclick="location.href='/informes/{{$informe->id}}'" class="inline-flex items-center justify-center h-10 w-10 rounded-md hover:bg-accent hover:text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4">
                                             <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
                                             <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
                                             <path d="M10 9H8"></path>

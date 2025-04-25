@@ -39,6 +39,7 @@
                             <div class="tab-content">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
                                     <div class="mb-6"><label for="matricula" class="block text-sm font-medium text-gray-700 mb-2">Matrícula</label>
+                                        <input type="text" id="id" value="{{$informe[0]->id}}" name="id" class="hidden">
                                         <div class="relative"><input type="text" id="matricula" name="matricula" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="{{$informe[0]->matricula}}"></div>
                                     </div>
                                     <div class="mb-6"><label for="fechaAccidente" class="block text-sm font-medium text-gray-700 mb-2">Fecha del Accidente</label>
@@ -51,8 +52,8 @@
                                                 </svg></div>
                                         </div>
                                     </div>
-                                    <div class="mb-6"><label for="cliente" class="block text-sm font-medium text-gray-700 mb-2">Cliente</label>
-                                        <div class="relative"><input type="text" id="cliente" name="cliente" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="{{$informe[0]->nombreCliente}}"><button class="absolute inset-y-0 right-10 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5 text-gray-400">
+                                    <div class="mb-6"><label for="nombreCliente" class="block text-sm font-medium text-gray-700 mb-2">Cliente</label>
+                                        <div class="relative"><input type="text" id="nombreCliente" name="nombreCliente" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="{{$informe[0]->nombreCliente}}"><button class="absolute inset-y-0 right-10 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5 text-gray-400">
                                                     <circle cx="11" cy="11" r="8"></circle>
                                                     <path d="m21 21-4.3-4.3"></path>
                                                 </svg></button><button class="absolute inset-y-0 right-0 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-5 w-5 text-gray-400">
@@ -60,15 +61,13 @@
                                                     <path d="M12 5v14"></path>
                                                 </svg></button></div>
                                     </div>
-                                    <div class="mb-6"><label for="abogado" class="block text-sm font-medium text-gray-700 mb-2">Abogado Asociado</label>
-                                        <div class="relative"><select id="abogado" name="abogado" value="{{$informe[0]->abogadoAsociado}}"class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
+                                    <div class="mb-6"><label for="abogadoAsociado" class="block text-sm font-medium text-gray-700 mb-2">Abogado Asociado</label>
+                                        <div class="relative"><select id="abogadoAsociado" name="abogadoAsociado" value="{{$informe[0]->abogadoAsociado}}"class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
                                                 <option value="Pedro Sánchez">Pedro Sánchez</option>
                                                 <option value="María López">María López</option>
                                                 <option value="Carlos Ruiz">Carlos Ruiz</option>
                                             </select>
-                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"><svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
-                                                </svg></div>
+                                          
                                         </div>
                                     </div>
                                     <div class="mb-6"><label for="peritoAsignado" class="block text-sm font-medium text-gray-700 mb-2">Perito Asignado</label>
@@ -77,9 +76,7 @@
                                                 <option value="Javier García">Javier García</option>
                                                 <option value="Ana Martínez">Ana Martínez</option>
                                             </select>
-                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"><svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
-                                                </svg></div>
+                                           
                                         </div>
                                     </div>
                                     <div class="mb-6"><label for="tipoInforme" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Informe</label>
@@ -88,9 +85,7 @@
                                                 <option value="Daños materiales">Daños materiales</option>
                                                 <option value="Lesiones personales">Lesiones personales</option>
                                             </select>
-                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"><svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
-                                                </svg></div>
+                                            
                                         </div>
                                     </div>
                                     <div class="mb-6"><label for="companiaSeguros" class="block text-sm font-medium text-gray-700 mb-2">Compañía de Seguros</label>
@@ -126,13 +121,15 @@
                                         </div>
                                     </div>
                                     <div class="mb-6"><label for="tipoColision" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Colisión</label>
-                                        <div class="relative"><input type="text" id="tipoColision" name="tipoColision" value="{{$informe[0]->tipoColision}}" placeholder="Seleccionar tipo de colisión" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value=""><button class="absolute inset-y-0 right-10 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5 text-gray-400">
-                                                    <circle cx="11" cy="11" r="8"></circle>
-                                                    <path d="m21 21-4.3-4.3"></path>
-                                                </svg></button><button class="absolute inset-y-0 right-0 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-5 w-5 text-gray-400">
-                                                    <path d="M5 12h14"></path>
-                                                    <path d="M12 5v14"></path>
-                                                </svg></button></div>
+                                        <div class="relative">
+                                            <select id="tipoColision" name="tipoColision" value="{{$informe[0]->tipoColision}}" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
+                                                <option value="Frontal">Frontal</option>
+                                                <option value="Lateral izquierdo">Lateral izquierdo</option>
+                                                <option value="Lateral derecho">Lateral derecho</option>
+                                                <option value="Trasera">Trasera</option>
+                                                <option value="Multiple">Multiple</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -251,9 +248,9 @@
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                                    <div><label class="block text-sm font-medium text-gray-700 mb-2">Compañía de Seguros</label>
-                                        <div class="relative"><input type="text"
-                                             placeholder="Seleccionar compañía de seguros" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="">
+                                    <div><label for="companiaSeguros-2" class="block text-sm font-medium text-gray-700 mb-2">Compañía de Seguros</label>
+                                        <div class="relative"><input type="text" id="companiaSeguros-2"
+                                             placeholder="Seleccionar compañía de seguros" name="companiaSeguros-2"  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="">
                                             <div class="absolute inset-y-0 right-0 flex items-center pr-2 space-x-1"><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5 text-gray-400">
                                                         <circle cx="11" cy="11" r="8"></circle>
                                                         <path d="m21 21-4.3-4.3"></path>
@@ -263,8 +260,8 @@
                                                     </svg></button></div>
                                         </div>
                                     </div>
-                                    <div><label class="block text-sm font-medium text-gray-700 mb-2">Taller</label>
-                                        <div class="relative"><input type="text" placeholder="Seleccionar taller" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="">
+                                    <div><label for="taller-2" class="block text-sm font-medium text-gray-700 mb-2">Taller</label>
+                                        <div class="relative"><input type="text" placeholder="Seleccionar taller" id="taller-2" name="taller-2" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="">
                                             <div class="absolute inset-y-0 right-0 flex items-center pr-2 space-x-1"><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5 text-gray-400">
                                                         <circle cx="11" cy="11" r="8"></circle>
                                                         <path d="m21 21-4.3-4.3"></path>
@@ -309,14 +306,14 @@
                                         </div>
                                     </div>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div class="mb-6"><label for="coefRestitucion" class="block text-sm font-medium text-gray-700 mb-2">Coeficiente de Restitución e= 0,25-0,45; e medio Agu= 0,31</label>
-                                            <div class="relative"><input type="text" id="coefRestitucion" name="coefRestitucion"
+                                        <div class="mb-6"><label for="coeficienteRestitucion" class="block text-sm font-medium text-gray-700 mb-2">Coeficiente de Restitución e= 0,25-0,45; e medio Agu= 0,31</label>
+                                            <div class="relative"><input type="text" id="coeficienteRestitucion" name="coeficienteRestitucion"
                                                  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
                                                  value="{{$datosInforme->resultadosBiomecanicos->coeficienteRestitucion}}"></div>
                                         </div>
-                                        <div class="mb-6"><label for="coefRozamiento" class="block text-sm font-medium text-gray-700 mb-2">COEFICIENTE DE ROZAMIENTO μ = (LIBRE 0,015; FRENO 0,7)</label>
+                                        <div class="mb-6"><label for="coeficienteRozamiento" class="block text-sm font-medium text-gray-700 mb-2">COEFICIENTE DE ROZAMIENTO μ = (LIBRE 0,015; FRENO 0,7)</label>
                                             <div class="relative"><input type="text" 
-                                                id="coefRozamiento" name="coefRozamiento" 
+                                                id="coeficienteRozamiento" name="coeficienteRozamiento" 
                                                 class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
                                                 value="{{$datosInforme->resultadosBiomecanicos->coeficienteRozamiento}}"></div>
                                         </div>
@@ -384,6 +381,12 @@
                                                 <div class="relative"><input type="number" id="deltaV2" 
                                                     name="deltaV2" 
                                                     value="{{$datosInforme->resultadosBiomecanicos->deltaV2}}"
+                                                    class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"></div>
+                                            </div>
+                                            <div class="mb-6"><label for="deltaV2" class="block text-sm font-medium text-gray-700 mb-2">Fuerza G Vehículo 2</label>
+                                                <div class="relative"><input type="number" id="fuerzaG2" 
+                                                    name="fuerzaG2" 
+                                                    value="{{$datosInforme->resultadosBiomecanicos->fuerzaG2}}"
                                                     class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"></div>
                                             </div>
                                         </div>
@@ -475,28 +478,28 @@
                                                 </div>
                                             </div>
                                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                                                <div class="mb-6"><label for="aceleracionGravitatoriaconFreno" class="block text-sm font-medium text-gray-700 mb-2">ACELERACIÓN GRAVITATORIA (Vehículo Diana) PISANDO Freno</label>
+                                                <div class="mb-6"><label for="aceleracionGravitatoriaConFreno" class="block text-sm font-medium text-gray-700 mb-2">ACELERACIÓN GRAVITATORIA (Vehículo Diana) PISANDO Freno</label>
                                                     <div class="relative"><input type="text" 
-                                                        id="aceleracionGravitatoriaconFreno" name="aceleracionGravitatoriaconFreno"
+                                                        id="aceleracionGravitatoriaConFreno" name="aceleracionGravitatoriaConFreno"
 
                                                          class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
                                                          value="{{$datosInforme->resultadosBiomecanicos->aceleracionGravitatoriaConFreno}}"></div>
                                                 </div>
-                                                <div class="mb-6"><label for="fuerzaInerciaconFreno" class="block text-sm font-medium text-gray-700 mb-2">FUERZA DE INERCIA (Vehículo Diana) PISANDO Freno</label>
-                                                    <div class="relative"><input type="text" id="fuerzaInerciaconFreno" name="fuerzaInerciaconFreno" 
+                                                <div class="mb-6"><label for="fuerzaInerciaConFreno" class="block text-sm font-medium text-gray-700 mb-2">FUERZA DE INERCIA (Vehículo Diana) PISANDO Freno</label>
+                                                    <div class="relative"><input type="text" id="fuerzaInerciaConFreno" name="fuerzaInerciaConFreno" 
                                                         class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
                                                         value="{{$datosInforme->resultadosBiomecanicos->fuerzaInerciaConFreno}}"></div>
                                                 </div>
                                             </div>
                                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                                                <div class="mb-6"><label for="aumentoPesoconFreno" class="block text-sm font-medium text-gray-700 mb-2">AUMENTO PESO CABEZA OCUPANTES (Vehículo Diana) PISANDO Freno</label>
-                                                    <div class="relative"><input type="text" id="aumentoPesoCabezaconFreno" name="aumentoPesoCabezaconFreno" 
+                                                <div class="mb-6"><label for="aumentoPesoConFreno" class="block text-sm font-medium text-gray-700 mb-2">AUMENTO PESO CABEZA OCUPANTES (Vehículo Diana) PISANDO Freno</label>
+                                                    <div class="relative"><input type="text" id="aumentoPesoCabezaConFreno" name="aumentoPesoCabezaConFreno" 
                                                         class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
                                                         value="{{$datosInforme->resultadosBiomecanicos->aumentoPesoCabezaConFreno}}"></div>
                                                 </div>
                                                 <div class="mb-6"><label for="nicconFreno" class="block text-sm font-medium text-gray-700 mb-2">NIC (Criterio de Lesiones en el Cuello ocupantes Vehículo Diana) PISANDO Freno</label>
                                                     <div class="relative"><input type="text"
-                                                         id="nicconFreno" name="nicconFreno"
+                                                         id="nicConFreno" name="nicConFreno"
                                                           class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
                                                           value="{{$datosInforme->resultadosBiomecanicos->nicConFreno}}"></div>
                                                 </div>
@@ -510,7 +513,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-gray-50 px-6 py-4 flex justify-end space-x-3 border-t border-gray-200"><button type="button" class="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Cancelar</button><button type="button" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Guardar Cambios</button></div>
+        <div class="bg-gray-50 px-6 py-4 flex justify-end space-x-3 border-t border-gray-200"><button type="button" class="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Cancelar</button><button type="button" id="btnGuardarCambios" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Guardar Cambios</button></div>
     </div>
 </div>
 <script>
@@ -550,5 +553,5 @@
 @endsection
 
 @push("scripts")
-    
+@vite('resources/js/informes.js')
 @endpush
