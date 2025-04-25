@@ -224,7 +224,7 @@ class ExportController extends Controller
                 return response()->json(['error' => 'No se encontraron datos para el cliente ID: ' . $numero], 404);
             }
 
-            $originalPath = public_path('VALORACIÓN BIOMECÁNICA CLÍNIC1_ODT.odt');
+            $originalPath = resource_path('plantillas/informe.odt');
             $tempDir = sys_get_temp_dir() . '/odt_' . uniqid();
             $tempOdt = $tempDir . '/modificado.odt';
 
