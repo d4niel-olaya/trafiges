@@ -15,6 +15,7 @@ use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\DiagnosticoController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\BackupController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\InicioController;
 Route::middleware(['auth'])->group(function () {
 
@@ -51,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('backups', [BackupController::class, 'index'])->name('backups.index');
     });
 
-    Route::get('/exportar', [InformeController::class, 'exportar']);
+    Route::get('/exportar', [ExportController::class, 'exportar']);
 });
 
 Route::get('/', function () {
