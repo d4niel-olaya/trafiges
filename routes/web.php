@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('backups', [BackupController::class, 'index'])->name('backups.index');
     });
 
-    Route::get('/exportar', [ExportController::class, 'exportar']);
+    //Route::get('/exportar', [ExportController::class, 'exportar']);
 });
 
 Route::get('/', function () {
