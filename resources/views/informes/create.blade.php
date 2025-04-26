@@ -31,6 +31,7 @@
                         <button id="tab-datos-generales" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 active" data-tab="datos-generales-content">Datos Generales</button>
                         <button id="tab-vehiculos" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="vehiculos-content">Vehículos</button>
                         <button id="tab-biomecanica-vista" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="biomecanica-content">Biomecánica</button>
+                        <button id="tab-ocupantes" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="ocupantes-content">Ocupantes</button>
                     </nav>
                 </div>
                 <div class="py-6 tab-content">
@@ -464,6 +465,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div id="ocupantes-content" class="tab-panel">
+                        <x-tab-ocupantes/>
                     </div>
                 </div>
             </div>
