@@ -32,6 +32,71 @@ class InformeController extends Controller
     public function store(Request $request)
     {
         //
+        $ultimoInforme = DB::table('informes')->orderBy('created_at', 'desc')->first();
+
+    // Generar un nuevo ID basado en el último ID
+        if ($ultimoInforme) {
+            $ultimoId = $ultimoInforme->id;
+            $numero = (int) str_replace('INF-', '', $ultimoId); // Extraer el número del ID
+            $nuevoId = 'INF-' . str_pad($numero + 1, 4, '0', STR_PAD_LEFT); // Incrementar y formatear
+        } else {
+            $nuevoId = 'INF-0001'; // Si no hay registros, iniciar con INF-0001
+        }
+        $validatedData = $request->validate([
+            'matricula' => 'required|string',
+            'fechaAccidente' => 'required|date',
+            'nombreCliente' => 'required|string',
+            'abogadoAsociado' => 'required|string',
+            'peritoAsignado' => 'required|string',
+            'tipoInforme' => 'required|string',
+            'coordenadasGeograficas' => 'nullable|string',
+            'fechaEntregaAbogado' => 'nullable|date',
+            'fechaEntregaCliente' => 'nullable|date',
+            'companiaSeguros' => 'nullable|string',
+            'tipoColision' => 'nullable|string',
+            'vehiculo1' => 'required|array',
+            'vehiculo2' => 'required|array',
+            'resultadosBiomecanicos' => 'required|array',
+        ]);
+
+        $datosCompletos = json_encode([
+            'id' => $nuevoId,
+            'matricula' => $validatedData['matricula'],
+            'fechaAccidente' => $validatedData['fechaAccidente'],
+            'nombreCliente' => $validatedData['nombreCliente'],
+            'abogadoAsociado' => $validatedData['abogadoAsociado'],
+            'peritoAsignado' => $validatedData['peritoAsignado'],
+            'tipoInforme' => $validatedData['tipoInforme'],
+            'coordenadasGeograficas' => $validatedData['coordenadasGeograficas'],
+            'fechaEntregaAbogado' => $validatedData['fechaEntregaAbogado'],
+            'fechaEntregaCliente' => $validatedData['fechaEntregaCliente'],
+            'companiaSeguros' => $validatedData['companiaSeguros'],
+            'tipoColision' => $validatedData['tipoColision'],
+            'vehiculo1' => $validatedData['vehiculo1'],
+            'vehiculo2' => $validatedData['vehiculo2'],
+            'resultadosBiomecanicos' => $validatedData['resultadosBiomecanicos'],
+        ]);
+
+        DB::table('informes')->insert([
+            'id' => $nuevoId,
+            'matricula' => $validatedData['matricula'],
+            'fechaAccidente' => $validatedData['fechaAccidente'],
+            'nombreCliente' => $validatedData['nombreCliente'],
+            'abogadoAsociado' => $validatedData['abogadoAsociado'],
+            'peritoAsignado' => $validatedData['peritoAsignado'],
+            'tipoInforme' => $validatedData['tipoInforme'],
+            'coordenadasGeograficas' => $validatedData['coordenadasGeograficas'],
+            'fechaEntregaAbogado' => $validatedData['fechaEntregaAbogado'],
+            'fechaEntregaCliente' => $validatedData['fechaEntregaCliente'],
+            'companiaSeguros' => $validatedData['companiaSeguros'],
+            'tipoColision' => $validatedData['tipoColision'],
+            'datos' => $datosCompletos,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    
+        // Retornar una respuesta JSON
+        return response()->json(['message' => 'Informe creado correctamente', 'id' => $nuevoId]);
     }
 
     /**
