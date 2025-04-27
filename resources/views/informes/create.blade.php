@@ -517,7 +517,7 @@
 
     tabButtonsNested.forEach(button => {
         button.addEventListener("click", function() {
-            
+           // debugger;
             const targetId = this.getAttribute("data-target");
             // 1. Ocultar todos los paneles
             tabPanelsNested.forEach(panel => {
@@ -526,12 +526,14 @@
             //copiloto-content
             // 2. Mostrar el panel correspondiente
             //const targetPanel = tabContainer.querySelector("#" + targetId);
-            const targetPanel = tabContainer.querySelector("#" + targetId);
+            console.log(tabContainer)
+            const targetPanel = tabContainer.querySelector("#"+ targetId);
 
             if (targetPanel) {
                 targetPanel.classList.remove("hidden");
             }
-
+            console.log(targetPanel)
+            console.log(targetId)
             // 3. Actualizar estilos de los botones
             tabButtonsNested.forEach(btn => {
                 btn.classList.remove("border-sky-500", "text-sky-600");
