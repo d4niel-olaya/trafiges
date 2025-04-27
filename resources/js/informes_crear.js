@@ -1,7 +1,30 @@
 import {formularioAJson, inputsAJson, limpiarCamposFormulario} from './forms_utils.js';
 import AjaxHandler from './utils.js';
 
-
+function obtenerNombresYValores(idDiv) {
+    const div = document.getElementById(idDiv);
+    if (!div) {
+      console.warn(`No se encontró un div con el id: ${idDiv}`);
+      return [];
+    }
+  
+    const elementos = div.querySelectorAll('input, select, textarea');
+    const resultado = [];
+  
+    elementos.forEach(el => {
+      if (!el.name) return;
+  
+      if (el.type === 'checkbox') {
+        if (el.checked) {
+          resultado.push({ name: el.name, value: el.value });
+        }
+      } else {
+        resultado.push({ name: el.name, value: el.value });
+      }
+    });
+  
+    return resultado;
+  }
 document.addEventListener('DOMContentLoaded', () => {
 
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -86,8 +109,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 aumentoPesoCabezaConFreno: parseFloat(document.querySelector('input[name="aumentoPesoCabezaConFreno"]').value) || 0,
                 nicConFreno: parseFloat(document.querySelector('input[name="nicConFreno"]').value) || 0,
             },
+            ocupantes: [],
         };
 
+        const ocupanteIds = [
+            'conductor-formulario',
+            'copiloto-formulario',
+            'detras_conductor-formulario',
+            'detras_copiloto-formulario',
+            'detras_centro-formulario',
+            'detras_3-formulario',
+            'detras_4-formulario',
+        ];
+    
+        ocupanteIds.forEach((id) => {
+            const formulario = document.getElementById(id);
+            if (formulario) {
+                const ocupanteData = {tipo_ocupante: id.split('-')[0].replaceAll('_', ' ')};
+                const inputs = formulario.querySelectorAll('input, select, textarea');
+                inputs.forEach((input) => {
+                    //console.log(input)
+                   // console.log(input.name.replace(`${id.split('-')[0]}_`, '')); // Verificar el nombre del input
+                    ocupanteData[input.name.replace(`${id.split('-')[0]}_`, '')] = input.value || null;
+                });
+                formData.ocupantes.push(ocupanteData);
+            }
+        });
+    
+        console.log(formData); // Verificar el contenido del objeto JSON
         ajaxHandler.sendRequest('/informes', formData, 'POST', true, true, (response) => {
             console.log(response); // Manejar la respuesta del servidor
             //limpiarCamposFormulario('formularioInformes');

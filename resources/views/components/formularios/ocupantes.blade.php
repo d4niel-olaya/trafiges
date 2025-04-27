@@ -1,6 +1,6 @@
 @props(['ocupante'=> '', 'tipo' => 'conductor'])
 <div class="mb-8 py-4">
-        <div class="space-y-8">
+        <div class="space-y-8" id="{{$tipo}}-formulario">
             <div>
                 <h3 class="text-lg font-medium text-gray-900 mb-4">Datos Básicos - {{$ocupante}}</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

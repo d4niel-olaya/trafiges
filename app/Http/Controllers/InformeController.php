@@ -57,6 +57,7 @@ class InformeController extends Controller
             'vehiculo1' => 'required|array',
             'vehiculo2' => 'required|array',
             'resultadosBiomecanicos' => 'required|array',
+            'ocupantes' => 'required|array',
         ]);
 
         $datosCompletos = json_encode([
@@ -94,6 +95,49 @@ class InformeController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+
+        foreach ($validatedData['ocupantes'] as $ocupante) {
+            DB::table('informes_ocupantes')->insert([
+                'idInforme' => $nuevoId,
+                'tipo_ocupante' => $ocupante['tipo_ocupante'] ?? 'conductor',
+                'posicion' => $ocupante['posicion'] ?? null,
+                'sexo' => $ocupante['sexo'] ?? null,
+                'edad' => $ocupante['edad'] ?? null,
+                'peso' => $ocupante['peso'] ?? null,
+                'altura' => $ocupante['altura'] ?? null,
+                'dominancia' => $ocupante['dominancia'] ?? null,
+                'actividad_laboral' => $ocupante['actividad_laboral'] ?? null,
+                'actividad_deportiva' => $ocupante['actividad_deportiva'] ?? null,
+                'accidentes_previos' => $ocupante['accidentes_previos'] ?? null,
+                'tratamiento_farmacologico' => $ocupante['tratamiento_farmacologico'] ?? null,
+                'posicion_general' => $ocupante['posicion_general'] ?? null,
+                'posicion_cuello' => $ocupante['posicion_cuello'] ?? null,
+                'mirada' => $ocupante['mirada'] ?? null,
+                'mano_derecha' => $ocupante['mano_derecha'] ?? null,
+                'mano_izquierda' => $ocupante['mano_izquierda'] ?? null,
+                'pie_derecho' => $ocupante['pie_derecho'] ?? null,
+                'pie_izquierdo' => $ocupante['pie_izquierdo'] ?? null,
+                'pierna_derecha' => $ocupante['pierna_derecha'] ?? null,
+                'pierna_izquierda' => $ocupante['pierna_izquierda'] ?? null,
+                'descripcion_circunstancias' => $ocupante['descripcion_circunstancias'] ?? null,
+                'musculatura' => $ocupante['musculatura'] ?? null,
+                'circunstancias_vehiculo' => $ocupante['circunstancias_vehiculo'] ?? null,
+                'lesiones' => $ocupante['lesiones'] ?? null,
+                'zonas_afectadas' => $ocupante['zonas_afectadas'] ?? null,
+                'hospital_urgencias' => $ocupante['hospital_urgencias'] ?? null,
+                'juicio_urgencias' => $ocupante['juicio_urgencias'] ?? null,
+                'centro_rhb' => $ocupante['centro_rhb'] ?? null,
+                'juicio_rhb' => $ocupante['juicio_rhb'] ?? null,
+                'fecha_inicio_rhb' => $ocupante['fecha_inicio_rhb'] ?? null,
+                'fecha_fin_rhb' => $ocupante['fecha_fin_rhb'] ?? null,
+                'numero_sesiones' => $ocupante['numero_sesiones'] ?? null,
+                'fecha_alta' => $ocupante['fecha_alta'] ?? null,
+                'secuelas' => $ocupante['secuelas'] ?? null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     
         // Retornar una respuesta JSON
         return response()->json(['message' => 'Informe creado correctamente', 'id' => $nuevoId]);
