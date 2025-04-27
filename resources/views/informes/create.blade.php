@@ -507,7 +507,45 @@
 
         // Mostrar la primera pestaña por defecto
         showTab('datos-generales-content');
+
+
+    const tabContainer = document.getElementById("tab-ocupantes-anidada");
+    if (!tabContainer) return; // Seguridad, por si no existe
+
+    const tabButtonsNested = tabContainer.querySelectorAll(".tab-button-nested");
+    const tabPanelsNested = tabContainer.querySelectorAll(".tab-panel-nested");
+
+    tabButtonsNested.forEach(button => {
+        button.addEventListener("click", function() {
+            
+            const targetId = this.getAttribute("data-target");
+            // 1. Ocultar todos los paneles
+            tabPanelsNested.forEach(panel => {
+                panel.classList.add("hidden");
+            });
+            //copiloto-content
+            // 2. Mostrar el panel correspondiente
+            //const targetPanel = tabContainer.querySelector("#" + targetId);
+            const targetPanel = tabContainer.querySelector("#" + targetId);
+
+            if (targetPanel) {
+                targetPanel.classList.remove("hidden");
+            }
+
+            // 3. Actualizar estilos de los botones
+            tabButtonsNested.forEach(btn => {
+                btn.classList.remove("border-sky-500", "text-sky-600");
+                btn.classList.add("border-transparent", "text-gray-500");
+            });
+
+            this.classList.add("border-sky-500", "text-sky-600");
+            this.classList.remove("border-transparent", "text-gray-500");
+        });
     });
+        
+    });
+ 
+
 </script>
 @endsection
 
