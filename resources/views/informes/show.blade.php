@@ -94,8 +94,23 @@
                             <div>
                                 <h3 class="font-medium text-sm text-muted-foreground mb-1">Estado</h3>
                                 <div class="flex items-center">
-                                    <div class="h-2 w-2 rounded-full bg-amber-500 mr-2"></div>
-                                    <p>{{$informe[0]->estado}}</p>
+                                    @switch($informe[0]->estado)
+                                    @case('en_proceso')
+                                        <div class="h-2 w-2 rounded-full bg-blue-500 mr-2"></div>
+                                        <p>En Proceso</p>
+                                    @break
+                                    @case('finalizado')
+                                        <div class="h-2 w-2 rounded-full bg-green-500 mr-2"></div>
+                                        <p>Finalizado</p>  
+                                    @break;
+                                    @case('urgente')
+                                        <div class="h-2 w-2 rounded-full bg-red-500 mr-2"></div>
+                                        <p>Urgente</p>
+                                    @break;
+                                    @default
+                                        <div class="h-2 w-2 rounded-full bg-amber-500 mr-2"></div>
+                                        <p>Pendiente</p>
+                                    @endswitch
                                 </div>
                             </div>
                         </div>
