@@ -87,8 +87,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 aumentoPesoCabezaConFreno: parseFloat(document.querySelector('input[name="aumentoPesoCabezaConFreno"]').value) || 0,
                 nicConFreno: parseFloat(document.querySelector('input[name="nicConFreno"]').value) || 0,
             },
+            ocupantes: [],
         };
+        const ocupanteIds = [
+            'conductor-formulario',
+            'copiloto-formulario',
+            'detras_conductor-formulario',
+            'detras_copiloto-formulario',
+            'detras_centro-formulario',
+            'detras_3-formulario',
+            'detras_4-formulario',
+        ];
+    
+        ocupanteIds.forEach((id) => {
+            const formulario = document.getElementById(id);
+            if (formulario) {
+                const ocupanteData = {tipo_ocupante: id.split('-')[0].replaceAll('_', ' ')};
+                const inputs = formulario.querySelectorAll('input, select, textarea, checkbox');
+                inputs.forEach((input) => {
+                    if(input.type === 'checkbox'){
+                        ocupanteData[input.name.replace(`${id.split('-')[0]}_`, '')] = input.checked ? 1 : 0;
+                    }else{
 
+                        ocupanteData[input.name.replace(`${id.split('-')[0]}_`, '')] = input.value || null;
+                    }
+                   // console.log(input.name.replace(`${id.split('-')[0]}_`, '')); // Verificar el nombre del input
+                });
+                formData.ocupantes.push(ocupanteData);
+            }
+        });
+        //console.log(formData); // Verificar el contenido del objeto JSON
         ajaxHandler.sendRequest('/informes/update', formData, 'PATCH', true, true, (response) => {
             console.log(response); // Manejar la respuesta del servidor
             //limpiarCamposFormulario('formularioInformes');

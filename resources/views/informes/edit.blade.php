@@ -31,6 +31,7 @@
                         <button id="tab-datos-generales" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 active" data-tab="datos-generales-content">Datos Generales</button>
                         <button id="tab-vehiculos" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="vehiculos-content">Vehículos</button>
                         <button id="tab-biomecanica-vista" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="biomecanica-content">Biomecánica</button>
+                        <button id="tab-ocupantes" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="ocupantes-content">Ocupantes</button>
                     </nav>
                 </div>
                 <div class="py-6 tab-content">
@@ -510,6 +511,17 @@
                             </div>
                         </div>
                     </div>
+                    <div id="ocupantes-content" class="tab-panel">
+                       
+                        <x-tab-ocupantes_edit :ocupantes_conductor="$ocupantes_conductor" 
+                        :ocupantes_copiloto="$ocupantes_copiloto" 
+                        :ocupantes_detras_conductor="$ocupantes_detras_conductor"
+                        :ocupantes_detras_copiloto="$ocupantes_detras_copiloto"
+                        :ocupantes_detras_centro="$ocupantes_detras_centro"
+                        :ocupantes_detras_3="$ocupantes_detras_3"
+                        :ocupantes_detras_4="$ocupantes_detras_4"
+                                     />
+                    </div>
                 </div>
             </div>
         </div>
@@ -517,7 +529,7 @@
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabPanels = document.querySelectorAll('.tab-panel');
 
@@ -548,6 +560,44 @@
 
         // Mostrar la primera pestaña por defecto
         showTab('datos-generales-content');
+
+
+    const tabContainer = document.getElementById("tab-ocupantes-anidada");
+    if (!tabContainer) return; // Seguridad, por si no existe
+
+    const tabButtonsNested = tabContainer.querySelectorAll(".tab-button-nested");
+    const tabPanelsNested = tabContainer.querySelectorAll(".tab-panel-nested");
+
+    tabButtonsNested.forEach(button => {
+        button.addEventListener("click", function() {
+           // debugger;
+            const targetId = this.getAttribute("data-target");
+            // 1. Ocultar todos los paneles
+            tabPanelsNested.forEach(panel => {
+                panel.classList.add("hidden");
+            });
+            //copiloto-content
+            // 2. Mostrar el panel correspondiente
+            //const targetPanel = tabContainer.querySelector("#" + targetId);
+            console.log(tabContainer)
+            const targetPanel = tabContainer.querySelector("#"+ targetId);
+
+            if (targetPanel) {
+                targetPanel.classList.remove("hidden");
+            }
+            console.log(targetPanel)
+            console.log(targetId)
+            // 3. Actualizar estilos de los botones
+            tabButtonsNested.forEach(btn => {
+                btn.classList.remove("border-sky-500", "text-sky-600");
+                btn.classList.add("border-transparent", "text-gray-500");
+            });
+
+            this.classList.add("border-sky-500", "text-sky-600");
+            this.classList.remove("border-transparent", "text-gray-500");
+        });
+    });
+        
     });
 </script>
 @endsection

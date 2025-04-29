@@ -1,4 +1,4 @@
-
+@props(['ocupantes_conductor'=> null,'ocupantes_copiloto'=> null, 'ocupantes_detras_conductor'=> null, 'ocupantes_detras_copiloto'=> null, 'ocupantes_detras_centro'=> null, 'ocupantes_detras_3'=> null, 'ocupantes_detras_4'=> null])
 <div class="py-4">
     <div class="tab-content" id="tab-ocupantes-anidada">
         <div class="space-y-2">
@@ -18,43 +18,43 @@
 
                 <div id="conductor-content" class="tab-panel-nested">
                     <div>
-                        <x-formularios.ocupantes ocupante="Conductor" tipo="conductor" />
+                        <x-formularios.ocupantes_edit ocupante="Conductor" tipo="conductor" :ocupantes="$ocupantes_conductor"/>
                     </div>
                 </div>
 
                 <div id="copiloto-content" class="tab-panel-nested hidden">
                     <div>
-                        <x-formularios.ocupantes ocupante="Copiloto" tipo="copiloto" />
+                        <x-formularios.ocupantes_edit ocupante="Copiloto" tipo="copiloto"  :ocupantes="$ocupantes_copiloto"/>
                     </div>
                 </div>
 
                 <div id="detras-conductor-content" class="tab-panel-nested hidden">
                     <div>
-                        <x-formularios.ocupantes ocupante="Detras Conductor" tipo="detras_conductor" />
+                        <x-formularios.ocupantes_edit ocupante="Detras Conductor" tipo="detras_conductor" :ocupantes="$ocupantes_detras_conductor" />
                     </div>
                 </div>
 
                 <div id="detras-copiloto-content" class="tab-panel-nested hidden">
                     <div>
-                        <x-formularios.ocupantes ocupante="Detras Copiloto" tipo="detras_copiloto" />
+                        <x-formularios.ocupantes_edit ocupante="Detras Copiloto" tipo="detras_copiloto" :ocupantes="$ocupantes_detras_copiloto" />
                     </div>
                 </div>
 
                 <div id="detras-centro-content" class="tab-panel-nested hidden">
                     <div>
-                        <x-formularios.ocupantes ocupante="Detras Centro" tipo="detras_centro" />
+                        <x-formularios.ocupantes_edit ocupante="Detras Centro" tipo="detras_centro" :ocupantes="$ocupantes_detras_centro"/>
                     </div>
                 </div>
 
                 <div id="detras-3-content" class="tab-panel-nested hidden">
                     <div>
-                        <x-formularios.ocupantes ocupante="Detras 3" tipo="detras_3" />
+                        <x-formularios.ocupantes_edit ocupante="Detras 3" tipo="detras_3" :ocupantes="$ocupantes_detras_3"/>
                     </div>
                 </div>
 
                 <div id="detras-4-content" class="tab-panel-nested hidden">
                     <div>
-                        <x-formularios.ocupantes ocupante="Detras 4" tipo="detras_4" />
+                        <x-formularios.ocupantes_edit ocupante="Detras 4" tipo="detras_4" :ocupantes="$ocupantes_detras_4"/>
                     </div>
                 </div>
                 

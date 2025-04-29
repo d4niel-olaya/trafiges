@@ -13,7 +13,7 @@ class InformeController extends Controller
     public function index()
     {
         //
-        $informes = DB::table("informes")->select("id","matricula","fechaAccidente","nombreCliente","abogadoAsociado","peritoAsignado", "tipoInforme", "companiaSeguros")->orderBy("fechaAccidente","desc")->get();    
+        $informes = DB::table("informes")->select("id","matricula","fechaAccidente","nombreCliente","abogadoAsociado","peritoAsignado", "tipoInforme", "companiaSeguros")->orderBy("fechaAccidente","desc")->get();   
         return view("informes.index", ["informes" => $informes]);
     }
 
@@ -121,6 +121,8 @@ class InformeController extends Controller
                 'pierna_derecha' => $ocupante['pierna_derecha'] ?? null,
                 'pierna_izquierda' => $ocupante['pierna_izquierda'] ?? null,
                 'descripcion_circunstancias' => $ocupante['descripcion_circunstancias'] ?? null,
+                'vio_impacto' => $ocupante['vio_impacto'] ?? 0,
+                'desprevenido' => $ocupante['desprevenido'] ?? 0,
                 'musculatura' => $ocupante['musculatura'] ?? null,
                 'circunstancias_vehiculo' => $ocupante['circunstancias_vehiculo'] ?? null,
                 'lesiones' => $ocupante['lesiones'] ?? null,
@@ -150,7 +152,7 @@ class InformeController extends Controller
     {
         //
         $informe= DB::table("informes")->orderBy("fechaAccidente","desc")->where("id","=", $id)->get();    
-     
+        
         return view("informes.show", ["informe" => $informe]);
     }
 
@@ -161,9 +163,22 @@ class InformeController extends Controller
     {
         //
         $informe= DB::table("informes")->orderBy("fechaAccidente","desc")->where("id","=", $id)->get();    
-        
+        $ocupantes_conductor = DB::table("informes_ocupantes")->where("idInforme","=", $id)->where("tipo_ocupante","=","conductor")->get();
+        $ocupantes_copiloto = DB::table("informes_ocupantes")->where("idInforme","=", $id)->where("tipo_ocupante","=","copiloto")->get();
+        $ocupantes_detras_conductor = DB::table("informes_ocupantes")->where("idInforme","=", $id)->where("tipo_ocupante","=","detras conductor")->get();
+        $ocupantes_detras_copiloto = DB::table("informes_ocupantes")->where("idInforme","=", $id)->where("tipo_ocupante","=","detras copiloto")->get();
+        $ocupantes_detras_centro = DB::table("informes_ocupantes")->where("idInforme","=", $id)->where("tipo_ocupante","=","detras centro")->get();
+        $ocupantes_detras_3 = DB::table("informes_ocupantes")->where("idInforme","=", $id)->where("tipo_ocupante","=","detras 3")->get();
+        $ocupantes_detras_4 = DB::table("informes_ocupantes")->where("idInforme","=", $id)->where("tipo_ocupante","=","detras 4")->get();
         //return $informe;
-        return view("informes.edit",["informe" => $informe]);
+        return view("informes.edit",["informe" => $informe, "ocupantes_conductor" => $ocupantes_conductor
+                , "ocupantes_copiloto" => $ocupantes_copiloto,
+                "ocupantes_detras_conductor" => $ocupantes_detras_conductor,
+                "ocupantes_detras_copiloto" => $ocupantes_detras_copiloto,
+                "ocupantes_detras_centro" => $ocupantes_detras_centro,
+                "ocupantes_detras_3" => $ocupantes_detras_3,
+                "ocupantes_detras_4" => $ocupantes_detras_4
+            ]);
     }
 
     /**
@@ -192,6 +207,7 @@ class InformeController extends Controller
             'vehiculo1' => 'required|array',
             'vehiculo2' => 'required|array',
             'resultadosBiomecanicos' => 'required|array',
+            'ocupantes' => 'required|array', 
         ]);
     
         // Convertir los datos de vehículos y resultados biomecánicos a JSON
@@ -231,6 +247,52 @@ class InformeController extends Controller
                 'datos' => $datosCompletos,
                 'updated_at' => now(),
             ]);
+
+            DB::table('informes_ocupantes')->where('idInforme', $validatedData['id'])->delete();
+
+            foreach ($validatedData['ocupantes'] as $ocupante) {
+                DB::table('informes_ocupantes')->insert([
+                    'idInforme' => $validatedData['id'],
+                    'tipo_ocupante' => $ocupante['tipo_ocupante'] ?? 'conductor',
+                    'posicion' => $ocupante['posicion'] ?? 'conductor',
+                    'sexo' => $ocupante['sexo'] ?? null,
+                    'edad' => $ocupante['edad'] ?? null,
+                    'peso' => $ocupante['peso'] ?? null,
+                    'altura' => $ocupante['altura'] ?? null,
+                    'dominancia' => $ocupante['dominancia'] ?? null,
+                    'actividad_laboral' => $ocupante['actividad_laboral'] ?? null,
+                    'actividad_deportiva' => $ocupante['actividad_deportiva'] ?? null,
+                    'accidentes_previos' => $ocupante['accidentes_previos'] ?? null,
+                    'tratamiento_farmacologico' => $ocupante['tratamiento_farmacologico'] ?? null,
+                    'posicion_general' => $ocupante['posicion_general'] ?? null,
+                    'posicion_cuello' => $ocupante['posicion_cuello'] ?? null,
+                    'mirada' => $ocupante['mirada'] ?? null,
+                    'mano_derecha' => $ocupante['mano_derecha'] ?? null,
+                    'mano_izquierda' => $ocupante['mano_izquierda'] ?? null,
+                    'pie_derecho' => $ocupante['pie_derecho'] ?? null,
+                    'pie_izquierdo' => $ocupante['pie_izquierdo'] ?? null,
+                    'pierna_derecha' => $ocupante['pierna_derecha'] ?? null,
+                    'pierna_izquierda' => $ocupante['pierna_izquierda'] ?? null,
+                    'descripcion_circunstancias' => $ocupante['descripcion_circunstancias'] ?? null,
+                    'vio_impacto' => $ocupante['vio_impacto'] ?? 0,
+                    'desprevenido' => $ocupante['desprevenido'] ?? 0,
+                    'musculatura' => $ocupante['musculatura'] ?? null,
+                    'circunstancias_vehiculo' => $ocupante['circunstancias_vehiculo'] ?? null,
+                    'lesiones' => $ocupante['lesiones'] ?? null,
+                    'zonas_afectadas' => $ocupante['zonas_afectadas'] ?? null,
+                    'hospital_urgencias' => $ocupante['hospital_urgencias'] ?? null,
+                    'juicio_urgencias' => $ocupante['juicio_urgencias'] ?? null,
+                    'centro_rhb' => $ocupante['centro_rhb'] ?? null,
+                    'juicio_rhb' => $ocupante['juicio_rhb'] ?? null,
+                    'fecha_inicio_rhb' => $ocupante['fecha_inicio_rhb'] ?? null,
+                    'fecha_fin_rhb' => $ocupante['fecha_fin_rhb'] ?? null,
+                    'numero_sesiones' => $ocupante['numero_sesiones'] ?? null,
+                    'fecha_alta' => $ocupante['fecha_alta'] ?? null,
+                    'secuelas' => $ocupante['secuelas'] ?? null,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
     
             //return response()->json(['message' => 'Informe actualizado correctamente', 'id' => $input['id']]);
            return response()->json(['message' => 'Informe actualizado correctamente', 'id']);
