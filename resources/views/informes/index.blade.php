@@ -39,6 +39,7 @@
                 <caption class="mt-4 text-sm text-muted-foreground">Lista de informes actuales</caption>
                 <thead>
                     <tr class="border-b">
+                        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground"></th>
                         <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">ID</th>
                         <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Matrícula</th>
                         <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Fecha Accidente</th>
@@ -53,6 +54,25 @@
                 <tbody>
                     @foreach ($informes as $informe)
                         <tr class="border-b transition-colors hover:bg-muted/50">
+                            <td class="p-4 align-middle">
+                                @switch($informe->estado)
+                                @case('en_proceso')
+                                    <div class="h-4 w-4 rounded-full bg-blue-500 mr-2"></div>
+                                    
+                                @break
+                                @case('finalizado')
+                                    <div class="h-4 w-4 rounded-full bg-green-500 mr-2"></div>
+                                   
+                                @break;
+                                @case('urgente')
+                                    <div class="h-4 w-4 rounded-full bg-red-500 mr-2"></div>
+                                 
+                                @break;
+                                @default
+                                    <div class="h-4 w-4 rounded-full bg-amber-500 mr-2"></div>
+                                   
+                                @endswitch
+                            </td>
                             <td class="p-4 align-middle font-medium">{{$informe->id}}</td>
                             <td class="p-4 align-middle">{{$informe->matricula}}</td>
                             <td class="p-4 align-middle">{{$informe->fechaAccidente}}</td>
