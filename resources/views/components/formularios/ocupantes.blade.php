@@ -79,12 +79,21 @@
                         <label class="block text-sm font-medium text-gray-700" for="posicion_cuello">Posición Cuello</label>
                         <select  name="{{$tipo}}_posicion_cuello" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
                             <option value="">Seleccionar</option>
+                            <option value="Neutro">Seleccionar</option>
+                            <option value="Flexión">Seleccionar</option>
+                            <option value="Extensión">Seleccionar</option>
+                            <option value="Rotación derecha">Seleccionar</option>
+                            <option value="Rotación izquierda">Seleccionar</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700" for="mirada">Mirada</label>
                         <select name="{{$tipo}}_mirada" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
                             <option value="">Seleccionar</option>
+                            <option value="Al Frente">Al Frente</option>
+                            <option value="Al Espejo">Al Espejo</option>
+                            <option value="Al Costado">Al Costado</option>
+                            <option value="Otros">Otros</option>
                         </select>
                     </div>
                 </div>
@@ -140,6 +149,14 @@
                         <label class="block text-sm font-medium text-gray-700" for="musculatura">Musculatura</label>
                         <select name="{{$tipo}}_musculatura" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
                             <option value="">Seleccionar</option>
+                            <option value="Atrofiada">Atrofiada</option>
+                            <option value="Relajada">Relajada</option>
+                            <option value="Contraida">Contraida</option>
+                            <option value="Hipertrofiada">Hipertrofiada</option>
+                            <option value="Rigida">Rigida</option>
+                            <option value="Espástica">Espástica</option>
+                            <option value="Hipertónica">Hipertónica</option>
+                            <option value="Hipotónica">Hipotónica</option>
                         </select>
                     </div>
                     <div>
