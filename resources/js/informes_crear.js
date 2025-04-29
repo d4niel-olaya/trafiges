@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const formData = {
             matricula: document.querySelector('input[name="matricula"]').value,
+            estado: document.querySelector('select[name="estado"]').value,
             fechaAccidente: document.querySelector('input[name="fechaAccidente"]').value,
             nombreCliente: document.querySelector('input[name="nombreCliente"]').value,
             abogadoAsociado: document.querySelector('select[name="abogadoAsociado"]').value,
@@ -128,9 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const ocupanteData = {tipo_ocupante: id.split('-')[0].replaceAll('_', ' ')};
                 const inputs = formulario.querySelectorAll('input, select, textarea');
                 inputs.forEach((input) => {
-                    //console.log(input)
+                    if(input.type === 'checkbox'){
+                        ocupanteData[input.name.replace(`${id.split('-')[0]}_`, '')] = input.checked ? 1 : 0;
+                    }else{
+
+                        ocupanteData[input.name.replace(`${id.split('-')[0]}_`, '')] = input.value || null;
+                    }
                    // console.log(input.name.replace(`${id.split('-')[0]}_`, '')); // Verificar el nombre del input
-                    ocupanteData[input.name.replace(`${id.split('-')[0]}_`, '')] = input.value || null;
                 });
                 formData.ocupantes.push(ocupanteData);
             }

@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = {
             id: document.querySelector('input[name="id"]').value,
             matricula: document.querySelector('input[name="matricula"]').value,
+            estado: document.querySelector('select[name="estado"]').value,
             fechaAccidente: document.querySelector('input[name="fechaAccidente"]').value,
             nombreCliente: document.querySelector('input[name="nombreCliente"]').value,
             abogadoAsociado: document.querySelector('select[name="abogadoAsociado"]').value,

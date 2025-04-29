@@ -131,6 +131,16 @@
                                             </select>
                                                     </div>
                                     </div>
+                                    <div class="mb-6"><label for="estado" class="block text-sm font-medium text-gray-700 mb-2">Estado del Informe</label>
+                                        <div class="relative"><select id="estado" name="estado"  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
+                                                    <option value="en_proceso">🔵 En proceso</option>
+                                                    <option value="urgente">🔴 Urgente</option>
+                                                    <option value="pendiente">🟠 Pendiente</option>
+                                                    <option value="finalizado">🟢 Finalizado</option>
+                                            </select>
+                                           
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
