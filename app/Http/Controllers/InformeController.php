@@ -7,6 +7,43 @@ use Illuminate\Support\Facades\DB;
 
 class InformeController extends Controller
 {
+    private function stringIsNullOrEmpty($str) {
+        return is_null($str) || $str === '';
+    }
+    public function search(Request $request)
+    {
+   
+        $estado = $request->input("estado");
+        $abogadoAsociado = $request->input("abogadoAsociado");
+        $numeroInforme = $request->input("numeroInforme");
+        $fechaAccidente = $request->input("fechaAccidente");
+        if($this->stringIsNullOrEmpty($estado) == true)
+        {
+            $estado = '%';
+        }
+        if($this->stringIsNullOrEmpty($abogadoAsociado) == true)
+        {
+            $abogadoAsociado = '%';
+        }
+        if($this->stringIsNullOrEmpty($fechaAccidente) == true)
+        {
+            $fechaAccidente = '%';
+        }
+        
+        if($this->stringIsNullOrEmpty($numeroInforme) == true)
+        {
+            $numeroInforme = '%';
+        }
+       
+        $informes = DB::table("informes")->select("id","matricula","fechaAccidente","estado","nombreCliente","abogadoAsociado","peritoAsignado", "tipoInforme", "companiaSeguros")->
+        orderBy("fechaAccidente","desc")
+        ->where("estado","like", $estado)
+        ->where("abogadoAsociado","like", $abogadoAsociado)
+        ->where("id","like", $numeroInforme)
+        ->whereDate("fechaAccidente","like", $fechaAccidente)
+        ->get();   
+        return view("informes.index", ["informes" => $informes]);
+    }
     /**
      * Display a listing of the resource.
      */

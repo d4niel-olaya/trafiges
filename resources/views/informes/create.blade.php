@@ -88,7 +88,7 @@
                                            
                                         </div>
                                     </div>
-                                    <div class="mb-6"><label for="companiaSeguros" class="block text-sm font-medium text-gray-700 mb-2">Compañía de Seguros</label>
+                                    <div class="mb-6 hidden"><label for="companiaSeguros" class="block text-sm font-medium text-gray-700 mb-2">Compañía de Seguros</label>
                                         <div class="relative"><input type="text" id="companiaSeguros" name="companiaSeguros" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="Mutua Madrileña"><button class="absolute inset-y-0 right-10 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5 text-gray-400">
                                                     <circle cx="11" cy="11" r="8"></circle>
                                                     <path d="m21 21-4.3-4.3"></path>

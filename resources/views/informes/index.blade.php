@@ -25,14 +25,52 @@
                     <path d="m5 17-3-3h10"></path>
                 </svg>Plantillas</button></div>
     </div>
-    <div class="flex flex-col sm:flex-row gap-2">
-        <div class="relative flex-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground">
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-            </svg><input type="search" class="flex h-10 w-full rounded-md border bg-background px-8 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" placeholder="Buscar informes..." value=""></div><button class="inline-flex items-center justify-center h-10 w-10 rounded-md border bg-background hover:bg-accent hover:text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter h-4 w-4">
-                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-            </svg></button>
-    </div>
+    <form class="flex flex-col sm:flex-row gap-2" action="{{ route('informes.search') }}" method="GET">
+    
+        <!-- Select para filtrar por estado -->
+        <div class="relative flex-1">
+            <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
+            <select id="estado" name="estado" class="flex h-10 w-full rounded-md border bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                <option value="%">Todos</option>
+                <option value="en_proceso">🔵 En proceso</option>
+                <option value="urgente">🔴 Urgente</option>
+                <option value="pendiente">🟠 Pendiente</option>
+                <option value="finalizado">🟢 Finalizado</option>
+            </select>
+        </div>
+    
+        <!-- Select para filtrar por tipo de informe -->
+        <div class="relative flex-1">
+            <label for="abogadoAsociado" class="block text-sm font-medium text-gray-700">Abogado Asociado</label>
+            <select id="abogadoAsociado" name="abogadoAsociado" class="flex h-10 w-full rounded-md border bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                <option value="%">Todos</option>
+                <option value="Pedro Sánchez">Pedro Sánchez</option>
+                <option value="María López">María López</option>
+                <option value="Carlos Ruiz">Carlos Ruiz</option>
+            </select>
+        </div>
+    
+        <!-- Campo para filtrar por fecha -->
+        <div class="relative flex-1">
+            <label for="fechaAccidente" class="block text-sm font-medium text-gray-700">Fecha de Accidente</label>
+            <input type="date" id="fechaAccidente" name="fechaAccidente" class="flex h-10 w-full rounded-md border bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+        </div>
+    
+        <!-- Campo de texto para buscar por cliente -->
+        <div class="relative flex-1">
+            <label for="numeroInforme" class="block text-sm font-medium text-gray-700">Número Informe</label>
+            <input type="text" id="numeroInforme" name="numeroInforme" placeholder="Buscar Informe..." class="flex h-10 w-full rounded-md border bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+        </div>
+    
+        <!-- Botón para aplicar filtros -->
+      
+        <div class="flex sm:items-end w-full sm:w-auto">
+            <button class="border-2 border-gray-800 h-10 w-full sm:w-auto px-4 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-medium">
+                Buscar
+            </button>
+        </div>
+        
+    </form>
     <div class="rounded-md border">
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
