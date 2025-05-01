@@ -89,7 +89,7 @@
                         <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Cliente</th>
                         <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Abogado</th>
                         <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Perito</th>
-                        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Tipo</th>
+                        {{-- <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Tipo</th> --}}
                         {{-- <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Cía. Seguros</th> --}}
                         <th class="h-12 px-4 text-right align-middle font-medium text-muted-foreground">Acciones</th>
                     </tr>
@@ -122,7 +122,7 @@
                             <td class="p-4 align-middle">{{$informe->nombreCliente}}</td>
                             <td class="p-4 align-middle">{{$informe->abogadoAsociado}}</td>
                             <td class="p-4 align-middle">{{$informe->peritoAsignado}}</td>
-                            <td class="p-4 align-middle">{{$informe->tipoInforme}}</td>
+                            {{-- <td class="p-4 align-middle">{{$informe->tipoInforme}}</td> --}}
                             {{-- <td class="p-4 align-middle">{{$informe->companiaSeguros}}</td> --}}
                             <td class="p-4 align-middle">
                                 <div class="flex justify-end space-x-2"><button onclick="location.href='/informes/{{$informe->id}}'" class="inline-flex items-center justify-center h-10 w-10 rounded-md hover:bg-accent hover:text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4">
