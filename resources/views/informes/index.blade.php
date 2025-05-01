@@ -41,7 +41,7 @@
     
         <!-- Select para filtrar por tipo de informe -->
         <div class="relative flex-1">
-            <label for="abogadoAsociado" class="block text-sm font-medium text-gray-700">Abogado Asociado</label>
+            <label for="abogadoAsociado" class="block text-sm font-medium text-gray-700">Abogado</label>
             <select id="abogadoAsociado" name="abogadoAsociado" class="flex h-10 w-full rounded-md border bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                 <option value="%">Todos</option>
                 <option value="Pedro Sánchez">Pedro Sánchez</option>
@@ -52,13 +52,13 @@
     
         <!-- Campo para filtrar por fecha -->
         <div class="relative flex-1">
-            <label for="fechaAccidente" class="block text-sm font-medium text-gray-700">Fecha de Accidente</label>
+            <label for="fechaAccidente" class="block text-sm font-medium text-gray-700">Fecha</label>
             <input type="date" id="fechaAccidente" name="fechaAccidente" class="flex h-10 w-full rounded-md border bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
         </div>
     
         <!-- Campo de texto para buscar por cliente -->
         <div class="relative flex-1">
-            <label for="numeroInforme" class="block text-sm font-medium text-gray-700">Número Informe</label>
+            <label for="numeroInforme" class="block text-sm font-medium text-gray-700">ID</label>
             <input type="text" id="numeroInforme" name="numeroInforme" placeholder="Buscar Informe..." class="flex h-10 w-full rounded-md border bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
         </div>
 
