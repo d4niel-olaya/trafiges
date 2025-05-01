@@ -30,7 +30,7 @@
             <ul class="space-y-2 font-medium">
                 {{-- ADMINISTRADOR --}}
                 @if(Auth::user()->hasRole('administrador'))
-                    <li><x-nav-item route="dashboard" icon="home" label="Dashboard" /></li>
+                    {{-- <li><x-nav-item route="dashboard" icon="home" label="Dashboard" /></li> --}}
                     <li><x-nav-item route="informes.index" icon="file-text" label="Gestión de Informes" /></li>
                     <li><x-nav-item route="plantillas.index" icon="file" label="Plantillas de Documentos" /></li>
                     <li><x-nav-item route="clientes.index" icon="users" label="Gestión de Clientes" /></li>

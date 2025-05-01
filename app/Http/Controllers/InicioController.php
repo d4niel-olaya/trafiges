@@ -16,7 +16,7 @@ class InicioController extends Controller
     
             // Definir redirecciones por rol
             $routesByRole = [
-                'administrador' => 'dashboard',
+                'administrador' => 'informes.index',
                 'perito'        => 'informes.index',
                 'asistente'     => 'usuarios.index',
             ];

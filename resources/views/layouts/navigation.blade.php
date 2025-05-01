@@ -15,14 +15,14 @@
             <div class="px-4 py-6">
                 <h1 class="text-2xl font-bold text-center mb-6">Gestión</h1>
                 <ul>
-                    <li class="mb-4">
+                    {{-- <li class="mb-4">
                         <a href="{{ route('dashboard') }}" class="flex items-center p-2 text-sm font-medium text-gray-200 hover:bg-gray-700 rounded">
                             <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h11M9 21V3m12 10h-7m0 0l-3 3m3-3l3-3"/>
                             </svg>
                             Dashboard
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="mb-4">
                         <a href="{{ route('users.index') }}" class="flex items-center p-2 text-sm font-medium text-gray-200 hover:bg-gray-700 rounded">
                             <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
