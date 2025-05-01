@@ -124,11 +124,35 @@
                                     <div class="mb-6"><label for="tipoColision" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Colisión</label>
                                         <div class="relative">
                                             <select id="tipoColision" name="tipoColision" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
-                                                <option value="Frontal" @selected(old('tipoColision', $informe[0]->tipoColision) == 'Frontal')>Frontal</option>
-                                                <option value="Lateral izquierdo" @selected(old('tipoColision', $informe[0]->tipoColision) == 'Lateral izquierdo')>Lateral izquierdo</option>
-                                                <option value="Lateral derecho" @selected(old('tipoColision', $informe[0]->tipoColision) == 'Lateral derecho')>Lateral derecho</option>
-                                                <option value="Trasera" @selected(old('tipoColision', $informe[0]->tipoColision) == 'Trasera')>Trasera</option>
-                                                <option value="Multiple" @selected(old('tipoColision', $informe[0]->tipoColision) == 'Multiple')>Multiple</option>
+                                                <optgroup label="Raspados">
+                                                    <option value="Angulares con finalización en raspado (izquierda)" @selected($informe[0]->tipoColision == 'Angulares con finalización en raspado (izquierda)')>
+                                                        Angulares con finalización en raspado (izquierda)
+                                                    </option>
+                                                    <option value="Angulares con finalización en raspado (derecha)" @selected($informe[0]->tipoColision == 'Angulares con finalización en raspado (derecha)')>
+                                                        Angulares con finalización en raspado (derecha)
+                                                    </option>
+                                                    <option value="Negativo" @selected($informe[0]->tipoColision == 'Negativo')>Negativo</option>
+                                                    <option value="Positivo" @selected($informe[0]->tipoColision == 'Positivo')>Positivo</option>
+                                                </optgroup>
+                                                <optgroup label="Colisiones Frontales">
+                                                    <option value="Frontal angular" @selected($informe[0]->tipoColision == 'Frontal angular')>Frontal angular</option>
+                                                    <option value="Frontal excéntrica derecha" @selected($informe[0]->tipoColision == 'Frontal excéntrica derecha')>Frontal excéntrica derecha</option>
+                                                    <option value="Frontal excéntrica izquierda" @selected($informe[0]->tipoColision == 'Frontal excéntrica izquierda')>Frontal excéntrica izquierda</option>
+                                                    <option value="Frontal central" @selected($informe[0]->tipoColision == 'Frontal central')>Frontal central</option>
+                                                </optgroup>
+                                                <optgroup label="Colisiones Frontolaterales">
+                                                    <option value="Angular (izquierda)" @selected($informe[0]->tipoColision == 'Angular (izquierda)')>Angular (izquierda)</option>
+                                                    <option value="Angular (derecha)" @selected($informe[0]->tipoColision == 'Angular (derecha)')>Angular (derecha)</option>
+                                                    <option value="Central" @selected($informe[0]->tipoColision == 'Central')>Central</option>
+                                                    <option value="Anterior" @selected($informe[0]->tipoColision == 'Anterior')>Anterior</option>
+                                                    <option value="Posterior" @selected($informe[0]->tipoColision == 'Posterior')>Posterior</option>
+                                                </optgroup>
+                                                <optgroup label="Colisiones por Alcance">
+                                                    <option value="Angular" @selected($informe[0]->tipoColision == 'Angular')>Angular</option>
+                                                    <option value="Excéntrica derecha" @selected($informe[0]->tipoColision == 'Excéntrica derecha')>Excéntrica derecha</option>
+                                                    <option value="Excéntrica izquierda" @selected($informe[0]->tipoColision == 'Excéntrica izquierda')>Excéntrica izquierda</option>
+                                                    <option value="Central (alcance)" @selected($informe[0]->tipoColision == 'Central (alcance)')>Central</option>
+                                                </optgroup>
                                             </select>
                                             
                                         </div>
@@ -250,7 +274,7 @@
                                             <div class="relative"><input type="number" id="mom-2" name="mom-2" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
                                                  value="{{$datosInforme->vehiculo2->mom}}"></div>
                                         </div>
-                                        <div class="mb-6"><label for="ocupantes-2" class="block text-sm font-medium text-gray-700 mb-2">Nº Ocupantes</label>
+                                        <div class="mb-6 hidden"><label for="ocupantes-2" class="block text-sm font-medium text-gray-700 mb-2">Nº Ocupantes</label>
                                             <div class="relative"><input type="number" 
                                                 id="ocupantes-2" name="ocupantes-2" 
                                                 class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
