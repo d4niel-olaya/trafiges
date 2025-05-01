@@ -207,9 +207,9 @@
                                     <h3 class="text-lg font-medium text-gray-900 mb-6">Vehículo 2</h3>
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                                         <div class="mb-6"><label for="matricula-2" class="block text-sm font-medium text-gray-700 mb-2">Matrícula</label>
-                                            <div class="relative"><input type="text" id="matricula-2" name="matricula-2"
-                                                 class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                 value="{{$datosInforme->vehiculo2->matricula}}"></div>
+                                            <div class="relative"><input type="text" id="matricula-2" name="matricula-2" disabled
+                                                 class="w-full rounded-md border border-gray-300 bg-gray-100 text-gray-500 py-2 px-3 shadow-inner cursor-not-allowed placeholder-gray-400" 
+                                                 value="{{$datosInforme->matricula}}"></div>
                                         </div>
                                         <div class="mb-6"><label for="marca-2" class="block text-sm font-medium text-gray-700 mb-2">Marca</label>
                                             <div class="relative"><input type="text" id="marca-2" name="marca-2"

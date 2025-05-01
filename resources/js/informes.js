@@ -7,19 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const ajaxHandler = new AjaxHandler(csrfToken);
     const btnGuardarCambios = document.getElementById("btnGuardarCambios");
+    const inptMatricula = document.querySelector('input[name="matricula"]');
 
-    const elementos = document.querySelectorAll('input, select');
-
-    const lista = [];
-
-    elementos.forEach(el => {
-        const id = el.id || '';
-        const name = el.name || '';
-        if(name !== '' && name !== '_token'){
-        
-
-            lista.push(id);
-        }
+    inptMatricula.addEventListener('input', (e) => {
+        document.querySelector('input[name="matricula-2"]').value = e.target.value;
     });
     //console.log(inputsAJson(lista)); // Verificar el contenido del objeto JSON
     //console.log(lista); 

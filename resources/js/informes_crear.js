@@ -30,7 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const ajaxHandler = new AjaxHandler(csrfToken);
     const btnGuardarCambios = document.getElementById("btnGuardarCambios");
+    const inptMatricula = document.querySelector('input[name="matricula"]');
 
+    inptMatricula.addEventListener('input', (e) => {
+        document.querySelector('input[name="matricula-2"]').value = e.target.value;
+    });
     // const elementos = document.querySelectorAll('input, select');
 
     // const lista = [];
