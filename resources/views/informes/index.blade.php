@@ -61,6 +61,11 @@
             <label for="numeroInforme" class="block text-sm font-medium text-gray-700">Número Informe</label>
             <input type="text" id="numeroInforme" name="numeroInforme" placeholder="Buscar Informe..." class="flex h-10 w-full rounded-md border bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
         </div>
+
+        <div class="relative flex-1">
+            <label for="matricula" class="block text-sm font-medium text-gray-700">Matricula</label>
+            <input type="text" id="matricula" name="matricula" placeholder="Buscar Matricula..." class="flex h-10 w-full rounded-md border bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+        </div>
     
         <!-- Botón para aplicar filtros -->
       
@@ -85,7 +90,7 @@
                         <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Abogado</th>
                         <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Perito</th>
                         <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Tipo</th>
-                        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Cía. Seguros</th>
+                        {{-- <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Cía. Seguros</th> --}}
                         <th class="h-12 px-4 text-right align-middle font-medium text-muted-foreground">Acciones</th>
                     </tr>
                 </thead>
@@ -118,7 +123,7 @@
                             <td class="p-4 align-middle">{{$informe->abogadoAsociado}}</td>
                             <td class="p-4 align-middle">{{$informe->peritoAsignado}}</td>
                             <td class="p-4 align-middle">{{$informe->tipoInforme}}</td>
-                            <td class="p-4 align-middle">{{$informe->companiaSeguros}}</td>
+                            {{-- <td class="p-4 align-middle">{{$informe->companiaSeguros}}</td> --}}
                             <td class="p-4 align-middle">
                                 <div class="flex justify-end space-x-2"><button onclick="location.href='/informes/{{$informe->id}}'" class="inline-flex items-center justify-center h-10 w-10 rounded-md hover:bg-accent hover:text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4">
                                             <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>

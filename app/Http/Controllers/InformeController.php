@@ -17,6 +17,7 @@ class InformeController extends Controller
         $abogadoAsociado = $request->input("abogadoAsociado");
         $numeroInforme = $request->input("numeroInforme");
         $fechaAccidente = $request->input("fechaAccidente");
+        $matricula = $request->input("matricula");
         if($this->stringIsNullOrEmpty($estado) == true)
         {
             $estado = '%';
@@ -34,6 +35,10 @@ class InformeController extends Controller
         {
             $numeroInforme = '%';
         }
+        if($this->stringIsNullOrEmpty($matricula) == true)
+        {
+            $matricula = '%';
+        }
        
         $informes = DB::table("informes")->select("id","matricula","fechaAccidente","estado","nombreCliente","abogadoAsociado","peritoAsignado", "tipoInforme", "companiaSeguros")->
         orderBy("fechaAccidente","desc")
@@ -41,6 +46,7 @@ class InformeController extends Controller
         ->where("abogadoAsociado","like", $abogadoAsociado)
         ->where("id","like", $numeroInforme)
         ->whereDate("fechaAccidente","like", $fechaAccidente)
+        ->where("matricula","like", $matricula)
         ->get();   
         return view("informes.index", ["informes" => $informes]);
     }
