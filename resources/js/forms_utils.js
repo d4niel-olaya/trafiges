@@ -193,6 +193,40 @@ export function MostrarMensajeValidacion(inputId, message) {
         }
     });
 }
+/**
+ * Valida que el campo no esté vacío. Si lo está, lanza un mensaje con SweetAlert2.
+ * @param {string} inputId - ID del input a validar
+ * @param {string} mensaje - Mensaje de error a mostrar si el campo está vacío
+ * @returns {boolean} - true si el campo está lleno, false si está vacío
+ */
+export function ValidarCampo(inputId, mensaje) {
+    const input = document.getElementById(inputId);
+    if (!input) return false;
+
+    const valor = input.value.trim();
+    if (valor === '') {
+        MostrarMensajeValidacion(inputId, mensaje);
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Valida múltiples campos y muestra el mensaje de error para el primero que falle.
+ * @param {Array} campos - Array de objetos con { id: string, mensaje: string }
+ * @returns {boolean} - true si todos los campos están llenos, false si alguno está vacío
+ */
+export function ValidarCampos(campos) {
+    for (let campo of campos) {
+        const input = document.getElementById(campo.id);
+        if (!input || input.value.trim() === '') {
+            MostrarMensajeValidacion(campo.id, campo.mensaje);
+            return false;
+        }
+    }
+    return true;
+}
 
 export function formularioAJson(divId) {
     // Crear un objeto vacío para almacenar los datos del formulario

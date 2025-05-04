@@ -7,7 +7,7 @@
 <div class="p-6">
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <h1 class="text-2xl font-bold text-gray-900">Gestión de Clientes</h1>
-        <div class="flex gap-2"><button class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-5 w-5">
+        <div class="flex gap-2"><button onclick="location.href='/clientes/create'" class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-5 w-5">
                     <path d="M5 12h14"></path>
                     <path d="M12 5v14"></path>
                 </svg>Nuevo Cliente</button><button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-5 w-5">
@@ -43,13 +43,14 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
+                    @foreach ($clientes as $cliente)
                     <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 text-sm text-gray-900">1</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">Lourdes</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">Cebada Cabañas</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">75765256J</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">654275919</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">lourdes.cebada.cabanas@gmail.com</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{$cliente->id}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{$cliente->nombre}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{$cliente->apellidos}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{$cliente->dni}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{$cliente->telefono}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{$cliente->email}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">-</td>
                         <td class="px-6 py-4 text-sm text-gray-900">-</td>
                         <td class="px-6 py-4 text-sm text-gray-900">
@@ -57,7 +58,7 @@
                                         <path d="M18 20a6 6 0 0 0-12 0"></path>
                                         <circle cx="12" cy="10" r="4"></circle>
                                         <circle cx="12" cy="12" r="10"></circle>
-                                    </svg></button><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil h-5 w-5 text-gray-600">
+                                    </svg></button><button onclick="location.href='/clientes/{{$cliente->id}}/edit'"class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil h-5 w-5 text-gray-600">
                                         <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path>
                                         <path d="m15 5 4 4"></path>
                                     </svg></button><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 h-5 w-5 text-gray-600">
@@ -68,85 +69,8 @@
                                         <line x1="14" x2="14" y1="11" y2="17"></line>
                                     </svg></button></div>
                         </td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 text-sm text-gray-900">2</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">María</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">Rodríguez García</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">87654321B</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">666333444</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">maria.rodriguez@example.com</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">-</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">-</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">
-                            <div class="flex gap-2"><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round h-5 w-5 text-gray-600">
-                                        <path d="M18 20a6 6 0 0 0-12 0"></path>
-                                        <circle cx="12" cy="10" r="4"></circle>
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                    </svg></button><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil h-5 w-5 text-gray-600">
-                                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path>
-                                        <path d="m15 5 4 4"></path>
-                                    </svg></button><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 h-5 w-5 text-gray-600">
-                                        <path d="M3 6h18"></path>
-                                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                                        <line x1="10" x2="10" y1="11" y2="17"></line>
-                                        <line x1="14" x2="14" y1="11" y2="17"></line>
-                                    </svg></button></div>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 text-sm text-gray-900">3</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">Carlos</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">González Martínez</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">11222333C</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">666555666</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">carlos.gonzalez@example.com</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">-</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">-</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">
-                            <div class="flex gap-2"><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round h-5 w-5 text-gray-600">
-                                        <path d="M18 20a6 6 0 0 0-12 0"></path>
-                                        <circle cx="12" cy="10" r="4"></circle>
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                    </svg></button><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil h-5 w-5 text-gray-600">
-                                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path>
-                                        <path d="m15 5 4 4"></path>
-                                    </svg></button><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 h-5 w-5 text-gray-600">
-                                        <path d="M3 6h18"></path>
-                                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                                        <line x1="10" x2="10" y1="11" y2="17"></line>
-                                        <line x1="14" x2="14" y1="11" y2="17"></line>
-                                    </svg></button></div>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 text-sm text-gray-900">5</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">Manuel Jesús</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">Tocino Gómez</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">52922824P</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">667582738</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">mjtocino@gmail.com</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">-</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">-</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">
-                            <div class="flex gap-2"><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round h-5 w-5 text-gray-600">
-                                        <path d="M18 20a6 6 0 0 0-12 0"></path>
-                                        <circle cx="12" cy="10" r="4"></circle>
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                    </svg></button><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil h-5 w-5 text-gray-600">
-                                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path>
-                                        <path d="m15 5 4 4"></path>
-                                    </svg></button><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 h-5 w-5 text-gray-600">
-                                        <path d="M3 6h18"></path>
-                                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                                        <line x1="10" x2="10" y1="11" y2="17"></line>
-                                        <line x1="14" x2="14" y1="11" y2="17"></line>
-                                    </svg></button></div>
-                        </td>
-                    </tr>
+                <tr>
+                    @endforeach
                 </tbody>
             </table>
             <div class="px-6 py-4 text-sm text-gray-500 border-t border-gray-200">Lista de clientes registrados</div>
