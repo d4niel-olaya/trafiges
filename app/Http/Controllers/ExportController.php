@@ -10,7 +10,7 @@ use RecursiveIteratorIterator;
 class ExportController extends Controller
 {
     
-    public function exportar(Request $request)
+    public function exportar(string $id_informe)
     {
         $campos = [
             "cliente_id_2023",
@@ -40,10 +40,10 @@ class ExportController extends Controller
             "longitud_accidente",
             "posicion_vehiculo_2",
             "descripcion_hechos",
-            "clase_vehiculo_1",
-            "marca_vehiculo_1",
-            "modelo_vehiculo_1",
-            "matricula_vehiculo_1",
+            "clase_vehiculo_2",
+            "marca_vehiculo_2",
+            "modelo_vehiculo_2",
+            "matricula_vehiculo_2",
             "conductor1_nombre",
             "conductor1_apellidos",
             "conductor1_dni",
@@ -212,16 +212,35 @@ class ExportController extends Controller
             "posicion_asiento_trasero_izquierdo",
             "posicion_asiento_trasero_central",
             "posicion_asiento_trasero_derecho",
+            // campos objecto del informe , se nombraron de esta forma debo a un espacio limitado en las tablas del documento
+            "f1",
+            "f2",
+            "f3",
+            "f4",    
+            "f5",
+            "f6",
+            "f7",
+            "f8",
+            "f9",
+            "f10",
+            "f11",
+            "f12",
+            "f13",
+            "f14",
+            "f15",
+            "f16",
         ];
 
         try {
             $numero = mt_rand(2, 53);
-            $valores = DB::table('ExcelTrafiges')
-                ->where('cliente_id_2023',$numero)
-                ->first();
-
+            // $valores = DB::table('ExcelTrafiges')
+            //     ->where('cliente_id_2023',$numero)
+            //     ->first();
+            //$id_informe = $request->input('id_informe');
+            $valores = DB::select('CALL obtener_informe_con_ocupantes(?)', [$id_informe]);
+            $valores = $valores[0] ?? null;
             if (!$valores) {
-                return response()->json(['error' => 'No se encontraron datos para el cliente ID: ' . $numero], 404);
+                return response()->json(['error' => 'No se encontraron datos para el cliente ID: ' . $id_informe], 404);
             }
 
             $originalPath = resource_path('plantillas/informe.odt');
@@ -239,16 +258,30 @@ class ExportController extends Controller
             $zip->close();
 
             // 2. Leer y modificar content.xml
+            // $contentPath = $tempDir . '/content.xml';
+            // $content = file_get_contents($contentPath);
+            // $reemplazos = [];
+
+            // foreach ($campos as $campo) {
+            //     $valor = $valores->$campo ?? '';
+            //     $reemplazos['${' . $campo . '}'] = $valor;
+            // }
+            // //var_dump($reemplazos);
+            // $content = str_replace(array_keys($reemplazos), array_values($reemplazos), $content);
+            // file_put_contents($contentPath, $content);
             $contentPath = $tempDir . '/content.xml';
             $content = file_get_contents($contentPath);
-            $reemplazos = [];
 
             foreach ($campos as $campo) {
                 $valor = $valores->$campo ?? '';
-                $reemplazos['${' . $campo . '}'] = $valor;
+           
+                // Construye un patrón regex tolerante a saltos de línea y espacios
+                $pattern = '/\$\{\s*' . preg_quote($campo, '/') . '\s*\}/s';
+
+                // Reemplaza todas las ocurrencias del patrón por el valor
+                $content = preg_replace($pattern, $valor, $content);
             }
 
-            $content = str_replace(array_keys($reemplazos), array_values($reemplazos), $content);
             file_put_contents($contentPath, $content);
 
             // 3. Volver a comprimir como ODT

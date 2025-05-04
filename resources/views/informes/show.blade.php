@@ -47,6 +47,7 @@
         <div class="flex items-start justify-between p-6 border-b border-gray-200">
             <div>
                 <h2 class="text-xl font-semibold text-gray-900">Informe {{$informe[0]->id}}</h2>
+                <input value="{{$informe[0]->id}}" id="id_informe" class="hidden"/>
                 <p class="mt-1 text-sm text-gray-500">Modifique la información del informe.</p>
             </div>
         </div>
@@ -204,7 +205,8 @@
         document.getElementById("btnExportar").addEventListener("click", function() {
             // Aquí puedes agregar la lógica para exportar el informe
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        fetch('/exportar', {
+            const idInforme = document.getElementById("id_informe").value;
+        fetch('/exportar/word/'+idInforme, {
             method: 'GET', // o 'GET', según como esté configurado tu PHP
             headers: {
             //responseType: 'blob'
@@ -224,7 +226,7 @@
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'documento_generado.odt';
+            a.download = 'documento_generado.docx';
             document.body.appendChild(a);
             a.click();
             a.remove();

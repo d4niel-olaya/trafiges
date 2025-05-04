@@ -17,6 +17,7 @@ use App\Http\Controllers\LogController;
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\WordExportController;
 Route::middleware(['auth'])->group(function () {
 
     // 🔹 Dashboard
@@ -52,8 +53,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('backups', [BackupController::class, 'index'])->name('backups.index');
     });
 
-    Route::get('/exportar', [ExportController::class, 'exportar']);
-
+    Route::get('/exportar/{id_informe}', [ExportController::class, 'exportar']);
+    Route::get('/exportar/word/{id_informe}', [WordExportController::class, 'exportWordDocument']);
     Route::get('/buscar/informes', [InformeController::class, 'search'])->name('informes.search');
     //Route::post('/informes/update', [InformeController::class,'update'])->name('informes.update');
 });
