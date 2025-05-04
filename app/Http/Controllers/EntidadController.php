@@ -12,6 +12,7 @@ class EntidadController extends Controller
     public function index()
     {
         //
+        return view("entidades.index");
     }
 
     /**
