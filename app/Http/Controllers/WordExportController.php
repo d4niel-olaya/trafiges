@@ -32,10 +32,16 @@ class WordExportController extends Controller
             $templateProcessor->setValue($key, $value ?? '');
         }
 
-        // Guardar documento temporal
-        $outputPath = storage_path("app/generated/word_export_{$id_informe}.docx");
-        $templateProcessor->saveAs($outputPath);
+       // Crear carpeta si no existe
+        $folderPath = storage_path('app/generated');
 
+        if (!file_exists($folderPath)) {
+            mkdir($folderPath, 0755, true);
+        }
+
+        // Guardar archivo Word
+        $outputPath = $folderPath . "/word_export_{$id_informe}.docx";
+        $templateProcessor->saveAs($outputPath);
         // Devolver archivo como descarga
         return response()->download($outputPath)->deleteFileAfterSend(true);
     }
