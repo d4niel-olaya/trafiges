@@ -1,6 +1,6 @@
-import {formularioAJson, inputsAJson, limpiarCamposFormulario} from './forms_utils.js';
+import {formularioAJson, inputsAJson, limpiarCamposFormulario,ValidarCampo,ValidarCampos} from './forms_utils.js';
 import AjaxHandler from './utils.js';
-
+import $ from 'jquery';
 function obtenerNombresYValores(idDiv) {
     const div = document.getElementById(idDiv);
     if (!div) {
@@ -35,29 +35,79 @@ document.addEventListener('DOMContentLoaded', () => {
     inptMatricula.addEventListener('input', (e) => {
         document.querySelector('input[name="matricula-2"]').value = e.target.value;
     });
-    // const elementos = document.querySelectorAll('input, select');
+    
+      // autocomplete de clientes
 
-    // const lista = [];
+      const $input = $("#nombreCliente");
+      const $hidden_input = $("#cliente_id");
+      const $suggestions = $("#cliente_sugerencias");
+  
+      $input.on("input", function () {
+          const query = $(this).val().trim();
+            console.log(query);
+          if (query === "") {
+             // localStorage.setItem("cliente", "");
+              $hidden_input.val("");
+              $suggestions.addClass("hidden").empty();
+              return;
+          }
+  
+          if (query.length >= 1) {
+              $.ajax({
+                  url: "/clientes/buscar", // Ajusta a tu ruta real de búsqueda
+                  method: "POST",
+                  data: { query: query },
+                  headers: {
+                    'X-CSRF-TOKEN': csrfToken // Token CSRF para seguridad
+                },
+                  success: function (data) {
+                      $suggestions.empty();
+                        console.log(data);
+                      if (data.length > 0) {
+                          data.forEach((cliente) => {
+                              $suggestions.append(
+                                  `<li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                      data-id="${cliente.id}">${cliente.nombre} ${cliente.apellidos}</li>`
+                              );
+                          });
+                          $suggestions.removeClass("hidden");
+                      } else {
+                          $suggestions.addClass("hidden");
+                      }
+                  },
+                  error: function () {
+                      console.error("Error al buscar clientes.");
+                  },
+              });
+          }
+      });
+  
+      // Selección de cliente
+      $suggestions.on("click", "li", function () {
+          const nombreCompleto = $(this).text();
+          const id = $(this).data("id");
+  
+          $input.val(nombreCompleto);
+          //localStorage.setItem("cliente", nombreCompleto);
+          $hidden_input.val(id);
+          $suggestions.addClass("hidden");
+      });
+  
+      // fin autocomplete clientes
 
-    // elementos.forEach(el => {
-    //     const id = el.id || '';
-    //     const name = el.name || '';
-    //     if(name !== '' && name !== '_token'){
-        
-
-    //         lista.push(id);
-    //     }
-    // });
-    //console.log(inputsAJson(lista)); // Verificar el contenido del objeto JSON
-    //console.log(lista); 
     btnGuardarCambios.addEventListener('click', (e) => {
         e.preventDefault(); // Evitar el envío del formulario por defecto
+        if(document.querySelector('input[id="cliente_id"]').value.trim() === ''){
+                ValidarCampo('nombreCliente', 'Debe seleccionar un cliente registrado.');
+                return; // Detiene el flujo si hay errores
+        }
 
         const formData = {
             matricula: document.querySelector('input[name="matricula"]').value,
             estado: document.querySelector('select[name="estado"]').value,
             fechaAccidente: document.querySelector('input[name="fechaAccidente"]').value,
             nombreCliente: document.querySelector('input[name="nombreCliente"]').value,
+            idCliente: document.querySelector('input[name="cliente_id"]').value,
             abogadoAsociado: document.querySelector('select[name="abogadoAsociado"]').value,
             peritoAsignado: document.querySelector('select[name="peritoAsignado"]').value,
             tipoInforme: document.querySelector('select[name="tipoInforme"]').value,

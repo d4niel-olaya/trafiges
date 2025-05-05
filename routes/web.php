@@ -62,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', function () {
     return redirect()->route('login');
 });
-
+Route::post('/clientes/buscar', [ClienteController::class, 'search_autocomplete']);
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

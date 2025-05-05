@@ -54,13 +54,20 @@
                                         </div>
                                     </div>
                                     <div class="mb-6"><label for="nombreCliente" class="block text-sm font-medium text-gray-700 mb-2">Cliente</label>
-                                        <div class="relative"><input type="text" id="nombreCliente" name="nombreCliente" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="{{$informe[0]->nombreCliente}}"><button class="absolute inset-y-0 right-10 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5 text-gray-400">
-                                                    <circle cx="11" cy="11" r="8"></circle>
-                                                    <path d="m21 21-4.3-4.3"></path>
-                                                </svg></button><button class="absolute inset-y-0 right-0 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-5 w-5 text-gray-400">
-                                                    <path d="M5 12h14"></path>
-                                                    <path d="M12 5v14"></path>
-                                                </svg></button></div>
+                                        <div class="relative">
+                                            <x-utilidades.autocomplete
+                                            hidden-id="cliente_id"
+                                            input-id="nombreCliente"
+                                            hidden-name="cliente_id"
+                                            placeholder="Buscar cliente..."
+                                            input-name="nombreCliente"
+                                            class="mb-4"
+                                            name="nombreCliente"
+                                            input-class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                                            suggestions-id="cliente_sugerencias"
+                                            hidden-value="{{$informe[0]->idCliente}}"
+                                            input-value="{{$informe[0]->nombreCliente}}"/>
+                                        </div>
                                     </div>
                                     <div class="mb-6"><label for="abogadoAsociado" class="block text-sm font-medium text-gray-700 mb-2">Abogado Asociado</label>
                                         <div class="relative"><select id="abogadoAsociado" name="abogadoAsociado" value="{{$informe[0]->abogadoAsociado}}"class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">

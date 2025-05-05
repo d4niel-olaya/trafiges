@@ -181,4 +181,16 @@ class ClienteController extends Controller
     {
         //
     }
+
+    public function search_autocomplete(Request $request)
+    {
+        $query = $request->input('query');
+        $clientes = DB::table('clientes')
+            ->where('nombre', 'LIKE', "%".$query."%")
+            ->limit(10)
+            ->get();
+          // ->orWhere('apellidos', 'LIKE', "%{$query}%")
+            // ->orWhere('dni', 'LIKE', "%{$query}%")
+        return response()->json($clientes);
+    }
 }

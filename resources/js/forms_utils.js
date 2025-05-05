@@ -197,14 +197,15 @@ export function MostrarMensajeValidacion(inputId, message) {
  * Valida que el campo no esté vacío. Si lo está, lanza un mensaje con SweetAlert2.
  * @param {string} inputId - ID del input a validar
  * @param {string} mensaje - Mensaje de error a mostrar si el campo está vacío
+ * @param {boolean} forceValidation - Si es true, fuerza la validación incluso si el campo esta lleno
  * @returns {boolean} - true si el campo está lleno, false si está vacío
  */
-export function ValidarCampo(inputId, mensaje) {
+export function ValidarCampo(inputId, mensaje,forceValidation = false) {
     const input = document.getElementById(inputId);
     if (!input) return false;
 
     const valor = input.value.trim();
-    if (valor === '') {
+    if (valor === '' || forceValidation) {  
         MostrarMensajeValidacion(inputId, mensaje);
         return false;
     }
