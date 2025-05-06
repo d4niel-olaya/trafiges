@@ -55,6 +55,7 @@
                                     <div class="mb-6"><label for="nombreCliente" class="block text-sm font-medium text-gray-700 mb-2">Cliente</label>
                                         {{-- <div class="relative"><input type="text" id="nombreCliente" name="nombreCliente" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" >
                                         </div> --}}
+                                        
                                         <x-utilidades.autocomplete
                                         hidden-id="cliente_id"
                                         input-id="nombreCliente"
@@ -66,7 +67,13 @@
                                         input-class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
                                         suggestions-id="cliente_sugerencias"
                                     />
-
+                                        <button type="button" id="btnAbrirModal" class="ml-2 p-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus">
+                                                <path d="M12 5v14"></path>
+                                                <path d="M5 12h14"></path>
+                                            </svg>
+                                        </button>
+                                        
                                     </div>
                                     <div class="mb-6"><label for="abogadoAsociado" class="block text-sm font-medium text-gray-700 mb-2">Abogado Asociado</label>
                                         <div class="relative"><select id="abogadoAsociado" name="abogadoAsociado"  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
@@ -516,6 +523,49 @@
         <div class="bg-gray-50 px-6 py-4 flex justify-end space-x-3 border-t border-gray-200"><button type="button" class="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Cancelar</button><button type="button" id="btnGuardarCambios" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Guardar Cambios</button></div>
     </div>
 </div>
+
+<!-- Modal -->
+<div id="modalCrearCliente" class="fixed inset-0 z-50 hidden bg-gray-800 bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-lg">
+        <div class="p-6">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">Crear Nuevo Cliente</h2>
+            <div class="grid grid-cols-1 gap-4">
+                <div>
+                    <label for="modalNombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+                    <input type="text" id="modalNombre" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                </div>
+                <div>
+                    <label for="modalApellidos" class="block text-sm font-medium text-gray-700">Apellidos</label>
+                    <input type="text" id="modalApellidos" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                </div>
+                <div>
+                    <label for="modalDni" class="block text-sm font-medium text-gray-700">DNI</label>
+                    <input type="text" id="modalDni" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                </div>
+                <div>
+                    <label for="modalFechaNacimiento" class="block text-sm font-medium text-gray-700">Fecha de Nacimiento</label>
+                    <input type="date" id="modalFechaNacimiento" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                </div>
+                <div>
+                    <label for="modalTelefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
+                    <input type="text" id="modalTelefono" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                </div>
+                <div>
+                    <label for="modalEmail" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="modalEmail" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                </div>
+                <div>
+                    <label for="modalDomicilio" class="block text-sm font-medium text-gray-700">Domicilio</label>
+                    <input type="text" id="modalDomicilio" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                </div>
+            </div>
+        </div>
+        <div class="bg-gray-50 px-6 py-4 flex justify-end space-x-3 border-t border-gray-200">
+            <button type="button" id="btnCerrarModal" class="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Cerrar</button>
+            <button type="button" id="btnEnviarCliente" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Enviar</button>
+        </div>
+    </div>
+</div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const tabButtons = document.querySelectorAll('.tab-button');
@@ -585,8 +635,27 @@
             this.classList.remove("border-transparent", "text-gray-500");
         });
     });
+
+
+    const modal = document.getElementById('modalCrearCliente');
+        const btnAbrirModal = document.getElementById('btnAbrirModal');
+        const btnCerrarModal = document.getElementById('btnCerrarModal');
+        const btnEnviarCliente = document.getElementById('btnEnviarCliente');
+
+        // Abrir modal
+        btnAbrirModal.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        // Cerrar modal
+        btnCerrarModal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
         
     });
+
+
+    
  
 
 </script>

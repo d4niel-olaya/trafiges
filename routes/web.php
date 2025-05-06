@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbogadoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
@@ -18,6 +19,8 @@ use App\Http\Controllers\BackupController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\WordExportController;
+use App\Http\Controllers\PeritoController;
+use App\Http\Controllers\SeguroController;
 Route::middleware(['auth'])->group(function () {
 
     // 🔹 Dashboard
@@ -34,7 +37,16 @@ Route::middleware(['auth'])->group(function () {
 
     // 🔹 Entidades
     Route::resource('entidades', EntidadController::class)->middleware('role:administrador');
+    
+    // 🔹 Abogados
+    Route::resource('abogados', AbogadoController::class);
 
+    // Peritos
+
+    Route::resource('peritos', PeritoController::class);
+
+
+    Route::resource('seguros', SeguroController::class);
     // 🔹 Comercial
     Route::resource('comercial', ComercialController::class)->middleware('role:administrador');
 

@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const ajaxHandler = new AjaxHandler(csrfToken);
     const btnGuardarCambios = document.getElementById("btnGuardarCambios");
     const inptMatricula = document.querySelector('input[name="matricula"]');
-
+    const btnEnviarCliente = document.getElementById('btnEnviarCliente'); // botón para enviar el formulario de cliente modal
+    const modal = document.getElementById('modalCrearCliente');
     inptMatricula.addEventListener('input', (e) => {
         document.querySelector('input[name="matricula-2"]').value = e.target.value;
     });
@@ -202,6 +203,51 @@ document.addEventListener('DOMContentLoaded', () => {
         }, (error) => {
             console.error(error); // Manejar el error
         });
+    });
+
+
+    btnEnviarCliente.addEventListener('click', () => {
+        const clienteData = {
+            nombre: document.getElementById('modalNombre').value,
+            apellidos: document.getElementById('modalApellidos').value,
+            dni: document.getElementById('modalDni').value,
+            fechaNacimiento: document.getElementById('modalFechaNacimiento').value,
+            telefono: document.getElementById('modalTelefono').value,
+            email: document.getElementById('modalEmail').value,
+            domicilio: document.getElementById('modalDomicilio').value,
+        };
+        const campos = [
+            { id: 'modalNombre', mensaje: 'El campo nombre es obligatorio.' },
+            { id: 'modalApellidos', mensaje: 'El campo apellidos es obligatorio.' },
+            { id: 'modalDni', mensaje: 'El campo DNI es obligatorio.' },
+           { id: 'modalFechaNacimiento', mensaje: 'El campo fecha de nacimiento es obligatorio.' },
+        ];
+    
+        if (!ValidarCampos(campos)) {
+            return; // Detiene el flujo si hay errores
+        }
+        // Aquí puedes enviar los datos mediante AJAX
+     
+        ajaxHandler.sendRequest('/clientes', clienteData, 'POST', true, true, (response) => {
+            console.log(response); // Manejar la respuesta del servidor
+            //limpiarCamposFormulario('formularioInformes');
+            document.getElementById("cliente_id").value = response.cliente_id;
+            document.getElementById("nombreCliente").value = document.getElementById('modalNombre').value;
+            
+            
+            document.getElementById('modalNombre').value ="";
+             document.getElementById('modalApellidos').value = "";
+           document.getElementById('modalDni').value="";
+            document.getElementById('modalFechaNacimiento').value="";
+             document.getElementById('modalTelefono').value="";
+            document.getElementById('modalEmail').value="";
+            document.getElementById('modalDomicilio').value="";// Asignar el ID del cliente al campo oculto
+            modal.classList.toggle('hidden');
+        }, (error) => {
+            console.error(error); // Manejar el error
+        });
+        // Cerrar modal después de enviar
+        //modal.classList.add('hidden');
     });
 });
 

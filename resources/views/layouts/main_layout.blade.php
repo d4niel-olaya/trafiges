@@ -34,7 +34,17 @@
                     <li><x-nav-item route="informes.index" icon="file-text" label="Gestión de Informes" /></li>
                     <li><x-nav-item route="plantillas.index" icon="file" label="Plantillas de Documentos" /></li>
                     <li><x-nav-item route="clientes.index" icon="users" label="Gestión de Clientes" /></li>
-                    <li><x-nav-item route="entidades.index" icon="building" label="Gestión de Entidades" /></li>
+                    <li>
+                        {{-- <x-nav-item route="entidades.index" icon="building" label="Gestión de Entidades" /> --}}
+                        <x-nav-group label="Gestión de Entidades" icon="building">
+                            <x-nav-item route="abogados.index" icon="abogado" label="Abogados" />
+                            <x-nav-item route="peritos.index" icon="perito" label="Peritos" />
+                            <x-nav-item route="seguros.index" icon="seguros" label="Com. Seguros" />
+                            {{-- <x-nav-item route="diagnostico.index" icon="alert-circle" label="Diagnóstico" />
+                            <x-nav-item route="logs.index" icon="file-search" label="Logs" />
+                            <x-nav-item route="backups.index" icon="save" label="Copias de Seguridad" /> --}}
+                        </x-nav-group>
+                    </li>
                     <li><x-nav-item route="comercial.index" icon="dollar-sign" label="Gestión Comercial" /></li>
                     <li><x-nav-item route="biomecanica.index" icon="activity" label="Gestión Biomecánica" /></li>
                     <li><x-nav-item route="documentacion.index" icon="book-open" label="Documentación" /></li>
