@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import { readdirSync } from 'fs';
+import { readdirSync, statSync } from 'fs';
 import { resolve, join } from 'path';
 
 function getJsInputs(directory) {
