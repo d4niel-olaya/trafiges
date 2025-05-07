@@ -33,11 +33,11 @@
                     <tr class="text-left text-sm font-medium text-gray-500 border-b border-gray-200">
                         <th class="px-6 py-3 whitespace-nowrap">ID</th>
                         <th class="px-6 py-3 whitespace-nowrap">Nombre</th>
-                        <th class="px-6 py-3 whitespace-nowrap">Apellidos</th>
+                        <th class="px-6 py-3 whitespace-nowrap">Direccion</th>
                         <th class="px-6 py-3 whitespace-nowrap">Contacto</th>
                         <th class="px-6 py-3 whitespace-nowrap">Teléfono</th>
                         <th class="px-6 py-3 whitespace-nowrap">Email</th>
-                        <th class="px-6 py-3 whitespace-nowrap">Población</th>
+                       
                    
                     </tr>
                 </thead>
@@ -46,11 +46,11 @@
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4 text-sm text-gray-900">{{$seguro->id}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{$seguro->nombre}}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">{{$seguro->apellidos}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{$seguro->direccion}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{$seguro->contacto}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{$seguro->telefono}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{$seguro->email}}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">-</td>
+                       
                         <td class="px-6 py-4 text-sm text-gray-900">-</td>
                         <td class="px-6 py-4 text-sm text-gray-900">
                             <div class="flex gap-2"><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round h-5 w-5 text-gray-600">

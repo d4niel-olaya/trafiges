@@ -33,20 +33,20 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('plantillas', PlantillaController::class)->middleware('role:administrador');
 
     // 🔹 Clientes
-    Route::resource('clientes', ClienteController::class);
+    Route::resource('clientes', ClienteController::class)->middleware('role:administrador');;
 
     // 🔹 Entidades
-    Route::resource('entidades', EntidadController::class)->middleware('role:administrador');
+    //Route::resource('entidades', EntidadController::class)->middleware('role:administrador');
     
     // 🔹 Abogados
-    Route::resource('abogados', AbogadoController::class);
+    Route::resource('abogados', AbogadoController::class)->middleware('role:administrador');;
 
     // Peritos
 
-    Route::resource('peritos', PeritoController::class);
+    Route::resource('peritos', PeritoController::class)->middleware('role:administrador');;
 
 
-    Route::resource('seguros', SeguroController::class);
+    Route::resource('seguros', SeguroController::class)->middleware('role:administrador');;
     // 🔹 Comercial
     Route::resource('comercial', ComercialController::class)->middleware('role:administrador');
 

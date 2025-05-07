@@ -47,13 +47,13 @@
                     </li>
                     <li><x-nav-item route="comercial.index" icon="dollar-sign" label="Gestión Comercial" /></li>
                     <li><x-nav-item route="biomecanica.index" icon="activity" label="Gestión Biomecánica" /></li>
-                    <li><x-nav-item route="documentacion.index" icon="book-open" label="Documentación" /></li>
+                    {{-- <li><x-nav-item route="documentacion.index" icon="book-open" label="Documentación" /></li> --}}
                     <li>
                         <x-nav-group label="Mantenimiento" icon="settings">
                             <x-nav-item route="usuarios.index" icon="user-cog" label="Usuarios" />
-                            <x-nav-item route="configuracion.index" icon="database" label="Configuración BD" />
+                            {{-- <x-nav-item route="configuracion.index" icon="database" label="Configuración BD" />
                             <x-nav-item route="diagnostico.index" icon="alert-circle" label="Diagnóstico" />
-                            <x-nav-item route="logs.index" icon="file-search" label="Logs" />
+                            <x-nav-item route="logs.index" icon="file-search" label="Logs" /> --}}
                             <x-nav-item route="backups.index" icon="save" label="Copias de Seguridad" />
                         </x-nav-group>
                     </li>
