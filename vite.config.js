@@ -5,9 +5,25 @@ import { resolve } from 'path';
 
 function getJsInputs(directory) {
     const dirPath = resolve(__dirname, directory);
-    return readdirSync(dirPath)
-        .filter(file => file.endsWith('.js')) // Filtrar solo archivos .js
-        .map(file => `${directory}/${file}`); // Crear la ruta relativa
+    let inputs = [];
+
+    function walk(dir) {
+        const files = readdirSync(dir);
+        for (const file of files) {
+            const fullPath = join(dir, file);
+            const stat = statSync(fullPath);
+            if (stat.isDirectory()) {
+                walk(fullPath); // Recursivamente buscar en subdirectorios
+            } else if (file.endsWith('.js')) {
+                // Crear ruta relativa desde __dirname
+                const relativePath = fullPath.replace(resolve(__dirname) + '/', '');
+                inputs.push(relativePath);
+            }
+        }
+    }
+
+    walk(dirPath);
+    return inputs;
 }
 
 export default defineConfig({
