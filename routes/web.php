@@ -18,9 +18,13 @@ use App\Http\Controllers\LogController;
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\PagoController;
 use App\Http\Controllers\WordExportController;
 use App\Http\Controllers\PeritoController;
 use App\Http\Controllers\SeguroController;
+use App\Http\Controllers\ReciboController;
+use App\Http\Controllers\TipoInformeController;    
+
 Route::middleware(['auth'])->group(function () {
 
     // 🔹 Dashboard
@@ -33,20 +37,26 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('plantillas', PlantillaController::class)->middleware('role:administrador');
 
     // 🔹 Clientes
-    Route::resource('clientes', ClienteController::class)->middleware('role:administrador');;
+    Route::resource('clientes', ClienteController::class)->middleware('role:administrador');
 
     // 🔹 Entidades
     //Route::resource('entidades', EntidadController::class)->middleware('role:administrador');
     
     // 🔹 Abogados
-    Route::resource('abogados', AbogadoController::class)->middleware('role:administrador');;
+    Route::resource('abogados', AbogadoController::class)->middleware('role:administrador');
 
     // Peritos
 
-    Route::resource('peritos', PeritoController::class)->middleware('role:administrador');;
+    Route::resource('peritos', PeritoController::class)->middleware('role:administrador');
+
+    Route::resource('recibos', ReciboController::class)->middleware('role:administrador');
 
 
-    Route::resource('seguros', SeguroController::class)->middleware('role:administrador');;
+    Route::resource('pagos', PagoController::class)->middleware('role:administrador');
+
+    Route::resource('tiposinformes', TipoInformeController::class)->middleware('role:administrador');
+
+    Route::resource('seguros', SeguroController::class)->middleware('role:administrador');
     // 🔹 Comercial
     Route::resource('comercial', ComercialController::class)->middleware('role:administrador');
 

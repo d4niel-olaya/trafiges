@@ -45,7 +45,17 @@
                             <x-nav-item route="backups.index" icon="save" label="Copias de Seguridad" /> --}}
                         </x-nav-group>
                     </li>
-                    <li><x-nav-item route="comercial.index" icon="dollar-sign" label="Gestión Comercial" /></li>
+                    <li>
+                        {{-- <x-nav-item route="comercial.index" icon="dollar-sign" label="Gestión Comercial" /> --}}
+                        <x-nav-group label="Gestión Comercial" icon="dollar-sign">
+                            <x-nav-item route="recibos.index" icon="referidos" label="Recibos" />
+                            <x-nav-item route="pagos.index" icon="pagos" label="Pagos" />
+                            <x-nav-item route="tiposinformes.index" icon="book-open" label="Tipos de Informe" />
+                            {{-- <x-nav-item route="diagnostico.index" icon="alert-circle" label="Diagnóstico" />
+                            <x-nav-item route="logs.index" icon="file-search" label="Logs" />
+                            <x-nav-item route="backups.index" icon="save" label="Copias de Seguridad" /> --}}
+                        </x-nav-group>
+                    </li>
                     <li><x-nav-item route="biomecanica.index" icon="activity" label="Gestión Biomecánica" /></li>
                     {{-- <li><x-nav-item route="documentacion.index" icon="book-open" label="Documentación" /></li> --}}
                     <li>
@@ -73,7 +83,7 @@
                 @endif
             
                 {{-- Perfil y Logout comunes --}}
-                <li><x-nav-item route="profile.edit" icon="user" label="Perfil" /></li>
+                <li><x-nav-item route="profile.edit" icon="perfil" label="Perfil" /></li>
                 <li>
                     <form method="POST" action="{{ route('logout') }}" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 group">
                         @csrf

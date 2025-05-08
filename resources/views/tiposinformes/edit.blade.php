@@ -1,13 +1,13 @@
 
 @extends('layouts.main_layout')
 
-@section('title', 'Crear Perito')
+@section('title', 'Crear Tipos de informes')
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="mb-6 flex items-center justify-between">
     
-        <button class="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors focus:outline-none" onclick="window.location.href='/peritos'">
+        <button class="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors focus:outline-none" onclick="window.location.href='/tiposinformes'">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left mr-2">
                 <path d="m12 19-7-7 7-7"></path>
                 <path d="M19 12H5"></path>
@@ -18,7 +18,7 @@
     <div class="bg-white shadow rounded-lg overflow-hidden">
         <div class="flex items-start justify-betweem p-6 border-b border-gray-200">
             <div>
-                <h2 class="text-xl font-semibold text-gray-900">Crear Perito</h2>
+                <h2 class="text-xl font-semibold text-gray-900">Editar Tipo de informe</h2>
             </div>
         </div>
         <div class="p-6">
@@ -29,7 +29,7 @@
                             <div class="tab-content">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
                                     
-                                    @include("peritos.partials.form")
+                                    @include("tiposinformes.partials.form",["tipoInforme"=>$tipoInforme])
                                     
                                 </div>
                             </div>
@@ -47,5 +47,5 @@
 @endsection
 
 @push("scripts")
-@vite('resources/js/peritos/create.js')
+@vite('resources/js/tiposInformes/edit.js')
 @endpush
