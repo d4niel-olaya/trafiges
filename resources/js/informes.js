@@ -93,7 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
             coordenadasGeograficas: document.querySelector('input[name="coordenadasGeograficas"]').value,
             fechaEntregaAbogado: document.querySelector('input[name="fechaEntregaAbogado"]').value,
             fechaEntregaCliente: document.querySelector('input[name="fechaEntregaCliente"]').value,
-            companiaSeguros: document.querySelector('input[name="companiaSeguros"]').value,
+           // companiaSeguros: document.querySelector('input[name="companiaSeguros"]').value,
+            companiaSeguros: document.querySelector('select[name="companiaSeguros"]').value,
             tipoColision: document.querySelector('select[name="tipoColision"]').value,
             vehiculo1: {
                 matricula: document.querySelector('input[name="matricula-1"]').value,
@@ -114,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 mom: parseFloat(document.querySelector('input[name="mom-2"]').value) || 0,
                 numOcupantes: parseInt(document.querySelector('input[name="ocupantes-2"]').value) || 0,
                 velocidad: parseFloat(document.querySelector('input[name="velocidad-2"]').value) || 0,
-                companiaSeguros: document.querySelector('input[name="companiaSeguros-2"]').value || '',
+                companiaSeguros: document.querySelector('select[name="companiaSeguros-2"]').value || '',
                 taller: document.querySelector('input[name="taller-2"]').value || '',
             },
             resultadosBiomecanicos: {

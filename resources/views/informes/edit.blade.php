@@ -70,19 +70,35 @@
                                         </div>
                                     </div>
                                     <div class="mb-6"><label for="abogadoAsociado" class="block text-sm font-medium text-gray-700 mb-2">Abogado Asociado</label>
-                                        <div class="relative"><select id="abogadoAsociado" name="abogadoAsociado" value="{{$informe[0]->abogadoAsociado}}"class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
-                                                <option value="Pedro Sánchez">Pedro Sánchez</option>
-                                                <option value="María López">María López</option>
-                                                <option value="Carlos Ruiz">Carlos Ruiz</option>
+                                        <div class="relative"><select id="abogadoAsociado" name="abogadoAsociado" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
+                                                @if(count($abogados) > 0)
+                                                    <option value="">Seleccione</option>
+                                                    @foreach($abogados as $abogado)
+
+                                                    <option value="{{ $abogado->id }}" {{ $abogado->id == $informe[0]->idAbogado ? 'selected' : '' }}>
+                                                        {{ $abogado->nombre }}
+                                                    </option>
+                                                    @endforeach
+                                                @else
+                                                <option value="">No hay abogados asociados</option>
+                                                @endif
                                             </select>
                                           
                                         </div>
                                     </div>
                                     <div class="mb-6"><label for="peritoAsignado" class="block text-sm font-medium text-gray-700 mb-2">Perito Asignado</label>
-                                        <div class="relative"><select id="peritoAsignado" name="peritoAsignado" value="{{$informe[0]->peritoAsignado}}" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
-                                                <option value="Laura Fernández">Laura Fernández</option>
-                                                <option value="Javier García">Javier García</option>
-                                                <option value="Ana Martínez">Ana Martínez</option>
+                                        <div class="relative"><select id="peritoAsignado" name="peritoAsignado" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
+                                            @if(count($peritos) > 0)
+                                                <option value="">Seleccione</option>
+                                                @foreach($peritos as $perito)
+
+                                                    <option value="{{ $perito->id }}" {{ $perito->id == $informe[0]->idPerito ? 'selected' : '' }}>
+                                                        {{ $perito->nombre }}
+                                                    </option>
+                                                @endforeach
+                                                @else
+                                                    <option value="">No hay Peritos asignados</option>
+                                            @endif
                                             </select>
                                            
                                         </div>
@@ -97,13 +113,21 @@
                                         </div>
                                     </div>
                                     <div class="mb-6 hidden"><label for="companiaSeguros" class="block text-sm font-medium text-gray-700 mb-2">Compañía de Seguros</label>
-                                        <div class="relative"><input type="text" id="companiaSeguros" name="companiaSeguros" value="{{$informe[0]->companiaSeguros}}" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="Mutua Madrileña"><button class="absolute inset-y-0 right-10 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5 text-gray-400">
-                                                    <circle cx="11" cy="11" r="8"></circle>
-                                                    <path d="m21 21-4.3-4.3"></path>
-                                                </svg></button><button class="absolute inset-y-0 right-0 flex items-center pr-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-5 w-5 text-gray-400">
-                                                    <path d="M5 12h14"></path>
-                                                    <path d="M12 5v14"></path>
-                                                </svg></button></div>
+                                        <div class="relative">
+                                            <select id="companiaSeguros" name="companiaSeguros"  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
+                                                @if(count($companias) > 0)
+                                                    <option value="">Seleccione</option>
+                                                    @foreach($companias as $compania)
+
+                                                        <option value="{{ $compania->id }}" {{ $compania->id == $informe[0]->idCompaniaSeguros ? 'selected' : '' }}>
+                                                            {{ $compania->nombre }}
+                                                        </option>
+                                                    @endforeach
+                                                    @else
+                                                    <option value="">No hay Compañias de Seguros</option>
+                                                @endif
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="mb-6"><label for="coordenadasGeograficas" class="block text-sm font-medium text-gray-700 mb-2">Coordenadas Geográficas</label>
                                         <div class="relative"><input type="text" id="coordenadasGeograficas" name="coordenadasGeograficas" value="{{$informe[0]->coordenadasGeograficas}}" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="Ej: 40.416775, -3.703790"></div>
@@ -291,15 +315,20 @@
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                                     <div><label for="companiaSeguros-2" class="block text-sm font-medium text-gray-700 mb-2">Compañía de Seguros</label>
-                                        <div class="relative"><input type="text" id="companiaSeguros-2"
-                                             placeholder="Seleccionar compañía de seguros" name="companiaSeguros-2"  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="">
-                                            <div class="absolute inset-y-0 right-0 flex items-center pr-2 space-x-1"><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5 text-gray-400">
-                                                        <circle cx="11" cy="11" r="8"></circle>
-                                                        <path d="m21 21-4.3-4.3"></path>
-                                                    </svg></button><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-5 w-5 text-gray-400">
-                                                        <path d="M5 12h14"></path>
-                                                        <path d="M12 5v14"></path>
-                                                    </svg></button></div>
+                                        <div class="relative">
+                                            <select id="companiaSeguros-2" name="companiaSeguros-2"  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
+                                                @if(count($companias) > 0)
+                                                    <option value="">Seleccione</option>
+                                                    @foreach($companias as $compania)
+
+                                                        <option value="{{ $compania->id }}" {{ $compania->id == $datosInforme->vehiculo2->companiaSeguros ? 'selected' : '' }} >
+                                                            {{ $compania->nombre }}
+                                                        </option>
+                                                    @endforeach
+                                                    @else
+                                                    <option value="">No hay Compañias de seguros</option>
+                                                @endif
+                                            </select>
                                         </div>
                                     </div>
                                     <div><label for="taller-2" class="block text-sm font-medium text-gray-700 mb-2">Taller</label>
