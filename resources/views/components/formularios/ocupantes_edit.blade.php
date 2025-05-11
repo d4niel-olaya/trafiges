@@ -9,12 +9,14 @@
                         <input type="text"  name="{{$tipo}}_posicion" class="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 shadow-sm" value="{{$ocupantes[0]->posicion ?? '' }}">
                     </div>
                     <div>
+                        @php
+                            $valorSexo = old($tipo.'_sexo', $ocupantes[0]->sexo ?? '');
+                        @endphp
                         <label class="block text-sm font-medium text-gray-700" for="sexo">Sexo</label>
-                        <select  name="{{$tipo}}_sexo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"
-                        value="{{$ocupantes[0]->sexo ?? '' }}">
-                            <option value="">Seleccionar</option>
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
+                        <select  name="{{$tipo}}_sexo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
+                             <option value="">Seleccionar</option>
+                        <option value="M" {{ $valorSexo == 'M' ? 'selected' : '' }}>Masculino</option>
+                        <option value="F" {{ $valorSexo == 'F' ? 'selected' : '' }}>Femenino</option>
                         </select>
                     </div>
                     <div>
@@ -33,12 +35,15 @@
                         <input type="number"  name="{{$tipo}}_altura" value="{{$ocupantes[0]->altura ?? '' }}" placeholder="Altura en cm" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500" value="">
                     </div>
                     <div>
+                        @php
+                             $valorDominancia = old($tipo.'_dominancia', $ocupantes[0]->dominancia ?? '');
+                        @endphp
                         <label class="block text-sm font-medium text-gray-700" for="dominancia">Dominancia</label>
-                        <select  name="{{$tipo}}_dominancia" value="{{$ocupantes[0]->dominancia ?? '' }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
+                        <select  name="{{$tipo}}_dominancia" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
                             <option value="">Seleccionar</option>
-                            <option value="diestro">Diestro</option>
-                            <option value="zurdo">Zurdo</option>
-                            <option value="ambidiestro">Ambidiestro</option>
+                            <option value="diestro" {{ $valorDominancia == 'diestro' ? 'selected' : '' }}>Diestro</option>
+                            <option value="zurdo" {{ $valorDominancia == 'zurdo' ? 'selected' : '' }}>Zurdo</option>
+                            <option value="ambidiestro" {{ $valorDominancia == 'ambidiestro' ? 'selected' : '' }}>Ambidiestro</option>
                         </select>
                     </div>
                 </div>
@@ -60,11 +65,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700" for="accidentes_previos">Accidentes Previos</label>
-                        <textarea  name="{{$tipo}}_accidentes_previos" rows="4"  value="{{$ocupantes[0]->accidentes_previos ?? '' }}" placeholder="Descripción de accidentes previos" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"></textarea>
+                        <textarea  name="{{$tipo}}_accidentes_previos" rows="4"  placeholder="Descripción de accidentes previos" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">{{$ocupantes[0]->accidentes_previos ?? '' }}</textarea>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700" for="tratamiento_farmacologico">Tratamiento Farmacológico Previo</label>
-                        <textarea  name="{{$tipo}}_tratamiento_farmacologico" rows="4" value="{{$ocupantes[0]->tratamiento_farmacologico ?? '' }}" placeholder="Descripción de tratamientos farmacológicos previos" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"></textarea>
+                        <textarea  name="{{$tipo}}_tratamiento_farmacologico" rows="4"  placeholder="Descripción de tratamientos farmacológicos previos" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">{{$ocupantes[0]->tratamiento_farmacologico ?? '' }}</textarea>
                     </div>
                 </div>
             </div>
@@ -109,7 +114,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700" for="pierna_derecha">Pierna Derecha</label>
-                        <input type="text"  name="{{$tipo}}_pierna_derecha" value="{{$ocupantes[0]->pierna_derecho ?? '' }}"  placeholder="Posición pierna derecha" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
+                        <input type="text"  name="{{$tipo}}_pierna_derecha" value="{{$ocupantes[0]->pierna_derecha ?? '' }}"  placeholder="Posición pierna derecha" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700" for="pierna_izquierda">Pierna Izquierda</label>
@@ -122,7 +127,7 @@
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700" for="descripcion_circunstancias">Descripción de Circunstancias</label>
-                        <textarea name="{{$tipo}}_descripcion_circunstancias"  value="{{$ocupantes[0]->descripcion_circunstancias ?? '' }}" rows="4" placeholder="Descripción de las circunstancias" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"></textarea>
+                        <textarea name="{{$tipo}}_descripcion_circunstancias"  rows="4" placeholder="Descripción de las circunstancias" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">{{$ocupantes[0]->descripcion_circunstancias ?? '' }}</textarea>
                     </div>
                     <div class="flex space-x-6">
                         <label class="flex items-center">
@@ -135,22 +140,25 @@
                         </label>
                     </div>
                     <div>
+                        @php
+                            $valorMusculatura = old($tipo.'_musculatura', $ocupantes[0]->musculatura ?? '');
+                        @endphp
                         <label class="block text-sm font-medium text-gray-700" for="musculatura">Musculatura</label>
                         <select name="{{$tipo}}_musculatura" value="{{$ocupantes[0]->musculatura ?? '' }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
-                            <option value="">Seleccionar</option>
-                            <option value="Atrofiada">Atrofiada</option>
-                            <option value="Relajada">Relajada</option>
-                            <option value="Contraida">Contraida</option>
-                            <option value="Hipertrofiada">Hipertrofiada</option>
-                            <option value="Rigida">Rigida</option>
-                            <option value="Espástica">Espástica</option>
-                            <option value="Hipertónica">Hipertónica</option>
-                            <option value="Hipotónica">Hipotónica</option>
+                              <option value="">Seleccionar</option>
+                                <option value="Atrofiada" {{ $valorMusculatura == 'Atrofiada' ? 'selected' : '' }}>Atrofiada</option>
+                                <option value="Relajada" {{ $valorMusculatura == 'Relajada' ? 'selected' : '' }}>Relajada</option>
+                                <option value="Contraida" {{ $valorMusculatura == 'Contraida' ? 'selected' : '' }}>Contraida</option>
+                                <option value="Hipertrofiada" {{ $valorMusculatura == 'Hipertrofiada' ? 'selected' : '' }}>Hipertrofiada</option>
+                                <option value="Rigida" {{ $valorMusculatura == 'Rigida' ? 'selected' : '' }}>Rigida</option>
+                                <option value="Espástica" {{ $valorMusculatura == 'Espástica' ? 'selected' : '' }}>Espástica</option>
+                                <option value="Hipertónica" {{ $valorMusculatura == 'Hipertónica' ? 'selected' : '' }}>Hipertónica</option>
+                                <option value="Hipotónica" {{ $valorMusculatura == 'Hipotónica' ? 'selected' : '' }}>Hipotónica</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700" for="circunstancias_vehiculo">Circunstancias del Vehículo (Cliente)</label>
-                        <textarea name="{{$tipo}}_circunstancias_vehiculo" rows="4" value="{{$ocupantes[0]->circunstancias_vehiculo ?? '' }}" placeholder="Circunstancias del vehículo 2 (Cliente)" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"></textarea>
+                        <textarea name="{{$tipo}}_circunstancias_vehiculo" rows="4" placeholder="Circunstancias del vehículo 2 (Cliente)" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">{{$ocupantes[0]->circunstancias_vehiculo ?? '' }}</textarea>
                     </div>
                 </div>
             </div>
@@ -160,11 +168,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700" for="lesiones">Lesiones</label>
-                        <textarea  name="{{$tipo}}_lesiones"  rows="4" value="{{$ocupantes[0]->lesiones ?? '' }}" placeholder="Descripción de lesiones" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"></textarea>
+                        <textarea  name="{{$tipo}}_lesiones"  rows="4"  placeholder="Descripción de lesiones" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">{{$ocupantes[0]->lesiones ?? '' }}</textarea>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700" for="zonas_afectadas">Zonas Afectadas</label>
-                        <textarea  name="{{$tipo}}_zonas_afectadas" rows="4"  value="{{$ocupantes[0]->zonas_afectadas ?? '' }}" placeholder="Descripción de zonas afectadas" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"></textarea>
+                        <textarea  name="{{$tipo}}_zonas_afectadas" rows="4"  placeholder="Descripción de zonas afectadas" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">{{$ocupantes[0]->zonas_afectadas ?? '' }}</textarea>
                     </div>
                 </div>
             
@@ -175,7 +183,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700" for="juicio_urgencias">Juicio Clínico Urgencias</label>
-                        <textarea  name="{{$tipo}}_juicio_urgencias" rows="4"  value="{{$ocupantes[0]->juicio_urgencias ?? '' }}"  placeholder="Juicio clínico de urgencias" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"></textarea>
+                        <textarea  name="{{$tipo}}_juicio_urgencias" rows="4"   placeholder="Juicio clínico de urgencias" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">{{$ocupantes[0]->juicio_urgencias ?? '' }}</textarea>
                     </div>
                 </div>
             
@@ -186,7 +194,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700" for="juicio_rhb">Juicio Clínico RHB</label>
-                        <textarea  name="{{$tipo}}_juicio_rhb" rows="4" value="{{$ocupantes[0]->juicio_rhb ?? '' }}"  placeholder="Juicio clínico RHB" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"></textarea>
+                        <textarea  name="{{$tipo}}_juicio_rhb" rows="4"  placeholder="Juicio clínico RHB" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">{{$ocupantes[0]->juicio_rhb ?? '' }} </textarea>
                     </div>
                 </div>
             
@@ -215,13 +223,13 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700" for="fecha_alta">Fecha Alta</label>
                         <div class="relative">
-                            <input name="{{$tipo}}_fecha_alta" type="date"  value="{{$ocupantes[0]->fecha_alta ?? '' }}" placeholder="dd/mm/aaaa" class="mt-1 block w-full rounded-md border-gray-300 pl-10 shadow-sm focus:border-sky-500 focus:ring-sky-500">
+                            <input name="{{$tipo}}_fecha_alta" type="date" value="{{$ocupantes[0]->fecha_alta ?? '' }}" placeholder="dd/mm/aaaa" class="mt-1 block w-full rounded-md border-gray-300 pl-10 shadow-sm focus:border-sky-500 focus:ring-sky-500">
                           
                         </div>
                     </div>
                 </div>
                 <div class="mt-4"><label class="block text-sm font-medium text-gray-700">Secuelas</label>
-                    <textarea rows="4" placeholder="Descripción de secuelas"  name="{{$tipo}}_secuelas"   value="{{$ocupantes[0]->secuelas ?? '' }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"></textarea></div>
+                    <textarea rows="4" placeholder="Descripción de secuelas"  name="{{$tipo}}_secuelas"  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">{{$ocupantes[0]->secuelas ?? '' }}</textarea></div>
             </div>
         </div>
 </div>  

@@ -56,7 +56,7 @@ class InformeController extends Controller
     public function index()
     {
         //
-        $informes = DB::table("informes")->select("id","matricula","fechaAccidente","estado","nombreCliente","abogadoAsociado","peritoAsignado", "tipoInforme", "companiaSeguros")->orderBy("fechaAccidente","desc")->get();   
+        $informes = DB::table("informes")->select("id","matricula","fechaAccidente","estado","nombreCliente","abogadoAsociado","peritoAsignado", "tipoInforme", "companiaSeguros")->orderBy("created_at","desc")->get();   
         return view("informes.index", ["informes" => $informes]);
     }
 
