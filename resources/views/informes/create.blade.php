@@ -108,9 +108,17 @@
                                     </div>
                                     <div class="mb-6"><label for="tipoInforme" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Informe</label>
                                         <div class="relative"><select id="tipoInforme" name="tipoInforme"   class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
-                                                <option value="Accidente de tráfico">Accidente de tráfico</option>
-                                                <option value="Daños materiales">Daños materiales</option>
-                                                <option value="Lesiones personales">Lesiones personales</option>
+                                                @if(count($tipos_informe) > 0)
+                                                    <option value="">Seleccione</option>
+                                                @foreach($tipos_informe as $tipo)
+
+                                                    <option value="{{ $tipo->id }}">
+                                                        {{ $tipo->nombre }}
+                                                    </option>
+                                                @endforeach
+                                                @else
+                                                <option value="">No hay Tipos de informes creados</option>
+                                            @endif
                                             </select>
                                            
                                         </div>

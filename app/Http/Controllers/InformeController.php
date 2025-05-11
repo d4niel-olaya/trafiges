@@ -84,7 +84,8 @@ class InformeController extends Controller
         $peritos = DB::table("peritos")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
         $abogados = DB::table("abogados")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
         $companias = DB::table("companias_seguros")->select("id","nombre")->orderBy("nombre","asc")->get();
-        return view("informes.create", ["peritos" => $peritos, "abogados" => $abogados, "companias" => $companias]);
+        $tipos_informe = DB::table("tipos_informe")->select("id","nombre")->orderBy("nombre","asc")->get();
+        return view("informes.create", ["peritos" => $peritos, "abogados" => $abogados, "companias" => $companias, "tipos_informe" => $tipos_informe]);
     }
 
     /**
@@ -110,7 +111,8 @@ class InformeController extends Controller
             'estado' => 'required|string',
             'abogadoAsociado' => 'nullable|integer',
             'peritoAsignado' => 'nullable|integer',
-            'tipoInforme' => 'required|string',
+            //'tipoInforme' => 'required|string',
+            'tipoInforme' => 'required|integer',
             'coordenadasGeograficas' => 'nullable|string',
             'fechaEntregaAbogado' => 'nullable|date',
             'fechaEntregaCliente' => 'nullable|date',
@@ -152,7 +154,8 @@ class InformeController extends Controller
             'idAbogado' => $validatedData['abogadoAsociado'],
            // 'peritoAsignado' => $validatedData['peritoAsignado'],
             'idPerito' => $validatedData['peritoAsignado'],
-            'tipoInforme' => $validatedData['tipoInforme'],
+            //'tipoInforme' => $validatedData['tipoInforme'],
+            'idTipoInforme' => $validatedData['tipoInforme'],
             'coordenadasGeograficas' => $validatedData['coordenadasGeograficas'],
             'fechaEntregaAbogado' => $validatedData['fechaEntregaAbogado'],
             'fechaEntregaCliente' => $validatedData['fechaEntregaCliente'],
@@ -241,6 +244,7 @@ class InformeController extends Controller
         $abogados = DB::table("abogados")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
         $peritos = DB::table("peritos")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
         $companias = DB::table("companias_seguros")->select("id","nombre")->orderBy("nombre","asc")->get();
+        $tipos_informe = DB::table("tipos_informe")->select("id","nombre")->orderBy("nombre","asc")->get();
         //return $informe;
         return view("informes.edit",["informe" => $informe, "ocupantes_conductor" => $ocupantes_conductor
                 , "ocupantes_copiloto" => $ocupantes_copiloto,
@@ -252,6 +256,7 @@ class InformeController extends Controller
                 "peritos" => $peritos,
                 "abogados" => $abogados,
                 "companias" => $companias,
+                "tipos_informe" => $tipos_informe,
             ]);
     }
 
@@ -274,7 +279,9 @@ class InformeController extends Controller
            // 'abogadoAsociado' => 'required|string',
             'abogadoAsociado' => 'nullable|integer',
             'peritoAsignado' => 'nullable|integer',
-            'tipoInforme' => 'required|string',
+            //'tipoInforme' => 'required|string',
+            'tipoInforme' => 'required|integer',
+            //'coordenadasGeograficas' => 'required|string',
             'coordenadasGeograficas' => 'nullable|string',
             'fechaEntregaAbogado' => 'nullable|date',
             'fechaEntregaCliente' => 'nullable|date',
@@ -318,7 +325,8 @@ class InformeController extends Controller
                 'idAbogado' => $validatedData['abogadoAsociado'],
                 //'peritoAsignado' => $validatedData['peritoAsignado'],
                 'idPerito' => $validatedData['peritoAsignado'],
-                'tipoInforme' => $validatedData['tipoInforme'],
+                //'tipoInforme' => $validatedData['tipoInforme'],
+                'idTipoInforme' => $validatedData['tipoInforme'],
                 'coordenadasGeograficas' => $validatedData['coordenadasGeograficas'],
                 'fechaEntregaAbogado' => $validatedData['fechaEntregaAbogado'],
                 'fechaEntregaCliente' => $validatedData['fechaEntregaCliente'],
