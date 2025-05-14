@@ -78,6 +78,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/exportar/{id_informe}', [ExportController::class, 'exportar']);
     Route::get('/exportar/word/{id_informe}', [WordExportController::class, 'exportWordDocument']);
     Route::get('/buscar/informes', [InformeController::class, 'search'])->name('informes.search');
+    Route::get('/exportar-informes-csv', [InformeController::class, 'exportarCSV'])->name('informes.exportarCSV');
     //Route::post('/informes/update', [InformeController::class,'update'])->name('informes.update');
 });
 

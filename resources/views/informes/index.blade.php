@@ -13,7 +13,7 @@
                 </svg><span>Inicio</span></button><button onclick="location.href='/informes/create'" class="inline-flex items-center justify-center gap-2 px-4 h-10 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-medium"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4">
                     <path d="M5 12h14"></path>
                     <path d="M12 5v14"></path>
-                </svg>Nuevo Informe</button><button class="inline-flex items-center justify-center gap-2 px-4 h-10 rounded-md border text-sm font-medium bg-background hover:bg-accent hover:text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-4 w-4">
+                </svg>Nuevo Informe</button><button onclick="location.href='/exportar-informes-csv'" class="inline-flex items-center justify-center gap-2 px-4 h-10 rounded-md border text-sm font-medium bg-background hover:bg-accent hover:text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-4 w-4">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                     <polyline points="7 10 12 15 17 10"></polyline>
                     <line x1="12" x2="12" y1="15" y2="3"></line>

@@ -8,6 +8,7 @@ use PhpOffice\PhpWord\TemplateProcessor;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 class WordExportController extends Controller
 {
+    
     public function exportWordDocument(string $id_informe)
     {
         // Ruta de la plantilla

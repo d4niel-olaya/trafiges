@@ -85,7 +85,33 @@ class InformeController extends Controller
         $abogados = DB::table("abogados")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
         $companias = DB::table("companias_seguros")->select("id","nombre")->orderBy("nombre","asc")->get();
         $tipos_informe = DB::table("tipos_informe")->select("id","nombre")->orderBy("nombre","asc")->get();
-        return view("informes.create", ["peritos" => $peritos, "abogados" => $abogados, "companias" => $companias, "tipos_informe" => $tipos_informe]);
+        $pagos = [
+            (object)[
+                'id' => 'P-001',
+                'fecha' => '2023-03-15',
+                'concepto' => 'Pago a perito',
+                'beneficiario' => 'Carlos Martínez',
+                'importe' => 300,
+                'estado' => 'Realizado',
+            ],
+            (object)[
+                'id' => 'P-002',
+                'fecha' => '2023-03-25',
+                'concepto' => 'Material oficina',
+                'beneficiario' => 'Papelería Central',
+                'importe' => 120,
+                'estado' => 'Realizado',
+            ],
+            (object)[
+                'id' => 'P-003',
+                'fecha' => '2023-04-10',
+                'concepto' => 'Alquiler oficina',
+                'beneficiario' => 'Inmobiliaria Sol',
+                'importe' => 800,
+                'estado' => 'Pendiente',
+            ],
+        ];
+        return view("informes.create", ["peritos" => $peritos, "abogados" => $abogados, "companias" => $companias, "tipos_informe" => $tipos_informe, "pagos" => $pagos]);  
     }
 
     /**
@@ -395,5 +421,58 @@ class InformeController extends Controller
         //
     }
 
-    
+    public function exportarCSV()
+{
+    $informes =  DB::table("informes")
+              ->select(
+            "informes.id",
+            "informes.matricula",
+            "informes.fechaAccidente",
+            "informes.estado",
+            "clientes.nombre as nombreCliente",
+            "abogados.nombre as abogadoAsociado",
+            "peritos.nombre as peritoAsignado",
+            "informes.tipoInforme",
+            "informes.companiaSeguros"
+         )   
+        ->leftJoin("abogados", "informes.idAbogado", "=", "abogados.id")
+        ->leftJoin("peritos", "informes.idPerito", "=", "peritos.id")
+        ->leftJoin("clientes", "informes.idCliente", "=", "clientes.id")
+        ->orderBy("informes.created_at","desc")->get();   
+
+    // Encabezados del archivo
+    $headers = [
+        'Content-Type' => 'text/csv',
+        'Content-Disposition' => 'attachment; filename="informes.csv"',
+    ];
+
+    // Callback que construye el CSV
+    $callback = function () use ($informes) {
+        $handle = fopen('php://output', 'w');
+        
+        // Escribe la fila de encabezados
+        fputcsv($handle, ['Id', 'Matricula', 'Fecha Accidente', 'Estado', 'Nombre Cliente', 'Abogado Asociado', 'Perito Asignado', 'Tipo Informe', 'Compañía Seguros']);
+
+        // Escribe los datos
+        foreach ($informes as $informe) {
+            fputcsv($handle, [
+                $informe->id,
+                $informe->matricula,
+                $informe->fechaAccidente,
+                $informe->estado,
+                $informe->nombreCliente,
+                $informe->abogadoAsociado,
+                $informe->peritoAsignado,
+                $informe->tipoInforme,
+                $informe->companiaSeguros,
+
+            ]);
+        }
+
+        fclose($handle);
+    };
+
+    return response()->stream($callback, 200, $headers);
+}
+
 }
