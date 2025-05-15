@@ -322,7 +322,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 hidden">
                                     <div><label for="companiaSeguros-2" class="block text-sm font-medium text-gray-700 mb-2">Compañía de Seguros</label>
                                         <div class="relative">
                                             <select id="companiaSeguros-2" name="companiaSeguros-2"  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">

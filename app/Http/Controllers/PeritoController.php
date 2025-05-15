@@ -39,6 +39,8 @@ class PeritoController extends Controller
             'email' => 'nullable|email|max:100',
             'especialidad' => 'nullable|string|max:100',
             'notas' => 'nullable|string',
+             'provincia' => 'nullable|string|max:100',
+            'poblacion' => 'nullable|string|max:200',
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
             'nombre.string' => 'El nombre debe ser un texto válido.',
@@ -56,6 +58,12 @@ class PeritoController extends Controller
     
             'especialidad.string' => 'La especialidad debe ser texto.',
             'especialidad.max' => 'La especialidad no debe tener más de 100 caracteres.',
+
+            'poblacion.string' => 'La población debe ser texto.',
+            'poblacion.max' => 'La población no debe tener más de 200 caracteres.',
+
+            'provincia.string' => 'La provincia debe ser texto.',
+            'provincia.max' => 'La provincia no debe tener más de 100 caracteres.',
         ]);
     
         $id = DB::table('peritos')->insertGetId([
@@ -65,6 +73,8 @@ class PeritoController extends Controller
             'email' => $validated['email'] ?? null,
             'especialidad' => $validated['especialidad'] ?? null,
             'notas' => $validated['notas'] ?? null,
+            'poblacion' => $validated['poblacion'] ?? null,
+            'provincia' => $validated['provincia'] ?? null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -108,6 +118,8 @@ class PeritoController extends Controller
             'email' => 'nullable|email|max:100',
             'especialidad' => 'nullable|string|max:100',
             'notas' => 'nullable|string',
+             'provincia' => 'nullable|string|max:100',
+            'poblacion' => 'nullable|string|max:200',
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
             'nombre.string' => 'El nombre debe ser un texto válido.',
@@ -125,6 +137,13 @@ class PeritoController extends Controller
     
             'especialidad.string' => 'La especialidad debe ser texto.',
             'especialidad.max' => 'La especialidad no debe tener más de 100 caracteres.',
+
+            
+            'poblacion.string' => 'La población debe ser texto.',
+            'poblacion.max' => 'La población no debe tener más de 200 caracteres.',
+
+            'provincia.string' => 'La provincia debe ser texto.',
+            'provincia.max' => 'La provincia no debe tener más de 100 caracteres.',
         ]);
     
         $updated = DB::table('peritos')->where('id', $id)->update([
@@ -134,6 +153,8 @@ class PeritoController extends Controller
             'email' => $validated['email'] ?? null,
             'especialidad' => $validated['especialidad'] ?? null,
             'notas' => $validated['notas'] ?? null,
+            'poblacion' => $validated['poblacion'] ?? null,
+            'provincia' => $validated['provincia'] ?? null,
             'updated_at' => now(),
         ]);
     

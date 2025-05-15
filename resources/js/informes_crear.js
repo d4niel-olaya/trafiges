@@ -197,10 +197,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     
-        console.log(formData); // Verificar el contenido del objeto JSON
+       // console.log(formData); // Verificar el contenido del objeto JSON
         ajaxHandler.sendRequest('/informes', formData, 'POST', true, true, (response) => {
             console.log(response); // Manejar la respuesta del servidor
             //limpiarCamposFormulario('formularioInformes');
+            location.href = '/informes'; // Redirigir a la página de informes
         }, (error) => {
             console.error(error); // Manejar el error
         });

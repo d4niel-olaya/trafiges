@@ -53,7 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
             direccion: document.querySelector('input[id="domicilio"]').value,
             notas: document.querySelector('input[id="notas"]').value,
             id: document.querySelector('input[id="id"]').value,
-          
+          provincia: document.querySelector('input[id="provincia"]').value,
+           poblacion: document.querySelector('input[id="poblacion"]').value,
         };
 
        

@@ -1,30 +1,7 @@
 import {formularioAJson, inputsAJson, limpiarCamposFormulario, MostrarMensajeValidacion,ValidarCampo, ValidarCampos} from '../forms_utils.js';
 import AjaxHandler from '../utils.js';
 
-function obtenerNombresYValores(idDiv) {
-    const div = document.getElementById(idDiv);
-    if (!div) {
-      console.warn(`No se encontró un div con el id: ${idDiv}`);
-      return [];
-    }
-  
-    const elementos = div.querySelectorAll('input, select, textarea');
-    const resultado = [];
-  
-    elementos.forEach(el => {
-      if (!el.name) return;
-  
-      if (el.type === 'checkbox') {
-        if (el.checked) {
-          resultado.push({ name: el.name, value: el.value });
-        }
-      } else {
-        resultado.push({ name: el.name, value: el.value });
-      }
-    });
-  
-    return resultado;
-  }
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -52,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
             email: document.querySelector('input[id="email"]').value,
             especialidad: document.querySelector('input[id="especialidad"]').value,
             notas: document.querySelector('textarea[id="notas"]').value,
+              provincia: document.querySelector('input[id="provincia"]').value,
+           poblacion: document.querySelector('input[id="poblacion"]').value,
         };
 
        
@@ -68,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
              document.querySelector('input[id="email"]').value = "";
              document.querySelector('input[id="especialidad"]').value = "";
             document.querySelector('textarea[id="notas"]').value = "";
+            document.querySelector('input[id="poblacion"]').value = "";
+              document.querySelector('input[id="provincia"]').value = "";
         }, (error) => {
             console.error(error); // Manejar el error
         });

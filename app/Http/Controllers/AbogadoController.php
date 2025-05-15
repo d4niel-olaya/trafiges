@@ -38,6 +38,8 @@ class AbogadoController extends Controller
             'despacho' => 'nullable|string|max:150',
             'direccion' => 'nullable|string',
             'notas' => 'nullable|string',
+             'provincia' => 'nullable|string|max:100',
+            'poblacion' => 'nullable|string|max:200',
         ], [
             // Mensajes personalizados
             'nombre.required' => 'El nombre es obligatorio.',
@@ -56,6 +58,12 @@ class AbogadoController extends Controller
     
             'despacho.string' => 'El despacho debe ser texto.',
             'despacho.max' => 'El despacho no debe tener más de 150 caracteres.',
+
+            'poblacion.string' => 'La población debe ser texto.',
+            'poblacion.max' => 'La población no debe tener más de 200 caracteres.',
+
+            'provincia.string' => 'La provincia debe ser texto.',
+            'provincia.max' => 'La provincia no debe tener más de 100 caracteres.',
         ]);
     
         $id = DB::table('abogados')->insertGetId([
@@ -66,6 +74,8 @@ class AbogadoController extends Controller
             'despacho' => $validated['despacho'] ?? null,
             'direccion' => $validated['direccion'] ?? null,
             'notas' => $validated['notas'] ?? null,
+              'poblacion' => $validated['poblacion'] ?? null,
+            'provincia' => $validated['provincia'] ?? null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -110,6 +120,8 @@ class AbogadoController extends Controller
             'despacho' => 'nullable|string|max:150',
             'direccion' => 'nullable|string',
             'notas' => 'nullable|string',
+            'provincia' => 'nullable|string|max:100',
+            'poblacion' => 'nullable|string|max:200',
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
             'nombre.string' => 'El nombre debe ser un texto válido.',
@@ -127,6 +139,12 @@ class AbogadoController extends Controller
     
             'despacho.string' => 'El despacho debe ser texto.',
             'despacho.max' => 'El despacho no debe tener más de 150 caracteres.',
+
+            'poblacion.string' => 'La población debe ser texto.',
+            'poblacion.max' => 'La población no debe tener más de 200 caracteres.',
+
+            'provincia.string' => 'La provincia debe ser texto.',
+            'provincia.max' => 'La provincia no debe tener más de 100 caracteres.',
         ]);
     
         $updated = DB::table('abogados')->where('id', $id)->update([
@@ -137,6 +155,8 @@ class AbogadoController extends Controller
             'despacho' => $validated['despacho'] ?? null,
             'direccion' => $validated['direccion'] ?? null,
             'notas' => $validated['notas'] ?? null,
+            'poblacion' => $validated['poblacion'] ?? null,
+            'provincia' => $validated['provincia'] ?? null,
             'updated_at' => now(),
         ]);
     

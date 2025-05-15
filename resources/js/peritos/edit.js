@@ -52,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
             email: document.querySelector('input[id="email"]').value,
             especialidad: document.querySelector('input[id="especialidad"]').value,
             notas: document.querySelector('textarea[id="notas"]').value,
+              provincia: document.querySelector('input[id="provincia"]').value,
+           poblacion: document.querySelector('input[id="poblacion"]').value,
         };
 
        

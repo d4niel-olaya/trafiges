@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
             email: document.querySelector('input[id="email"]').value,
             direccion: document.querySelector('input[id="domicilio"]').value,
             notas: document.querySelector('input[id="notas"]').value,
-  
-          
+           provincia: document.querySelector('input[id="provincia"]').value,
+           poblacion: document.querySelector('input[id="poblacion"]').value,
         };
 
        
@@ -71,6 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
              document.querySelector('input[id="email"]').value = "";
              document.querySelector('input[id="domicilio"]').value = "";
             document.querySelector('input[id="notas"]').value = "";
+             document.querySelector('input[id="poblacion"]').value = "";
+              document.querySelector('input[id="provincia"]').value = "";
         }, (error) => {
             console.error(error); // Manejar el error
         });
