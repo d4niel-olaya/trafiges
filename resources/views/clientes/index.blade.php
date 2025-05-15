@@ -51,8 +51,8 @@
                         <td class="px-6 py-4 text-sm text-gray-900">{{$cliente->dni}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{$cliente->telefono}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{$cliente->email}}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">-</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">-</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{$cliente->poblacion}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{$cliente->abogadoAsociado}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">
                             <div class="flex gap-2"><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round h-5 w-5 text-gray-600">
                                         <path d="M18 20a6 6 0 0 0-12 0"></path>

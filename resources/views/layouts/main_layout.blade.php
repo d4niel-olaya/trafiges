@@ -39,7 +39,7 @@
                         <x-nav-group label="Gestión de Entidades" icon="building">
                             <x-nav-item route="abogados.index" icon="abogado" label="Abogados" />
                             <x-nav-item route="peritos.index" icon="perito" label="Peritos" />
-                            <x-nav-item route="seguros.index" icon="seguros" label="Com. Seguros" />
+                            <x-nav-item route="seguros.index" icon="seguros" label="Referidos" />
                             {{-- <x-nav-item route="diagnostico.index" icon="alert-circle" label="Diagnóstico" />
                             <x-nav-item route="logs.index" icon="file-search" label="Logs" />
                             <x-nav-item route="backups.index" icon="save" label="Copias de Seguridad" /> --}}

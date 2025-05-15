@@ -74,9 +74,17 @@
                                     <div class="mb-6">
                                         <label for="abogadoAsociado" class="block text-sm font-medium text-gray-700 mb-2">Abogado Asociado</label>
                                         <select id="abogadoAsociado" name="abogadoAsociado" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
-                                            <option value="Pedro Sánchez">Pedro Sánchez</option>
-                                            <option value="María López">María López</option>
-                                            <option value="Carlos Ruiz">Carlos Ruiz</option>
+                                           @if(count($abogados) > 0)
+                                                    <option value="">Seleccione</option>
+                                                    @foreach($abogados as $abogado)
+
+                                                    <option value="{{ $abogado->id }}">
+                                                        {{ $abogado->nombre }}
+                                                    </option>
+                                                    @endforeach
+                                                @else
+                                                <option value="">No hay abogados asociados</option>
+                                            @endif
                                         </select>
                                     </div>
                                 </div>

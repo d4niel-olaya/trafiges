@@ -68,18 +68,26 @@
                                     </div>
                                     <div class="mb-6">
                                         <label for="poblacion" class="block text-sm font-medium text-gray-700 mb-2">Población</label>
-                                        <input type="text" id="poblacion" name="poblacion"  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                                        <input type="text" id="poblacion" name="poblacion" value="{{$cliente->poblacion ?? '' }}" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
                                     </div>
                                     <div class="mb-6">
                                         <label for="provincia" class="block text-sm font-medium text-gray-700 mb-2">Provincia</label>
-                                        <input type="text" id="provincia" name="provincia" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                                        <input type="text" id="provincia" name="provincia" value="{{$cliente->provincia ?? '' }}" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
                                     </div>
                                     <div class="mb-6">
                                         <label for="abogadoAsociado" class="block text-sm font-medium text-gray-700 mb-2">Abogado Asociado</label>
                                         <select id="abogadoAsociado" name="abogadoAsociado" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
-                                            <option value="Pedro Sánchez">Pedro Sánchez</option>
-                                            <option value="María López">María López</option>
-                                            <option value="Carlos Ruiz">Carlos Ruiz</option>
+                                           @if(count($abogados) > 0)
+                                                    <option value="">Seleccione</option>
+                                                    @foreach($abogados as $abogado)
+
+                                                    <option value="{{ $abogado->id }}" {{ $abogado->id == $cliente->idAbogado ? 'selected' : '' }}>
+                                                        {{ $abogado->nombre }}
+                                                    </option>
+                                                    @endforeach
+                                                @else
+                                                <option value="">No hay abogados asociados</option>
+                                            @endif
                                         </select>
                                     </div>
                                 </div>
@@ -92,23 +100,23 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
                                 <div class="mb-6">
                                     <label for="estatura" class="block text-sm font-medium text-gray-700 mb-2">Estatura (cm)</label>
-                                    <input type="number" id="estatura" name="estatura" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                                    <input type="number" id="estatura" name="estatura"  value="{{$cliente->estatura ?? '' }}" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
                                 </div>
                                 <div class="mb-6">
                                     <label for="peso" class="block text-sm font-medium text-gray-700 mb-2">Peso (kg)</label>
-                                    <input type="number" id="peso" name="peso" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                                    <input type="number" id="peso" name="peso" value="{{$cliente->peso ?? '' }}" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
                                 </div>
                                 <div class="mb-6">
                                     <label for="antecedentesClinicos" class="block text-sm font-medium text-gray-700 mb-2">Antecedentes Clínicos</label>
-                                    <textarea id="antecedentesClinicos" name="antecedentesClinicos" value="{{$cliente->notas ?? '' }}" rows="4" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"></textarea>
+                                    <textarea id="antecedentesClinicos" name="antecedentesClinicos"  rows="4" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">{{$cliente->notas ?? '' }}</textarea>
                                 </div>
                                 <div class="mb-6">
                                     <label for="antecedentesMedicos" class="block text-sm font-medium text-gray-700 mb-2">Antecedentes Médicos</label>
-                                    <textarea id="antecedentesMedicos" name="antecedentesMedicos" rows="4" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"></textarea>
+                                    <textarea id="antecedentesMedicos" name="antecedentesMedicos"  rows="4" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">{{$cliente->antecedentesMedicos ?? '' }}</textarea>
                                 </div>
                                 <div class="mb-6">
                                     <label for="antecedentesAccidentes" class="block text-sm font-medium text-gray-700 mb-2">Antecedentes en Accidentes</label>
-                                    <textarea id="antecedentesAccidentes" name="antecedentesAccidentes" rows="4" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"></textarea>
+                                    <textarea id="antecedentesAccidentes" name="antecedentesAccidentes" rows="4" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">{{$cliente->antecedentesAccidentes ?? '' }}</textarea>
                                 </div>
                             </div>
                         </div>

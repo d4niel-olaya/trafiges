@@ -15,7 +15,10 @@ class ClienteController extends Controller
     public function index()
     {
         //
-        $clientes = DB::table('clientes')->get();
+        $clientes =  DB::table('clientes')
+        ->select('clientes.*', 'abogados.nombre as abogadoAsociado')  
+        ->leftJoin('abogados', 'clientes.idAbogado', '=', 'abogados.id')
+        ->get();
         return view("clientes.index", compact('clientes'));
     }
 
@@ -25,7 +28,8 @@ class ClienteController extends Controller
     public function create()
     {
         //
-        return view("clientes.create");
+         $abogados = DB::table("abogados")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
+        return view("clientes.create", compact('abogados'));
     }
 
     /**
@@ -41,7 +45,16 @@ class ClienteController extends Controller
             'email' => 'nullable|email|max:100',
             'direccion' => 'nullable|string',
             'fecha_nacimiento' => 'nullable|date',
+             'idAbogado' => 'nullable|integer|exists:abogados,id',
             'notas' => 'nullable|string',
+             // Nuevos campos
+            'poblacion' => 'nullable|string|max:200',
+            'provincia' => 'nullable|string|max:100',
+            'estatura' => 'nullable|integer|min:0|max:255',
+            'peso' => 'nullable|integer|min:0|max:255',
+            'antecedentesClinicos' => 'nullable|string',
+            'antecedentesMedicos' => 'nullable|string',
+            'antecedentesAccidentes' => 'nullable|string',
         ], [
             // Mensajes personalizados
             'nombre.required' => 'El nombre es obligatorio.',
@@ -63,6 +76,25 @@ class ClienteController extends Controller
             'email.max' => 'El email no debe tener más de 100 caracteres.',
     
             'fecha_nacimiento.date' => 'La fecha de nacimiento debe ser una fecha válida.',
+
+            'poblacion.string' => 'La población debe ser texto.',
+            'poblacion.max' => 'La población no debe tener más de 200 caracteres.',
+
+            'provincia.string' => 'La provincia debe ser texto.',
+            'provincia.max' => 'La provincia no debe tener más de 100 caracteres.',
+
+            'estatura.integer' => 'La estatura debe ser un número entero.',
+            'estatura.min' => 'La estatura no puede ser negativa.',
+            'estatura.max' => 'La estatura no debe ser mayor a 255 cm.',
+
+            'peso.integer' => 'El peso debe ser un número entero.',
+            'peso.min' => 'El peso no puede ser negativo.',
+            'peso.max' => 'El peso no debe ser mayor a 255 kg.',
+
+            'antecedentesClinicos.string' => 'Los antecedentes clínicos deben ser texto.',
+            'antecedentesMedicos.string' => 'Los antecedentes médicos deben ser texto.',
+            'antecedentesAccidentes.string' => 'Los antecedentes de accidentes deben ser texto.',
+            'idAbogado' => 'nullable|integer|exists:abogados,id'
         ]);
     
         $id = DB::table('clientes')->insertGetId([
@@ -74,6 +106,15 @@ class ClienteController extends Controller
             'direccion' => $validated['direccion'] ?? null,
             'fecha_nacimiento' => $validated['fecha_nacimiento'] ?? null,
             'notas' => $validated['notas'] ?? null,
+            'idAbogado' => $validated['idAbogado'] ?? null,
+                     // Nuevos campos
+            'poblacion' => $validated['poblacion'] ?? null,
+            'provincia' => $validated['provincia'] ?? null,
+            'estatura' => $validated['estatura'] ?? null,
+            'peso' => $validated['peso'] ?? null,
+            'antecedentesClinicos' => $validated['antecedentesClinicos'] ?? null,
+            'antecedentesMedicos' => $validated['antecedentesMedicos'] ?? null,
+            'antecedentesAccidentes' => $validated['antecedentesAccidentes'] ?? null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -100,8 +141,12 @@ class ClienteController extends Controller
     public function edit(string $id)
     {
         //
-        $cliente = DB::table('clientes')->where('id', $id)->first();
-        return view("clientes.edit", compact('cliente'));
+        $abogados = DB::table("abogados")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
+        $cliente = DB::table('clientes')
+        ->select('clientes.*')  
+        ->leftJoin('abogados', 'clientes.idAbogado', '=', 'abogados.id')
+        ->where('clientes.id', $id)->first();
+        return view("clientes.edit", compact('cliente','abogados'));
     }
 
     /**
@@ -125,6 +170,14 @@ class ClienteController extends Controller
             'direccion' => 'nullable|string',
             'fecha_nacimiento' => 'nullable|date',
             'notas' => 'nullable|string',
+            'poblacion' => 'nullable|string|max:200',
+            'provincia' => 'nullable|string|max:100',
+            'estatura' => 'nullable|integer|min:0|max:255',
+            'peso' => 'nullable|integer|min:0|max:255',
+            'antecedentesClinicos' => 'nullable|string',
+            'antecedentesMedicos' => 'nullable|string',
+            'antecedentesAccidentes' => 'nullable|string',
+            'idAbogado' => 'nullable|integer|exists:abogados,id',
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
             'nombre.string' => 'El nombre debe ser un texto válido.',
@@ -145,6 +198,25 @@ class ClienteController extends Controller
             'email.max' => 'El email no debe tener más de 100 caracteres.',
 
             'fecha_nacimiento.date' => 'La fecha de nacimiento debe ser una fecha válida.',
+
+            
+            'poblacion.string' => 'La población debe ser texto.',
+            'poblacion.max' => 'La población no debe tener más de 200 caracteres.',
+
+            'provincia.string' => 'La provincia debe ser texto.',
+            'provincia.max' => 'La provincia no debe tener más de 100 caracteres.',
+
+            'estatura.integer' => 'La estatura debe ser un número entero.',
+            'estatura.min' => 'La estatura no puede ser negativa.',
+            'estatura.max' => 'La estatura no debe ser mayor a 255 cm.',
+
+            'peso.integer' => 'El peso debe ser un número entero.',
+            'peso.min' => 'El peso no puede ser negativo.',
+            'peso.max' => 'El peso no debe ser mayor a 255 kg.',
+
+            'antecedentesClinicos.string' => 'Los antecedentes clínicos deben ser texto.',
+            'antecedentesMedicos.string' => 'Los antecedentes médicos deben ser texto.',
+            'antecedentesAccidentes.string' => 'Los antecedentes de accidentes deben ser texto.',
         ]);
 
         $actualizado = DB::table('clientes')
@@ -158,6 +230,15 @@ class ClienteController extends Controller
                 'direccion' => $validated['direccion'] ?? null,
                 'fecha_nacimiento' => $validated['fecha_nacimiento'] ?? null,
                 'notas' => $validated['notas'] ?? null,
+                'idAbogado' => $validated['idAbogado'] ?? null,
+                    // Nuevos campos
+                'poblacion' => $validated['poblacion'] ?? null,
+                'provincia' => $validated['provincia'] ?? null,
+                'estatura' => $validated['estatura'] ?? null,
+                'peso' => $validated['peso'] ?? null,
+                'antecedentesClinicos' => $validated['antecedentesClinicos'] ?? null,
+                'antecedentesMedicos' => $validated['antecedentesMedicos'] ?? null,
+                'antecedentesAccidentes' => $validated['antecedentesAccidentes'] ?? null,
                 'updated_at' => now(),
             ]);
 
