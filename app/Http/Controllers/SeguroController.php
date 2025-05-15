@@ -65,7 +65,7 @@ class SeguroController extends Controller
     
         return response()->json([
             'success' => true,
-            'message' => 'Compañía de seguros registrada correctamente',
+            'message' => 'Referido registrada correctamente',
             'id' => $id,
         ]);
     }
@@ -130,12 +130,12 @@ class SeguroController extends Controller
         if ($updated) {
             return response()->json([
                 'success' => true,
-                'message' => 'Compañía de seguros actualizada correctamente',
+                'message' => 'Referido actualizad0 correctamente',
             ]);
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'No se encontró la compañía o no hubo cambios',
+                'message' => 'No se encontró el Referido o no hubo cambios',
             ], 404);
         }
     }
