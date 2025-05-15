@@ -1,16 +1,16 @@
 @extends('layouts.main_layout')
 
-@section('title', 'Compañias de Seguros')
+@section('title', 'Referidos')
 
 @section('content')
 
 <div class="p-6">
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-        <h1 class="text-2xl font-bold text-gray-900">Gestión de Com. Seguros</h1>
+        <h1 class="text-2xl font-bold text-gray-900">Gestión de Referidos</h1>
         <div class="flex gap-2"><button onclick="location.href='/seguros/create'" class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-5 w-5">
                     <path d="M5 12h14"></path>
                     <path d="M12 5v14"></path>
-                </svg>Nueva Com. Seguros</button><button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-5 w-5">
+                </svg>Nuevo Referido</button><button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-5 w-5">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                     <polyline points="7 10 12 15 17 10"></polyline>
                     <line x1="12" x2="12" y1="15" y2="3"></line>
@@ -72,7 +72,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="px-6 py-4 text-sm text-gray-500 border-t border-gray-200">Lista de Com. Seguros registradas</div>
+            <div class="px-6 py-4 text-sm text-gray-500 border-t border-gray-200">Lista de Referidos registradas</div>
         </div>
     </div>
 </div>
