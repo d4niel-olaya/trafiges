@@ -32,6 +32,7 @@
                         <button id="tab-vehiculos" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="vehiculos-content">Vehículos</button>
                         <button id="tab-biomecanica-vista" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="biomecanica-content">Biomecánica</button>
                         <button id="tab-ocupantes" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="ocupantes-content">Ocupantes</button>
+                        <button id="tab-pagos" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="pagos-content">Cobros</button>
                     </nav>
                 </div>
                 <div class="py-6 tab-content">
@@ -104,13 +105,13 @@
                                         </div>
                                     </div>
                                     <div class="mb-6"><label for="tipoInforme" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Informe</label>
-                                        <div class="relative"><select id="tipoInforme" name="tipoInforme"  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
+                                        <div class="relative"><select id="tipoInforme" name="tipoInforme" disabled class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
                                                @if(count($tipos_informe) > 0)
                                                 <option value="">Seleccione</option>
                                                 @foreach($tipos_informe as $tipo)
 
                                                     <option value="{{ $tipo->id }}" {{ $tipo->id == $informe[0]->idTipoInforme ? 'selected' : '' }}>
-                                                        {{ $tipo->nombre }}
+                                                         {{ $tipo->nombre }} - {{$tipo->precio}} €
                                                     </option>
                                                 @endforeach
                                                 @else
@@ -600,6 +601,14 @@
                         :ocupantes_detras_4="$ocupantes_detras_4"
                                      />
                     </div>
+                     <div id="pagos-content" class="tab-panel">
+                        <div class="py-4">
+                           <h2 class="text-xl font-semibold text-gray-900 mb-2">Gestión	de cobros</h2>
+                            <div class="tab-content">
+                                 @include('pagos.partials.form', ["pagos"=>$pagos])
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -681,5 +690,5 @@
 @endsection
 
 @push("scripts")
-@vite('resources/js/informes.js')
+@vite(['resources/js/informes.js', 'resources/js/pagos/create.js'])
 @endpush

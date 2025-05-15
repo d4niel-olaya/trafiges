@@ -84,34 +84,9 @@ class InformeController extends Controller
         $peritos = DB::table("peritos")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
         $abogados = DB::table("abogados")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
         $companias = DB::table("companias_seguros")->select("id","nombre")->orderBy("nombre","asc")->get();
-        $tipos_informe = DB::table("tipos_informe")->select("id","nombre")->orderBy("nombre","asc")->get();
-        $pagos = [
-            (object)[
-                'id' => 'P-001',
-                'fecha' => '2023-03-15',
-                'concepto' => 'Pago a perito',
-                'beneficiario' => 'Carlos Martínez',
-                'importe' => 300,
-                'estado' => 'Realizado',
-            ],
-            (object)[
-                'id' => 'P-002',
-                'fecha' => '2023-03-25',
-                'concepto' => 'Material oficina',
-                'beneficiario' => 'Papelería Central',
-                'importe' => 120,
-                'estado' => 'Realizado',
-            ],
-            (object)[
-                'id' => 'P-003',
-                'fecha' => '2023-04-10',
-                'concepto' => 'Alquiler oficina',
-                'beneficiario' => 'Inmobiliaria Sol',
-                'importe' => 800,
-                'estado' => 'Pendiente',
-            ],
-        ];
-        return view("informes.create", ["peritos" => $peritos, "abogados" => $abogados, "companias" => $companias, "tipos_informe" => $tipos_informe, "pagos" => $pagos]);  
+        $tipos_informe = DB::table("tipos_informe")->select("id","nombre","precio")->orderBy("nombre","asc")->get();
+       
+        return view("informes.create", ["peritos" => $peritos, "abogados" => $abogados, "companias" => $companias, "tipos_informe" => $tipos_informe]);  
     }
 
     /**
@@ -270,7 +245,8 @@ class InformeController extends Controller
         $abogados = DB::table("abogados")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
         $peritos = DB::table("peritos")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
         $companias = DB::table("companias_seguros")->select("id","nombre")->orderBy("nombre","asc")->get();
-        $tipos_informe = DB::table("tipos_informe")->select("id","nombre")->orderBy("nombre","asc")->get();
+        $tipos_informe = DB::table("tipos_informe")->select("id","nombre","precio")->orderBy("nombre","asc")->get();
+         $pagos = DB::table("pagos")->select("id","concepto","beneficiario","importe","metodo_pago","estado","informe_id", "fecha")->where("informe_id","=", $id)->get();
         //return $informe;
         return view("informes.edit",["informe" => $informe, "ocupantes_conductor" => $ocupantes_conductor
                 , "ocupantes_copiloto" => $ocupantes_copiloto,
@@ -283,6 +259,7 @@ class InformeController extends Controller
                 "abogados" => $abogados,
                 "companias" => $companias,
                 "tipos_informe" => $tipos_informe,
+                "pagos" => $pagos,
             ]);
     }
 
