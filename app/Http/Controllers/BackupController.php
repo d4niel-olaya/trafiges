@@ -30,7 +30,8 @@ class BackupController extends Controller
         $dbName = env('DB_DATABASE');
 
         // Comando mysqldump
-        $command = "mysqldump -h$dbHost -u$dbUser -p\"$dbPass\" $dbName > $backupPath";
+        //$command = "mysqldump -h$dbHost -u$dbUser -p\"$dbPass\" $dbName > $backupPath";
+        $command = "mysqldump -h$dbHost -u$dbUser -p\"$dbPass\" $dbName 2>&1 > \"$backupPath\"";
 
         // Ejecutar el comando
         $resultado = null;
@@ -40,7 +41,7 @@ class BackupController extends Controller
         if ($resultado === 0) {
             return back()->with('success', "Backup creado exitosamente: $filename");
         } else {
-            return back()->with('error', 'Error al generar la copia de seguridad. Verifica permisos y configuración.');
+              return back()->with('error', "Error al generar el backup:<br><pre>" . implode("\n", $salida) . "</pre>");
         }
     }
 
