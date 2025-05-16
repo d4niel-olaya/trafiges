@@ -73,6 +73,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('diagnostico', [DiagnosticoController::class, 'index'])->name('diagnostico.index');
         Route::get('logs', [LogController::class, 'index'])->name('logs.index');
         Route::get('backups', [BackupController::class, 'index'])->name('backups.index');
+
+        Route::post('/backup/generar', [BackupController::class, 'generar'])->name('backup.generar');
+        Route::get('/backup/descargar/{archivo}', [BackupController::class, 'descargar'])->name('backup.descargar');
+        Route::get('/backup/historial', [BackupController::class, 'historial'])->name('backup.historial');
     });
 
     Route::get('/exportar/{id_informe}', [ExportController::class, 'exportar']);

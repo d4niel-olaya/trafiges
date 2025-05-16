@@ -12,6 +12,7 @@ class BiomecanicaController extends Controller
     public function index()
     {
         //
+        return view("biomecanica.index");
     }
 
     /**
