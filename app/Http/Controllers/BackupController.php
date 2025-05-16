@@ -16,41 +16,49 @@ class BackupController extends Controller
     }
 
 
-    public function generar()
-    {
-        // Configuración
-        $fecha = now()->format('Y-m-d_H-i-s');
-        $filename = "backup_$fecha.sql";
-       $backupPath = env('BACKUP_PATH') . "/$filename";
+   public function generar()
+{
+    // Preparar nombre de archivo
+    $fecha = now()->format('Y-m-d_H-i-s');
+    $filename = "backup_$fecha.sql";
 
-        // Datos de conexión desde .env
-        $dbHost = env('DB_HOST');
-        $dbUser = env('DB_USERNAME');
-        $dbPass = env('DB_PASSWORD');
-        $dbName = env('DB_DATABASE');
+    // Ruta donde se guardará
+    $backupDir = base_path('database/backups');
+    $backupPath = $backupDir . "/$filename";
 
-        // Comando mysqldump
-        //$command = "mysqldump -h$dbHost -u$dbUser -p\"$dbPass\" $dbName > $backupPath";
-        $command = "mysqldump -h$dbHost -u$dbUser -p\"$dbPass\" $dbName 2>&1 > \"$backupPath\"";
-
-        // Ejecutar el comando
-        $resultado = null;
-        $salida = null;
-        exec($command, $salida, $resultado);
-
-        if ($resultado === 0) {
-            return back()->with('success', "Backup creado exitosamente: $filename");
-        } else {
-              return back()->with('error', "Error al generar el backup:<br><pre>" . implode("\n", $salida) . "</pre>");
-        }
+    // Crear carpeta si no existe
+    if (!file_exists($backupDir)) {
+        mkdir($backupDir, 0755, true);
     }
+
+    // Datos de conexión
+    $dbHost = env('DB_HOST');
+    $dbUser = env('DB_USERNAME');
+    $dbPass = env('DB_PASSWORD');
+    $dbName = env('DB_DATABASE');
+
+    // Comando mysqldump
+    $command = "mysqldump -h$dbHost -u$dbUser -p\"$dbPass\" $dbName 2>&1 > \"$backupPath\"";
+
+    // Ejecutar
+    $resultado = null;
+    $salida = null;
+    exec($command, $salida, $resultado);
+
+    if ($resultado === 0) {
+        return back()->with('success', "Backup creado exitosamente: $filename");
+    } else {
+        return back()->with('error', "Error al generar el backup:<br><pre>" . implode("\n", $salida) . "</pre>");
+    }
+}
+
 
     /**
      * Descarga un backup
      */
     public function descargar($archivo)
     {
-        $path = env('BACKUP_PATH') . "/$archivo";
+        $path = base_path('database/backups') . "/$archivo";
 
         if (!file_exists($path)) {
             abort(404, "Archivo no encontrado.");
@@ -64,7 +72,7 @@ class BackupController extends Controller
      */
     public function historial()
     {
-        $ruta = env('BACKUP_PATH');
+        $ruta = base_path('database/backups');
         $archivos = collect(glob("$ruta/*.sql"))->map(function ($archivo) {
             return [
                 'nombre' => basename($archivo),
