@@ -79,7 +79,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse(\File::glob(env('BACKUP_PATH') . '/*.sql') as $archivo)
+                        @php
+                            $backupFiles = \File::glob(base_path('database/backups') . '/*.sql');
+                        @endphp
+                        @forelse($backupFiles as $archivo)
                             <tr class="border-b">
                                 <td class="px-4 py-2">{{ basename($archivo) }}</td>
                                 <td class="px-4 py-2">{{ round(filesize($archivo) / 1048576, 2) }} MB</td>
