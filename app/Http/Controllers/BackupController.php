@@ -9,7 +9,7 @@ class BackupController extends Controller
     //
 
 
-    public function index()
+     public function index()
     {
         //
         return view("backup.index");
@@ -23,7 +23,7 @@ class BackupController extends Controller
     $filename = "backup_$fecha.sql";
 
     // Ruta donde se guardará
-    $backupDir = base_path('database/backups');
+    $backupDir = env('BACKUP_PATH');
     $backupPath = $backupDir . "/$filename";
 
     // Crear carpeta si no existe
@@ -58,7 +58,7 @@ class BackupController extends Controller
      */
     public function descargar($archivo)
     {
-        $path = base_path('database/backups') . "/$archivo";
+        $path = env('BACKUP_PATH') . "/$archivo";
 
         if (!file_exists($path)) {
             abort(404, "Archivo no encontrado.");
@@ -72,7 +72,7 @@ class BackupController extends Controller
      */
     public function historial()
     {
-        $ruta = base_path('database/backups');
+        $ruta = env('BACKUP_PATH');
         $archivos = collect(glob("$ruta/*.sql"))->map(function ($archivo) {
             return [
                 'nombre' => basename($archivo),
