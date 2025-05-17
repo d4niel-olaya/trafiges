@@ -5,6 +5,18 @@
                 <h3 class="text-lg font-medium text-gray-900 mb-4">Datos Básicos - {{$ocupante}}</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
+                        <label class="block text-sm font-medium text-gray-700" for="nombre">Nombre</label>
+                        <input type="text"  name="{{$tipo}}_nombre"  value="{{$ocupantes[0]->nombre ?? '' }}"  class="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 shadow-sm" maxlength="100">
+                    </div>
+                     <div>
+                        <label class="block text-sm font-medium text-gray-700" for="apellidos">Apellidos</label>
+                        <input type="text"  name="{{$tipo}}_apellidos"  value="{{$ocupantes[0]->apellidos ?? '' }}"  class="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 shadow-sm" maxlength="100">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700" for="dni">Dni</label>
+                        <input type="text"  name="{{$tipo}}_dni" value="{{$ocupantes[0]->dni ?? '' }}" class="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 shadow-sm" maxlength="15">
+                    </div>
+                    <div>
                         <label class="block text-sm font-medium text-gray-700" for="posicion">Posición</label>
                         <input type="text"  name="{{$tipo}}_posicion" class="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 shadow-sm" value="{{$ocupantes[0]->posicion ?? '' }}">
                     </div>

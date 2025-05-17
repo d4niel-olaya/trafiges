@@ -173,6 +173,9 @@ class InformeController extends Controller
             DB::table('informes_ocupantes')->insert([
                 'idInforme' => $nuevoId,
                 'tipo_ocupante' => $ocupante['tipo_ocupante'] ?? 'conductor',
+                'nombre' => $ocupante['nombre'] ?? null,
+                'apellidos' => $ocupante['apellidos'] ?? null,
+                'dni' => $ocupante['dni'] ?? null,
                 'posicion' => $ocupante['posicion'] ?? null,
                 'sexo' => $ocupante['sexo'] ?? null,
                 'edad' => $ocupante['edad'] ?? null,
@@ -346,6 +349,9 @@ class InformeController extends Controller
                 DB::table('informes_ocupantes')->insert([
                     'idInforme' => $validatedData['id'],
                     'tipo_ocupante' => $ocupante['tipo_ocupante'] ?? 'conductor',
+                    'nombre' => $ocupante['nombre'] ?? null,
+                    'apellidos' => $ocupante['apellidos'] ?? null,
+                    'dni' => $ocupante['dni'] ?? null,
                     'posicion' => $ocupante['posicion'] ?? 'conductor',
                     'sexo' => $ocupante['sexo'] ?? null,
                     'edad' => $ocupante['edad'] ?? null,
