@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 class BackupController extends Controller
 {
     //
@@ -12,7 +13,11 @@ class BackupController extends Controller
      public function index()
     {
         //
-        return view("backup.index");
+         $backupPath = env('BACKUP_PATH');
+        $backupFiles = File::glob($backupPath . '/*.sql');
+
+        return view('backup.index', compact('backupFiles'));
+        //return view("backup.index");
     }
 
 

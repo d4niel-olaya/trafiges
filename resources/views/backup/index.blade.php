@@ -79,9 +79,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $backupFiles = \File::glob(base_path('database/backups') . '/*.sql');
-                        @endphp
+                        
                         @forelse($backupFiles as $archivo)
                             <tr class="border-b">
                                 <td class="px-4 py-2">{{ basename($archivo) }}</td>
