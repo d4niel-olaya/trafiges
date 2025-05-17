@@ -43,10 +43,17 @@
         <div class="relative flex-1">
             <label for="abogadoAsociado" class="block text-sm font-medium text-gray-700">Abogado</label>
             <select id="abogadoAsociado" name="abogadoAsociado" class="flex h-10 w-full rounded-md border bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                <option value="%">Todos</option>
-                <option value="Pedro Sánchez">Pedro Sánchez</option>
-                <option value="María López">María López</option>
-                <option value="Carlos Ruiz">Carlos Ruiz</option>
+                @if(count($abogados) > 0)
+                    <option value="%">Todos</option>
+                    @foreach($abogados as $abogado)
+
+                    <option value="{{ $abogado->id }}">
+                        {{ $abogado->nombre }}
+                    </option>
+                    @endforeach
+                @else
+                        <option value="">No hay abogados asociados</option>
+                @endif
             </select>
         </div>
     

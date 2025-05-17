@@ -39,16 +39,16 @@ class InformeController extends Controller
         {
             $matricula = '%';
         }
-       
+         $abogados = DB::table("abogados")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
         $informes = DB::table("informes")->select("id","matricula","fechaAccidente","estado","nombreCliente","abogadoAsociado","peritoAsignado", "tipoInforme", "companiaSeguros")->
         orderBy("fechaAccidente","desc")
         ->where("estado","like", $estado)
-        ->where("abogadoAsociado","like", $abogadoAsociado)
+        ->where("idAbogado","like", $abogadoAsociado)
         ->where("id","like", $numeroInforme)
         ->whereDate("fechaAccidente","like", $fechaAccidente)
         ->where("matricula","like", $matricula)
         ->get();   
-        return view("informes.index", ["informes" => $informes]);
+        return view("informes.index", ["informes" => $informes,"abogados" => $abogados]);
     }
     /**
      * Display a listing of the resource.
@@ -72,7 +72,9 @@ class InformeController extends Controller
         ->leftJoin("peritos", "informes.idPerito", "=", "peritos.id")
         ->leftJoin("clientes", "informes.idCliente", "=", "clientes.id")
         ->orderBy("informes.created_at","desc")->get();   
-        return view("informes.index", ["informes" => $informes]);
+
+        $abogados = DB::table("abogados")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
+        return view("informes.index", ["informes" => $informes, "abogados" => $abogados]);
     }
 
     /**
