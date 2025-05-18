@@ -60,6 +60,8 @@ Route::middleware(['auth'])->group(function () {
     // 🔹 Comercial
     Route::resource('comercial', ComercialController::class)->middleware('role:administrador');
 
+
+
     // 🔹 Biomecánica
     Route::resource('biomecanica', BiomecanicaController::class)->middleware('role:administrador');
 
