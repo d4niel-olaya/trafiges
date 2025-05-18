@@ -31,13 +31,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [InicioController::class, 'index'])->name('dashboard');
 
     // 🔹 Informes
-    Route::resource('informes', InformeController::class);
+    Route::resource('informes', InformeController::class)->middleware('role:administrador|perito|asistente');;
 
     // 🔹 Plantillas
     Route::resource('plantillas', PlantillaController::class)->middleware('role:administrador');
 
     // 🔹 Clientes
-    Route::resource('clientes', ClienteController::class)->middleware('role:administrador');
+    Route::resource('clientes', ClienteController::class)->middleware('role:administrador|perito');
 
     // 🔹 Entidades
     //Route::resource('entidades', EntidadController::class)->middleware('role:administrador');
@@ -69,7 +69,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('documentacion', DocumentacionController::class);
 
     // 🔹 Mantenimiento
-    Route::middleware('role:administrador')->group(function () {
+
+    Route::middleware('role:administrado|asistente')->group(function () {
         Route::resource('usuarios', UserController::class);
         Route::get('configuracion', [ConfigController::class, 'index'])->name('configuracion.index');
         Route::get('diagnostico', [DiagnosticoController::class, 'index'])->name('diagnostico.index');
@@ -80,6 +81,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/backup/descargar/{archivo}', [BackupController::class, 'descargar'])->name('backup.descargar');
         Route::get('/backup/historial', [BackupController::class, 'historial'])->name('backup.historial');
     });
+
 
     Route::get('/exportar/{id_informe}', [ExportController::class, 'exportar']);
     Route::get('/exportar/word/{id_informe}', [WordExportController::class, 'exportWordDocument']);

@@ -73,7 +73,7 @@
 
                     {{-- TAB 2 - Crear usuario (puede ir luego en su propia vista si prefieres) --}}
                     <div id="crear-usuario" class="tab-panel hidden">
-                        <div class="py-6">
+                            <div class="py-6">
                                 <form action="{{ route('usuarios.store') }}" method="POST">
                                     @csrf
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
