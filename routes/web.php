@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
 
     // 🔹 Mantenimiento
 
-    Route::middleware('role:administrado|asistente')->group(function () {
+    Route::middleware('role:administrador|asistente')->group(function () {
         Route::resource('usuarios', UserController::class);
         Route::get('configuracion', [ConfigController::class, 'index'])->name('configuracion.index');
         Route::get('diagnostico', [DiagnosticoController::class, 'index'])->name('diagnostico.index');
@@ -86,7 +86,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/exportar/{id_informe}', [ExportController::class, 'exportar']);
     Route::get('/exportar/word/{id_informe}', [WordExportController::class, 'exportWordDocument']);
     Route::get('/buscar/informes', [InformeController::class, 'search'])->name('informes.search');
-    Route::get('/exportar-informes-csv', [InformeController::class, 'exportarCSV'])->name('informes.exportarCSV');
+    Route::get('/exportar-informes-csv', [InformeController::class, 'exportarExcel'])->name('informes.exportarCSV');
     //Route::post('/informes/update', [InformeController::class,'update'])->name('informes.update');
 });
 

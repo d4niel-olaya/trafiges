@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Spatie\SimpleExcel\SimpleExcelWriter;
 class InformeController extends Controller
 {
     private function stringIsNullOrEmpty($str) {
@@ -40,8 +40,9 @@ class InformeController extends Controller
             $matricula = '%';
         }
          $abogados = DB::table("abogados")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
-        $informes = DB::table("informes")->select("id","matricula","fechaAccidente","estado","nombreCliente","abogadoAsociado","peritoAsignado", "tipoInforme", "companiaSeguros")->
-        orderBy("fechaAccidente","desc")
+        $informes = DB::table("informes")->
+        select("id","matricula","fechaAccidente","estado","nombreCliente","abogadoAsociado","peritoAsignado", "tipoInforme", "companiaSeguros")
+        ->orderBy("fechaAccidente","desc")
         ->where("estado","like", $estado)
         ->where("idAbogado","like", $abogadoAsociado)
         ->where("id","like", $numeroInforme)
@@ -405,6 +406,56 @@ class InformeController extends Controller
     {
         //
     }
+
+    public function exportarExcel()
+    {
+         $fileName = 'informes.xlsx';
+
+        return response()->streamDownload(function () {
+            $rows = DB::table("informes")
+              ->select(
+            "informes.id",
+            "informes.matricula",
+            "informes.fechaAccidente",
+            DB::raw("
+            CASE informes.estado
+                WHEN 'en_proceso' THEN 'En proceso'
+                WHEN 'urgente' THEN 'Urgente'
+                WHEN 'pendiente' THEN 'Pendiente'
+                WHEN 'finalizado' THEN 'Finalizado'
+                ELSE '⚪ Desconocido'
+            END AS estado"),
+            "clientes.nombre as nombreCliente",
+            "abogados.nombre as abogadoAsociado",
+            "peritos.nombre as peritoAsignado",
+            "informes.tipoInforme",
+            "informes.companiaSeguros"
+         )   
+            ->leftJoin("abogados", "informes.idAbogado", "=", "abogados.id")
+            ->leftJoin("peritos", "informes.idPerito", "=", "peritos.id")
+            ->leftJoin("clientes", "informes.idCliente", "=", "clientes.id")
+            ->orderBy("informes.created_at","desc")->get();   
+
+            SimpleExcelWriter::streamDownload('informes.xlsx', 'xlsx')
+                ->addHeader(['ID', 'Matricula', 'Fecha Accidente', 'Estado', 'Nombre Cliente', 'Abogado Asociado', 'Perito Asignado', 'Tipo Informe', 'Compañía Seguros'])
+                ->addRows($rows->map(function ($informe) {
+                    return [
+                        'ID'     => $informe->id,
+                        'Matricula' => $informe->matricula,
+                        'Fecha Accidente' => $informe->fechaAccidente,
+                        'Estado'  => $informe->estado,
+                        'Nombre Cliente' => $informe->nombreCliente,
+                        'Abogado Asociado' => $informe->abogadoAsociado,
+                        'Perito Asignado' => $informe->peritoAsignado,
+                        'Tipo Informe' => $informe->tipoInforme,
+                        'Compañía Seguros' => $informe->companiaSeguros,
+                    ];
+                })->toArray());
+        }, $fileName, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);
+    }
+
 
     public function exportarCSV()
 {
