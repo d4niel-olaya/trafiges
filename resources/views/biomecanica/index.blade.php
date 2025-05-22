@@ -44,7 +44,7 @@
                             </div>
                             
                                 @php
-                            $json = $formulas[0]->parametros;
+                            $json = $formulas[0]->parametros ?? '{}';
 
                             $parametros = json_decode($json, true);
 
