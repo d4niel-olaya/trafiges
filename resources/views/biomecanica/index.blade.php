@@ -31,7 +31,7 @@
 
                 <div class="py-6 tab-content">
                     <div id="formulas-biomecanicas-content" class="tab-panel">
-                        <div class="p-4 sm:p-6 space-y-6">
+                        <div class="p-4 sm:p-6 space-y-6" id="parametrosBiomecanicos">
                             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                                 <h2 class="text-2xl font-semibold text-gray-900">Fórmulas Biomecánicas</h2>
                                 <button class="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
@@ -42,7 +42,32 @@
                                     Editar Fórmulas
                                 </button>
                             </div>
+                            
+                                @php
+                            $json = $formulas[0]->parametros;
 
+                            $parametros = json_decode($json, true);
+
+                            $aceleracionMaxima = $parametros['aceleracionMaxima'] ?? '';
+                            $aceleracionGravitatoria = $parametros['aceleracionGravitatoria'] ?? '';
+                            $fuerzaInercia = $parametros['fuerzaInercia'] ?? '';
+                            $aumentoPesoCabeza = $parametros['aumentoPesoCabeza'] ?? '';
+
+                            $deltaV2ConFreno = $parametros['deltaV2ConFreno'] ?? '';
+                            $aceleracionMaximaConFreno = $parametros['aceleracionMaximaConFreno'] ?? '';
+                            $aceleracionGravitatoriaConFreno = $parametros['aceleracionGravitatoriaConFreno'] ?? '';
+                            $fuerzaInerciaConFreno = $parametros['fuerzaInerciaConFreno'] ?? '';
+                            $aumentoPesoCabezaConFreno = $parametros['aumentoPesoCabezaConFreno'] ?? '';
+                            $nicConFreno = $parametros['nicConFreno'] ?? '';
+                            $distanciaFrenado = $parametros['distanciaFrenado'] ?? '';
+                            $tiempoDesaceleracion = $parametros['tiempoDesaceleracion'] ?? '';
+
+                            $deltaV2ConEmbrague = $parametros['deltaV2ConEmbrague'] ?? '';
+                            $aceleracionMaximaConDesplazamiento = $parametros['aceleracionMaximaConDesplazamiento'] ?? '';
+                            $fuerzaInerciaConDesplazamiento = $parametros['fuerzaInerciaConDesplazamiento'] ?? '';
+                            $aumentoPesoCabezaConDesplazamiento = $parametros['aumentoPesoCabezaConDesplazamiento'] ?? '';
+                            $nicConDesplazamiento = $parametros['nicConDesplazamiento'] ?? '';
+                        @endphp
                             <div class="p-6 space-y-6">
                                 <h2 class="text-xl font-semibold text-gray-900">1. Fórmulas Sin Deslizamiento</h2>
 
@@ -53,7 +78,7 @@
                                             ACELERACIÓN MÁXIMA (Vehículo 2 Diana) [m/seg²]
                                             <span class="block text-xs font-normal text-gray-500">Utiliza deltaV2 para el cálculo</span>
                                         </label>
-                                        <input type="text" value="Math.abs(deltaV2) / 3.6 / 0.05" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" value="{{$aceleracionMaxima}}" id="aceleracionMaxima" name="aceleracionMaxima" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
 
                                     {{-- ACELERACIÓN GRAVITATORIA --}}
@@ -62,7 +87,7 @@
                                             ACELERACIÓN GRAVITATORIA (Vehículo 2 Diana) [g's]
                                             <span class="block text-xs font-normal text-gray-500">Usa aceleracionMaxima y constante gravitacional</span>
                                         </label>
-                                        <input type="text" value="aceleracionMaxima / 9.81" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" value="{{$aceleracionGravitatoria}}" id="aceleracionGravitatoria" name="aceleracionGravitatoria" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
 
                                     {{-- FUERZA DE INERCIA --}}
@@ -71,7 +96,7 @@
                                             FUERZA DE INERCIA (Vehículo Diana) [N]
                                             <span class="block text-xs font-normal text-gray-500">Basada en la aceleración máxima</span>
                                         </label>
-                                        <input type="text" value="aceleracionMaxima * 7" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" value="{{$fuerzaInercia}}" id="fuerzaInercia" name="fuerzaInercia" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
 
                                     {{-- AUMENTO PESO CABEZA --}}
@@ -80,7 +105,7 @@
                                             AUMENTO PESO CABEZA OCUPANTES (Vehículo Diana)
                                             <span class="block text-xs font-normal text-gray-500">Relación entre fuerza y peso</span>
                                         </label>
-                                        <input type="text" value="fuerzaInercia / 9.81" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" value="{{$aumentoPesoCabeza}}" id="aumentoPesoCabeza" name="aumentoPesoCabeza" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +120,7 @@
                                             DELTA V2 CON DESPLAZAMIENTO FRENO ACTIVADO [Km/h]
                                             <span class="block text-xs font-normal text-gray-500">μ = 0.7 — Considera el coeficiente de rozamiento alto</span>
                                         </label>
-                                        <input type="text" value="deltaV2 - (0.7 * 9.81 * 0.1 * 3.6)" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" value="{{$deltaV2ConFreno}}" id="deltaV2ConFreno" name="deltaV2ConFreno" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
 
                                     {{-- ACELERACIÓN MÁXIMA --}}
@@ -104,7 +129,7 @@
                                             ACELERACIÓN MÁXIMA (Vehículo Diana) [m/seg²] PISANDO FRENO
                                             <span class="block text-xs font-normal text-gray-500">Basada en deltaV2ConFreno</span>
                                         </label>
-                                        <input type="text" value="(deltaV2ConFreno / 3.6) / 0.05" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" value="{{$aceleracionMaximaConFreno}}"   id="aceleracionMaximaConFreno" name="aceleracionMaximaConFreno"  class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
 
                                     {{-- ACELERACIÓN GRAVITATORIA --}}
@@ -113,7 +138,7 @@
                                             ACELERACIÓN GRAVITATORIA (Vehículo Diana) PISANDO FRENO
                                             <span class="block text-xs font-normal text-gray-500">Relacionada con la aceleración y constante de gravedad</span>
                                         </label>
-                                        <input type="text" value="aceleracionMaximaConFreno / 9.81" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" id="aceleracionGravitatoriaConFreno" name="aceleracionGravitatoriaConFreno" value="{{$aceleracionGravitatoriaConFreno}}" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
 
                                     {{-- FUERZA DE INERCIA --}}
@@ -122,7 +147,7 @@
                                             FUERZA DE INERCIA (Vehículo Diana) PISANDO FRENO
                                             <span class="block text-xs font-normal text-gray-500">Fuerza ajustada con freno activado</span>
                                         </label>
-                                        <input type="text" value="aceleracionMaximaConFreno * 7" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" value="{{$fuerzaInerciaConFreno}}"  id="fuerzaInerciaConFreno" name="fuerzaInerciaConFreno" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
 
                                     {{-- AUMENTO PESO CABEZA --}}
@@ -131,7 +156,7 @@
                                             AUMENTO PESO CABEZA OCUPANTES (Vehículo Diana) PISANDO FRENO
                                             <span class="block text-xs font-normal text-gray-500">Considera la fuerza con freno activo</span>
                                         </label>
-                                        <input type="text" value="fuerzaInerciaConFreno / 9.81" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" value="{{$aumentoPesoCabezaConFreno}}"  id="aumentoPesoCabezaConFreno" name="aumentoPesoCabezaConFreno" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
 
                                     {{-- NIC --}}
@@ -140,7 +165,7 @@
                                             NIC (Lesiones en el Cuello ocupantes Vehículo Diana) PISANDO FRENO
                                             <span class="block text-xs font-normal text-gray-500">Índice crítico con freno activado</span>
                                         </label>
-                                        <input type="text" value="(aceleracionMaximaConFreno * 0.2) + Math.pow(deltaV2ConFreno / 3.6, 2)" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" value="{{$nicConFreno}}" id="nicConFreno" name="nicConFreno" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
 
                                     {{-- NUEVO INPUT 1 --}}
@@ -149,7 +174,7 @@
                                             DISTANCIA DE FRENADO (Vehículo Diana) [m]
                                             <span class="block text-xs font-normal text-gray-500">Cálculo estimado usando fórmula cinemática</span>
                                         </label>
-                                        <input type="text" value="Math.pow(deltaV2ConFreno / 3.6, 2) / (2 * 9.81 * 0.7)" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" value="{{$distanciaFrenado}}" id="distanciaFrenado" name="distanciaFrenado" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
 
                                     {{-- NUEVO INPUT 2 --}}
@@ -158,7 +183,7 @@
                                             TIEMPO DE DESACELERACIÓN [s]
                                             <span class="block text-xs font-normal text-gray-500">Relación entre deltaV2 y aceleración</span>
                                         </label>
-                                        <input type="text" value="(deltaV2ConFreno / 3.6) / aceleracionMaximaConFreno" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" value="{{$tiempoDesaceleracion}}" id="tiempoDesaceleracion" name="tiempoDesaceleracion" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
                                 </div>
                             </div>
@@ -174,7 +199,7 @@
                                             DELTA V2 DESPLAZAMIENTO CON EMBRAGUE [Km/h]; μ = 0,015
                                             <span class="block text-xs font-normal text-gray-500">Considera el coeficiente de rozamiento bajo</span>
                                         </label>
-                                        <input type="text" value="deltaV2 - (0.015 * 9.81 * 0.1 * 3.6)" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" id="deltaV2ConEmbrague" name="deltaV2ConEmbrague" value="{{$deltaV2ConEmbrague}}" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
 
                                     {{-- ACELERACIÓN MÁXIMA --}}
@@ -183,7 +208,7 @@
                                             ACELERACIÓN MÁXIMA (Vehículo Diana) [m/seg²] CON DESPLAZAMIENTO
                                             <span class="block text-xs font-normal text-gray-500">Basada en deltaV2ConEmbrague</span>
                                         </label>
-                                        <input type="text" value="(deltaV2ConEmbrague / 3.6) / 0.05" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" id="aceleracionMaximaConDesplazamiento" name="aceleracionMaximaConDesplazamiento"  value="{{$aceleracionMaximaConDesplazamiento}}" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
 
                                     {{-- FUERZA DE INERCIA --}}
@@ -192,7 +217,7 @@
                                             FUERZA DE INERCIA (Vehículo Diana)
                                             <span class="block text-xs font-normal text-gray-500">Ajustada al desplazamiento con embrague</span>
                                         </label>
-                                        <input type="text" value="deltaV2ConEmbrague * 7" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" value="{{$fuerzaInerciaConDesplazamiento}}" id="fuerzaInerciaConDesplazamiento" name="fuerzaInerciaConDesplazamiento" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
 
                                     {{-- AUMENTO PESO CABEZA --}}
@@ -201,7 +226,7 @@
                                             AUMENTO PESO CABEZA OCUPANTES (Vehículo Diana)
                                             <span class="block text-xs font-normal text-gray-500">Considera el desplazamiento con embrague</span>
                                         </label>
-                                        <input type="text" value="fuerzaInerciaConDesplazamiento / 9.81" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" value="{{$aumentoPesoCabezaConDesplazamiento}}"  id="aumentoPesoCabezaConDesplazamiento" name="aumentoPesoCabezaConDesplazamiento" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
 
                                     {{-- NIC --}}
@@ -210,7 +235,7 @@
                                             NIC (Criterio de Lesiones en el Cuello ocupantes Vehículo Diana) CON DESPLAZAMIENTO
                                             <span class="block text-xs font-normal text-gray-500">Índice crítico con desplazamiento</span>
                                         </label>
-                                        <input type="text" value="((deltaV2ConEmbrague / 3.6) / 0.05) * 0.2 + Math.pow(deltaV2ConEmbrague / 3.6, 2)" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
+                                        <input type="text" value="{{$nicConDesplazamiento}}" id="nicConDesplazamiento" name="nicConDesplazamiento" class="mt-1 w-full text-sm rounded-md border-gray-300 shadow-sm bg-gray-50 px-3 py-2">
                                     </div>
                                 </div>
                             </div>
@@ -515,5 +540,5 @@
 @endsection
 
 @push("scripts")
-{{-- @vite('resources/js/clientes_crear.js') --}}
+@vite('resources/js/biomecanica/create.js') 
 @endpush
