@@ -255,7 +255,7 @@
                                         <label class="block text-sm font-semibold text-gray-800">
                                             MOM 1 (Masa en Orden de Marcha vehículo Bala) [Kg]
                                         </label>
-                                        <input type="number" value="1350" class="mt-1 w-full rounded-md border-gray-300 bg-gray-50 shadow-sm px-3 py-2 text-sm">
+                                        <input type="number" id="mom1" value="1350" class="mt-1 w-full rounded-md border-gray-300 bg-gray-50 shadow-sm px-3 py-2 text-sm">
                                     </div>
 
                                     {{-- MOM 2 --}}
@@ -263,7 +263,7 @@
                                         <label class="block text-sm font-semibold text-gray-800">
                                             MOM 2 (Masa en Orden de Marcha vehículo Diana) [Kg]
                                         </label>
-                                        <input type="number" value="1450" class="mt-1 w-full rounded-md border-gray-300 bg-gray-50 shadow-sm px-3 py-2 text-sm">
+                                        <input type="number" id="mom2" value="1450" class="mt-1 w-full rounded-md border-gray-300 bg-gray-50 shadow-sm px-3 py-2 text-sm">
                                     </div>
 
                                     {{-- V1 --}}
@@ -271,7 +271,7 @@
                                         <label class="block text-sm font-semibold text-gray-800">
                                             V1 (Velocidad de vehículo Bala) Estimada entre 12–16 [km/h]
                                         </label>
-                                        <input type="number" value="14" class="mt-1 w-full rounded-md border-gray-300 bg-gray-50 shadow-sm px-3 py-2 text-sm">
+                                        <input type="number" id="v1" value="14" class="mt-1 w-full rounded-md border-gray-300 bg-gray-50 shadow-sm px-3 py-2 text-sm">
                                     </div>
 
                                     {{-- V2 --}}
@@ -279,7 +279,7 @@
                                         <label class="block text-sm font-semibold text-gray-800">
                                             V2 (Velocidad de vehículo Diana) [Km/h] Habitualmente detenido
                                         </label>
-                                        <input type="number" value="0" class="mt-1 w-full rounded-md border-gray-300 bg-gray-50 shadow-sm px-3 py-2 text-sm">
+                                        <input type="number" id="v2" value="0" class="mt-1 w-full rounded-md border-gray-300 bg-gray-50 shadow-sm px-3 py-2 text-sm">
                                     </div>
 
                                     {{-- Coeficiente de Restitución --}}
@@ -287,7 +287,7 @@
                                         <label class="block text-sm font-semibold text-gray-800">
                                             Coeficiente de Restitución e = 0,25–0,45; medio Agu = 0,31
                                         </label>
-                                        <input type="number" step="0.01" value="0.31" class="mt-1 w-full rounded-md border-gray-300 bg-gray-50 shadow-sm px-3 py-2 text-sm">
+                                        <input type="number" id="coeficiente_restitucion" step="0.01" value="0.31" class="mt-1 w-full rounded-md border-gray-300 bg-gray-50 shadow-sm px-3 py-2 text-sm">
                                     </div>
 
                                     {{-- Coeficiente de Rozamiento --}}
@@ -295,15 +295,13 @@
                                         <label class="block text-sm font-semibold text-gray-800">
                                             COEFICIENTE DE ROZAMIENTO μ = (LIBRE 0,015; FRENO 0,7)
                                         </label>
-                                        <input type="number" step="0.001" value="0.015" class="mt-1 w-full rounded-md border-gray-300 bg-gray-50 shadow-sm px-3 py-2 text-sm">
+                                        <input type="number" id="coeficiente_rozamiento" step="0.001" value="0.015" class="mt-1 w-full rounded-md border-gray-300 bg-gray-50 shadow-sm px-3 py-2 text-sm">
                                     </div>
                                 </div>
 
                                 <div class="pt-4">
-                                    <button class="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v6H8V8h8zM8 4h8a2 2 0 012 2v12a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2z"/>
-                                        </svg>
+                                    <button id="btnGenerarFormulas" class="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition">
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator-icon lucide-calculator"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
                                         Calcular Resultados
                                     </button>
                                 </div>
@@ -364,41 +362,41 @@
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                         <div>
                                             <label class="block text-sm font-medium text-gray-800">Delta-V Vehículo 1</label>
-                                            <input type="text" readonly value="No calculado" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
+                                            <input type="text" readonly id="calculos-deltav1" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
                                         </div>
                                         <div>
                                             <label class="block text-sm font-medium text-gray-800">Fuerza G Vehículo 1</label>
-                                            <input type="text" readonly value="No calculado" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
+                                            <input type="text" readonly  id="calculos-fuerzaGV1" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
                                         </div>
                                         <div>
                                             <label class="block text-sm font-medium text-gray-800">Delta-V Vehículo 2</label>
-                                            <input type="text" readonly value="No calculado" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
+                                            <input type="text" readonly  id="calculos-deltav2" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
                                         </div>
                                     </div>
 
                                     <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
                                         <div>
                                             <label class="block text-sm font-medium text-gray-800">Fuerza G Vehículo 2</label>
-                                            <input type="text" readonly value="No calculado" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
+                                            <input type="text" readonly  id="calculos-fuerzaGV2" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
                                         </div>
                                     </div>
 
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div>
                                             <label class="block text-sm font-medium text-gray-800">ACELERACIÓN MÁXIMA (Vehículo 2 Diana) [m/seg²]</label>
-                                            <input type="text" readonly value="No calculado" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
+                                            <input type="text" readonly  id="calculos-aceleracionMaxima"" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
                                         </div>
                                         <div>
                                             <label class="block text-sm font-medium text-gray-800">ACELERACIÓN GRAVITATORIA (Vehículo 2 Diana) [g's]</label>
-                                            <input type="text" readonly value="No calculado" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
+                                            <input type="text" readonly   id="calculos-aceleracionGravitatoria" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
                                         </div>
                                         <div>
                                             <label class="block text-sm font-medium text-gray-800">FUERZA DE INERCIA (Vehículo Diana) [N]</label>
-                                            <input type="text" readonly value="No calculado" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
+                                            <input type="text" readonly  id="calculos-fuerzaInercia"  class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
                                         </div>
                                         <div>
                                             <label class="block text-sm font-medium text-gray-800">AUMENTO PESO CABEZA OCUPANTES (Vehículo Diana)</label>
-                                            <input type="text" readonly value="No calculado" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
+                                            <input type="text" readonly  id="calculos-aumentoPesoCabeza" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
                                         </div>
                                     </div>
 
@@ -406,7 +404,7 @@
                                             <label class="block text-sm font-medium text-gray-800">
                                                 NIC (Criterio de Lesiones en el Cuello ocupantes Vehículo Diana)
                                             </label>
-                                            <input type="text" readonly value="No calculado" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
+                                            <input type="text" readonly   id="calculos-nic" class="w-full mt-1 px-3 py-2 text-sm bg-gray-50 border border-gray-300 rounded-md shadow-sm">
                                         </div>
                                 </div>
                             </div>

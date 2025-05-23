@@ -1,6 +1,6 @@
-import {formularioAJson, inputsAJson, limpiarCamposFormulario, MostrarMensajeValidacion,ValidarCampo, ValidarCampos} from '../forms_utils.js';
+import {formularioAJson, inputsAJson, limpiarCamposFormulario, MostrarMensajeValidacion,ValidarCampo, ValidarCampos, MostrarMensajeExito} from '../forms_utils.js';
 import AjaxHandler from '../utils.js';
-
+import { calcularResultadosSinDesplazamiento } from '../biomecanica.js';
 function recolectarParametros() {
     const contenedor = document.getElementById('parametrosBiomecanicos');
     if (!contenedor) {
@@ -56,11 +56,36 @@ function obtenerNombresYValores(idDiv) {
   
     return resultado;
   }
+
+
+ 
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const ajaxHandler = new AjaxHandler(csrfToken);
     const btnGuardarCambios = document.getElementById("btnGuardarCambios");
+    const btnGenerarFormulas = document.getElementById("btnGenerarFormulas");
+
+    btnGenerarFormulas.addEventListener('click', (e) => {
+        const parametros = {
+                mom1: parseInt(document.getElementById("mom1").value), // Kg
+                mom2: parseInt(document.getElementById("mom2").value), // Kg
+                v1: parseInt(document.getElementById("v1").value),     // Km/h
+                v2: parseInt(document.getElementById("v2").value),      // Km/h
+                e: parseFloat(document.getElementById("coeficiente_restitucion").value)     // Coeficiente de restitución
+        };
+        const resultados = calcularResultadosSinDesplazamiento(parametros);
+        console.log(parametros);
+        document.getElementById("calculos-deltav1").value = resultados.deltaV1;
+        document.getElementById("calculos-deltav2").value = resultados.deltaV2;
+        document.getElementById("calculos-aceleracionMaxima").value = resultados.aceleracionMaxima;
+        document.getElementById("calculos-aceleracionGravitatoria").value = resultados.aceleracionGravitatoria;
+        document.getElementById("calculos-fuerzaInercia").value = resultados.fuerzaInercia;
+        document.getElementById("calculos-aumentoPesoCabeza").value = resultados.aumentoPesoCabeza;
+        document.getElementById("calculos-nic").value = resultados.nic;
+        MostrarMensajeExito('Resultados calculados correctamente', 'Los resultados se han calculado y asignado a los campos correspondientes.');
+    });
 
    
     btnGuardarCambios.addEventListener('click', (e) => {
@@ -86,8 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
        
     
         console.log(formData); // Verificar el contenido del objeto JSON
-    
-        console.log(formData); // Verificar el contenido del objeto JSON
+
         ajaxHandler.sendRequest('/biomecanica', formData, 'POST', true, true, (response) => {
             console.log(response); // Manejar la respuesta del servidor
             //limpiarCamposFormulario('formularioInformes');

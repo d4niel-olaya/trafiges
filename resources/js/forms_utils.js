@@ -299,3 +299,13 @@ export function inputsAJson(listaIds) {
 
     return formData;
 }
+
+
+export function MostrarMensajeExito(title,message) {
+    // Mostrar alerta con SweetAlert2
+   Swal.fire({
+        title: title,
+        text: message,
+        icon: "success"
+        });
+}
