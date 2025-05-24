@@ -102,7 +102,7 @@ class InformeController extends Controller
 
     // Generar un nuevo ID basado en el último ID
         if ($ultimoInforme) {
-            $ultimoId = $ultimoInforme->id;
+            $ultimoId = $ultimoInforme->numero_informe; // Obtener el último ID
             $numero = (int) str_replace('INF-', '', $ultimoId); // Extraer el número del ID
             $nuevoId = 'INF-' . str_pad($numero + 1, 4, '0', STR_PAD_LEFT); // Incrementar y formatear
         } else {
@@ -129,7 +129,7 @@ class InformeController extends Controller
         ]);
 
         $datosCompletos = json_encode([
-            'id' => $nuevoId,
+            'numero_informe' => $nuevoId,
             'matricula' => $validatedData['matricula'],
             'fechaAccidente' => $validatedData['fechaAccidente'],
             'nombreCliente' => $validatedData['nombreCliente'],
@@ -147,8 +147,8 @@ class InformeController extends Controller
             'resultadosBiomecanicos' => $validatedData['resultadosBiomecanicos'],
         ]);
 
-        DB::table('informes')->insert([
-            'id' => $nuevoId,
+        $id_informe = DB::table('informes')->insertGetId([
+            'numero_informe' => $nuevoId,
             'matricula' => $validatedData['matricula'],
             'fechaAccidente' => $validatedData['fechaAccidente'],
             'estado' => $validatedData['estado'],
@@ -174,7 +174,7 @@ class InformeController extends Controller
 
         foreach ($validatedData['ocupantes'] as $ocupante) {
             DB::table('informes_ocupantes')->insert([
-                'idInforme' => $nuevoId,
+                'idInforme' => $id_informe,
                 'tipo_ocupante' => $ocupante['tipo_ocupante'] ?? 'conductor',
                 'nombre' => $ocupante['nombre'] ?? null,
                 'apellidos' => $ocupante['apellidos'] ?? null,
