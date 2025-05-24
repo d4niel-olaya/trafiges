@@ -105,7 +105,7 @@
                                            
                                         </div>
                                     </div>
-                                    <div class="mb-6"><label for="tipoInforme" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Informe</label>
+                                    <div class="mb-6 hidden"><label for="tipoInforme" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Informe</label>
                                         <div class="relative"><select id="tipoInforme" name="tipoInforme" disabled class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white">
                                                @if(count($tipos_informe) > 0)
                                                 <option value="">Seleccione</option>
@@ -615,7 +615,7 @@
                         <div class="py-4">
                            <h2 class="text-xl font-semibold text-gray-900 mb-2">Asociar Tipos de informes</h2>
                             <div class="tab-content">
-                                 @include('informes.partials.tipos_informes_facturacion', ["tiposInformes"=>$tipos_informe])
+                                 @include('informes.partials.tipos_informes_facturacion', ["tiposInformes"=>$tipos_informe, "tipos_informes_asociados"=>$tipos_informes_asociados])
                             </div>
                         </div>
                     </div>
@@ -700,5 +700,5 @@
 @endsection
 
 @push("scripts")
-@vite(['resources/js/informes.js', 'resources/js/pagos/create.js'])
+@vite(['resources/js/informes.js', 'resources/js/pagos/create.js', 'resources/js/tiposInformes/asociar_informe.js'])
 @endpush

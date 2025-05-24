@@ -116,7 +116,7 @@ class InformeController extends Controller
             'abogadoAsociado' => 'nullable|integer',
             'peritoAsignado' => 'nullable|integer',
             //'tipoInforme' => 'required|string',
-            'tipoInforme' => 'required|integer',
+            'tipoInforme' => 'nullable|integer',
             'coordenadasGeograficas' => 'nullable|string',
             'fechaEntregaAbogado' => 'nullable|date',
             'fechaEntregaCliente' => 'nullable|date',
@@ -136,7 +136,7 @@ class InformeController extends Controller
             'estado' => $validatedData['estado'],
             'abogadoAsociado' => $validatedData['abogadoAsociado'],
             'peritoAsignado' => $validatedData['peritoAsignado'],
-            'tipoInforme' => $validatedData['tipoInforme'],
+            'tipoInforme' => $validatedData['tipoInforme'] ?? null,
             'coordenadasGeograficas' => $validatedData['coordenadasGeograficas'],
             'fechaEntregaAbogado' => $validatedData['fechaEntregaAbogado'],
             'fechaEntregaCliente' => $validatedData['fechaEntregaCliente'],
@@ -159,7 +159,7 @@ class InformeController extends Controller
            // 'peritoAsignado' => $validatedData['peritoAsignado'],
             'idPerito' => $validatedData['peritoAsignado'],
             //'tipoInforme' => $validatedData['tipoInforme'],
-            'idTipoInforme' => $validatedData['tipoInforme'],
+            'idTipoInforme' => $validatedData['tipoInforme'] ?? null,
             'coordenadasGeograficas' => $validatedData['coordenadasGeograficas'],
             'fechaEntregaAbogado' => $validatedData['fechaEntregaAbogado'],
             'fechaEntregaCliente' => $validatedData['fechaEntregaCliente'],
@@ -252,6 +252,13 @@ class InformeController extends Controller
         $peritos = DB::table("peritos")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
         $companias = DB::table("companias_seguros")->select("id","nombre")->orderBy("nombre","asc")->get();
         $tipos_informe = DB::table("tipos_informe")->select("id","nombre","precio")->orderBy("nombre","asc")->get();
+        $tipos_informes_asociados = DB::table("informes_tiposInformes")
+                                    ->join("tipos_informe","tipos_informe.id","=","informes_tiposInformes.id_tipo_informe")
+                                    ->select('informes_tiposInformes.id',"tipos_informe.nombre","informes_tiposInformes.precio")
+                                    ->orderBy("tipos_informe.nombre","asc")
+                                    ->where("informes_tiposInformes.id_informe","=",$id)
+                                    ->get();
+                        
          $pagos = DB::table("pagos")->select("id","concepto","beneficiario","importe","metodo_pago","estado","informe_id", "fecha")->where("informe_id","=", $id)->get();
         //return $informe;
         return view("informes.edit",["informe" => $informe, "ocupantes_conductor" => $ocupantes_conductor
@@ -266,6 +273,7 @@ class InformeController extends Controller
                 "companias" => $companias,
                 "tipos_informe" => $tipos_informe,
                 "pagos" => $pagos,
+                "tipos_informes_asociados" => $tipos_informes_asociados,
             ]);
     }
 
@@ -289,7 +297,7 @@ class InformeController extends Controller
             'abogadoAsociado' => 'nullable|integer',
             'peritoAsignado' => 'nullable|integer',
             //'tipoInforme' => 'required|string',
-            'tipoInforme' => 'required|integer',
+            'tipoInforme' => 'nullable|integer',
             //'coordenadasGeograficas' => 'required|string',
             'coordenadasGeograficas' => 'nullable|string',
             'fechaEntregaAbogado' => 'nullable|date',
@@ -510,5 +518,40 @@ class InformeController extends Controller
 
     return response()->stream($callback, 200, $headers);
 }
+
+
+    public function asociarTipoInforme(Request $request)
+    {
+        $idInforme = $request->input('idInforme');
+        $idTipoInforme = $request->input('idTipoInforme');
+        $validarTipoInforme = DB::table('informes_tiposInformes')
+            ->where('id_informe', $idInforme)
+            ->where('id_tipo_informe', $idTipoInforme)
+            ->exists();
+        if ($validarTipoInforme) {
+            return response()->json(['message' => 'El tipo de informe ya está asociado'], 400);
+        }
+    //     $precio = DB::table('tipos_informe')
+    // ->where('idTipoInforme', $idTipoInforme)
+    // ->value('precio');
+
+    // DB::table('informes_tiposInformes')
+    //     ->insert([
+    //         'idInforme' => $idInforme,
+    //         'idTipoInforme' => $idTipoInforme,
+    //         'precio' => $precio,
+    //         'created_at' => now(),
+    //         'updated_at' => now(),
+    //     ]);
+        DB::insert('
+        INSERT INTO informes_tiposInformes (id_informe, id_tipo_informe, precio, created_at, updated_at)
+        SELECT ?, ?, precio, NOW(), NOW()
+        FROM tipos_informe
+        WHERE id = ?
+    ', [$idInforme, $idTipoInforme, $idTipoInforme]);
+
+
+        return response()->json(['message' => 'Tipo de informe asociado correctamente']);
+    }
 
 }

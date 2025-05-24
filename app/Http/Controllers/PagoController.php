@@ -12,32 +12,11 @@ class PagoController extends Controller
     public function index()
     {
         //
-        $pagos = [
-            (object)[
-                'id' => 'P-001',
-                'fecha' => '2023-03-15',
-                'concepto' => 'Pago a perito',
-                'beneficiario' => 'Carlos Martínez',
-                'importe' => '300.00 €',
-                'estado' => 'Realizado',
-            ],
-            (object)[
-                'id' => 'P-002',
-                'fecha' => '2023-03-25',
-                'concepto' => 'Material oficina',
-                'beneficiario' => 'Papelería Central',
-                'importe' => '120.00 €',
-                'estado' => 'Realizado',
-            ],
-            (object)[
-                'id' => 'P-003',
-                'fecha' => '2023-04-10',
-                'concepto' => 'Alquiler oficina',
-                'beneficiario' => 'Inmobiliaria Sol',
-                'importe' => '800.00 €',
-                'estado' => 'Pendiente',
-            ],
-        ];
+        $pagos = DB::table('pagos')
+            ->join('informes', 'pagos.informe_id', '=', 'informes.id')
+            ->select('informes.numero_informe as id', 'pagos.fecha', 'pagos.concepto', 'pagos.beneficiario', 'pagos.importe', 'pagos.estado')
+            ->orderBy('pagos.fecha', 'desc')
+            ->get();
         return view('pagos.index', compact('pagos'));        
     }
 
@@ -65,18 +44,17 @@ class PagoController extends Controller
             'informe_id'   => 'required|exists:informes,id',
         ]);
 
-        $precioTotal = DB::table('informes')
-            ->select('tipos_informe.precio')
-            ->leftJoin('tipos_informe', 'informes.idTipoInforme', '=', 'tipos_informe.id')
-            ->where('informes.id',"=", $validatedData['informe_id'])
-            ->get();
+        $precioTotal = DB::table('informes_tiposInformes')
+            ->leftJoin('tipos_informe', 'informes_tiposInformes.id_informe', '=', 'tipos_informe.id')
+            ->where('informes_tiposInformes.id_informe',"=", $validatedData['informe_id'])
+            ->sum('informes_tiposInformes.precio');
 
         $sumaPagos = DB::table('pagos')
             ->where('informe_id', $validatedData['informe_id'])
             ->sum('importe');
         
         
-        if ($sumaPagos + $validatedData['importe'] > $precioTotal[0]->precio) {
+        if ($sumaPagos + $validatedData['importe'] > $precioTotal) {
             return response()->json(['success' => false, 'message' => 'El importe total de los pagos no puede superar el precio del informe.'],422);
         }
             

@@ -49,7 +49,7 @@
                         {{-- <x-nav-item route="comercial.index" icon="dollar-sign" label="Gestión Comercial" /> --}}
                         <x-nav-group label="Gestión Comercial" icon="dollar-sign">
                             <x-nav-item route="recibos.index" icon="referidos" label="Recibos" />
-                            <x-nav-item route="pagos.index" icon="pagos" label="Pagos" />
+                            <x-nav-item route="pagos.index" icon="pagos" label="Historial de Pagos" />
                             <x-nav-item route="tiposinformes.index" icon="book-open" label="Tipos de Informe" />
                             {{-- <x-nav-item route="diagnostico.index" icon="alert-circle" label="Diagnóstico" />
                             <x-nav-item route="logs.index" icon="file-search" label="Logs" />

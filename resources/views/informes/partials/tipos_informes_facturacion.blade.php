@@ -25,6 +25,17 @@
                 </tr>
             </thead>
             <tbody id="tabla-informes-body">
+                @if(isset($tipos_informes_asociados))
+                 @foreach($tipos_informes_asociados as $tipo_informe)
+                    <tr class="border-b border-gray-200">
+                        <td class="py-2 px-4">{{ $tipo_informe->nombre }}</td>
+                        <td class="py-2 px-4">${{ $tipo_informe->precio }}</td>
+                        <td class="py-2 px-4 text-center">
+                            <button type="button" class="btnEliminarInforme bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600" data-id="{{ $tipo_informe->id }}">Eliminar</button>
+                        </td>
+                    </tr>
+                    @endforeach
+                @endif
                 <!-- Aquí se agregarán dinámicamente las filas -->
             </tbody>
         </table>
@@ -33,59 +44,3 @@
     <input type="hidden" name="informesSeleccionados" id="informesSeleccionados" value="">
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const btnAgregarInforme = document.getElementById('btnAgregarInforme');
-    const selector = document.getElementById('tipo-informe-selector');
-    const tablaBody = document.getElementById('tabla-informes-body');
-    const inputInformes = document.getElementById('informesSeleccionados');
-    
-    const informes = [];
-
-    btnAgregarInforme.addEventListener('click', () => {
-        const id = selector.value;
-        const nombre = selector.options[selector.selectedIndex].dataset.nombre;
-        const precio = selector.options[selector.selectedIndex].dataset.precio;
-
-        if (!id) {
-            alert('Debe seleccionar un tipo de informe.');
-            return;
-        }
-
-        if (informes.some(inf => inf.id === id)) {
-            alert('Este tipo de informe ya ha sido agregado.');
-            return;
-        }
-
-        const informe = { id, nombre, precio };
-        informes.push(informe);
-        renderizarTabla();
-    });
-
-    function renderizarTabla() {
-        tablaBody.innerHTML = '';
-        informes.forEach((inf, index) => {
-            const tr = document.createElement('tr');
-            tr.className = 'border-b';
-            tr.innerHTML = `
-                <td class="py-2 px-4 whitespace-nowrap">${inf.nombre}</td>
-                <td class="py-2 px-4 whitespace-nowrap">$${inf.precio}</td>
-                <td class="py-2 px-4 text-center whitespace-nowrap">
-                    <button type="button" data-index="${index}" class="text-red-500 hover:underline">Eliminar</button>
-                </td>
-            `;
-            tablaBody.appendChild(tr);
-        });
-
-        inputInformes.value = JSON.stringify(informes);
-
-        tablaBody.querySelectorAll('button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const index = btn.dataset.index;
-                informes.splice(index, 1);
-                renderizarTabla();
-            });
-        });
-    }
-});
-</script>

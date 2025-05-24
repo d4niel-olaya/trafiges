@@ -6,8 +6,8 @@
 
 <div class="p-6">
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-        <h1 class="text-2xl font-bold text-gray-900">Pagos</h1>
-        <div class="flex gap-2"><button onclick="location.href='/recibos/create'" class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-5 w-5">
+        <h1 class="text-2xl font-bold text-gray-900">Historial de Pagos</h1>
+        <div class="flex gap-2"><button  class="hidden flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-5 w-5">
                     <path d="M5 12h14"></path>
                     <path d="M12 5v14"></path>
                 </svg>Nueva Recibo</button><button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-5 w-5">
@@ -22,7 +22,7 @@
                 <div class="relative flex-1 max-w-2xl"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="m21 21-4.3-4.3"></path>
-                    </svg><input type="text" placeholder="Buscar Referidos..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" value=""></div><button class="ml-2 p-2 hover:bg-gray-100 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter h-5 w-5 text-gray-600">
+                    </svg><input type="text" placeholder="Buscar Registros" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" value=""></div><button class="ml-2 p-2 hover:bg-gray-100 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter h-5 w-5 text-gray-600">
                         <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
                     </svg></button>
             </div>
@@ -31,14 +31,12 @@
             <table class="w-full">
                 <thead>
                     <tr class="text-left text-sm font-medium text-gray-500 border-b border-gray-200">
-                        <th class="px-6 py-3 whitespace-nowrap">ID</th>
-                        <th class="px-6 py-3 whitespace-nowrap">Nombre</th>
-                        <th class="px-6 py-3 whitespace-nowrap">Direccion</th>
-                        <th class="px-6 py-3 whitespace-nowrap">Contacto</th>
-                        <th class="px-6 py-3 whitespace-nowrap">Teléfono</th>
-                        <th class="px-6 py-3 whitespace-nowrap">Email</th>
-                       
-                   
+                        <th class="px-6 py-3 whitespace-nowrap">Numero Informe</th>
+                        <th class="px-6 py-3 whitespace-nowrap">Beneficiario</th>
+                        <th class="px-6 py-3 whitespace-nowrap">Concepto</th>
+                        <th class="px-6 py-3 whitespace-nowrap">Importe</th>
+                        <th class="px-6 py-3 whitespace-nowrap">Fecha</th>
+                        {{-- <th class="px-6 py-3 whitespace-nowrap">Estado</th> --}}
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -49,9 +47,9 @@
                         <td class="px-6 py-4 text-sm text-gray-900">{{$pago->concepto}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{$pago->importe}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{$pago->fecha}}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">{{$pago->estado}}</td>
+                        {{-- <td class="px-6 py-4 text-sm text-gray-900">{{$pago->estado}}</td> --}}
                        
-                        <td class="px-6 py-4 text-sm text-gray-900">-</td>
+                        {{-- <td class="px-6 py-4 text-sm text-gray-900">-</td>
                         <td class="px-6 py-4 text-sm text-gray-900">
                             <div class="flex gap-2"><button class="p-1 hover:bg-gray-100 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round h-5 w-5 text-gray-600">
                                         <path d="M18 20a6 6 0 0 0-12 0"></path>
@@ -67,12 +65,12 @@
                                         <line x1="10" x2="10" y1="11" y2="17"></line>
                                         <line x1="14" x2="14" y1="11" y2="17"></line>
                                     </svg></button></div>
-                        </td>
+                        </td> --}}
                 <tr>
                     @endforeach
                 </tbody>
             </table>
-            <div class="px-6 py-4 text-sm text-gray-500 border-t border-gray-200">Lista de Recibos registrados</div>
+            <div class="px-6 py-4 text-sm text-gray-500 border-t border-gray-200">Lista de Pagos registrados</div>
         </div>
     </div>
 </div>

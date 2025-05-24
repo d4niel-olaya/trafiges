@@ -62,6 +62,37 @@ function crearDivPagos(fecha)
     document.querySelector('#pagosList').appendChild(contenedorPagos);
 
 }
+
+function crearFilaPago(fecha) {
+    const tbody = document.querySelector('#tbPagos tbody');
+    const concepto = document.querySelector('#concepto').value;
+    const metodo = document.querySelector('#metodo_pago').value;
+    const importe = parseFloat(document.querySelector('#importe').value).toFixed(2);
+
+    const tr = document.createElement('tr');
+
+    tr.innerHTML = `
+        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">${fecha}</td>
+        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">${concepto}</td>
+        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">${metodo}</td>
+        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700 text-right font-semibold">${importe} €</td>
+        <td class="px-4 py-2 whitespace-nowrap text-sm text-right">
+            <button type="submit" class="text-red-600 hover:text-red-800" title="Eliminar">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6l-2 14H7L5 6"></path>
+                    <path d="M10 11v6"></path>
+                    <path d="M14 11v6"></path>
+                </svg>
+            </button>
+        </td>
+    `;
+
+    tbody.appendChild(tr);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -101,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(response.success)
             {
 
-                crearDivPagos(response.fecha);
+                crearFilaPago(response.fecha);
                   document.querySelector('input[id="importe"]').value = '';
                 document.querySelector('select[id="metodo_pago"]').value = '';
                 document.querySelector('input[id="referencia"]').value = '';

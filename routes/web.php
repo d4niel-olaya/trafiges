@@ -31,8 +31,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [InicioController::class, 'index'])->name('dashboard');
 
     // 🔹 Informes
-    Route::resource('informes', InformeController::class)->middleware('role:administrador|perito|asistente');;
-
+    Route::resource('informes', InformeController::class)->middleware('role:administrador|perito|asistente');
+    Route::post('/informes/tipo_informe', [InformeController::class, 'asociarTipoInforme'])->name('informes.asociarTipoInforme')->middleware('role:administrador');
     // 🔹 Plantillas
     Route::resource('plantillas', PlantillaController::class)->middleware('role:administrador');
 

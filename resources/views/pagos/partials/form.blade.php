@@ -18,7 +18,6 @@
             <option value="Efectivo">Efectivo</option>
             <option value="Tarjeta">Tarjeta</option>
             <option value="Bizum">Bizum</option>
-           
         </select>
     </div>
 
@@ -55,38 +54,60 @@
 @if(isset($pagos) && count($pagos) > 0)
     <div class="mt-10">
         <h3 class="text-lg font-semibold text-gray-900 mb-4">Pagos Registrados</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="pagosList">
-            @foreach($pagos as $pago)
-                <div class="border border-gray-200 rounded-lg shadow-sm p-4 bg-white hover:shadow-md transition">
-                    <div class="text-sm text-gray-500 mb-1">
-                        <strong>Fecha:</strong> {{ \Carbon\Carbon::parse($pago->fecha)->format('d/m/Y') }}
-                    </div>
-                    <div class="text-sm text-gray-700 mb-1">
-                        <strong>Concepto:</strong> {{ $pago->concepto }}
-                    </div>
-                    <div class="text-sm text-gray-700 mb-1">
-                        <strong>Método:</strong> {{ $pago->metodo_pago ?? '-' }}
-                    </div>
-                    <div class="text-sm text-gray-700 mb-3 font-semibold">
-                        <strong>Importe:</strong> {{ number_format($pago->importe, 2) }} €
-                    </div>
-                    <div class="text-right">
-                        <button type="submit" class="text-red-600 hover:text-red-800" title="Eliminar">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path d="M19 6l-2 14H7L5 6"></path>
-                                <path d="M10 11v6"></path>
-                                <path d="M14 11v6"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            @endforeach
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 border border-gray-200 rounded-lg" id="tbPagos">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Concepto</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Método</th>
+                        <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Importe (€)</th>
+                        <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200" >
+                    @foreach($pagos as $pago)
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">{{ \Carbon\Carbon::parse($pago->fecha)->format('d/m/Y') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">{{ $pago->concepto }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">{{ $pago->metodo_pago ?? '-' }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700 text-right font-semibold">{{ number_format($pago->importe, 2) }} €</td>
+                            <td class="px-4 py-2 whitespace-nowrap text-sm text-right">
+                                <button type="submit" class="text-red-600 hover:text-red-800" title="Eliminar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2"
+                                         stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path d="M19 6l-2 14H7L5 6"></path>
+                                        <path d="M10 11v6"></path>
+                                        <path d="M14 11v6"></path>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 @else
- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="pagosList">
- </div>
+    <div class="mt-10">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Pagos Registrados</h3>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 border border-gray-200 rounded-lg" id="tbPagos">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Concepto</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Método</th>
+                        <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Importe (€)</th>
+                        <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200" >
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
 @endif
