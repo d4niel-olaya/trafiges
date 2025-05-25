@@ -123,7 +123,7 @@
                                    
                                 @endswitch
                             </td>
-                            <td class="p-4 align-middle font-medium">{{$informe->id}}</td>
+                            <td class="p-4 align-middle font-medium">{{$informe->numero_informe}}</td>
                             <td class="p-4 align-middle">{{$informe->matricula}}</td>
                             <td class="p-4 align-middle">{{$informe->fechaAccidente}}</td>
                             <td class="p-4 align-middle">{{$informe->nombreCliente}}</td>

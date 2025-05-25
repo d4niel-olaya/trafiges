@@ -51,7 +51,7 @@
     </div>
 </div>
 
-@if(isset($pagos) && count($pagos) > 0)
+@if(isset($pagos) && count($pagos) > 0 && isset($totalPagos))
     <div class="mt-10">
         <h3 class="text-lg font-semibold text-gray-900 mb-4">Pagos Registrados</h3>
         <div class="overflow-x-auto">
@@ -89,6 +89,20 @@
                 </tbody>
             </table>
         </div>
+        @php
+            $total = $pagos->sum('importe');
+            $restante =  $totalPagos - $total;   
+        @endphp
+        <div class="mt-6 p-4 border border-gray-200 rounded-lg flex items-center justify-between bg-white shadow-sm">
+            <div>
+                <p class="text-sm text-gray-500">Total Pagado:</p>
+                <p class="text-lg font-semibold text-gray-900" id="total" data-precioPagado="{{$total}}">{{ number_format($total, 2) }} €</p>
+            </div>
+            <div class="text-right">
+                <p class="text-xs text-gray-500">Restante:</p>
+                <p class="text-lg font-semibold text-gray-900" id="restante" data-restante="{{$restante}}">{{ number_format($restante, 2) }} €</p>
+            </div>
+        </div>
     </div>
 @else
     <div class="mt-10">
@@ -108,6 +122,22 @@
                     
                 </tbody>
             </table>
+        </div>
+        <div class="mt-6 p-4 border border-gray-200 rounded-lg flex items-center justify-between bg-white shadow-sm">
+            <div>
+                <p class="text-sm text-gray-500">Total Pagado:</p>
+                <p class="text-lg font-semibold text-gray-900" id="total" data-precioPagado="0">{{ number_format(0, 2) }} €</p>
+            
+            </div>
+            <div class="text-right">
+                <p class="text-xs text-gray-500">Restante:</p>
+                @if(isset($totalPagos))
+                    
+                    <p class="text-lg font-semibold text-gray-900" id="restante" data-restante="{{$totalPagos}}">{{ number_format($totalPagos, 2) }} €</p>
+                @else
+                    <p class="text-lg font-semibold text-gray-900" id="restante" data-restante="0">{{ number_format(0, 2) }} €</p>
+                @endif
+            </div>
         </div>
     </div>
 @endif

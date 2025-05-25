@@ -26,6 +26,10 @@
             </thead>
             <tbody id="tabla-informes-body">
                 @if(isset($tipos_informes_asociados))
+                @php
+                    $totalPrecioInformes = $tipos_informes_asociados->sum("precio") ?? 0;
+                    
+                @endphp
                  @foreach($tipos_informes_asociados as $tipo_informe)
                     <tr class="border-b border-gray-200">
                         <td class="py-2 px-4">{{ $tipo_informe->nombre }}</td>
@@ -40,7 +44,12 @@
             </tbody>
         </table>
     </div>
-    
+     <div class="mt-6 p-4 border border-gray-200 rounded-lg flex items-center justify-between bg-white shadow-sm">
+        <div>
+            <p class="text-sm text-gray-500">Precio Total:</p>
+            <p class="text-lg font-semibold text-gray-900" id="totalPrecioInformes" data-precio="{{$totalPrecioInformes}}">{{ number_format($totalPrecioInformes, 2) }} €</p>
+        </div>
+    </div>
     <input type="hidden" name="informesSeleccionados" id="informesSeleccionados" value="">
 </div>
 

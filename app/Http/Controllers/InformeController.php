@@ -40,14 +40,28 @@ class InformeController extends Controller
             $matricula = '%';
         }
          $abogados = DB::table("abogados")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
-        $informes = DB::table("informes")->
-        select("id","matricula","fechaAccidente","estado","nombreCliente","abogadoAsociado","peritoAsignado", "tipoInforme", "companiaSeguros")
-        ->orderBy("fechaAccidente","desc")
-        ->where("estado","like", $estado)
-        ->where("idAbogado","like", $abogadoAsociado)
-        ->where("id","like", $numeroInforme)
+        $informes = DB::table("informes")
+              ->select(
+            "informes.id",
+            "informes.numero_informe",
+            "informes.matricula",
+            "informes.fechaAccidente",
+            "informes.estado",
+            "clientes.nombre as nombreCliente",
+            "abogados.nombre as abogadoAsociado",
+            "peritos.nombre as peritoAsignado",
+            "informes.tipoInforme",
+            "informes.companiaSeguros"
+         )   
+        ->leftJoin("abogados", "informes.idAbogado", "=", "abogados.id")
+        ->leftJoin("peritos", "informes.idPerito", "=", "peritos.id")
+        ->leftJoin("clientes", "informes.idCliente", "=", "clientes.id")
+        ->orderBy("informes.fechaAccidente","desc")
+        ->where("informes.estado","like", $estado)
+        ->where("informes.idAbogado","like", $abogadoAsociado)
+        ->where("informes.id","like", $numeroInforme)
         ->whereDate("fechaAccidente","like", $fechaAccidente)
-        ->where("matricula","like", $matricula)
+        ->where("informes.matricula","like", $matricula)
         ->get();   
         return view("informes.index", ["informes" => $informes,"abogados" => $abogados]);
     }
@@ -60,6 +74,7 @@ class InformeController extends Controller
         $informes = DB::table("informes")
               ->select(
             "informes.id",
+            "informes.numero_informe",
             "informes.matricula",
             "informes.fechaAccidente",
             "informes.estado",
@@ -259,7 +274,9 @@ class InformeController extends Controller
                                     ->where("informes_tiposInformes.id_informe","=",$id)
                                     ->get();
                         
-         $pagos = DB::table("pagos")->select("id","concepto","beneficiario","importe","metodo_pago","estado","informe_id", "fecha")->where("informe_id","=", $id)->get();
+         $pagos = DB::table("pagos")->select("pagos.id","concepto","beneficiario","importe","metodo_pago","estado","informe_id", "fecha")
+         ->where("pagos.informe_id","=", $id)->get();
+        $totalPagos = DB::table("informes_tiposInformes")->where("id_informe","=", $id)->sum("precio");
         //return $informe;
         return view("informes.edit",["informe" => $informe, "ocupantes_conductor" => $ocupantes_conductor
                 , "ocupantes_copiloto" => $ocupantes_copiloto,
@@ -274,6 +291,7 @@ class InformeController extends Controller
                 "tipos_informe" => $tipos_informe,
                 "pagos" => $pagos,
                 "tipos_informes_asociados" => $tipos_informes_asociados,
+                "totalPagos" => $totalPagos,
             ]);
     }
 

@@ -1,3 +1,4 @@
+import { parse } from 'postcss';
 import {formularioAJson, inputsAJson, limpiarCamposFormulario, MostrarMensajeValidacion,ValidarCampo, ValidarCampos} from '../forms_utils.js';
 import AjaxHandler from '../utils.js';
 
@@ -60,7 +61,7 @@ function crearDivPagos(fecha)
     `;
     contenedorPagos.innerHTML = div;
     document.querySelector('#pagosList').appendChild(contenedorPagos);
-
+   
 }
 
 function crearFilaPago(fecha) {
@@ -91,6 +92,15 @@ function crearFilaPago(fecha) {
     `;
 
     tbody.appendChild(tr);
+
+    const totalPagado = document.getElementById("total").getAttribute("data-precioPagado");
+    const totalPrecioInformes = document.getElementById("totalPrecioInformes").getAttribute("data-precio");
+    const nuevoPrecio = parseFloat(totalPagado) + parseFloat(document.querySelector('input[id="importe"]').value);
+    document.getElementById("total").setAttribute("data-precioPagado", nuevoPrecio);
+    document.getElementById("total").innerText = `${nuevoPrecio.toFixed(2)} €`;
+    const nuevoRestante = parseFloat(totalPrecioInformes) - nuevoPrecio;
+    document.getElementById("restante").setAttribute("data-restante", nuevoRestante);
+    document.getElementById("restante").innerText = `${nuevoRestante.toFixed(2)} €`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {

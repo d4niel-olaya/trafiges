@@ -54,6 +54,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 </td>
             `;
             tablaBody.appendChild(tr);
+
+            const totalPrecio = document.getElementById("totalPrecioInformes").getAttribute("data-precio");
+            const nuevoPrecio = parseFloat(totalPrecio) + parseFloat(informe.precio);
+        
+            document.getElementById("totalPrecioInformes").setAttribute("data-precio", nuevoPrecio);
+            document.getElementById("totalPrecioInformes").innerText = `$${nuevoPrecio.toFixed(2)} €`;
+
+
+            //const totalPagado = document.getElementById("total").getAttribute("data-precioPagado");
+            const restaantePagado = document.getElementById("restante").getAttribute("data-restante");
+            const nuevoRestante = parseFloat(restaantePagado) + parseFloat(informe.precio);
+
+            document.getElementById("restante").setAttribute("data-restante", nuevoRestante);
+            document.getElementById("restante").innerText = `$${nuevoRestante.toFixed(2)} €`;
         
         }, (error) => {
             console.error(error); // Manejar el error

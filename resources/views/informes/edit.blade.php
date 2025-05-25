@@ -606,7 +606,7 @@
                         <div class="py-4">
                            <h2 class="text-xl font-semibold text-gray-900 mb-2">Gestión	de cobros</h2>
                             <div class="tab-content">
-                                 @include('pagos.partials.form', ["pagos"=>$pagos])
+                                 @include('pagos.partials.form', ["pagos"=>$pagos, "totalPagos"=>$totalPagos])
                             </div>
                         </div>
                     </div>
@@ -615,7 +615,7 @@
                         <div class="py-4">
                            <h2 class="text-xl font-semibold text-gray-900 mb-2">Asociar Tipos de informes</h2>
                             <div class="tab-content">
-                                 @include('informes.partials.tipos_informes_facturacion', ["tiposInformes"=>$tipos_informe, "tipos_informes_asociados"=>$tipos_informes_asociados])
+                                 @include('informes.partials.tipos_informes_facturacion', ["tiposInformes"=>$tipos_informe, "tipos_informes_asociados"=>$tipos_informes_asociados, "totalPagos"=>$totalPagos])
                             </div>
                         </div>
                     </div>
