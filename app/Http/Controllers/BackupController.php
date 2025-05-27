@@ -5,88 +5,77 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use ZipArchive;
+
 class BackupController extends Controller
 {
-    //
-
-
-     public function index()
+    public function index()
     {
-        //
-         $backupPath = storage_path('app');
-        $backupFiles = File::glob($backupPath . '/*.sql');
+        $backupZipPath = storage_path('app/backups_zip');
+        $backupFiles = File::glob($backupZipPath . '/*.zip');
 
         return view('backup.index', compact('backupFiles'));
-        //return view("backup.index");
     }
 
-
-   public function generar()
-{
-    // Preparar nombre de archivo
-    $fecha = now()->format('Y-m-d_H-i-s');
-    $filename = "backup_$fecha.sql";
-
-    // Ruta donde se guardará
-    $backupDir = storage_path('app');
-    $backupPath = $backupDir . "/$filename";
-
-    // Crear carpeta si no existe
-    if (!file_exists($backupDir)) {
-        mkdir($backupDir, 0755, true);
-    }
-
-    // Datos de conexión
-    $dbHost = env('DB_HOST');
-    $dbUser = env('DB_USERNAME');
-    $dbPass = env('DB_PASSWORD');
-    $dbName = env('DB_DATABASE');
-
-    // Comando mysqldump
-    $command = "mysqldump -h$dbHost -u$dbUser -p\"$dbPass\" $dbName 2>&1 > \"$backupPath\"";
-
-    // Ejecutar
-    $resultado = null;
-    $salida = null;
-    exec($command, $salida, $resultado);
-
-    if ($resultado === 0) {
-        return back()->with('success', "Backup creado exitosamente: $filename");
-    } else {
-        return back()->with('error', "Error al generar el backup:<br><pre>" . implode("\n", $salida) . "</pre>");
-    }
-}
-
-
-    /**
-     * Descarga un backup
-     */
-    public function descargar($archivo)
+    public function generar()
     {
-        $path = storage_path('app') . "/$archivo";
+        $fecha = now()->format('Y-m-d_H-i-s');
+        $filename = "backup_$fecha.sql";
+        $zipFilename = "backup_$fecha.zip";
 
-        if (!file_exists($path)) {
-            abort(404, "Archivo no encontrado.");
+        $backupDir = storage_path('app/backups_sql');
+        $backupZipDir = storage_path('app/backups_zip');
+
+        // Crear carpetas si no existen
+        if (!file_exists($backupDir)) {
+            mkdir($backupDir, 0755, true);
+        }
+        if (!file_exists($backupZipDir)) {
+            mkdir($backupZipDir, 0755, true);
         }
 
-        return response()->download($path);
+        $backupPath = "$backupDir/$filename";
+        $zipPath = "$backupZipDir/$zipFilename";
+
+        // Datos de conexión
+        $dbHost = env('DB_HOST');
+        $dbUser = env('DB_USERNAME');
+        $dbPass = env('DB_PASSWORD');
+        $dbName = env('DB_DATABASE');
+
+        // Ejecutar mysqldump
+        $command = "mysqldump --user=$dbUser --password=$dbPass --host=$dbHost $dbName > $backupPath";
+        $output = null;
+        $resultCode = null;
+        exec($command, $output, $resultCode);
+
+        if ($resultCode !== 0) {
+            return response()->json(['error' => 'Error al crear el respaldo'], 500);
+        }
+
+        // Crear archivo zip
+        $zip = new ZipArchive();
+        if ($zip->open($zipPath, ZipArchive::CREATE) === TRUE) {
+            $zip->addFile($backupPath, $filename);
+            $zip->close();
+        } else {
+            return response()->json(['error' => 'No se pudo crear el archivo ZIP'], 500);
+        }
+
+        // Opcional: eliminar el archivo .sql original para ahorrar espacio
+        unlink($backupPath);
+
+        return response()->json(['success' => 'Respaldo generado y comprimido exitosamente', 'archivo' => $zipFilename]);
     }
 
-    /**
-     * Lista los archivos de backup disponibles
-     */
-    public function historial()
+    public function descargar($filename)
     {
-        $ruta = storage_path('app');
-        $archivos = collect(glob("$ruta/*.sql"))->map(function ($archivo) {
-            return [
-                'nombre' => basename($archivo),
-                'tamaño' => round(filesize($archivo) / 1048576, 2), // MB
-                'fecha' => date('d/m/Y H:i:s', filemtime($archivo)),
-            ];
-        });
+        $filePath = storage_path("app/backups_zip/$filename");
 
-        return view('backup.historial', compact('archivos'));
+        if (!file_exists($filePath)) {
+            abort(404);
+        }
+
+        return response()->download($filePath);
     }
-
 }
