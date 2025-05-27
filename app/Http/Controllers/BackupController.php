@@ -63,6 +63,7 @@ class BackupController extends Controller
      */
     public function descargar($archivo)
     {
+        $archivo .= '.sql';
         $filePath = storage_path('app') . "/$archivo";
 
         if (!file_exists($filePath)) {

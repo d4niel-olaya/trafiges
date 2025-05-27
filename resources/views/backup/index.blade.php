@@ -86,7 +86,7 @@
                                 <td class="px-4 py-2">{{ round(filesize($archivo) / 1048576, 2) }} MB</td>
                                 <td class="px-4 py-2">{{ date('d/m/Y H:i:s', filemtime($archivo)) }}</td>
                                 <td class="px-4 py-2">
-                                    <a href="{{ route('backup.descargar', basename($archivo)) }}" class="text-blue-600 hover:underline">Descargar</a>
+                                    <a href="{{ route('backup.descargar', pathinfo(basename($archivo), PATHINFO_FILENAME)) }}" class="text-blue-600 hover:underline">Descargar</a>
                                 </td>
                             </tr>
                         @empty
