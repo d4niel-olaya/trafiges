@@ -1,5 +1,6 @@
 import {formularioAJson, inputsAJson, limpiarCamposFormulario,ValidarCampo,ValidarCampos} from './forms_utils.js';
 import AjaxHandler from './utils.js';
+import {CalcularMom1, CalcularMom2} from './biomecanica.js';
 import $ from 'jquery';
 function obtenerNombresYValores(idDiv) {
     const div = document.getElementById(idDiv);
@@ -25,6 +26,9 @@ function obtenerNombresYValores(idDiv) {
   
     return resultado;
   }
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -36,7 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
     inptMatricula.addEventListener('input', (e) => {
         document.querySelector('input[name="matricula-2"]').value = e.target.value;
     });
-    
+    // calculos biomecánicos
+    document.querySelector('input[name="tara-1"]').addEventListener('input', CalcularMom1);
+    document.querySelector('input[name="mom-1"]').addEventListener('input', CalcularMom1);
+    document.querySelector('input[name="ocupantes-1"]').addEventListener('input', CalcularMom1);
+    document.querySelector('input[name="tara-2"]').addEventListener('input', CalcularMom2);
       // autocomplete de clientes
 
       const $input = $("#nombreCliente");

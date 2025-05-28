@@ -251,13 +251,13 @@
                                     </div>
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
                                         <div class="mb-6"><label for="tara-1" class="block text-sm font-medium text-gray-700 mb-2">Tara (kg)</label>
-                                            <div class="relative"><input type="number" id="tara-1"
+                                            <div class="relative"><input type="number" id="tara-1" 
                                                  name="tara-1" 
                                                  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
                                                   ></div>
                                         </div>
                                         <div class="mb-6"><label for="mom-1" class="block text-sm font-medium text-gray-700 mb-2">M.O.M. (kg)</label>
-                                            <div class="relative"><input type="number" id="mom-1"
+                                            <div class="relative"><input type="number" id="mom-1" 
                                                  name="mom-1" 
                                                  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
                                                   ></div>
@@ -365,14 +365,15 @@
                                     <h2 class="text-xl font-semibold text-gray-900">Resultados Biomecánicos</h2>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div class="mb-6"><label for="mom1" class="block text-sm font-medium text-gray-700 mb-2">MOM 1 (Masa en Orden de Marcha vehículo Bala) [Kg]</label>
-                                            <div class="relative"><input type="number"
-                                                 id="mom1" name="mom1"  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
+                                            <div class="relative"><input type="number" disabled 
+                                                 id="mom1" name="mom1"  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 disabled:opacity-50 disabled:cursor-not-allowed bg-gray-100" 
+                                                  value="0"
                                                  ></div>
                                         </div>
                                         <div class="mb-6"><label for="mom2" class="block text-sm font-medium text-gray-700 mb-2">MOM 2 (Masa en Orden de Marcha vehículo Diana) [Kg]</label>
-                                            <div class="relative"><input type="number" 
+                                            <div class="relative"><input type="number" disabled 
                                                 id="mom2" name="mom2"
-                                                 class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
+                                                 class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 disabled:opacity-50 disabled:cursor-not-allowed bg-gray-100" 
                                                   ></div>
                                         </div>
                                     </div>
