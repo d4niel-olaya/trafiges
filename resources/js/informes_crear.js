@@ -110,7 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ValidarCampo('nombreCliente', 'Debe seleccionar un cliente registrado.');
                 return; // Detiene el flujo si hay errores
         }
-
+        CalcularMom1();
+        CalcularMom2();
         const formData = {
             matricula: document.querySelector('input[name="matricula"]').value,
             estado: document.querySelector('select[name="estado"]').value,

@@ -82,7 +82,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => "required|email|unique:users,email,{$usuario->id}",
-           // 'password' => 'nullable|min:6',
+           'password' => 'nullable|min:6',
            
             'roles' => 'required|string'
         ]);
@@ -90,9 +90,9 @@ class UserController extends Controller
         $usuario->name = $request->name;
         $usuario->email = $request->email;
         $usuario->username = $request->name;
-        // if ($request->filled('password')) {
-        //     $usuario->password = Hash::make($request->password);
-        // }
+        if ($request->filled('password')) {
+            $usuario->password = Hash::make($request->password);
+        }
 
         $usuario->save();
         $usuario->syncRoles($request->roles);

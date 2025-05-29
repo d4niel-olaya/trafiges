@@ -4,7 +4,8 @@ import { CalcularMom1,CalcularMom2 } from './biomecanica.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
-
+    CalcularMom1();
+    CalcularMom2();
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const ajaxHandler = new AjaxHandler(csrfToken);
     const btnGuardarCambios = document.getElementById("btnGuardarCambios");
@@ -83,7 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     ValidarCampo('nombreCliente', 'Debe seleccionar un cliente registrado.',true);
                     return; // Detiene el flujo si hay errores
         }
-
+        CalcularMom1();
+        CalcularMom2();
         const formData = {
             id: document.querySelector('input[name="id"]').value,
             matricula: document.querySelector('input[name="matricula"]').value,

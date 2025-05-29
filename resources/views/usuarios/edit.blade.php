@@ -37,7 +37,7 @@
                             class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
                     </div>
 
-                    <div class="mb-6 hidden">
+                    <div class="mb-6">
                         <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Nueva contraseña <span class="text-gray-400 text-xs">(opcional)</span></label>
                         <input type="password" id="password" name="password"
                             class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">

@@ -48,13 +48,13 @@ export function calcularResultadosSinDesplazamiento({
 
   export function CalcularMom2()
   {
-    const peso_conductor = parseFloat(document.querySelector('input[name="conductor-peso"]').value) || 0;
-    const peso_copiloto = parseFloat(document.querySelector('input[name="copiloto-peso"]').value) || 0;
-    const peso_detras_conductor = parseFloat(document.querySelector('input[name="detras_conductor-peso"]').value) || 0;
-    const peso_detras_copiloto = parseFloat(document.querySelector('input[name="detras_copiloto-peso"]').value) || 0;
-    const peso_detras_centro = parseFloat(document.querySelector('input[name="detras_centro-peso"]').value) || 0;
-    const peso_detras_3 = parseFloat(document.querySelector('input[name="detras_3-peso"]').value) || 0;
-    const peso_detras_4 = parseFloat(document.querySelector('input[name="detras_4-peso"]').value) || 0;
+    const peso_conductor = parseFloat(document.querySelector('input[name="conductor_peso"]').value) || 0;
+    const peso_copiloto = parseFloat(document.querySelector('input[name="copiloto_peso"]').value) || 0;
+    const peso_detras_conductor = parseFloat(document.querySelector('input[name="detras_conductor_peso"]').value) || 0;
+    const peso_detras_copiloto = parseFloat(document.querySelector('input[name="detras_copiloto_peso"]').value) || 0;
+    const peso_detras_centro = parseFloat(document.querySelector('input[name="detras_centro_peso"]').value) || 0;
+    const peso_detras_3 = parseFloat(document.querySelector('input[name="detras_3_peso"]').value) || 0;
+    const peso_detras_4 = parseFloat(document.querySelector('input[name="detras_4_peso"]').value) || 0;
 // Crea un array con sus IDs
     const tara2 = parseFloat(document.querySelector('input[name="tara-2"]').value) || 0;
     document.querySelector('input[name="mom2"]').value = peso_conductor + peso_copiloto + peso_detras_conductor + peso_detras_copiloto + peso_detras_centro + peso_detras_3 + peso_detras_4 + tara2;
