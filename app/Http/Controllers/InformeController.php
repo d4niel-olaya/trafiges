@@ -144,7 +144,7 @@ class InformeController extends Controller
         ]);
 
         $datosCompletos = json_encode([
-            'numero_informe' => $nuevoId,
+            'id' => $nuevoId,
             'matricula' => $validatedData['matricula'],
             'fechaAccidente' => $validatedData['fechaAccidente'],
             'nombreCliente' => $validatedData['nombreCliente'],
@@ -160,6 +160,7 @@ class InformeController extends Controller
             'vehiculo1' => $validatedData['vehiculo1'],
             'vehiculo2' => $validatedData['vehiculo2'],
             'resultadosBiomecanicos' => $validatedData['resultadosBiomecanicos'],
+           
         ]);
 
         $id_informe = DB::table('informes')->insertGetId([

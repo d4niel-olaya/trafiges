@@ -41,9 +41,14 @@ export function calcularResultadosSinDesplazamiento({
  export function CalcularMom1()
   {
     const tara1 = parseFloat(document.querySelector('input[name="tara-1"]').value) || 0;
-    const mom1 = parseFloat(document.querySelector('input[name="mom-1"]').value) || 0;
-    const mom1_resultado = parseInt(document.querySelector('input[name="ocupantes-1"]').value) || 0;
-    document.querySelector('input[name="mom1"]').value = mom1_resultado + tara1 +mom1;
+    //const mom1 = parseFloat(document.querySelector('input[name="mom-1"]').value) || 0;
+    let pesoOcupantes = 0;
+    let contador = 0;
+    pesoOcupantes = JSON.parse(document.getElementById("pesos-ocupantes-vh1").value) || [{peso: 0}];
+    for (let i = 0; i < pesoOcupantes.length; i++) {
+        contador += parseInt(pesoOcupantes[i].peso) || 0;
+    }
+    document.querySelector('input[name="mom1"]').value = contador + tara1;
   }
 
   export function CalcularMom2()

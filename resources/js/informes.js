@@ -4,8 +4,8 @@ import { CalcularMom1,CalcularMom2 } from './biomecanica.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    CalcularMom1();
-    CalcularMom2();
+    //CalcularMom1();
+    // CalcularMom2();
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const ajaxHandler = new AjaxHandler(csrfToken);
     const btnGuardarCambios = document.getElementById("btnGuardarCambios");
@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('input[name="mom-1"]').addEventListener('input', CalcularMom1);
     document.querySelector('input[name="ocupantes-1"]').addEventListener('input', CalcularMom1);
     document.querySelector('input[name="tara-2"]').addEventListener('input', CalcularMom2);
+    
      // autocomplete de clientes
 
      const $input = $("#nombreCliente");
@@ -111,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 mom: parseFloat(document.querySelector('input[name="mom-1"]').value) || 0,
                 numOcupantes: parseInt(document.querySelector('input[name="ocupantes-1"]').value) || 0,
                 velocidad: parseFloat(document.querySelector('input[name="velocidad-1"]').value) || 0,
+                pesoOcupantes:document.getElementById("pesos-ocupantes-vh1").value || "[{peso: 0}]",
             },
             vehiculo2: {
                 matricula: document.querySelector('input[name="matricula-2"]').value,
@@ -138,6 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 fuerzaInercia: parseFloat(document.querySelector('input[name="fuerzaInercia"]').value) || 0,
                 aumentoPesoCabeza: parseFloat(document.querySelector('input[name="aumentoPesoCabeza"]').value) || 0,
                 nic: parseFloat(document.querySelector('input[name="nic"]').value) || 0,
+                mom1: parseFloat(document.querySelector('input[name="mom1"]').value) || 0,
+                mom2: parseFloat(document.querySelector('input[name="mom2"]').value) || 0,
                 deltaV2ConEmbrague: parseFloat(document.querySelector('input[name="deltaV2ConEmbrague"]').value) || 0,
                 aceleracionMaximaConDesplazamiento: parseFloat(document.querySelector('input[name="aceleracionMaximaConDesplazamiento"]').value) || 0,
                 fuerzaInerciaConDesplazamiento: parseFloat(document.querySelector('input[name="fuerzaInerciaConDesplazamiento"]').value) || 0,

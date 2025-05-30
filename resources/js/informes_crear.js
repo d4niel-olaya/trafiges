@@ -136,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 mom: parseFloat(document.querySelector('input[name="mom-1"]').value) || 0,
                 numOcupantes: parseInt(document.querySelector('input[name="ocupantes-1"]').value) || 0,
                 velocidad: parseFloat(document.querySelector('input[name="velocidad-1"]').value) || 0,
+                pesoOcupantes:document.getElementById("pesos-ocupantes-vh1").value || "[{peso: 0}]",
             },
             vehiculo2: {
                 matricula: document.querySelector('input[name="matricula-2"]').value,
@@ -158,6 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 deltaV2: parseFloat(document.querySelector('input[name="deltaV2"]').value) || 0,
                 fuerzaG1: parseFloat(document.querySelector('input[name="fuerzaG1"]').value) || 0,
                 fuerzaG2: parseFloat(document.querySelector('input[name="fuerzaG2"]').value) || 0,
+                mom1: parseFloat(document.querySelector('input[name="mom1"]').value) || 0,
+                mom2: parseFloat(document.querySelector('input[name="mom2"]').value) || 0,
                 aceleracionMaxima: parseFloat(document.querySelector('input[name="aceleracionMaxima"]').value) || 0,
                 aceleracionGravitatoria: parseFloat(document.querySelector('input[name="aceleracionGravitatoria"]').value) || 0,
                 fuerzaInercia: parseFloat(document.querySelector('input[name="fuerzaInercia"]').value) || 0,
