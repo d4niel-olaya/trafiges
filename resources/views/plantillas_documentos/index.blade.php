@@ -17,6 +17,16 @@
         <div class="flex items-start justify-between p-6 border-b border-gray-200">
             <h2 class="text-xl font-semibold text-gray-900">Plantillas de documentos</h2>
         </div>
+         {{-- ALERTAS --}}
+        @if(session('success'))
+            <div class="p-4 bg-green-100 border border-green-300 text-green-800 rounded-md">
+                {{ session('success') }}
+            </div>
+        @elseif(session('error'))
+            <div class="p-4 bg-red-100 border border-red-300 text-red-800 rounded-md">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <div class="p-6">
             <div class="w-full">
@@ -32,8 +42,8 @@
                       <div class="py-6">
                             <div class="tab-content">
                                 <!-- El formulario envuelve toda la grilla -->
-                                 <form id="formSubirPlantilla" enctype="multipart/form-data">
-                                    @csrf 
+                                 <form id="formSubirPlantilla" enctype="multipart/form-data" action="{{ route('plantillas.store') }}" method="POST">
+                                    @csrf("POST")
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
                                     <!-- Titulo -->
                                     <div class="mb-6">
@@ -175,5 +185,5 @@
 </script>
 @endsection
 @push("scripts")
-@vite('resources/js/plantillas/upload.js')
+{{-- @vite('resources/js/plantillas/upload.js') --}}
 @endpush

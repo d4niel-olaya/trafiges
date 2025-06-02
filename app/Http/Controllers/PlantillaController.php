@@ -63,10 +63,10 @@ class PlantillaController extends Controller
                 'updated_at' => now(),
             ]);
 
-            return response()->json(['message' => 'Archivo subido correctamente.', 'ruta' => $ruta], 200);
+            return back()->with('success', "Plantilla '$titulo' subida correctamente.");
         } catch (\Exception $e) {
             Log::error('Error al subir el archivo: ' . $e->getMessage());
-            return response()->json(['message' => 'Error interno al subir el archivo.'], 500);
+            return back()->with('error', "Error al subir la plantilla:<br><pre>" .  $e->getMessage() . "</pre>");
         }
     }
 
