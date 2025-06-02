@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 class PlantillaController extends Controller
 {
     /**
@@ -42,20 +43,31 @@ class PlantillaController extends Controller
         ]);
 
 
+        if (!$request->hasFile('plantilla')) {
+            return response()->json(['message' => 'No se encontró ningún archivo.'], 422);
+        }
+
         $archivo = $request->file('plantilla');
         $titulo = $request->input('titulo');
-        $extension = $archivo->getClientOriginalExtension(); // .docx
+        $extension = $archivo->getClientOriginalExtension();
         $nombreArchivo = Str::slug($titulo) . '_' . time() . '.' . $extension;
-        $ruta = $archivo->storeAs('plantillas',$nombreArchivo, 'public');
-        DB::table('plantillas')->insert([
-            'titulo' => $request->input('titulo'),
-            'descripcion' => $request->input('descripcion'),
-            'ruta' => $ruta,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        
-        return response()->json(['mensaje' => 'Archivo subido correctamente']);
+
+        try {
+            $ruta = $archivo->storeAs('plantillas', $nombreArchivo, 'public');
+
+            DB::table('plantillas')->insert([
+                'titulo' => $titulo,
+                'descripcion' => $request->input('descripcion'),
+                'ruta' => $ruta,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            return response()->json(['message' => 'Archivo subido correctamente.', 'ruta' => $ruta], 200);
+        } catch (\Exception $e) {
+            Log::error('Error al subir el archivo: ' . $e->getMessage());
+            return response()->json(['message' => 'Error interno al subir el archivo.'], 500);
+        }
     }
 
     /**
