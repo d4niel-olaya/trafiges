@@ -66,6 +66,49 @@ class AjaxHandler {
         });
     }
 
+    /**
+     * Método nuevo para enviar un FormData (con archivo incluido).
+     * @param {string} url - URL del endpoint.
+     * @param {FormData} formData - FormData con archivo(s) y otros datos.
+     * @param {string} method - Método HTTP (POST, PUT).
+     * @param {function} successCallback - Función que se ejecuta en caso de éxito.
+     * @param {function} errorCallback - Función que se ejecuta en caso de error.
+     */
+    sendFormData(url, formData, method = 'POST', showAlertOnSuccess = true, showConfirmButtonAlert = true, successCallback = null, errorCallback = null) {
+        $.ajax({
+            url: url,
+            type: method,
+            data: formData,
+            headers: {
+                'X-CSRF-TOKEN': this.csrfToken
+            },
+            processData: false, // Imprescindible para FormData
+            contentType: false, // Imprescindible para FormData
+            success: (response) => {
+                if (showAlertOnSuccess) {
+                    Swal.close();
+                    Swal.fire({
+                        title: 'Operación exitosa',
+                        text: response.message || 'Operación realizada con éxito.',
+                        icon: 'success',
+                        showConfirmButton: showConfirmButtonAlert
+                    });
+                }
+                if (successCallback) successCallback(response);
+            },
+            error: (xhr) => {
+                Swal.close();
+                const errorMessage = xhr.responseJSON?.message || 'Ha ocurrido un error inesperado.';
+                Swal.fire({
+                    title: 'Error',
+                    text: errorMessage,
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+                if (errorCallback) errorCallback(xhr);
+            }
+        });
+    }
 }
 
 
