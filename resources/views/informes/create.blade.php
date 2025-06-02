@@ -257,9 +257,9 @@
                                                   ></div>
                                         </div>
                                         <div class="mb-6"><label for="mom-1" class="block text-sm font-medium text-gray-700 mb-2">M.O.M. (kg)</label>
-                                            <div class="relative"><input type="number" id="mom-1" 
+                                            <div class="relative"><input type="number" id="mom-1"  disabled
                                                  name="mom-1" 
-                                                 class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
+                                                 class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 disabled:opacity-50 disabled:cursor-not-allowed bg-gray-100" 
                                                   ></div>
                                         </div>
                                         <div class="mb-6"><label for="ocupantes-1" class="block text-sm font-medium text-gray-700 mb-2">Nº Ocupantes</label>

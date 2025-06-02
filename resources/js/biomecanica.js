@@ -49,6 +49,7 @@ export function calcularResultadosSinDesplazamiento({
         contador += parseInt(pesoOcupantes[i].peso) || 0;
     }
     document.querySelector('input[name="mom1"]').value = contador + tara1;
+     document.querySelector('input[name="mom-1"]').value = contador + tara1;
   }
 
   export function CalcularMom2()
