@@ -64,6 +64,6 @@ export function calcularResultadosSinDesplazamiento({
 // Crea un array con sus IDs
     const tara2 = parseFloat(document.querySelector('input[name="tara-2"]').value) || 0;
     document.querySelector('input[name="mom2"]').value = peso_conductor + peso_copiloto + peso_detras_conductor + peso_detras_copiloto + peso_detras_centro + peso_detras_3 + peso_detras_4 + tara2;
-
+    document.querySelector('input[name="mom-2"]').value = peso_conductor + peso_copiloto + peso_detras_conductor + peso_detras_copiloto + peso_detras_centro + peso_detras_3 + peso_detras_4 + tara2;
    // ['conductor-formulario', 'copiloto-formulario', 'detras_conductor-formulario', 'detras_copiloto-formulario', 'detras_centro-formulario', 'detras_3-formulario', 'detras_4-formulario']
   }
