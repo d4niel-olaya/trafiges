@@ -210,6 +210,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                  @include('informes.partials.datos_relativos_via',[
+                                            "meteorologia" => '',
+                                            "estado_via" => '',
+                                            "estado_via_otros" =>  '',
+                                            "inclinacion_via" => '',
+                                            "nombre_testigo" => '',
+                                            "apellido_testigo" => ''])
                             </div>
                         </div>
                     </div>

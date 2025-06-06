@@ -141,6 +141,13 @@ class InformeController extends Controller
             'vehiculo2' => 'required|array',
             'resultadosBiomecanicos' => 'required|array',
             'ocupantes' => 'required|array',
+
+             'meteorologia' => 'nullable|string',
+            'estado_via' => 'nullable|string',
+            'estado_via_otros' => 'nullable|string|max:100',
+            'inclinacion_via' => 'nullable|string',
+            'nombre_testigo' => 'nullable|string|max:100',
+            'apellido_testigo' => 'nullable|string|max:100',
         ]);
 
         $datosCompletos = json_encode([
@@ -157,9 +164,18 @@ class InformeController extends Controller
             'fechaEntregaCliente' => $validatedData['fechaEntregaCliente'],
             'companiaSeguros' => $validatedData['companiaSeguros'],
             'tipoColision' => $validatedData['tipoColision'],
+
+            'meteorologia' => $validatedData['meteorologia'] ?? null,
+            'estado_via' => $validatedData['estado_via'] ?? null,
+            'estado_via_otros' => $validatedData['estado_via_otros'] ?? null,
+            'inclinacion_via' => $validatedData['inclinacion_via'] ?? null,
+            'nombre_testigo' => $validatedData['nombre_testigo'] ?? null,
+            'apellido_testigo' => $validatedData['apellido_testigo'] ?? null,
+            
             'vehiculo1' => $validatedData['vehiculo1'],
             'vehiculo2' => $validatedData['vehiculo2'],
             'resultadosBiomecanicos' => $validatedData['resultadosBiomecanicos'],
+            
            
         ]);
 
@@ -182,6 +198,12 @@ class InformeController extends Controller
             'companiaSeguros' => null,
             'idCompaniaSeguros' => $validatedData['companiaSeguros'],
             'tipoColision' => $validatedData['tipoColision'],
+            'meteorologia' => $validatedData['meteorologia'] ?? null,
+            'estado_via' => $validatedData['estado_via'] ?? null,
+            'estado_via_otros' => $validatedData['estado_via_otros'] ?? null,
+            'inclinacion_via' => $validatedData['inclinacion_via'] ?? null,
+            'nombre_testigo' => $validatedData['nombre_testigo'] ?? null,
+            'apellido_testigo' => $validatedData['apellido_testigo'] ?? null,
             'datos' => $datosCompletos,
             'created_at' => now(),
             'updated_at' => now(),
@@ -327,6 +349,13 @@ class InformeController extends Controller
             'vehiculo2' => 'required|array',
             'resultadosBiomecanicos' => 'required|array',
             'ocupantes' => 'required|array', 
+
+            'meteorologia' => 'nullable|string',
+            'estado_via' => 'nullable|string',
+            'estado_via_otros' => 'nullable|string|max:100',
+            'inclinacion_via' => 'nullable|string',
+            'nombre_testigo' => 'nullable|string|max:100',
+            'apellido_testigo' => 'nullable|string|max:100',
         ]);
     
         // Convertir los datos de vehículos y resultados biomecánicos a JSON
@@ -343,6 +372,12 @@ class InformeController extends Controller
             'fechaEntregaCliente' => $validatedData['fechaEntregaCliente'],
             'companiaSeguros' => $validatedData['companiaSeguros'],
             'tipoColision' => $validatedData['tipoColision'],
+            'meteorologia' => $validatedData['meteorologia'] ?? null,
+            'estado_via' => $validatedData['estado_via'] ?? null,
+            'estado_via_otros' => $validatedData['estado_via_otros'] ?? null,
+            'inclinacion_via' => $validatedData['inclinacion_via'] ?? null,
+            'nombre_testigo' => $validatedData['nombre_testigo'] ?? null,
+            'apellido_testigo' => $validatedData['apellido_testigo'] ?? null,
             'vehiculo1' => $validatedData['vehiculo1'],
             'vehiculo2' => $validatedData['vehiculo2'],
             'resultadosBiomecanicos' => $validatedData['resultadosBiomecanicos'],
@@ -369,6 +404,12 @@ class InformeController extends Controller
                 'companiaSeguros' => null,
                 'idCompaniaSeguros' => $validatedData['companiaSeguros'],
                 'tipoColision' => $validatedData['tipoColision'],
+                'meteorologia' => $validatedData['meteorologia'] ?? null,
+                'estado_via' => $validatedData['estado_via'] ?? null,
+                'estado_via_otros' => $validatedData['estado_via_otros'] ?? null,
+                'inclinacion_via' => $validatedData['inclinacion_via'] ?? null,
+                'nombre_testigo' => $validatedData['nombre_testigo'] ?? null,
+                'apellido_testigo' => $validatedData['apellido_testigo'] ?? null,
                 'datos' => $datosCompletos,
                 'updated_at' => now(),
             ]);

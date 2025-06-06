@@ -1,11 +1,12 @@
 import {formularioAJson, inputsAJson, limpiarCamposFormulario, ValidarCampo, ValidarCampos} from './forms_utils.js';
 import AjaxHandler from './utils.js';
 import { CalcularMom1,CalcularMom2 } from './biomecanica.js';
-
+import {toggleOtrosInput} from './informes/index.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     //CalcularMom1();
     // CalcularMom2();
+      toggleOtrosInput()
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const ajaxHandler = new AjaxHandler(csrfToken);
     const btnGuardarCambios = document.getElementById("btnGuardarCambios");
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('input[name="mom-1"]').addEventListener('input', CalcularMom1);
     document.querySelector('input[name="ocupantes-1"]').addEventListener('input', CalcularMom1);
     document.querySelector('input[name="tara-2"]').addEventListener('input', CalcularMom2);
-    
+    document.querySelector('select[name="estado_via"]').addEventListener('change', toggleOtrosInput);
      // autocomplete de clientes
 
      const $input = $("#nombreCliente");
@@ -103,6 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
            // companiaSeguros: document.querySelector('input[name="companiaSeguros"]').value,
             companiaSeguros: document.querySelector('select[name="companiaSeguros"]').value,
             tipoColision: document.querySelector('select[name="tipoColision"]').value,
+            meteorologia: document.querySelector('select[name="meteorologia"]')?.value || '',
+            estado_via: document.querySelector('select[name="estado_via"]')?.value || '',
+            estado_via_otros: document.querySelector('input[name="estado_via_otros"]')?.value || '',
+            inclinacion_via: document.querySelector('select[name="inclinacion_via"]')?.value || '',
+            nombre_testigo: document.querySelector('input[name="nombre_testigo"]')?.value || '',
+            apellido_testigo: document.querySelector('input[name="apellido_testigo"]')?.value || '',
             vehiculo1: {
                 matricula: document.querySelector('input[name="matricula-1"]').value,
                 marca: document.querySelector('input[name="marca-1"]').value,

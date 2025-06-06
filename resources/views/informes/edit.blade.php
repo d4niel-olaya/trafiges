@@ -206,8 +206,12 @@
                                             <option value="finalizado" @selected(old('estado', $informe[0]->estado) == 'finalizado')>🟢 Finalizado</option>
                                         </select>
                                         </div>
-                                    </div>
+                                    </div>  
+
+                                 
+
                                 </div>
+                                @include('informes.partials.datos_relativos_via', ["meteorologia" => $informe[0]->meteorologia, "estado_via" => $informe[0]->estado_via, "inclinacion_via" => $informe[0]->inclinacion_via, "estado_via_otros" => $informe[0]->estado_via_otros, "nombre_testigo" => $informe[0]->nombre_testigo, "apellido_testigo" => $informe[0]->apellido_testigo])
                             </div>
                         </div>
                     </div>
