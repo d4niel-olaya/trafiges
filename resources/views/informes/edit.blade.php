@@ -31,6 +31,7 @@
                         <button id="tab-datos-generales" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 active" data-tab="datos-generales-content">Datos Generales</button>
                         <button id="tab-vehiculos" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="vehiculos-content">Vehículos</button>
                         <button id="tab-biomecanica-vista" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="biomecanica-content">Biomecánica</button>
+                           <button id="tab-interactiva" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="interactiva-content">Formulas Biomecánicas</button>
                         <button id="tab-ocupantes" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="ocupantes-content">Ocupantes</button>
                         <button id="tab-tipos-informes" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="tipos-informes-content">Tipos de informes</button>
                         <button id="tab-pagos" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="pagos-content">Cobros</button>
@@ -367,8 +368,10 @@
                     <div id="biomecanica-content" class="tab-panel">
                         <div class="py-6">
                             <div class="tab-content">
-                                
-                                <div class="space-y-8">
+                                @include("informes.partials.resultados_biomecanicos")
+
+
+                                <div class="space-y-8 hidden">
                                     <h2 class="text-xl font-semibold text-gray-900">Resultados Biomecánicos</h2>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div class="mb-6"><label for="mom1" class="block text-sm font-medium text-gray-700 mb-2">MOM 1 (Masa en Orden de Marcha vehículo Bala) [Kg]</label>
@@ -451,7 +454,7 @@
                                             </div>
                                         </div>
                                     </div> --}}
-                                    <div class="bg-gray-50 p-6 rounded-lg">
+                                    <div class="bg-gray-50 p-6 rounded-lg hidden">
                                         <h3 class="text-lg font-medium text-gray-900 mb-4">RESULTADOS SIN DESPLAZAMIENTO POSTCOLISIVO</h3>
                                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                                             <div class="mb-6"><label for="deltaV1" class="block text-sm font-medium text-gray-700 mb-2">Delta-V Vehículo 1</label>
@@ -515,7 +518,7 @@
                                         </div>
                                     </div>
                                     </div>
-                                    <div class="bg-gray-50 p-6 rounded-lg">
+                                    <div class="bg-gray-50 p-6 rounded-lg hidden">
                                         <h3 class="text-lg font-medium text-gray-900 mb-4">ESTUDIOS CON DESPLAZAMIENTO POSTCOLISIVO</h3>
                                         <div class="mb-6">
                                             <h4 class="text-md font-medium text-gray-800 mb-4">RESULTADOS SIN ACCIÓN DEL FRENO (RODADURA LIBRE O EMBRAGUE PISADO)</h4>
@@ -599,6 +602,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div id="interactiva-content" class="tab-panel">
+                        @include("informes.partials.formulas_interactivas")
+
                     </div>
                     <div id="ocupantes-content" class="tab-panel">
                        
