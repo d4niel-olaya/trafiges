@@ -605,6 +605,8 @@
                     </div>
 
                     <div id="interactiva-content" class="tab-panel">
+                        @include("informes.partials.formulas_builder")
+                        <br>
                         @include("informes.partials.formulas_interactivas")
 
                     </div>
@@ -717,5 +719,7 @@
 @endsection
 
 @push("scripts")
-@vite(['resources/js/informes.js', 'resources/js/pagos/create.js', 'resources/js/tiposInformes/asociar_informe.js'])
+@vite(['resources/js/informes.js', 'resources/js/pagos/create.js', 
+        'resources/js/tiposInformes/asociar_informe.js',
+        'resources/js/biomecanica/formulas_interactivas.js',])
 @endpush

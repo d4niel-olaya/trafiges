@@ -32,13 +32,28 @@
         <div class="bg-white rounded-lg shadow-lg p-6">
             <h3 class="text-xl font-semibold text-gray-900 mb-6 border-b border-gray-200 pb-3">Datos Necesarios</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div><label class="block text-sm font-medium text-gray-700 mb-2">V1 (Velocidad de vehículo Bala) - Estimada entre 12-16 [km/h]</label><input type="number" step="0.1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="12.3"><span class="text-xs text-gray-500">km/h</span></div>
-                <div><label class="block text-sm font-medium text-gray-700 mb-2">V2 (Velocidad de vehículo Diana) - Habitualmente detenido [km/h]</label><input type="number" step="0.1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0"><span class="text-xs text-gray-500">km/h</span></div>
-                <div><label class="block text-sm font-medium text-gray-700 mb-2">MOM 1 (Masa en Orden de Marcha vehículo Bala) [Kg]</label><input type="number" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="1375"><span class="text-xs text-gray-500">Kg</span></div>
-                <div><label class="block text-sm font-medium text-gray-700 mb-2">MOM 2 (Masa en Orden de Marcha vehículo Diana) [Kg]</label><input type="number" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="1502"><span class="text-xs text-gray-500">Kg</span></div>
-                <div><label class="block text-sm font-medium text-gray-700 mb-2">Coeficiente de Restitución (e = 0,25-0,45; e medio = 0,31)</label><input type="number" step="0.01" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0.45"></div>
-                <div><label class="block text-sm font-medium text-gray-700 mb-2">Coeficiente de Rozamiento Libre (μ = 0,015)</label><input type="number" step="0.001" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0.015"></div>
-                <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-2">Coeficiente de Rozamiento con Freno (μ = 0,7)</label><input type="number" step="0.1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0.7"></div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-2">V1 (Velocidad de vehículo Bala) - Estimada entre 12-16 [km/h]</label>
+                    <input type="number" id="fm-v1" step="0.1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="12.3"><span class="text-xs text-gray-500">km/h</span>
+                </div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-2">V2 (Velocidad de vehículo Diana) - Habitualmente detenido [km/h]</label>
+                    <input type="number" id="fm-v2" step="0.1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0"><span class="text-xs text-gray-500">km/h</span></div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-2">MOM 1 (Masa en Orden de Marcha vehículo Bala) [Kg]</label>
+                    <input type="number" id="fm-mom1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="1375">
+                    <span class="text-xs text-gray-500">Kg</span>
+                </div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-2">MOM 2 (Masa en Orden de Marcha vehículo Diana) [Kg]</label>
+                    <input type="number" id="fm-mom2" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="1502">
+                    <span class="text-xs text-gray-500">Kg</span>
+                </div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-2">Coeficiente de Restitución (e = 0,25-0,45; e medio = 0,31)</label>
+                    <input type="number" id="fm-coef_restitucion" step="0.01" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0.45">
+                </div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-2">Coeficiente de Rozamiento Libre (μ = 0,015)</label>
+                    <input type="number" id="fm-coef_rozamiento" step="0.001" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0.015">
+                </div>
+                <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-2">Coeficiente de Rozamiento con Freno (μ = 0,7)</label>
+                    <input type="number" id="fm-coef_rozamiento_freno" step="0.1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0.7">
+                </div>
             </div>
         </div>
         <div class="bg-white rounded-lg shadow-lg p-6">

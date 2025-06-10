@@ -1,10 +1,10 @@
 <div class="space-y-8">
-    <div class="flex justify-between items-center">
+    {{-- <div class="flex justify-between items-center">
         <h2 class="text-2xl font-bold text-gray-900">Constructor de Fórmulas Interactivas</h2><button class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-5 w-5">
                 <path d="M5 12h14"></path>
                 <path d="M12 5v14"></path>
             </svg>Nueva Fórmula</button>
-    </div>
+    </div> --}}
     <div class="bg-gradient-to-r from-purple-50 to-indigo-50 p-6 rounded-lg border border-purple-200">
         <h3 class="text-xl font-semibold text-purple-900 mb-4 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator h-6 w-6">
                 <rect width="16" height="20" x="4" y="2" rx="2"></rect>
