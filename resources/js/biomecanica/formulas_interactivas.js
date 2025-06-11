@@ -1,5 +1,18 @@
 
+   const array_pesoOcupantes = [{
 
+        id: "peso_ocupantes1",
+        label: "Peso de los ocupantes del vehículo 1",
+        value: obtenerPesoOcupantes1(),
+        alias: "peso_ocupantes1"
+    },
+    {
+        id: "peso_ocupantes2",
+        label: "Peso de los ocupantes del vehículo 2",
+        value: obtenerPesoOcupantes2(),
+        alias: "peso_ocupantes2"
+    }
+  ]
 
 
 const inputData = [
@@ -45,6 +58,7 @@ const inputData = [
     value: 0.7,
     alias:"coef_rozamiento_freno"
   }
+  
 ];
 
 function probar(){
@@ -57,7 +71,9 @@ function probar(){
         .replaceAll("v1", document.getElementById("fm-v1").value)
         .replaceAll("v2", document.getElementById("fm-v2").value)
         .replaceAll("mom1", document.getElementById("fm-mom1").value)
-        .replaceAll("mom2", document.getElementById("fm-mom2").value);
+        .replaceAll("mom2", document.getElementById("fm-mom2").value)
+        .replaceAll("peso_ocupantes1", obtenerPesoOcupantes1())
+        .replaceAll("peso_ocupantes2", obtenerPesoOcupantes2());
         console.log(expresion);
         alert("El resultado de la expresión es: " + eval(expresion));
     }catch (error) {
@@ -79,6 +95,18 @@ function pintarBotonesFormulas() {
         // Agregar el botón al contenedor de fórmulas
         formulas.appendChild(boton);
     }
+
+
+
+    for(let i = 0; i <= array_pesoOcupantes.length - 1; i++) {
+        const boton = crearBotonFormulaSinId(array_pesoOcupantes[i]);
+        
+        // Agregar el botón al contenedor de fórmulas
+        formulas.appendChild(boton);
+    }
+    // variables peso del ocupantes
+
+
 }
 
 function crearBotonFormula(objeto) {
@@ -98,12 +126,49 @@ function crearBotonFormula(objeto) {
 
 }
 
+function crearBotonFormulaSinId(objeto) {
+   // console.log(objeto);
+    const boton = document.createElement("button");
+    boton.className = "text-left p-2 bg-blue-50 hover:bg-blue-100 rounded border border-blue-200 transition-colors";
+    const valorInpt = objeto.value || 0;
+    boton.innerHTML = `
+                    <div class="font-mono text-sm text-blue-700">${objeto.alias}</div>
+                    <div class="text-xs text-gray-600">${objeto.label}</div>
+                    <div class="text-xs text-blue-600">Valor actual: ${valorInpt} </div>
+    `;
+    boton.addEventListener("click", function() {
+        document.getElementById("fm-test").value = document.getElementById("fm-test").value.concat(" " + objeto.alias);
+    });
+    return boton;
+
+}
+
+function obtenerPesoOcupantes2() {
+    const peso_conductor = parseFloat(document.querySelector('input[name="conductor_peso"]').value) || 0;
+    const peso_copiloto = parseFloat(document.querySelector('input[name="copiloto_peso"]').value) || 0;
+    const peso_detras_conductor = parseFloat(document.querySelector('input[name="detras_conductor_peso"]').value) || 0;
+    const peso_detras_copiloto = parseFloat(document.querySelector('input[name="detras_copiloto_peso"]').value) || 0;
+    const peso_detras_centro = parseFloat(document.querySelector('input[name="detras_centro_peso"]').value) || 0;
+    const peso_detras_3 = parseFloat(document.querySelector('input[name="detras_3_peso"]').value) || 0;
+    const peso_detras_4 = parseFloat(document.querySelector('input[name="detras_4_peso"]').value) || 0;
+    return peso_conductor + peso_copiloto + peso_detras_conductor + peso_detras_copiloto + peso_detras_centro + peso_detras_3 + peso_detras_4;
+}
+
+function obtenerPesoOcupantes1() {
+    let pesoOcupantes = 0;
+    let contador = 0;
+    const pesoOcupantesArray = JSON.parse(document.getElementById("pesos-ocupantes-vh1").value) || [{peso: 0}];
+    for (let i = 0; i < pesoOcupantesArray.length; i++) {
+        contador += parseInt(pesoOcupantesArray[i].peso) || 0;
+    }
+    return contador;
+}
 
 document.addEventListener("DOMContentLoaded", function() {
     // Obtener todos los elementos con la clase 'formula-interactiva'
     const formulas = document.getElementById("variables_formulas");
     document.getElementById("btnProbar").addEventListener("click", probar);
-
+  
     // pintar los botones de las fórmulas
     for(let i = 0; i <= inputData.length - 1; i++) {
         const boton = crearBotonFormula(inputData[i]);
@@ -112,7 +177,12 @@ document.addEventListener("DOMContentLoaded", function() {
         formulas.appendChild(boton);
     }
 
-
+     for(let i = 0; i <= array_pesoOcupantes.length - 1; i++) {
+        const boton = crearBotonFormulaSinId(array_pesoOcupantes[i]);
+        
+        // Agregar el botón al contenedor de fórmulas
+        formulas.appendChild(boton);
+    }
 
     // Iterar sobre cada elemento y agregar el evento de clic
     

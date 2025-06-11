@@ -71,7 +71,10 @@
             
                 {{-- PERITO --}}
                 @if(Auth::user()->hasRole('perito'))
+
                     <li><x-nav-item route="informes.index" icon="file-text" label="Informes" /></li>
+                     <li><x-nav-item route="plantillas.index" icon="file" label="Plantillas de Documentos" /></li>
+                    <li><x-nav-item route="biomecanica.index" icon="activity" label="Gestión Biomecánica" /></li>
                     <li><x-nav-item route="clientes.index" icon="users" label="Clientes" /></li>
                     <li><x-nav-item route="documentacion.index" icon="book-open" label="Documentación" /></li>
                 @endif

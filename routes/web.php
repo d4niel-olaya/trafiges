@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('informes', InformeController::class)->middleware('role:administrador|perito|asistente');
     Route::post('/informes/tipo_informe', [InformeController::class, 'asociarTipoInforme'])->name('informes.asociarTipoInforme')->middleware('role:administrador');
     // 🔹 Plantillas
-    Route::resource('plantillas', PlantillaController::class)->middleware('role:administrador');
+    Route::resource('plantillas', PlantillaController::class)->middleware('role:administrador|perito');
 
     // 🔹 Clientes
     Route::resource('clientes', ClienteController::class)->middleware('role:administrador|perito');
@@ -63,7 +63,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     // 🔹 Biomecánica
-    Route::resource('biomecanica', BiomecanicaController::class)->middleware('role:administrador');
+    Route::resource('biomecanica', BiomecanicaController::class)->middleware('role:administrador|perito');
 
     // 🔹 Documentación
     Route::resource('documentacion', DocumentacionController::class);

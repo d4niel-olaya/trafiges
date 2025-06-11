@@ -126,7 +126,7 @@
                             <td class="p-4 align-middle font-medium">{{$informe->numero_informe}}</td>
                             <td class="p-4 align-middle">{{$informe->matricula}}</td>
                             <td class="p-4 align-middle">{{$informe->fechaAccidente}}</td>
-                            <td class="p-4 align-middle">{{$informe->nombreCliente}}</td>
+                            <td class="p-4 align-middle">{{$informe->nombreCliente}} {{$informe->apellidoCliente}}</td>
                             <td class="p-4 align-middle">{{$informe->abogadoAsociado}}</td>
                             <td class="p-4 align-middle">{{$informe->peritoAsignado}}</td>
                             {{-- <td class="p-4 align-middle">{{$informe->tipoInforme}}</td> --}}
