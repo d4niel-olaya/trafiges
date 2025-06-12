@@ -38,11 +38,11 @@
                 <div><label class="block text-sm font-medium text-gray-700 mb-2">V2 (Velocidad de vehículo Diana) - Habitualmente detenido [km/h]</label>
                     <input type="number" id="fm-v2" step="0.1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0"><span class="text-xs text-gray-500">km/h</span></div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-2">MOM 1 (Masa en Orden de Marcha vehículo Bala) [Kg]</label>
-                    <input type="number" id="fm-mom1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="1375">
+                    <input type="number" id="fm-mom1" disabled class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed bg-gray-100" value="1375" >
                     <span class="text-xs text-gray-500">Kg</span>
                 </div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-2">MOM 2 (Masa en Orden de Marcha vehículo Diana) [Kg]</label>
-                    <input type="number" id="fm-mom2" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="1502">
+                    <input type="number" id="fm-mom2" disabled class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed bg-gray-100" value="1502">
                     <span class="text-xs text-gray-500">Kg</span>
                 </div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-2">Coeficiente de Restitución (e = 0,25-0,45; e medio = 0,31)</label>

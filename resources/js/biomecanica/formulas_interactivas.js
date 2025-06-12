@@ -1,4 +1,4 @@
-
+import AjaxHandler from '../utils.js';
    const array_pesoOcupantes = [{
 
         id: "peso_ocupantes1",
@@ -60,6 +60,18 @@ const inputData = [
   }
   
 ];
+
+
+function setearValoresAsociados() {
+  const select = document.getElementById("campo_asociado");
+  for (let i = 0; i < inputData.length; i++) {
+    const option = document.createElement("option");
+    option.value = inputData[i].id;
+    option.textContent = inputData[i].label;
+    select.appendChild(option);
+  } 
+
+}
 
 function probar(){
     try{
@@ -166,7 +178,11 @@ function obtenerPesoOcupantes1() {
 
 document.addEventListener("DOMContentLoaded", function() {
     // Obtener todos los elementos con la clase 'formula-interactiva'
+    setearValoresAsociados();
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const ajaxHandler = new AjaxHandler(csrfToken);
     const formulas = document.getElementById("variables_formulas");
+    const btnGuardarFormula = document.getElementById("btnGuardarFormula");
     document.getElementById("btnProbar").addEventListener("click", probar);
   
     // pintar los botones de las fórmulas
@@ -183,6 +199,63 @@ document.addEventListener("DOMContentLoaded", function() {
         // Agregar el botón al contenedor de fórmulas
         formulas.appendChild(boton);
     }
+
+       btnGuardarFormula.addEventListener("click", function() {
+        const expresion = document.getElementById("fm-test").value;
+        const nombre = document.getElementById("fm-nombre").value;
+        const descripcion = document.getElementById("fm-descripcion").value;
+        const campoAsociado = document.getElementById("campo_asociado").value;
+
+        if (!expresion || !nombre) {
+            alert("Por favor, completa todos los campos requeridos.");
+            return;
+        }
+
+
+        const formData = {
+            id_informe: document.querySelector('input[name="id"]').value,
+            formula_con_variables: expresion,
+            formula_sin_variables : expresion.replaceAll("coef_rozamiento_freno", document.getElementById("fm-coef_rozamiento_freno").value)
+                                  .replaceAll("coef_rozamiento", document.getElementById("fm-coef_rozamiento").value)
+                                  .replaceAll("coef_restitucion", document.getElementById("fm-coef_restitucion").value)
+                                  .replaceAll("v1", document.getElementById("fm-v1").value)
+                                  .replaceAll("v2", document.getElementById("fm-v2").value)
+                                  .replaceAll("mom1", document.getElementById("fm-mom1").value)
+                                  .replaceAll("mom2", document.getElementById("fm-mom2").value)
+                                  .replaceAll("peso_ocupantes1", obtenerPesoOcupantes1())
+                                  .replaceAll("peso_ocupantes2", obtenerPesoOcupantes2()),
+            nombre: nombre,
+            descripcion: descripcion,
+            campo_destino: campoAsociado,
+            parametros: JSON.stringify({
+
+              valor : 10
+            }),
+            campos_variables : JSON.stringify({
+                v1: document.getElementById("fm-v1").value,
+                v2: document.getElementById("fm-v2").value,
+                mom1: document.getElementById("fm-mom1").value,
+                mom2: document.getElementById("fm-mom2").value,
+                coef_restitucion: document.getElementById("fm-coef_restitucion").value,
+                coef_rozamiento: document.getElementById("fm-coef_rozamiento").value,
+                coef_rozamiento_freno: document.getElementById("fm-coef_rozamiento_freno").value,
+                peso_ocupantes1: obtenerPesoOcupantes1(),
+                peso_ocupantes2: obtenerPesoOcupantes2()
+            })
+        }
+
+        
+          ajaxHandler.sendRequest('/biomecanica', formData, 'POST', true, true, (response) => {
+            console.log(response); // Manejar la respuesta del servidor
+            //limpiarCamposFormulario('formularioInformes');
+            
+        }, (error) => {
+            console.error(error); // Manejar el error
+        });
+        // Aquí puedes agregar la lógica para guardar la fórmula
+        
+
+       });
 
     // Iterar sobre cada elemento y agregar el evento de clic
     

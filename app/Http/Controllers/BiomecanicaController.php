@@ -30,6 +30,13 @@ class BiomecanicaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'id_informe'=> 'required|integer',
+            'formula_sin_variables' => 'required|string',
+            'nombre' => 'required|string',
+            'descripcion' => 'nullable|string',
+            'formula_con_variables' => 'required|string',
+            'campo_destino' => 'required|string',
+            'campos_variables' => 'required|json',
             'parametros' => 'required|json',
             'esPlantilla' => 'nullable|boolean',
         ]);
@@ -38,16 +45,23 @@ class BiomecanicaController extends Controller
         $ultimoId = DB::table('formulas_biomecanicas')->max('id');
 
         // Si hay registros, elimina el de id más alto, si no, intenta eliminar el id 1
-        if ($ultimoId) {
-            DB::table('formulas_biomecanicas')->where('id', $ultimoId)->delete();
-        } else {
-            DB::table('formulas_biomecanicas')->where('id', 1)->delete();
-        }
+        // if ($ultimoId) {
+        //     DB::table('formulas_biomecanicas')->where('id', $ultimoId)->delete();
+        // } else {
+        //     DB::table('formulas_biomecanicas')->where('id', 1)->delete();
+        // }
 
         // Insertar el nuevo registro
         $id = DB::table('formulas_biomecanicas')->insertGetId([
             'id' => $ultimoId ? $ultimoId : 1,
             'parametros' => $validated['parametros'],
+            'id_informe' => $validated['id_informe'],
+            'nombre' => $validated['nombre'],
+            'descripcion' => $validated['descripcion'] ?? null,
+            'formula_sin_variables' => $validated['formula_sin_variables'],
+            'formula_con_variables' => $validated['formula_con_variables'],
+            'campo_destino' => $validated['campo_destino'],
+            'campos_variables' => $validated['campos_variables'],
             'esPlantilla' => $validated['esPlantilla'] ?? false,
             'created_at' => now(),
             'updated_at' => now(),
@@ -77,14 +91,28 @@ class BiomecanicaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-        'parametros' => 'required|json',
-        'esPlantilla' => 'nullable|boolean',
+         $validated = $request->validate([
+            'id_informe'=> 'required|integer',
+            'nombre' => 'required|string',
+            'descripcion' => 'nullable|string',
+            'campos_sin_variables' => 'required|string',
+            'campos_con_variables' => 'required|string',
+            'campo_destino' => 'required|string',
+            'campos_variables' => 'required|json',
+            'parametros' => 'required|json',
+            'esPlantilla' => 'nullable|boolean',
         ]);
 
     $updated = DB::table('formulas_biomecanicas')
         ->where('id', $id)
         ->update([
+            'id_informe' => $validated['id_informe'],
+            'nombre' => $validated['nombre'],
+            'descripcion' => $validated['descripcion'] ?? null,
+            'campos_sin_variables' => $validated['campos_sin_variables'],
+            'campos_con_variables' => $validated['campos_con_variables'],
+            'campo_destino' => $validated['campo_destino'],
+            'campos_variables' => $validated['campos_variables'],
             'parametros' => $validated['parametros'],
             'updated_at' => now(),
         ]);
