@@ -82,7 +82,7 @@ function setearResultados() {
     const expresion = reemplazarValoresFormulas(formula.getAttribute("data-formula-expresion"));
     const inpt = formula.getAttribute("data-campo-destino");
     document.getElementById(inpt).value =eval(expresion);
-    
+    document.getElementById("resultado-"+ formula.getAttribute("data-formula-id")).innerText = eval(expresion);
     if(inpt.includes("mom1"))
     {
        document.querySelector('input[name="mom-1"]').value =eval(expresion);
@@ -152,7 +152,7 @@ function crearFormulaDiv({
 
         <div class="flex justify-between items-center">
             <div class="text-sm text-gray-600">Resultado:</div>
-            <div class="text-xl font-bold text-blue-600">${resultado}</div>
+            <div class="text-xl font-bold text-blue-600" id="resultado-${id}">${resultado}</div>
         </div>
     `;
 
@@ -393,6 +393,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 resultado: eval(formData.formula_sin_variables)
             });
             document.getElementById("formulas-interactivas").appendChild(divNuevo);
+            setearResultados(); // Actualizar los resultados de las fórmulas
             //limpiarCamposFormulario('formularioInformes');
             
         }, (error) => {

@@ -68,10 +68,10 @@
 
                     <div class="flex justify-between items-center">
                         <div class="text-sm text-gray-600">Resultado:</div>
-                        <div class="text-xl font-bold text-blue-600">
-                            @php
+                        <div class="text-xl font-bold text-blue-600" id="resultado-{{$formula->id}}">
+                            {{-- @php
                             echo eval("return $formula->formula_sin_variables;");
-                            @endphp
+                            @endphp --}}
                         </div>
                     </div>
                 </div>
