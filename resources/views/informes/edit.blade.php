@@ -607,7 +607,7 @@
                     <div id="interactiva-content" class="tab-panel">
                         @include("informes.partials.formulas_builder")
                         <br>
-                        @include("informes.partials.formulas_interactivas")
+                        @include("informes.partials.formulas_interactivas", ["formulas"=>$formulas])
 
                     </div>
                     <div id="ocupantes-content" class="tab-panel">

@@ -302,6 +302,7 @@ class InformeController extends Controller
          $pagos = DB::table("pagos")->select("pagos.id","concepto","beneficiario","importe","metodo_pago","estado","informe_id", "fecha")
          ->where("pagos.informe_id","=", $id)->get();
         $totalPagos = DB::table("informes_tiposInformes")->where("id_informe","=", $id)->sum("precio");
+        $formulas = DB::table("formulas_biomecanicas")->where("id_informe","=", $id)->get();
         //return $informe;
         return view("informes.edit",["informe" => $informe, "ocupantes_conductor" => $ocupantes_conductor
                 , "ocupantes_copiloto" => $ocupantes_copiloto,
@@ -317,6 +318,7 @@ class InformeController extends Controller
                 "pagos" => $pagos,
                 "tipos_informes_asociados" => $tipos_informes_asociados,
                 "totalPagos" => $totalPagos,
+                "formulas" => $formulas,
             ]);
     }
 

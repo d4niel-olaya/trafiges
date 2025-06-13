@@ -23,90 +23,61 @@
     <div class="bg-white rounded-lg shadow-lg p-6">
         <h3 class="text-xl font-semibold text-gray-900 mb-6">Fórmulas Creadas</h3>
         <div class="space-y-4" id="formulas-interactivas">
-            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <div class="flex justify-between items-start mb-3">
-                    <div class="flex-1">
-                        <h4 class="text-lg font-medium text-gray-900">Delta V1 Básico</h4>
-                        <p class="text-sm text-gray-600 mt-1">Cambio de velocidad del vehículo bala</p>
+
+            @foreach ($formulas as $formula)
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 formula" 
+                    data-formula-id="{{$formula->id}}" 
+                    data-formula-expresion="{{$formula->formula_con_variables}}" 
+                    data-campo-destino="{{$formula->campo_destino}}"
+                    data-campo-destino-alias="{{$formula->campo_destino_alias}}">
+                    
+                    <input type="hidden" name="formulas_interactivas[]">
+
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex-1">
+                            <h4 class="text-lg font-medium text-gray-900">{{$formula->nombre}}</h4>
+                            {{-- Mostramos el alias justo debajo del nombre --}}
+                            @if (!empty($formula->campo_destino_alias))
+                               <span class="block sm:inline bg-blue-100 text-blue-700 text-xs sm:text-sm font-medium px-2 py-1 rounded mt-2 sm:mt-0">
+                                Campo destino: {{$formula->campo_destino_alias}}
+                            </span>
+
+                            @endif
+                            <p class="text-sm text-gray-600 mt-1">{{$formula->descripcion}}</p>
+                        </div>
+                        <div class="flex gap-2"><button class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors" title="Copiar fórmula"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy h-4 w-4">
+                                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                                </svg></button><button class="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-100 rounded transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line h-4 w-4">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+                                </svg></button><button class="p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 h-4 w-4">
+                                    <path d="M3 6h18"></path>
+                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                                    <line x1="10" x2="10" y1="11" y2="17"></line>
+                                    <line x1="14" x2="14" y1="11" y2="17"></line>
+                                </svg></button>
+                        </div>
                     </div>
-                    <div class="flex gap-2"><button class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors" title="Copiar fórmula"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy h-4 w-4">
-                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
-                                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-                            </svg></button><button class="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-100 rounded transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line h-4 w-4">
-                                <path d="M12 20h9"></path>
-                                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
-                            </svg></button><button class="p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 h-4 w-4">
-                                <path d="M3 6h18"></path>
-                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                                <line x1="10" x2="10" y1="11" y2="17"></line>
-                                <line x1="14" x2="14" y1="11" y2="17"></line>
-                            </svg></button></div>
-                </div>
-                <div class="bg-white p-3 rounded border border-gray-200 mb-3">
-                    <div class="text-sm text-gray-600 mb-1">Expresión:</div><code class="text-sm text-gray-800 font-mono">-(mom2 * (1 + coefRestitucion) * (v1 - v2)) / (mom1 + mom2)</code>
-                </div>
-                <div class="flex justify-between items-center">
-                    <div class="text-sm text-gray-600">Resultado:</div>
-                    <div class="text-xl font-bold text-blue-600">-0.529903</div>
-                </div>
-            </div>
-            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <div class="flex justify-between items-start mb-3">
-                    <div class="flex-1">
-                        <h4 class="text-lg font-medium text-gray-900">Delta V2 Básico</h4>
-                        <p class="text-sm text-gray-600 mt-1">Cambio de velocidad del vehículo diana</p>
+
+                    <div class="bg-white p-3 rounded border border-gray-200 mb-3">
+                        <div class="text-sm text-gray-600 mb-1">Expresión:</div>
+                        <code class="text-sm text-gray-800 font-mono">{{$formula->formula_con_variables}}</code>
                     </div>
-                    <div class="flex gap-2"><button class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors" title="Copiar fórmula"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy h-4 w-4">
-                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
-                                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-                            </svg></button><button class="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-100 rounded transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line h-4 w-4">
-                                <path d="M12 20h9"></path>
-                                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
-                            </svg></button><button class="p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 h-4 w-4">
-                                <path d="M3 6h18"></path>
-                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                                <line x1="10" x2="10" y1="11" y2="17"></line>
-                                <line x1="14" x2="14" y1="11" y2="17"></line>
-                            </svg></button></div>
-                </div>
-                <div class="bg-white p-3 rounded border border-gray-200 mb-3">
-                    <div class="text-sm text-gray-600 mb-1">Expresión:</div><code class="text-sm text-gray-800 font-mono">(mom1 * (1 + coefRestitucion) * (v1 - v2)) / (mom1 + mom2)</code>
-                </div>
-                <div class="flex justify-between items-center">
-                    <div class="text-sm text-gray-600">Resultado:</div>
-                    <div class="text-xl font-bold text-blue-600">0.485097</div>
-                </div>
-            </div>
-            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <div class="flex justify-between items-start mb-3">
-                    <div class="flex-1">
-                        <h4 class="text-lg font-medium text-gray-900">Energía Cinética Total</h4>
-                        <p class="text-sm text-gray-600 mt-1">Energía cinética total antes del impacto</p>
+
+                    <div class="flex justify-between items-center">
+                        <div class="text-sm text-gray-600">Resultado:</div>
+                        <div class="text-xl font-bold text-blue-600">
+                            @php
+                            echo eval("return $formula->formula_sin_variables;");
+                            @endphp
+                        </div>
                     </div>
-                    <div class="flex gap-2"><button class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors" title="Copiar fórmula"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy h-4 w-4">
-                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
-                                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-                            </svg></button><button class="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-100 rounded transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line h-4 w-4">
-                                <path d="M12 20h9"></path>
-                                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
-                            </svg></button><button class="p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 h-4 w-4">
-                                <path d="M3 6h18"></path>
-                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                                <line x1="10" x2="10" y1="11" y2="17"></line>
-                                <line x1="14" x2="14" y1="11" y2="17"></line>
-                            </svg></button></div>
                 </div>
-                <div class="bg-white p-3 rounded border border-gray-200 mb-3">
-                    <div class="text-sm text-gray-600 mb-1">Expresión:</div><code class="text-sm text-gray-800 font-mono">0.5 * mom1 * Math.pow(v1/3.6, 2) + 0.5 * mom2 * Math.pow(v2/3.6, 2)</code>
-                </div>
-                <div class="flex justify-between items-center">
-                    <div class="text-sm text-gray-600">Resultado:</div>
-                    <div class="text-xl font-bold text-blue-600">25.993441</div>
-                </div>
-            </div>
+            @endforeach
+
+            
         </div>
     </div>
 </div>

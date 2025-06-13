@@ -1,12 +1,17 @@
 import {formularioAJson, inputsAJson, limpiarCamposFormulario, ValidarCampo, ValidarCampos} from './forms_utils.js';
 import AjaxHandler from './utils.js';
-import { CalcularMom1,CalcularMom2 } from './biomecanica.js';
+//import { CalcularMom1,CalcularMom2 } from './biomecanica.js';
 import {toggleOtrosInput} from './informes/index.js';
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
     //CalcularMom1();
     // CalcularMom2();
       toggleOtrosInput()
+    
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const ajaxHandler = new AjaxHandler(csrfToken);
     const btnGuardarCambios = document.getElementById("btnGuardarCambios");
@@ -15,11 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     inptMatricula.addEventListener('input', (e) => {
         document.querySelector('input[name="matricula-2"]').value = e.target.value;
     });
-    document.querySelector('input[name="tara-1"]').addEventListener('input', CalcularMom1);
-    document.querySelector('input[name="mom-1"]').addEventListener('input', CalcularMom1);
-    document.querySelector('input[name="ocupantes-1"]').addEventListener('input', CalcularMom1);
-    document.querySelector('input[name="tara-2"]').addEventListener('input', CalcularMom2);
-    document.querySelector('select[name="estado_via"]').addEventListener('change', toggleOtrosInput);
+    // document.querySelector('input[name="tara-1"]').addEventListener('input', CalcularMom1);
+    // document.querySelector('input[name="mom-1"]').addEventListener('input', CalcularMom1);
+    // document.querySelector('input[name="ocupantes-1"]').addEventListener('input', CalcularMom1);
+    // document.querySelector('input[name="tara-2"]').addEventListener('input', CalcularMom2);
+    // document.querySelector('select[name="estado_via"]').addEventListener('change', toggleOtrosInput);
      // autocomplete de clientes
 
      const $input = $("#nombreCliente");
@@ -86,8 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     ValidarCampo('nombreCliente', 'Debe seleccionar un cliente registrado.',true);
                     return; // Detiene el flujo si hay errores
         }
-        CalcularMom1();
-        CalcularMom2();
+        //setearResultados(); // asignar resultados de biomecánica a los campos del formulario
+       // CalcularMom1();
+        //CalcularMom2();
         const formData = {
             id: document.querySelector('input[name="id"]').value,
             matricula: document.querySelector('input[name="matricula"]').value,
@@ -194,6 +200,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ajaxHandler.sendRequest('/informes/update', formData, 'PATCH', true, true, (response) => {
             console.log(response); // Manejar la respuesta del servidor
             //limpiarCamposFormulario('formularioInformes');
+            //setearResultados()
+            const evento = new CustomEvent("formulaCalculada", {
+                detail: {
+                    resultado: true
+                }
+            });
+
+            document.dispatchEvent(evento);
         }, (error) => {
             console.error(error); // Manejar el error
         });

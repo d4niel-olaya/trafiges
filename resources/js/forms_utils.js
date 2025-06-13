@@ -309,3 +309,12 @@ export function MostrarMensajeExito(title,message) {
         icon: "success"
         });
 }
+
+export function MostrarMensaje(title,message, type = "success") {
+    // Mostrar alerta con SweetAlert2
+   Swal.fire({
+        title: title,
+        text: message,
+        icon: type
+        });
+}

@@ -1,4 +1,5 @@
 import AjaxHandler from '../utils.js';
+import { MostrarMensaje } from '../forms_utils.js';
    const array_pesoOcupantes = [{
 
         id: "peso_ocupantes1",
@@ -58,10 +59,122 @@ const inputData = [
     value: 0.7,
     alias:"coef_rozamiento_freno"
   }
+   ,{
+    id: "tara-2",
+    label: "Tara Vehiculo 2",
+    value: 0,
+    alias:"tara2"
+  },{
+    id: "tara-1",
+    label: "Tara Vehiculo 1",
+    value: 0,
+    alias:"tara1"
+  }
   
 ];
 
 
+function setearResultados() {
+  const formulas  = document.querySelectorAll('.formula');
+  formulas.forEach(formula => {
+
+
+    const expresion = reemplazarValoresFormulas(formula.getAttribute("data-formula-expresion"));
+    const inpt = formula.getAttribute("data-campo-destino");
+    document.getElementById(inpt).value =eval(expresion);
+    
+    if(inpt.includes("mom1"))
+    {
+       document.querySelector('input[name="mom-1"]').value =eval(expresion);
+    }
+
+    if(inpt.includes("mom2"))
+    {
+       document.querySelector('input[name="mom-2"]').value =eval(expresion);
+    }
+    console.log("Seteando resultado de la fórmula: " + inpt + " con valor: " + eval(expresion));
+  });
+
+}
+
+function crearFormulaDiv({
+    id,
+    formulaSinVariables,
+    campoDestino,
+    campoDestinoAlias,
+    nombre,
+    descripcion,
+    formulaConVariables,
+    resultado
+}) {
+    // Crear el contenedor principal
+    const div = document.createElement('div');
+    div.className = "bg-gray-50 p-4 rounded-lg border border-gray-200 formula";
+    div.setAttribute("data-formula-id", id);
+    div.setAttribute("data-formula-expresion", formulaConVariables);
+    div.setAttribute("data-campo-destino", campoDestino);
+    div.setAttribute("data-campo-destino-alias", campoDestinoAlias);
+
+    // Contenido HTML interno
+    div.innerHTML = `
+        <input type="hidden" name="formulas_interactivas[]">
+
+        <div class="flex justify-between items-start mb-3">
+            <div class="flex-1">
+                <h4 class="text-lg font-medium text-gray-900">${nombre}</h4>
+                ${campoDestinoAlias ? `
+                    <span class="block sm:inline bg-blue-100 text-blue-700 text-xs sm:text-sm font-medium px-2 py-1 rounded mt-2 sm:mt-0">
+                        Campo destino: ${campoDestinoAlias}
+                    </span>` : ''}
+                <p class="text-sm text-gray-600 mt-1">${descripcion}</p>
+            </div>
+              <div class="flex gap-2">
+              <button class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors" title="Copiar fórmula"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy h-4 w-4">
+                                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                                </svg></button><button class="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-100 rounded transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line h-4 w-4">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+                                </svg></button><button class="p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 h-4 w-4">
+                                    <path d="M3 6h18"></path>
+                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                                    <line x1="10" x2="10" y1="11" y2="17"></line>
+                                    <line x1="14" x2="14" y1="11" y2="17"></line>
+                                </svg></button>
+                </div>
+        </div>
+
+        <div class="bg-white p-3 rounded border border-gray-200 mb-3">
+            <div class="text-sm text-gray-600 mb-1">Expresión:</div>
+            <code class="text-sm text-gray-800 font-mono">${formulaConVariables}</code>
+        </div>
+
+        <div class="flex justify-between items-center">
+            <div class="text-sm text-gray-600">Resultado:</div>
+            <div class="text-xl font-bold text-blue-600">${resultado}</div>
+        </div>
+    `;
+
+    return div;
+}
+
+
+
+function reemplazarValoresFormulas(expresion) {
+  return expresion.replaceAll("coef_rozamiento_freno", document.getElementById("fm-coef_rozamiento_freno").value)
+        .replaceAll("coef_rozamiento", document.getElementById("fm-coef_rozamiento").value)
+        .replaceAll("coef_restitucion", document.getElementById("fm-coef_restitucion").value)
+        .replaceAll("v1", document.getElementById("fm-v1").value)
+        .replaceAll("v2", document.getElementById("fm-v2").value)
+        .replaceAll("mom1", document.getElementById("fm-mom1").value)
+        .replaceAll("mom2", document.getElementById("fm-mom2").value)
+        .replaceAll("peso_ocupantes1", obtenerPesoOcupantes1())
+        .replaceAll("peso_ocupantes2", obtenerPesoOcupantes2())
+        .replaceAll("tara1", document.getElementById("tara-1").value)
+        .replaceAll("tara2", document.getElementById("tara-2").value)
+
+}
 function setearValoresAsociados() {
   const select = document.getElementById("campo_asociado");
   for (let i = 0; i < inputData.length; i++) {
@@ -76,16 +189,8 @@ function setearValoresAsociados() {
 function probar(){
     try{
 
-        const expresion = document.getElementById("fm-test").value
-        .replaceAll("coef_rozamiento_freno", document.getElementById("fm-coef_rozamiento_freno").value)
-        .replaceAll("coef_rozamiento", document.getElementById("fm-coef_rozamiento").value)
-        .replaceAll("coef_restitucion", document.getElementById("fm-coef_restitucion").value)
-        .replaceAll("v1", document.getElementById("fm-v1").value)
-        .replaceAll("v2", document.getElementById("fm-v2").value)
-        .replaceAll("mom1", document.getElementById("fm-mom1").value)
-        .replaceAll("mom2", document.getElementById("fm-mom2").value)
-        .replaceAll("peso_ocupantes1", obtenerPesoOcupantes1())
-        .replaceAll("peso_ocupantes2", obtenerPesoOcupantes2());
+        const expresion = reemplazarValoresFormulas(document.getElementById("fm-test").value)
+        
         console.log(expresion);
         alert("El resultado de la expresión es: " + eval(expresion));
     }catch (error) {
@@ -176,9 +281,26 @@ function obtenerPesoOcupantes1() {
     return contador;
 }
 
+function esExpresionValida(expresion) {
+    try {
+        // Intentamos evaluar la expresión
+        eval(expresion);
+        return true; // Es válida
+    } catch (e) {
+        return false; // Hay un error (sintaxis, variables, etc.)
+    }
+}
+// Evento Personalizado para manejar el resultado de la fórmula calculada
+document.addEventListener("formulaCalculada", function(event) {
+  if(event.detail.resultado) {
+    setearResultados();
+  }
+});
+
 document.addEventListener("DOMContentLoaded", function() {
     // Obtener todos los elementos con la clase 'formula-interactiva'
     setearValoresAsociados();
+    setearResultados(); // Setear los resultados iniciales de las fórmulas
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const ajaxHandler = new AjaxHandler(csrfToken);
     const formulas = document.getElementById("variables_formulas");
@@ -205,9 +327,19 @@ document.addEventListener("DOMContentLoaded", function() {
         const nombre = document.getElementById("fm-nombre").value;
         const descripcion = document.getElementById("fm-descripcion").value;
         const campoAsociado = document.getElementById("campo_asociado").value;
+          // Obtener el elemento select por su ID
+        const select = document.getElementById("campo_asociado");
 
+        // Obtener el texto visible del option seleccionado
+        const textoVisible = select.options[select.selectedIndex].text;
+        const expresionEval= reemplazarValoresFormulas(expresion)
         if (!expresion || !nombre) {
             alert("Por favor, completa todos los campos requeridos.");
+            return;
+        }
+
+        if( !esExpresionValida(expresionEval)) {
+            MostrarMensaje("Error en la fórmula","La expresión ingresada no es válida. Por favor, revisa la sintaxis y asegúrate de que todas las variables estén definidas.", "error");
             return;
         }
 
@@ -223,10 +355,13 @@ document.addEventListener("DOMContentLoaded", function() {
                                   .replaceAll("mom1", document.getElementById("fm-mom1").value)
                                   .replaceAll("mom2", document.getElementById("fm-mom2").value)
                                   .replaceAll("peso_ocupantes1", obtenerPesoOcupantes1())
-                                  .replaceAll("peso_ocupantes2", obtenerPesoOcupantes2()),
+                                  .replaceAll("peso_ocupantes2", obtenerPesoOcupantes2())
+                                  .replaceAll("tara1", document.getElementById("tara-1").value)
+                                  .replaceAll("tara2", document.getElementById("tara-2").value),
             nombre: nombre,
             descripcion: descripcion,
             campo_destino: campoAsociado,
+            campo_destino_alias : textoVisible,
             parametros: JSON.stringify({
 
               valor : 10
@@ -247,6 +382,17 @@ document.addEventListener("DOMContentLoaded", function() {
         
           ajaxHandler.sendRequest('/biomecanica', formData, 'POST', true, true, (response) => {
             console.log(response); // Manejar la respuesta del servidor
+            const divNuevo = crearFormulaDiv({
+                id: response.id,
+                formulaSinVariables: formData.formula_sin_variables,
+                campoDestino: formData.campo_destino,
+                campoDestinoAlias: formData.campo_destino_alias,
+                nombre: formData.nombre,
+                descripcion: formData.descripcion,
+                formulaConVariables: formData.formula_con_variables,
+                resultado: eval(formData.formula_sin_variables)
+            });
+            document.getElementById("formulas-interactivas").appendChild(divNuevo);
             //limpiarCamposFormulario('formularioInformes');
             
         }, (error) => {
