@@ -13,7 +13,7 @@ class BiomecanicaController extends Controller
     {
         //
         $formulas = DB::table('formulas_biomecanicas')->get();
-        return view("biomecanica.index", compact('formulas'));
+        return view("biomecanica.index2", compact('formulas'));
     }
 
     /**

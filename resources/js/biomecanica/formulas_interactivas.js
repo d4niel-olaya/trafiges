@@ -81,14 +81,16 @@ function setearResultados() {
 
     const expresion = reemplazarValoresFormulas(formula.getAttribute("data-formula-expresion"));
     const inpt = formula.getAttribute("data-campo-destino");
-    document.getElementById(inpt).value =eval(expresion);
+    if(document.getElementById(inpt) !== null) {
+      document.getElementById(inpt).value =eval(expresion);
+    }
     document.getElementById("resultado-"+ formula.getAttribute("data-formula-id")).innerText = eval(expresion);
-    if(inpt.includes("mom1"))
+    if(inpt.includes("mom1") && document.querySelector('input[name="mom-1"]') !== null)
     {
        document.querySelector('input[name="mom-1"]').value =eval(expresion);
     }
 
-    if(inpt.includes("mom2"))
+    if(inpt.includes("mom2")  && document.querySelector('input[name="mom-2"]') !== null)
     {
        document.querySelector('input[name="mom-2"]').value =eval(expresion);
     }
@@ -171,8 +173,8 @@ function reemplazarValoresFormulas(expresion) {
         .replaceAll("mom2", document.getElementById("fm-mom2").value)
         .replaceAll("peso_ocupantes1", obtenerPesoOcupantes1())
         .replaceAll("peso_ocupantes2", obtenerPesoOcupantes2())
-        .replaceAll("tara1", document.getElementById("tara-1").value)
-        .replaceAll("tara2", document.getElementById("tara-2").value)
+        .replaceAll("tara1", document.getElementById("tara-1")?.value || 0)
+        .replaceAll("tara2", document.getElementById("tara-2")?.value || 0)
 
 }
 function setearValoresAsociados() {
@@ -230,7 +232,7 @@ function crearBotonFormula(objeto) {
    // console.log(objeto);
     const boton = document.createElement("button");
     boton.className = "text-left p-2 bg-blue-50 hover:bg-blue-100 rounded border border-blue-200 transition-colors";
-    const valorInpt = document.getElementById(objeto.id).value;
+    const valorInpt = document.getElementById(objeto.id)?.value || '';
     boton.innerHTML = `
                     <div class="font-mono text-sm text-blue-700">${objeto.alias}</div>
                     <div class="text-xs text-gray-600">${objeto.label}</div>
@@ -259,22 +261,35 @@ function crearBotonFormulaSinId(objeto) {
     return boton;
 
 }
-
+function getPeso(inputName) {
+    const input = document.querySelector(`input[name="${inputName}"]`);
+    const valor = parseFloat(input?.value);
+    return isNaN(valor) ? 0 : valor;
+}
 function obtenerPesoOcupantes2() {
-    const peso_conductor = parseFloat(document.querySelector('input[name="conductor_peso"]').value) || 0;
-    const peso_copiloto = parseFloat(document.querySelector('input[name="copiloto_peso"]').value) || 0;
-    const peso_detras_conductor = parseFloat(document.querySelector('input[name="detras_conductor_peso"]').value) || 0;
-    const peso_detras_copiloto = parseFloat(document.querySelector('input[name="detras_copiloto_peso"]').value) || 0;
-    const peso_detras_centro = parseFloat(document.querySelector('input[name="detras_centro_peso"]').value) || 0;
-    const peso_detras_3 = parseFloat(document.querySelector('input[name="detras_3_peso"]').value) || 0;
-    const peso_detras_4 = parseFloat(document.querySelector('input[name="detras_4_peso"]').value) || 0;
+    const peso_conductor = getPeso("conductor_peso");
+    const peso_copiloto = getPeso("copiloto_peso");
+    const peso_detras_conductor = getPeso("detras_conductor_peso");
+    const peso_detras_copiloto = getPeso("detras_copiloto_peso");
+    const peso_detras_centro = getPeso("detras_centro_peso");
+    const peso_detras_3 = getPeso("detras_3_peso");
+    const peso_detras_4 = getPeso("detras_4_peso");
     return peso_conductor + peso_copiloto + peso_detras_conductor + peso_detras_copiloto + peso_detras_centro + peso_detras_3 + peso_detras_4;
 }
 
 function obtenerPesoOcupantes1() {
     let pesoOcupantes = 0;
     let contador = 0;
-    const pesoOcupantesArray = JSON.parse(document.getElementById("pesos-ocupantes-vh1").value) || [{peso: 0}];
+    let valorCampo = document.getElementById("pesos-ocupantes-vh1")?.value;
+
+    let pesoOcupantesArray;
+
+    try {
+        pesoOcupantesArray = JSON.parse(valorCampo || '[{"peso": 0}]');
+    } catch (e) {
+        console.warn("Error al parsear JSON:", e);
+        pesoOcupantesArray = [{ peso: 0 }];
+    }
     for (let i = 0; i < pesoOcupantesArray.length; i++) {
         contador += parseInt(pesoOcupantesArray[i].peso) || 0;
     }
@@ -310,7 +325,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // pintar los botones de las fórmulas
     for(let i = 0; i <= inputData.length - 1; i++) {
         const boton = crearBotonFormula(inputData[i]);
-        document.getElementById(inputData[i].id).addEventListener("input",pintarBotonesFormulas);
+        if(document.getElementById(inputData[i].id) !== null)
+        {
+
+          document.getElementById(inputData[i].id).addEventListener("input",pintarBotonesFormulas);
+        }
         // Agregar el botón al contenedor de fórmulas
         formulas.appendChild(boton);
     }
