@@ -59,76 +59,156 @@
         <div class="bg-white rounded-lg shadow-lg p-6">
             <h3 class="text-xl font-semibold text-gray-900 mb-6 border-b border-gray-200 pb-3">Resultados Sin Desplazamiento Postcolisivo</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-blue-50 p-4 rounded-lg"><label class="block text-sm font-medium text-blue-900 mb-2">DELTA V1 (Vehículo Bala) [km/h]</label>
-                    <div class="text-2xl font-bold text-blue-700">-9.311</div>
+                 <div class="bg-blue-50 p-4 rounded-lg">
+                    <label class="block text-sm font-medium text-blue-900 mb-2">DELTA V1 (Vehículo Bala) [km/h]</label>
+                    <input type="text" id="fm-deltav1" readonly class="text-2xl font-bold text-blue-700 bg-transparent border-none p-0 focus:ring-0 focus:outline-none w-full" value="-9.311">
                 </div>
-                <div class="bg-red-50 p-4 rounded-lg"><label class="block text-sm font-medium text-red-900 mb-2">DELTA V2 (Vehículo Diana) [km/h]</label>
-                    <div class="text-2xl font-bold text-red-700">8.524</div>
+                 <div class="bg-red-50 p-4 rounded-lg">
+                    <label class="block text-sm font-medium text-red-900 mb-2">DELTA V2 (Vehículo Diana) [km/h]</label>
+                    <input type="text" readonly  id="fm-deltav2" class="text-2xl font-bold text-red-700 bg-transparent border-none p-0 focus:ring-0 focus:outline-none w-full" value="8.524">
                 </div>
-                <div class="bg-orange-50 p-4 rounded-lg"><label class="block text-sm font-medium text-orange-900 mb-2">Aceleración Máxima [m/seg²]</label>
-                    <div class="text-2xl font-bold text-orange-700">47.355</div>
+                <div class="bg-orange-50 p-4 rounded-lg">
+                   <label class="block text-sm font-medium text-orange-900 mb-2">Aceleración Máxima [m/seg²]</label>
+                    <input type="text" readonly  id="fm-aceleracion-maxima" class="text-2xl font-bold text-orange-700 bg-transparent border-none p-0 focus:ring-0 focus:outline-none w-full" value="47.355">
                 </div>
-                <div class="bg-purple-50 p-4 rounded-lg"><label class="block text-sm font-medium text-purple-900 mb-2">Aceleración Gravitatoria [g's]</label>
-                    <div class="text-2xl font-bold text-purple-700">4.827</div>
+                <div class="bg-purple-50 p-4 rounded-lg">
+                    <label for="fm-aceleracion" class="block text-sm font-medium text-purple-900 mb-2">Aceleración Gravitatoria [g's]</label>
+                    <input id="fm-aceleracion" type="text" value="4.827" readonly 
+                            class="w-full text-2xl font-bold text-purple-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
+                 </div>
+
+                <div class="bg-green-50 p-4 rounded-lg">
+                <label for="fm-fuerza" class="block text-sm font-medium text-green-900 mb-2">Fuerza de Inercia [N]</label>
+                <input id="fm-fuerza" type="text" value="331.483"
+                        class="w-full text-2xl font-bold text-green-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                 </div>
-                <div class="bg-green-50 p-4 rounded-lg"><label class="block text-sm font-medium text-green-900 mb-2">Fuerza de Inercia [N]</label>
-                    <div class="text-2xl font-bold text-green-700">331.483</div>
+
+                <div class="bg-indigo-50 p-4 rounded-lg">
+                <label for="fm-peso-cabeza" class="block text-sm font-medium text-indigo-900 mb-2">Aumento Peso Cabeza [kg]</label>
+                <input id="fm-peso-cabeza" type="text" value="33.790"
+                        class="w-full text-2xl font-bold text-indigo-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                 </div>
-                <div class="bg-indigo-50 p-4 rounded-lg"><label class="block text-sm font-medium text-indigo-900 mb-2">Aumento Peso Cabeza [kg]</label>
-                    <div class="text-2xl font-bold text-indigo-700">33.790</div>
-                </div>
-                <div class="bg-pink-50 p-4 rounded-lg md:col-span-2 lg:col-span-3"><label class="block text-sm font-medium text-pink-900 mb-2">NIC (Criterio de Lesiones en el Cuello)</label>
-                    <div class="text-2xl font-bold text-pink-700">15.157</div>
+
+                <div class="bg-pink-50 p-4 rounded-lg md:col-span-2 lg:col-span-3">
+                <label for="fm-nic" class="block text-sm font-medium text-pink-900 mb-2">NIC (Criterio de Lesiones en el Cuello)</label>
+                <input id="fm-nic" type="text" value="15.157" readonly 
+                        class="w-full text-2xl font-bold text-pink-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                 </div>
             </div>
         </div>
         <div class="bg-white rounded-lg shadow-lg p-6">
             <h3 class="text-xl font-semibold text-gray-900 mb-6 border-b border-gray-200 pb-3">Estudios Con Desplazamiento Postcolisivo</h3>
-            <div class="mb-8">
-                <h4 class="text-lg font-medium text-gray-800 mb-4 bg-gray-100 p-3 rounded">Resultados Sin Acción del Freno (Rodadura Libre o Embrague Pisado)</h4>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="bg-yellow-50 p-4 rounded-lg"><label class="block text-sm font-medium text-yellow-900 mb-2">DELTA V2 Desplazamiento con Embrague [km/h]</label>
-                        <div class="text-xl font-bold text-yellow-700">8.460</div>
+             <div class="mb-8">
+                    <h4 class="text-lg font-medium text-gray-800 mb-4 bg-gray-100 p-3 rounded">
+                        Resultados Sin Acción del Freno (Rodadura Libre o Embrague Pisado)
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                    <label for="fm-delta-v2" class="block text-sm font-medium text-yellow-900 mb-2">
+                        DELTA V2 Desplazamiento con Embrague [km/h]
+                    </label>
+                    <input id="fm-delta-v2" type="text" value="8.460" readonly
+                            class="w-full text-xl font-bold text-yellow-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
-                    <div class="bg-yellow-50 p-4 rounded-lg"><label class="block text-sm font-medium text-yellow-900 mb-2">Aceleración Máxima [m/seg²]</label>
-                        <div class="text-xl font-bold text-yellow-700">46.998</div>
+
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                    <label for="fm-aceleracion-max" class="block text-sm font-medium text-yellow-900 mb-2">
+                        Aceleración Máxima [m/seg²]
+                    </label>
+                    <input id="fm-aceleracion-max" type="text" value="46.998" readonly
+                            class="w-full text-xl font-bold text-yellow-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
-                    <div class="bg-yellow-50 p-4 rounded-lg"><label class="block text-sm font-medium text-yellow-900 mb-2">Aceleración Gravitatoria [g's]</label>
-                        <div class="text-xl font-bold text-yellow-700">4.791</div>
+
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                    <label for="fm-aceleracion-g" class="block text-sm font-medium text-yellow-900 mb-2">
+                        Aceleración Gravitatoria [g's]
+                    </label>
+                    <input id="fm-aceleracion-g" type="text" value="4.791" readonly
+                            class="w-full text-xl font-bold text-yellow-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
-                    <div class="bg-yellow-50 p-4 rounded-lg"><label class="block text-sm font-medium text-yellow-900 mb-2">Fuerza de Inercia [N]</label>
-                        <div class="text-xl font-bold text-yellow-700">328.988</div>
+
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                    <label for="fm-fuerza-inercia" class="block text-sm font-medium text-yellow-900 mb-2">
+                        Fuerza de Inercia [N]
+                    </label>
+                    <input id="fm-fuerza-inercia" type="text" value="328.988" readonly
+                            class="w-full text-xl font-bold text-yellow-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
-                    <div class="bg-yellow-50 p-4 rounded-lg"><label class="block text-sm font-medium text-yellow-900 mb-2">Aumento Peso Cabeza [kg]</label>
-                        <div class="text-xl font-bold text-yellow-700">33.536</div>
+
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                    <label for="fm-peso-cabeza-aumento" class="block text-sm font-medium text-yellow-900 mb-2">
+                        Aumento Peso Cabeza [kg]
+                    </label>
+                    <input id="fm-peso-cabeza-aumento" type="text" value="33.536" readonly
+                            class="w-full text-xl font-bold text-yellow-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
-                    <div class="bg-yellow-50 p-4 rounded-lg"><label class="block text-sm font-medium text-yellow-900 mb-2">NIC</label>
-                        <div class="text-xl font-bold text-yellow-700">15.043</div>
+
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                    <label for="fm-nic-sin-freno" class="block text-sm font-medium text-yellow-900 mb-2">
+                        NIC
+                    </label>
+                    <input id="fm-nic-sin-freno" type="text" value="15.043" readonly
+                            class="w-full text-xl font-bold text-yellow-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
+
                 </div>
             </div>
+
             <div>
                 <h4 class="text-lg font-medium text-gray-800 mb-4 bg-gray-100 p-3 rounded">Resultados Con Acción del Freno</h4>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="bg-red-50 p-4 rounded-lg"><label class="block text-sm font-medium text-red-900 mb-2">DELTA V2 con Freno Activado [km/h]</label>
-                        <div class="text-xl font-bold text-red-700">4.669</div>
+
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <label for="fm-delta-v2-freno" class="block text-sm font-medium text-red-900 mb-2">
+                        DELTA V2 con Freno Activado [km/h]
+                        </label>
+                        <input id="fm-delta-v2-freno" type="text" value="4.669" readonly
+                            class="w-full text-xl font-bold text-red-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
-                    <div class="bg-red-50 p-4 rounded-lg"><label class="block text-sm font-medium text-red-900 mb-2">Aceleración Máxima [m/seg²]</label>
-                        <div class="text-xl font-bold text-red-700">25.937</div>
+
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <label for="fm-aceleracion-max-freno" class="block text-sm font-medium text-red-900 mb-2">
+                        Aceleración Máxima [m/seg²]
+                        </label>
+                        <input id="fm-aceleracion-max-freno" type="text" value="25.937" readonly
+                            class="w-full text-xl font-bold text-red-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
-                    <div class="bg-red-50 p-4 rounded-lg"><label class="block text-sm font-medium text-red-900 mb-2">Aceleración Gravitatoria [g's]</label>
-                        <div class="text-xl font-bold text-red-700">2.644</div>
+
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <label for="fm-aceleracion-g-freno" class="block text-sm font-medium text-red-900 mb-2">
+                        Aceleración Gravitatoria [g's]
+                        </label>
+                        <input id="fm-aceleracion-g-freno" type="text" value="2.644" readonly
+                            class="w-full text-xl font-bold text-red-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
-                    <div class="bg-red-50 p-4 rounded-lg"><label class="block text-sm font-medium text-red-900 mb-2">Fuerza de Inercia [N]</label>
-                        <div class="text-xl font-bold text-red-700">181.561</div>
+
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <label for="fm-fuerza-inercia-freno" class="block text-sm font-medium text-red-900 mb-2">
+                        Fuerza de Inercia [N]
+                        </label>
+                        <input id="fm-fuerza-inercia-freno" type="text" value="181.561" readonly
+                            class="w-full text-xl font-bold text-red-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
-                    <div class="bg-red-50 p-4 rounded-lg"><label class="block text-sm font-medium text-red-900 mb-2">Aumento Peso Cabeza [kg]</label>
-                        <div class="text-xl font-bold text-red-700">18.508</div>
+
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <label for="fm-peso-cabeza-freno" class="block text-sm font-medium text-red-900 mb-2">
+                        Aumento Peso Cabeza [kg]
+                        </label>
+                        <input id="fm-peso-cabeza-freno" type="text" value="18.508" readonly
+                            class="w-full text-xl font-bold text-red-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
-                    <div class="bg-red-50 p-4 rounded-lg"><label class="block text-sm font-medium text-red-900 mb-2">NIC</label>
-                        <div class="text-xl font-bold text-red-700">8.302</div>
+
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <label for="fm-nic-freno" class="block text-sm font-medium text-red-900 mb-2">
+                        NIC
+                        </label>
+                        <input id="fm-nic-freno" type="text" value="8.302" readonly
+                            class="w-full text-xl font-bold text-red-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
-                </div>
+
+                    </div>
+
             </div>
         </div>
     </div>

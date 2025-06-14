@@ -73,6 +73,84 @@ const inputData = [
   
 ];
 
+function calculosExcel()
+{
+  // ENTRADAS
+const V1 = 12; // km/h - Velocidad vehículo Bala
+const V2 = 3;  // km/h - Velocidad vehículo Diana
+const M1 = 1375; // kg - Masa vehículo Bala
+const M2 = 1502; // kg - Masa vehículo Diana
+const e = 0.45; // Coeficiente de restitución
+const g = 9.81; // gravedad m/s²
+const tiempoImpacto = 0.05; // tiempo de impacto en segundos
+const masaCabeza = 7; // kg - masa estimada cabeza
+const rozamientoLibre = 0.015;
+const rozamientoFreno = 0.7;
+const distanciaDesplazamiento = 0.1; // m - desplazamiento estimado
+
+// Conversión a m/s
+const V1_ms = V1 / 3.6;
+const V2_ms = V2 / 3.6;
+
+// DELTAS (Sin desplazamiento)
+const deltaV1 = ((1 + e) * (M2 * (V2_ms - V1_ms)) / (M1 + M2)) * 3.6; // km/h
+const deltaV2 = ((1 + e) * (M1 * (V1_ms - V2_ms)) / (M1 + M2)) * 3.6; // km/h
+
+// Aceleración máxima del vehículo Diana (sin desplazamiento)
+const aceleracionMax = (deltaV2 / 3.6) / tiempoImpacto; // m/s²
+const aceleracionGs = aceleracionMax / g;
+
+// Fuerza de inercia y aumento peso cabeza
+const fuerzaInercial = aceleracionMax * masaCabeza; // N
+const pesoCabezaAumentado = fuerzaInercial / 9.8; // kg
+
+// NIC (lesión en cuello)
+const NIC = (aceleracionMax * 0.2) + Math.pow(deltaV2 / 3.6, 2);
+
+// DESPLAZAMIENTO CON EMBRAGUE (rozamiento libre)
+const deltaV2_embrague = deltaV2 - (rozamientoLibre * g * distanciaDesplazamiento * 3.6);
+const aceleracionMaxEmbrague = (deltaV2_embrague / 3.6) / tiempoImpacto;
+const aceleracionGsEmbrague = aceleracionMaxEmbrague / g;
+const fuerzaInercialEmbrague = aceleracionMaxEmbrague * masaCabeza;
+const pesoCabezaEmbrague = fuerzaInercialEmbrague / 9.8;
+const NIC_Embrague = (aceleracionMaxEmbrague * 0.2) + Math.pow(deltaV2_embrague / 3.6, 2);
+
+// DESPLAZAMIENTO CON FRENO (rozamiento alto)
+const deltaV2_freno = deltaV2 - (rozamientoFreno * g * distanciaDesplazamiento * 3.6);
+const aceleracionMaxFreno = (deltaV2_freno / 3.6) / tiempoImpacto;
+const aceleracionGsFreno = aceleracionMaxFreno / g;
+const fuerzaInercialFreno = aceleracionMaxFreno * masaCabeza;
+const pesoCabezaFreno = fuerzaInercialFreno / 9.8;
+const NIC_Freno = (aceleracionMaxFreno * 0.2) + Math.pow(deltaV2_freno / 3.6, 2);
+
+// RESULTADOS
+console.log("=== RESULTADOS SIN DESPLAZAMIENTO ===");
+console.log("Delta V1 (vehículo Bala):", deltaV1.toFixed(2), "km/h");
+console.log("Delta V2 (vehículo Diana):", deltaV2.toFixed(2), "km/h");
+console.log("Aceleración máxima:", aceleracionMax.toFixed(2), "m/s²");
+console.log("Aceleración en g's:", aceleracionGs.toFixed(2));
+console.log("Fuerza de inercia:", fuerzaInercial.toFixed(2), "N");
+console.log("Aumento peso cabeza:", pesoCabezaAumentado.toFixed(2), "kg");
+console.log("NIC (lesión cuello):", NIC.toFixed(2));
+
+console.log("\n=== DESPLAZAMIENTO CON EMBRAGUE (μ = 0.015) ===");
+console.log("Delta V2:", deltaV2_embrague.toFixed(2), "km/h");
+console.log("Aceleración máxima:", aceleracionMaxEmbrague.toFixed(2), "m/s²");
+console.log("Aceleración en g's:", aceleracionGsEmbrague.toFixed(2));
+console.log("Fuerza de inercia:", fuerzaInercialEmbrague.toFixed(2), "N");
+console.log("Aumento peso cabeza:", pesoCabezaEmbrague.toFixed(2), "kg");
+console.log("NIC:", NIC_Embrague.toFixed(2));
+
+console.log("\n=== DESPLAZAMIENTO CON FRENO (μ = 0.7) ===");
+console.log("Delta V2:", deltaV2_freno.toFixed(2), "km/h");
+console.log("Aceleración máxima:", aceleracionMaxFreno.toFixed(2), "m/s²");
+console.log("Aceleración en g's:", aceleracionGsFreno.toFixed(2));
+console.log("Fuerza de inercia:", fuerzaInercialFreno.toFixed(2), "N");
+console.log("Aumento peso cabeza:", pesoCabezaFreno.toFixed(2), "kg");
+console.log("NIC:", NIC_Freno.toFixed(2));
+
+}
+
 
 function setearResultados() {
   const formulas  = document.querySelectorAll('.formula');
@@ -315,6 +393,7 @@ document.addEventListener("formulaCalculada", function(event) {
 document.addEventListener("DOMContentLoaded", function() {
     // Obtener todos los elementos con la clase 'formula-interactiva'
     setearValoresAsociados();
+    calculosExcel(); // Ejecutar los cálculos de ejemplo
     setearResultados(); // Setear los resultados iniciales de las fórmulas
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const ajaxHandler = new AjaxHandler(csrfToken);
