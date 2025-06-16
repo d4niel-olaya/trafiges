@@ -65,6 +65,10 @@ Route::middleware(['auth'])->group(function () {
     // 🔹 Biomecánica
     Route::resource('biomecanica', BiomecanicaController::class)->middleware('role:administrador|perito');
 
+     Route::middleware('role:administrador|perito')->group(function () {
+            Route::post("/biomecanica/base", [BiomecanicaController::class, 'store_formula_base']);
+     });
+
     // 🔹 Documentación
     Route::resource('documentacion', DocumentacionController::class);
 

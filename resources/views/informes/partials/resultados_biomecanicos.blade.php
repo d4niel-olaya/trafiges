@@ -33,26 +33,35 @@
             <h3 class="text-xl font-semibold text-gray-900 mb-6 border-b border-gray-200 pb-3">Datos Necesarios</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div><label class="block text-sm font-medium text-gray-700 mb-2">V1 (Velocidad de vehículo Bala) - Estimada entre 12-16 [km/h]</label>
-                    <input type="number" id="fm-v1" step="0.1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="12.3"><span class="text-xs text-gray-500">km/h</span>
+                    <input type="number" id="fm-v1" step="0.1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0"><span class="text-xs text-gray-500">km/h</span>
                 </div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-2">V2 (Velocidad de vehículo Diana) - Habitualmente detenido [km/h]</label>
                     <input type="number" id="fm-v2" step="0.1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0"><span class="text-xs text-gray-500">km/h</span></div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-2">MOM 1 (Masa en Orden de Marcha vehículo Bala) [Kg]</label>
-                    <input type="number" id="fm-mom1" disabled class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed bg-gray-100" value="1375" >
+                  
+                    @if( request()->is('informes/*'))
+                        <input type="number" id="fm-mom1" disabled class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed bg-gray-100" value="0" >
+                    @else
+                        <input type="number" id="fm-mom1"  class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0" >
+                    @endif
                     <span class="text-xs text-gray-500">Kg</span>
                 </div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-2">MOM 2 (Masa en Orden de Marcha vehículo Diana) [Kg]</label>
-                    <input type="number" id="fm-mom2" disabled class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed bg-gray-100" value="1502">
+                    @if( request()->is('informes/*'))
+                        <input type="number" id="fm-mom2" disabled class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed bg-gray-100" value="0">
+                    @else
+                        <input type="number" id="fm-mom2"  class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0">
+                    @endif
                     <span class="text-xs text-gray-500">Kg</span>
                 </div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-2">Coeficiente de Restitución (e = 0,25-0,45; e medio = 0,31)</label>
-                    <input type="number" id="fm-coef_restitucion" step="0.01" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0.45">
+                    <input type="number" id="fm-coef_restitucion" step="0.01" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0.">
                 </div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-2">Coeficiente de Rozamiento Libre (μ = 0,015)</label>
-                    <input type="number" id="fm-coef_rozamiento" step="0.001" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0.015">
+                    <input type="number" id="fm-coef_rozamiento" step="0.001" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0">
                 </div>
                 <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-2">Coeficiente de Rozamiento con Freno (μ = 0,7)</label>
-                    <input type="number" id="fm-coef_rozamiento_freno" step="0.1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0.7">
+                    <input type="number" id="fm-coef_rozamiento_freno" step="0.1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="0">
                 </div>
             </div>
         </div>
@@ -61,37 +70,37 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                  <div class="bg-blue-50 p-4 rounded-lg">
                     <label class="block text-sm font-medium text-blue-900 mb-2">DELTA V1 (Vehículo Bala) [km/h]</label>
-                    <input type="text" id="fm-deltav1" readonly class="text-2xl font-bold text-blue-700 bg-transparent border-none p-0 focus:ring-0 focus:outline-none w-full" value="-9.311">
+                    <input type="number" id="fm-deltav1" readonly class="text-2xl font-bold text-blue-700 bg-transparent border-none p-0 focus:ring-0 focus:outline-none w-full" value="0">
                 </div>
                  <div class="bg-red-50 p-4 rounded-lg">
                     <label class="block text-sm font-medium text-red-900 mb-2">DELTA V2 (Vehículo Diana) [km/h]</label>
-                    <input type="text" readonly  id="fm-deltav2" class="text-2xl font-bold text-red-700 bg-transparent border-none p-0 focus:ring-0 focus:outline-none w-full" value="8.524">
+                    <input type="number" readonly  id="fm-deltav2" class="text-2xl font-bold text-red-700 bg-transparent border-none p-0 focus:ring-0 focus:outline-none w-full" value="0">
                 </div>
                 <div class="bg-orange-50 p-4 rounded-lg">
                    <label class="block text-sm font-medium text-orange-900 mb-2">Aceleración Máxima [m/seg²]</label>
-                    <input type="text" readonly  id="fm-aceleracion-maxima" class="text-2xl font-bold text-orange-700 bg-transparent border-none p-0 focus:ring-0 focus:outline-none w-full" value="47.355">
+                    <input type="number" readonly  id="fm-aceleracion-maxima" class="text-2xl font-bold text-orange-700 bg-transparent border-none p-0 focus:ring-0 focus:outline-none w-full" value="0">
                 </div>
                 <div class="bg-purple-50 p-4 rounded-lg">
                     <label for="fm-aceleracion" class="block text-sm font-medium text-purple-900 mb-2">Aceleración Gravitatoria [g's]</label>
-                    <input id="fm-aceleracion" type="text" value="4.827" readonly 
+                    <input id="fm-aceleracion" type="number" value="0" readonly 
                             class="w-full text-2xl font-bold text-purple-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                  </div>
 
                 <div class="bg-green-50 p-4 rounded-lg">
                 <label for="fm-fuerza" class="block text-sm font-medium text-green-900 mb-2">Fuerza de Inercia [N]</label>
-                <input id="fm-fuerza" type="text" value="331.483"
+                <input id="fm-fuerza" type="number" value="0"
                         class="w-full text-2xl font-bold text-green-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                 </div>
 
                 <div class="bg-indigo-50 p-4 rounded-lg">
                 <label for="fm-peso-cabeza" class="block text-sm font-medium text-indigo-900 mb-2">Aumento Peso Cabeza [kg]</label>
-                <input id="fm-peso-cabeza" type="text" value="33.790"
+                <input id="fm-peso-cabeza" type="number" value="0"
                         class="w-full text-2xl font-bold text-indigo-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                 </div>
 
                 <div class="bg-pink-50 p-4 rounded-lg md:col-span-2 lg:col-span-3">
                 <label for="fm-nic" class="block text-sm font-medium text-pink-900 mb-2">NIC (Criterio de Lesiones en el Cuello)</label>
-                <input id="fm-nic" type="text" value="15.157" readonly 
+                <input id="fm-nic" type="number" value="0" readonly 
                         class="w-full text-2xl font-bold text-pink-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                 </div>
             </div>
@@ -108,7 +117,7 @@
                     <label for="fm-delta-v2" class="block text-sm font-medium text-yellow-900 mb-2">
                         DELTA V2 Desplazamiento con Embrague [km/h]
                     </label>
-                    <input id="fm-delta-v2" type="text" value="8.460" readonly
+                    <input id="fm-delta-v2" type="number" value="0" readonly
                             class="w-full text-xl font-bold text-yellow-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
 
@@ -116,7 +125,7 @@
                     <label for="fm-aceleracion-max" class="block text-sm font-medium text-yellow-900 mb-2">
                         Aceleración Máxima [m/seg²]
                     </label>
-                    <input id="fm-aceleracion-max" type="text" value="46.998" readonly
+                    <input id="fm-aceleracion-max" type="number" value="0" readonly
                             class="w-full text-xl font-bold text-yellow-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
 
@@ -124,7 +133,7 @@
                     <label for="fm-aceleracion-g" class="block text-sm font-medium text-yellow-900 mb-2">
                         Aceleración Gravitatoria [g's]
                     </label>
-                    <input id="fm-aceleracion-g" type="text" value="4.791" readonly
+                    <input id="fm-aceleracion-g" type="number" value="0" readonly
                             class="w-full text-xl font-bold text-yellow-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
 
@@ -132,7 +141,7 @@
                     <label for="fm-fuerza-inercia" class="block text-sm font-medium text-yellow-900 mb-2">
                         Fuerza de Inercia [N]
                     </label>
-                    <input id="fm-fuerza-inercia" type="text" value="328.988" readonly
+                    <input id="fm-fuerza-inercia" type="number" value="0" readonly
                             class="w-full text-xl font-bold text-yellow-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
 
@@ -140,15 +149,15 @@
                     <label for="fm-peso-cabeza-aumento" class="block text-sm font-medium text-yellow-900 mb-2">
                         Aumento Peso Cabeza [kg]
                     </label>
-                    <input id="fm-peso-cabeza-aumento" type="text" value="33.536" readonly
+                    <input id="fm-peso-cabeza-aumento" type="number" value="0" readonly
                             class="w-full text-xl font-bold text-yellow-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
 
                     <div class="bg-yellow-50 p-4 rounded-lg">
                     <label for="fm-nic-sin-freno" class="block text-sm font-medium text-yellow-900 mb-2">
-                        NIC
+                        NIC (Sin Freno)
                     </label>
-                    <input id="fm-nic-sin-freno" type="text" value="15.043" readonly
+                    <input id="fm-nic-sin-freno" type="number" value="0" readonly
                             class="w-full text-xl font-bold text-yellow-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
 
@@ -163,7 +172,7 @@
                         <label for="fm-delta-v2-freno" class="block text-sm font-medium text-red-900 mb-2">
                         DELTA V2 con Freno Activado [km/h]
                         </label>
-                        <input id="fm-delta-v2-freno" type="text" value="4.669" readonly
+                        <input id="fm-delta-v2-freno" type="number" value="0" readonly
                             class="w-full text-xl font-bold text-red-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
 
@@ -171,7 +180,7 @@
                         <label for="fm-aceleracion-max-freno" class="block text-sm font-medium text-red-900 mb-2">
                         Aceleración Máxima [m/seg²]
                         </label>
-                        <input id="fm-aceleracion-max-freno" type="text" value="25.937" readonly
+                        <input id="fm-aceleracion-max-freno" type="number" value="0" readonly
                             class="w-full text-xl font-bold text-red-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
 
@@ -179,7 +188,7 @@
                         <label for="fm-aceleracion-g-freno" class="block text-sm font-medium text-red-900 mb-2">
                         Aceleración Gravitatoria [g's]
                         </label>
-                        <input id="fm-aceleracion-g-freno" type="text" value="2.644" readonly
+                        <input id="fm-aceleracion-g-freno" type="number" value="0" readonly
                             class="w-full text-xl font-bold text-red-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
 
@@ -187,7 +196,7 @@
                         <label for="fm-fuerza-inercia-freno" class="block text-sm font-medium text-red-900 mb-2">
                         Fuerza de Inercia [N]
                         </label>
-                        <input id="fm-fuerza-inercia-freno" type="text" value="181.561" readonly
+                        <input id="fm-fuerza-inercia-freno" type="number" value="0" readonly
                             class="w-full text-xl font-bold text-red-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
 
@@ -195,15 +204,15 @@
                         <label for="fm-peso-cabeza-freno" class="block text-sm font-medium text-red-900 mb-2">
                         Aumento Peso Cabeza [kg]
                         </label>
-                        <input id="fm-peso-cabeza-freno" type="text" value="18.508" readonly
+                        <input id="fm-peso-cabeza-freno" type="number" value="0" readonly
                             class="w-full text-xl font-bold text-red-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
 
                     <div class="bg-red-50 p-4 rounded-lg">
                         <label for="fm-nic-freno" class="block text-sm font-medium text-red-900 mb-2">
-                        NIC
+                        NIC (Con Freno)
                         </label>
-                        <input id="fm-nic-freno" type="text" value="8.302" readonly
+                        <input id="fm-nic-freno" type="number" value="0" readonly
                             class="w-full text-xl font-bold text-red-700 bg-transparent border-none p-0 focus:outline-none cursor-default" />
                     </div>
 

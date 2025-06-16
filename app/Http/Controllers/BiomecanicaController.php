@@ -12,7 +12,7 @@ class BiomecanicaController extends Controller
     public function index()
     {
         //
-        $formulas = DB::table('formulas_biomecanicas')->get();
+        $formulas = DB::table('formulas_biomecanicas_base')->get();
         return view("biomecanica.index2", compact('formulas'));
     }
 
@@ -93,6 +93,58 @@ class BiomecanicaController extends Controller
     public function edit(string $id)
     {
         //
+    }
+
+    public function store_formula_base(Request $request)
+    {
+             $validated = $request->validate([
+           // 'id_informe'=> 'required|integer',
+            'formula_sin_variables' => 'required|string',
+            'nombre' => 'required|string',
+            'descripcion' => 'nullable|string',
+            'formula_con_variables' => 'required|string',
+            'campo_destino' => 'required|string',
+            'campos_variables' => 'required|json',
+            'campo_destino_alias' => 'required|string',
+            'parametros' => 'required|json',
+            'esPlantilla' => 'nullable|boolean',
+        ]);
+
+        // Obtener el id más alto de la tabla (último insertado)
+        $ultimoId = DB::table('formulas_biomecanicas_base')->max('id');
+        $yaExiste = DB::table('formulas_biomecanicas_base')
+            //->where('id_informe', $validated['id_informe'])
+            ->where('campo_destino', $validated['campo_destino'])
+            ->exists();
+
+        if ($yaExiste) {
+            return response()->json(["message" => 'Ya existe una fórmula asignada a '. $validated['campo_destino_alias']],422);
+        }
+        // Si hay registros, elimina el de id más alto, si no, intenta eliminar el id 1
+        // if ($ultimoId) {
+        //     DB::table('formulas_biomecanicas')->where('id', $ultimoId)->delete();
+        // } else {
+        //     DB::table('formulas_biomecanicas')->where('id', 1)->delete();
+        // }
+
+        // Insertar el nuevo registro
+        $id = DB::table('formulas_biomecanicas_base')->insertGetId([
+            //'id' => $ultimoId ? $ultimoId : 1,
+            'parametros' => $validated['parametros'],
+           // 'id_informe' => $validated['id_informe'],
+            'nombre' => $validated['nombre'],
+            'descripcion' => $validated['descripcion'] ?? null,
+            'formula_sin_variables' => $validated['formula_sin_variables'],
+            'formula_con_variables' => $validated['formula_con_variables'],
+            'campo_destino' => $validated['campo_destino'],
+            'campos_variables' => $validated['campos_variables'],
+            'campo_destino_alias' => $validated['campo_destino_alias'],
+            'esPlantilla' => $validated['esPlantilla'] ?? false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return response()->json(['success' => true, 'id' => $id]);
     }
 
     /**

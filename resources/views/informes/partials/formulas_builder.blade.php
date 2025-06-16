@@ -1,4 +1,4 @@
-<div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+<div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200 {{ request()->is('informes/create') ? 'hidden' : '' }}" >
     <h3 class="text-lg font-semibold text-gray-900 mb-6">Crear Nueva Fórmula</h3>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="space-y-4">

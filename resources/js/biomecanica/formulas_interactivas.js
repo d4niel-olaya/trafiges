@@ -70,8 +70,127 @@ const inputData = [
     value: 0,
     alias:"tara1"
   }
+  ,
+  {
+    id: "fm-deltav1",
+    label: "DELTA V1 (Vehículo Bala) [km/h]",
+    value: 0,
+    alias:"deltav1"
+  },
+   {
+    id: "fm-deltav2",
+    "label": "DELTA V2 (Vehículo Diana) [km/h]",
+    value: 0,
+    alias: "deltav2"
+  },
+  {
+    "id": "fm-aceleracion-maxima",
+    "label": "Aceleración Máxima [m/seg²]",
+    value: 0,
+    "alias": "aceleracion-maxima"
+  },
+  {
+    "id": "fm-aceleracion",
+    "label": "Aceleración Gravitatoria [g's]",
+    value: 0,
+    "alias": "aceleracion"
+  },
+  {
+    "id": "fm-fuerza",
+    "label": "Fuerza de Inercia [N]",
+    value: 0,
+    "alias": "fuerza"
+  },
+  {
+    "id": "fm-peso-cabeza",
+    "label": "Aumento Peso Cabeza [kg]",
+    value: 0,
+    "alias": "peso-cabeza"
+  },
+  {
+    "id": "fm-nic",
+    "label": "NIC (Criterio de Lesiones en el Cuello)",
+    value: 0,
+    "alias": "nic"
+  },
+  {
+    id: "fm-delta-v2",
+    "label": "DELTA V2 Desplazamiento con Embrague [km/h]",
+    value: 0,
+    alias: "delta-v2-embrague"
+  },
+  {
+    "id": "fm-aceleracion-max",
+    "label": "Aceleración Máxima [m/seg²]",
+    value: 0,
+    "alias": "aceleracion-max"
+  },
+  {
+    "id": "fm-aceleracion-g",
+    "label": "Aceleración Gravitatoria [g's]",
+    value: 0,
+    "alias": "aceleracion-g"
+  },
+  {
+    "id": "fm-fuerza-inercia",
+    "label": "Fuerza de Inercia [N]",
+    value: 0,
+    "alias": "fuerza-inercia"
+  },
+  {
+    "id": "fm-peso-cabeza-aumento",
+    "label": "Aumento Peso Cabeza [kg]",
+    value: 0,
+    "alias": "peso-cabeza-aumento"
+  },
+  {
+    "id": "fm-nic-sin-freno",
+    "label": "NIC (Sin Freno)",
+    value: 0,
+    "alias": "nic-sin-freno"
+
+  },
+  {
+    "id": "fm-delta-v2-freno",
+    "label": "DELTA V2 con Freno Activado [km/h]",
+    value: 0,
+    "alias": "delta-v2-freno"
+  },
+  {
+    "id": "fm-aceleracion-max-freno",
+    "label": "Aceleración Máxima [m/seg²]",
+    value: 0,
+    "alias": "aceleracion-max-freno"
+  },
+  {
+    "id": "fm-aceleracion-g-freno",
+    "label": "Aceleración Gravitatoria [g's]",
+    value: 0,
+    "alias": "aceleracion-g-freno"
+  },
+  {
+    "id": "fm-fuerza-inercia-freno",
+    "label": "Fuerza de Inercia [N]",
+    value: 0,
+    "alias": "fuerza-inercia-freno"
+  },
+  {
+    "id": "fm-peso-cabeza-freno",
+    "label": "Aumento Peso Cabeza [kg]",
+    value: 0,
+    "alias": "peso-cabeza-freno"
+  },
+  {
+    "id": "fm-nic-freno",
+    "label": "NIC (Con Freno)",
+    value: 0,
+    "alias": "nic-freno"
+  }
   
 ];
+
+
+
 
 function calculosExcel()
 {
@@ -159,20 +278,21 @@ function setearResultados() {
 
     const expresion = reemplazarValoresFormulas(formula.getAttribute("data-formula-expresion"));
     const inpt = formula.getAttribute("data-campo-destino");
+    const resultado = eval(expresion);
     if(document.getElementById(inpt) !== null) {
-      document.getElementById(inpt).value =eval(expresion);
+      document.getElementById(inpt).value = isNaN(resultado) ? 0 : resultado;
     }
-    document.getElementById("resultado-"+ formula.getAttribute("data-formula-id")).innerText = eval(expresion);
+    document.getElementById("resultado-"+ formula.getAttribute("data-formula-id")).innerText = isNaN(resultado) ? 0 : resultado;
     if(inpt.includes("mom1") && document.querySelector('input[name="mom-1"]') !== null)
     {
-       document.querySelector('input[name="mom-1"]').value =eval(expresion);
+       document.querySelector('input[name="mom-1"]').value =isNaN(resultado) ? 0 : resultado;
     }
 
     if(inpt.includes("mom2")  && document.querySelector('input[name="mom-2"]') !== null)
     {
-       document.querySelector('input[name="mom-2"]').value =eval(expresion);
+       document.querySelector('input[name="mom-2"]').value = isNaN(resultado) ? 0 : resultado;
     }
-    console.log("Seteando resultado de la fórmula: " + inpt + " con valor: " + eval(expresion));
+    console.log("Seteando resultado de la fórmula: " + inpt + " con valor: " + isNaN(resultado) ? 0 : resultado);
   });
 
 }
@@ -242,17 +362,71 @@ function crearFormulaDiv({
 
 
 function reemplazarValoresFormulas(expresion) {
-  return expresion.replaceAll("coef_rozamiento_freno", document.getElementById("fm-coef_rozamiento_freno").value)
-        .replaceAll("coef_rozamiento", document.getElementById("fm-coef_rozamiento").value)
-        .replaceAll("coef_restitucion", document.getElementById("fm-coef_restitucion").value)
-        .replaceAll("v1", document.getElementById("fm-v1").value)
-        .replaceAll("v2", document.getElementById("fm-v2").value)
-        .replaceAll("mom1", document.getElementById("fm-mom1").value)
-        .replaceAll("mom2", document.getElementById("fm-mom2").value)
-        .replaceAll("peso_ocupantes1", obtenerPesoOcupantes1())
-        .replaceAll("peso_ocupantes2", obtenerPesoOcupantes2())
-        .replaceAll("tara1", document.getElementById("tara-1")?.value || 0)
-        .replaceAll("tara2", document.getElementById("tara-2")?.value || 0)
+  // return expresion.replaceAll("coef_rozamiento_freno", document.getElementById("fm-coef_rozamiento_freno").value || 0)
+  //       .replaceAll("coef_rozamiento", document.getElementById("fm-coef_rozamiento").value || 0)
+  //       .replaceAll("coef_restitucion", document.getElementById("fm-coef_restitucion").value || 0)
+  //       .replaceAll("v1", document.getElementById("fm-v1").value || 0 )
+  //       .replaceAll("v2", document.getElementById("fm-v2").value || 0)
+  //       .replaceAll("mom1", document.getElementById("fm-mom1").value || 0)
+  //       .replaceAll("mom2", document.getElementById("fm-mom2").value || 0)
+  //       .replaceAll("peso_ocupantes1", obtenerPesoOcupantes1())
+  //       .replaceAll("peso_ocupantes2", obtenerPesoOcupantes2())
+  //       .replaceAll("tara1", document.getElementById("tara-1")?.value || 0)
+  //       .replaceAll("tara2", document.getElementById("tara-2")?.value || 0)
+  //       .replaceAll("deltav1", parseFloat(document.getElementById("fm-deltav1")?.value) || 0)
+  //       .replaceAll("deltav2", parseFloat(document.getElementById("fm-deltav2")?.value) || 0)
+  //       .replaceAll("aceleracion-maxima", parseFloat(document.getElementById("fm-aceleracion-maxima")?.value) || 0)
+  //       .replaceAll("aceleracion", parseFloat(document.getElementById("fm-aceleracion")?.value) || 0)
+  //       .replaceAll("fuerza", parseFloat(document.getElementById("fm-fuerza")?.value) || 0)
+  //       .replaceAll("peso-cabeza", parseFloat(document.getElementById("fm-peso-cabeza")?.value) || 0)
+  //       .replaceAll("nic", parseFloat(document.getElementById("fm-nic")?.value) || 0)
+  //       .replaceAll("delta-v2-embrague", parseFloat(document.getElementById("fm-delta-v2")?.value) || 0)
+  //       .replaceAll("aceleracion-max", parseFloat(document.getElementById("fm-aceleracion-max")?.value) || 0)
+  //       .replaceAll("aceleracion-g", parseFloat(document.getElementById("fm-aceleracion-g")?.value) || 0)
+  //       .replaceAll("fuerza-inercia", parseFloat(document.getElementById("fm-fuerza-inercia")?.value) || 0)
+  //       .replaceAll("peso-cabeza-aumento", parseFloat(document.getElementById("fm-peso-cabeza-aumento")?.value) || 0)
+  //       .replaceAll("nic-sin-freno", parseFloat(document.getElementById("fm-nic-sin-freno")?.value) || 0)
+  //       .replaceAll("delta-v2-freno", parseFloat(document.getElementById("fm-delta-v2-freno")?.value) || 0)
+  //       .replaceAll("aceleracion-max-freno", parseFloat(document.getElementById("fm-aceleracion-max-freno")?.value) || 0)
+  //       .replaceAll("aceleracion-g-freno", parseFloat(document.getElementById("fm-aceleracion-g-freno")?.value) || 0)
+  //       .replaceAll("fuerza-inercia-freno", parseFloat(document.getElementById("fm-fuerza-inercia-freno")?.value) || 0)
+  //       .replaceAll("peso-cabeza-freno", parseFloat(document.getElementById("fm-peso-cabeza-freno")?.value) || 0)
+  //       .replaceAll("nic-freno", parseFloat(document.getElementById("fm-nic-freno")?.value) || 0);
+// Array.from(document.querySelectorAll('input')).forEach(inp =>{
+//   console.log(inp.id)
+// })
+ 
+  // let resultado = expresion;
+
+  // inputData.forEach(({ id, alias }) => {
+  //   const valor = document.getElementById(id)?.value || 0;
+  //   console.log(resultado)
+  //   resultado = resultado.replaceAll(alias, valor);
+    
+  // });
+
+  // // Casos especiales
+  // resultado = resultado
+  //   .replaceAll("peso_ocupantes1", obtenerPesoOcupantes1())
+  //   .replaceAll("peso_ocupantes2", obtenerPesoOcupantes2());
+
+  // return resultado;
+    const ordenados = inputData
+    .slice()
+    .sort((a, b) => b.alias.length - a.alias.length); // Más largos primero
+
+  for (const input of ordenados) {
+    const valor = parseFloat(document.getElementById(input.id)?.value) || 0;
+    expresion = expresion.replaceAll(input.alias, valor);
+  }
+
+  // Si usas funciones como obtenerPesoOcupantes1 también agrégalas aparte:
+  expresion = expresion
+    .replaceAll("peso_ocupantes1", parseFloat(obtenerPesoOcupantes1()) || 0)
+    .replaceAll("peso_ocupantes2", parseFloat(obtenerPesoOcupantes2()) || 0);
+
+  expresion = expresion.replace(/(\d+(?:\.\d+)?|\([^)]+\))\s*\^\s*(\d+(?:\.\d+)?)/g, 'Math.pow($1,$2)');
+  return expresion;
 
 }
 function setearValoresAsociados() {
@@ -391,7 +565,14 @@ document.addEventListener("formulaCalculada", function(event) {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
+//   let valor = [];
+//   Array.from(document.querySelectorAll('input')).forEach(inp =>{
+//   console.log(inp.id)
+//   valor.push(inp.id);
+// })
+// console.log(valor.join("\n"));
     // Obtener todos los elementos con la clase 'formula-interactiva'
+
     setearValoresAsociados();
     calculosExcel(); // Ejecutar los cálculos de ejemplo
     setearResultados(); // Setear los resultados iniciales de las fórmulas
@@ -400,7 +581,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const formulas = document.getElementById("variables_formulas");
     const btnGuardarFormula = document.getElementById("btnGuardarFormula");
     document.getElementById("btnProbar").addEventListener("click", probar);
-  
+    document.getElementById("fm-v1").addEventListener("input", setearResultados);
+    document.getElementById("fm-v2").addEventListener("input", setearResultados);
+    document.getElementById("fm-mom1").addEventListener("input", setearResultados);
+    document.getElementById("fm-mom2").addEventListener("input", setearResultados);
+    document.getElementById("fm-coef_restitucion").addEventListener("input", setearResultados);
+     document.getElementById("fm-coef_rozamiento").addEventListener("input", setearResultados);
+     document.getElementById("fm-coef_rozamiento_freno").addEventListener("input", setearResultados);
+     //document.getElementById("fm-mom1").value = 1375;
+      //document.getElementById("fm-mom2").value = 1502;
+
     // pintar los botones de las fórmulas
     for(let i = 0; i <= inputData.length - 1; i++) {
         const boton = crearBotonFormula(inputData[i]);
@@ -443,19 +633,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
         const formData = {
-            id_informe: document.querySelector('input[name="id"]').value,
+            id_informe: document.querySelector('input[name="id"]')?.value || 0,
             formula_con_variables: expresion,
-            formula_sin_variables : expresion.replaceAll("coef_rozamiento_freno", document.getElementById("fm-coef_rozamiento_freno").value)
-                                  .replaceAll("coef_rozamiento", document.getElementById("fm-coef_rozamiento").value)
-                                  .replaceAll("coef_restitucion", document.getElementById("fm-coef_restitucion").value)
-                                  .replaceAll("v1", document.getElementById("fm-v1").value)
-                                  .replaceAll("v2", document.getElementById("fm-v2").value)
-                                  .replaceAll("mom1", document.getElementById("fm-mom1").value)
-                                  .replaceAll("mom2", document.getElementById("fm-mom2").value)
-                                  .replaceAll("peso_ocupantes1", obtenerPesoOcupantes1())
-                                  .replaceAll("peso_ocupantes2", obtenerPesoOcupantes2())
-                                  .replaceAll("tara1", document.getElementById("tara-1").value)
-                                  .replaceAll("tara2", document.getElementById("tara-2").value),
+            formula_sin_variables : reemplazarValoresFormulas(expresion),
             nombre: nombre,
             descripcion: descripcion,
             campo_destino: campoAsociado,
@@ -477,8 +657,12 @@ document.addEventListener("DOMContentLoaded", function() {
             })
         }
 
-        
-          ajaxHandler.sendRequest('/biomecanica', formData, 'POST', true, true, (response) => {
+          let ruta = "/biomecanica"
+          if(location.pathname == "/biomecanica")
+          {
+            ruta = "/biomecanica/base"; // Validación para usar una ruta u otra dependiendo si guarda la formula desde el informe o desde gestión biomecanica
+          }
+          ajaxHandler.sendRequest(ruta , formData, 'POST', true, true, (response) => {
             console.log(response); // Manejar la respuesta del servidor
             const divNuevo = crearFormulaDiv({
                 id: response.id,
