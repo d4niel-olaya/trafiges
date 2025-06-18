@@ -368,7 +368,8 @@
                     <div id="biomecanica-content" class="tab-panel">
                         <div class="py-6">
                             <div class="tab-content">
-                                @include("informes.partials.resultados_biomecanicos")
+                                {{-- {{$resultados_biomecanicos}} --}}
+                                @include("informes.partials.resultados_biomecanicos", ["resultados_biomecanicos" => $resultados_biomecanicos[0]]);
 
 
                                 <div class="space-y-8 hidden">
@@ -377,38 +378,44 @@
                                         <div class="mb-6"><label for="mom1" class="block text-sm font-medium text-gray-700 mb-2">MOM 1 (Masa en Orden de Marcha vehículo Bala) [Kg]</label>
                                             <div class="relative"><input type="number" disabled
                                                  id="mom1" name="mom1"  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 disabled:opacity-50 disabled:cursor-not-allowed bg-gray-100" 
-                                                value="{{intval($datosInforme->resultadosBiomecanicos->mom1 ?? 0) }}"></div>
+                                                {{-- value="{{intval($datosInforme->resultadosBiomecanicos->mom1 ?? 0) }}" --}}
+                                                ></div>
                                         </div>
                                         <div class="mb-6"><label for="mom2" class="block text-sm font-medium text-gray-700 mb-2">MOM 2 (Masa en Orden de Marcha vehículo Diana) [Kg]</label>
                                             <div class="relative"><input type="number" disabled
                                                 id="mom2" name="mom2"
                                                  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 disabled:opacity-50 disabled:cursor-not-allowed bg-gray-100" 
-                                                 value="{{intval($datosInforme->resultadosBiomecanicos->mom2 ?? 0)}}"></div>
+                                                 {{-- value="{{intval($datosInforme->resultadosBiomecanicos->mom2 ?? 0)}}" --}}
+                                                 ></div>
                                         </div>
                                     </div>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div class="mb-6"><label for="v1" class="block text-sm font-medium text-gray-700 mb-2">V1 (Velocidad de vehículo Bala) Estimada entre 12-16 [km/h]</label>
                                             <div class="relative"><input type="number" id="v1" name="v1" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                value="{{intval($datosInforme->resultadosBiomecanicos->velocidadV1)}}"></div>
+                                                {{-- value="{{intval($datosInforme->resultadosBiomecanicos->velocidadV1)}}" --}}
+                                                ></div>
                                         </div>
                                         <div class="mb-6"><label for="v2" class="block text-sm font-medium text-gray-700 mb-2">V2 (Velocidad de vehículo Diana) [Km/h] Habitualmente detenido</label>
                                             <div class="relative"><input type="number"
                                                  id="v2" name="v2" 
                                                  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                                                 value="{{intval($datosInforme->resultadosBiomecanicos->velocidadV2)}}"></div>
+                                                 {{-- value="{{intval($datosInforme->resultadosBiomecanicos->velocidadV2)}}" --}}
+                                                 ></div>
                                         </div>
                                     </div>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div class="mb-6"><label for="coeficienteRestitucion" class="block text-sm font-medium text-gray-700 mb-2">Coeficiente de Restitución e= 0,25-0,45; e medio Agu= 0,31</label>
                                             <div class="relative"><input type="text" id="coeficienteRestitucion" name="coeficienteRestitucion"
                                                  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                 value="{{intval($datosInforme->resultadosBiomecanicos->coeficienteRestitucion)}}"></div>
+                                                 {{-- value="{{intval($datosInforme->resultadosBiomecanicos->coeficienteRestitucion)}}" --}}
+                                                 ></div>
                                         </div>
                                         <div class="mb-6"><label for="coeficienteRozamiento" class="block text-sm font-medium text-gray-700 mb-2">COEFICIENTE DE ROZAMIENTO μ = (LIBRE 0,015; FRENO 0,7)</label>
                                             <div class="relative"><input type="text" 
                                                 id="coeficienteRozamiento" name="coeficienteRozamiento" 
                                                 class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                                                value="{{intval($datosInforme->resultadosBiomecanicos->coeficienteRozamiento)}}"></div>
+                                                {{-- value="{{intval($datosInforme->resultadosBiomecanicos->coeficienteRozamiento)}}" --}}
+                                                ></div>
                                         </div>
                                     </div>
                                     {{-- <div class="bg-gray-50 p-6 rounded-lg">
@@ -461,25 +468,27 @@
                                                 <div class="relative"><input type="number" id="deltaV1"
                                                     name="deltaV1" 
                                                     class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                                                    value="{{floatval($datosInforme->resultadosBiomecanicos->deltaV1)}}"></div>
+                                                    {{-- value="{{floatval($datosInforme->resultadosBiomecanicos->deltaV1)}}" --}}
+                                                    ></div>
                                             </div>
                                             <div class="mb-6"><label for="fuerzaG1" class="block text-sm font-medium text-gray-700 mb-2">Fuerza G Vehículo 1</label>
                                                 <div class="relative"><input type="number" 
                                                     id="fuerzaG1" 
                                                     name="fuerzaG1" 
                                                     class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                    value="{{floatval($datosInforme->resultadosBiomecanicos->fuerzaG1)}}"></div>
+                                                    {{-- value="{{floatval($datosInforme->resultadosBiomecanicos->fuerzaG1)}}" --}}
+                                                    ></div>
                                             </div>
                                             <div class="mb-6"><label for="deltaV2" class="block text-sm font-medium text-gray-700 mb-2">Delta-V Vehículo 2</label>
                                                 <div class="relative"><input type="number" id="deltaV2" 
                                                     name="deltaV2" 
-                                                    value="{{floatval($datosInforme->resultadosBiomecanicos->deltaV2)}}"
+                                                    {{-- value="{{floatval($datosInforme->resultadosBiomecanicos->deltaV2)}}" --}}
                                                     class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"></div>
                                             </div>
                                             <div class="mb-6"><label for="deltaV2" class="block text-sm font-medium text-gray-700 mb-2">Fuerza G Vehículo 2</label>
                                                 <div class="relative"><input type="number" id="fuerzaG2" 
                                                     name="fuerzaG2" 
-                                                    value="{{floatval($datosInforme->resultadosBiomecanicos->fuerzaG2)}}"
+                                                    {{-- value="{{floatval($datosInforme->resultadosBiomecanicos->fuerzaG2)}}" --}}
                                                     class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"></div>
                                             </div>
                                         </div>
@@ -488,32 +497,37 @@
                                                 <div class="relative"><input type="number"
                                                     id="aceleracionMaxima" name="aceleracionMaxima"
                                                      class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                     value="{{floatval($datosInforme->resultadosBiomecanicos->aceleracionMaxima)}}"></div>
+                                                     {{-- value="{{floatval($datosInforme->resultadosBiomecanicos->aceleracionMaxima)}}" --}}
+                                                     ></div>
                                             </div>
                                             <div class="mb-6"><label for="aceleracionGravitatoria" class="block text-sm font-medium text-gray-700 mb-2">ACELERACIÓN GRAVITATORIA (Vehículo 2 Diana) [g's]</label>
                                                 <div class="relative"><input type="number" id="aceleracionGravitatoria" name="aceleracionGravitatoria" 
                                                     class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                    value="{{floatval($datosInforme->resultadosBiomecanicos->aceleracionGravitatoria)}}"></div>
+                                                    {{-- value="{{floatval($datosInforme->resultadosBiomecanicos->aceleracionGravitatoria)}}" --}}
+                                                    ></div>
                                             </div>
                                         </div>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                                             <div class="mb-6"><label for="fuerzaInercia" class="block text-sm font-medium text-gray-700 mb-2">FUERZA DE INERCIA (Vehículo Diana) N</label>
                                                 <div class="relative"><input type="text" id="fuerzaInercia" name="fuerzaInercia" 
                                                     class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                    value="{{floatval($datosInforme->resultadosBiomecanicos->fuerzaInercia)}}"></div>
+                                                    {{-- value="{{floatval($datosInforme->resultadosBiomecanicos->fuerzaInercia)}}" --}}
+                                                    ></div>
                                             </div>
                                             <div class="mb-6"><label for="aumentoPeso" class="block text-sm font-medium text-gray-700 mb-2">AUMENTO PESO CABEZA OCUPANTES (Vehículo Diana)</label>
                                                 <div class="relative"><input type="text"
                                                      id="aumentoPesoCabeza" name="aumentoPesoCabeza"
                                                       class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                      value="{{floatval($datosInforme->resultadosBiomecanicos->aumentoPesoCabeza)}}"></div>
+                                                      {{-- value="{{floatval($datosInforme->resultadosBiomecanicos->aumentoPesoCabeza)}}" --}}
+                                                      ></div>
                                             </div>
                                         </div>
                                         <div class="mt-4">
                                             <div class="mb-6"><label for="nic" class="block text-sm font-medium text-gray-700 mb-2">NIC (Criterio de Lesiones en el Cuello ocupantes Vehículo Diana)</label>
                                                 <div class="relative"><input type="text" id="nic" name="nic" 
                                                     class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                                                    value="{{$datosInforme->resultadosBiomecanicos->nic}}"></div>
+                                                    {{-- value="{{$datosInforme->resultadosBiomecanicos->nic}}" --}}
+                                                    ></div>
                                             </div>
                                         </div>
                                     </div>
@@ -527,30 +541,36 @@
                                                     <div class="relative"><input type="text" id="deltaV2ConEmbrague"
                                                          name="deltaV2ConEmbrague"
                                                           class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                          value="{{$datosInforme->resultadosBiomecanicos->deltaV2ConEmbrague}}"></div>
+                                                          {{-- value="{{$datosInforme->resultadosBiomecanicos->deltaV2ConEmbrague}}" --}}
+                                                          ></div>
                                                 </div>
                                                 <div class="mb-6"><label for="aceleracionMaximaConDesplazamiento" class="block text-sm font-medium text-gray-700 mb-2">ACELERACIÓN MÁXIMA (Vehículo Diana) [m/seg2] CON DESPLAZAMIENTO</label>
                                                     <div class="relative"><input type="text" id="aceleracionMaximaConDesplazamiento"
                                                          name="aceleracionMaximaConDesplazamiento" 
                                                          class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                         value="{{$datosInforme->resultadosBiomecanicos->aceleracionMaximaConDesplazamiento}}"></div>
+                                                         {{-- value="{{$datosInforme->resultadosBiomecanicos->aceleracionMaximaConDesplazamiento}}" --}}
+                                                         ></div>
                                                 </div>
                                             </div>
                                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                                                 <div class="mb-6"><label for="fuerzaInerciaConDesplazamiento" class="block text-sm font-medium text-gray-700 mb-2">FUERZA DE INERCIA (Vehículo Diana)</label>
                                                     <div class="relative"><input type="text" id="fuerzaInerciaConDesplazamiento" name="fuerzaInerciaConDesplazamiento"
                                                          class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                                                         value="{{$datosInforme->resultadosBiomecanicos->fuerzaInerciaConDesplazamiento}}"></div>
+                                                         {{-- value="{{$datosInforme->resultadosBiomecanicos->fuerzaInerciaConDesplazamiento}}" --}}
+                                                         ></div>
                                                 </div>
                                                 <div class="mb-6"><label for="aumentoPesoCabezaConDesplazamiento" class="block text-sm font-medium text-gray-700 mb-2">AUMENTO PESO CABEZA OCUPANTES (Vehículo Diana)</label>
-                                                    <div class="relative"><input type="text" id="aumentoPesoCabezaConDesplazamiento" name="aumentoPesoCabezaConDesplazamiento" value="{{$datosInforme->resultadosBiomecanicos->aumentoPesoCabezaConDesplazamiento}}" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"></div>
+                                                    <div class="relative"><input type="text" id="aumentoPesoCabezaConDesplazamiento" name="aumentoPesoCabezaConDesplazamiento" 
+                                                        {{-- value="{{$datosInforme->resultadosBiomecanicos->aumentoPesoCabezaConDesplazamiento}}" --}}
+                                                         class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"></div>
                                                 </div>
                                             </div>
                                             <div class="mt-4">
                                                 <div class="mb-6"><label for="nicConDesplazamiento" class="block text-sm font-medium text-gray-700 mb-2">NIC (Criterio de Lesiones en el Cuello ocupantes Vehículo Diana) CON DESPLAZAMIENTO</label>
                                                     <div class="relative"><input type="text" id="nicConDesplazamiento" name="nicConDesplazamiento" 
                                                         class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                        value="{{$datosInforme->resultadosBiomecanicos->nicConDesplazamiento}}"></div>
+                                                        {{-- value="{{$datosInforme->resultadosBiomecanicos->nicConDesplazamiento}}" --}}
+                                                        ></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -561,12 +581,13 @@
                                                     <div class="relative"><input type="text" id="deltaV2ConFreno"
                                                          name="deltaV2ConFreno" 
                                                          class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                         value="{{$datosInforme->resultadosBiomecanicos->deltaV2ConFreno}}"></div>
+                                                         {{-- value="{{$datosInforme->resultadosBiomecanicos->deltaV2ConFreno}}" --}}
+                                                         ></div>
                                                 </div>
                                                 <div class="mb-6"><label for="aceleracionMaximaConFreno" class="block text-sm font-medium text-gray-700 mb-2">ACELERACIÓN MÁXIMA (Vehículo Diana) [m/seg2] PISANDO FRENO</label>
                                                     <div class="relative"><input type="text" id="aceleracionMaximaConFreno" name="aceleracionMaximaConFreno" 
                                                         class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                        value="{{$datosInforme->resultadosBiomecanicos->aceleracionMaximaConFreno}}"
+                                                        {{-- value="{{$datosInforme->resultadosBiomecanicos->aceleracionMaximaConFreno}}" --}}
                                                         ></div>
                                                 </div>
                                             </div>
@@ -576,25 +597,29 @@
                                                         id="aceleracionGravitatoriaConFreno" name="aceleracionGravitatoriaConFreno"
 
                                                          class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                         value="{{$datosInforme->resultadosBiomecanicos->aceleracionGravitatoriaConFreno}}"></div>
+                                                         {{-- value="{{$datosInforme->resultadosBiomecanicos->aceleracionGravitatoriaConFreno}}" --}}
+                                                         ></div>
                                                 </div>
                                                 <div class="mb-6"><label for="fuerzaInerciaConFreno" class="block text-sm font-medium text-gray-700 mb-2">FUERZA DE INERCIA (Vehículo Diana) PISANDO Freno</label>
                                                     <div class="relative"><input type="text" id="fuerzaInerciaConFreno" name="fuerzaInerciaConFreno" 
                                                         class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-                                                        value="{{$datosInforme->resultadosBiomecanicos->fuerzaInerciaConFreno}}"></div>
+                                                        {{-- value="{{$datosInforme->resultadosBiomecanicos->fuerzaInerciaConFreno}}" --}}
+                                                        ></div>
                                                 </div>
                                             </div>
                                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                                                 <div class="mb-6"><label for="aumentoPesoConFreno" class="block text-sm font-medium text-gray-700 mb-2">AUMENTO PESO CABEZA OCUPANTES (Vehículo Diana) PISANDO Freno</label>
                                                     <div class="relative"><input type="text" id="aumentoPesoCabezaConFreno" name="aumentoPesoCabezaConFreno" 
                                                         class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                        value="{{$datosInforme->resultadosBiomecanicos->aumentoPesoCabezaConFreno}}"></div>
+                                                        {{-- value="{{$datosInforme->resultadosBiomecanicos->aumentoPesoCabezaConFreno}}" --}}
+                                                        ></div>
                                                 </div>
                                                 <div class="mb-6"><label for="nicconFreno" class="block text-sm font-medium text-gray-700 mb-2">NIC (Criterio de Lesiones en el Cuello ocupantes Vehículo Diana) PISANDO Freno</label>
                                                     <div class="relative"><input type="text"
                                                          id="nicConFreno" name="nicConFreno"
                                                           class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
-                                                          value="{{$datosInforme->resultadosBiomecanicos->nicConFreno}}"></div>
+                                                          {{-- value="{{$datosInforme->resultadosBiomecanicos->nicConFreno}}" --}}
+                                                          ></div>
                                                 </div>
                                             </div>
                                         </div>

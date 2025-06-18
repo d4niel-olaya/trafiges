@@ -280,7 +280,7 @@ function setearResultados() {
     const inpt = formula.getAttribute("data-campo-destino");
     const resultado = eval(expresion);
     if(document.getElementById(inpt) !== null) {
-      document.getElementById(inpt).value = isNaN(resultado) ? 0 : resultado;
+      document.getElementById(inpt).value = isNaN(resultado) ? 0 : parseFloat(resultado).toFixed(2);
     }
     document.getElementById("resultado-"+ formula.getAttribute("data-formula-id")).innerText = isNaN(resultado) ? 0 : resultado;
     if(inpt.includes("mom1") && document.querySelector('input[name="mom-1"]') !== null)
@@ -416,14 +416,14 @@ function reemplazarValoresFormulas(expresion) {
     .sort((a, b) => b.alias.length - a.alias.length); // Más largos primero
 
   for (const input of ordenados) {
-    const valor = parseFloat(document.getElementById(input.id)?.value) || 0;
+    const valor = parseFloat(document.getElementById(input.id)?.value).toFixed(2) || 0;
     expresion = expresion.replaceAll(input.alias, valor);
   }
 
   // Si usas funciones como obtenerPesoOcupantes1 también agrégalas aparte:
   expresion = expresion
-    .replaceAll("peso_ocupantes1", parseFloat(obtenerPesoOcupantes1()) || 0)
-    .replaceAll("peso_ocupantes2", parseFloat(obtenerPesoOcupantes2()) || 0);
+    .replaceAll("peso_ocupantes1", parseFloat(obtenerPesoOcupantes1()).toFixed(2) || 0)
+    .replaceAll("peso_ocupantes2", parseFloat(obtenerPesoOcupantes2()).toFixed(2) || 0);
 
   expresion = expresion.replace(/(\d+(?:\.\d+)?|\([^)]+\))\s*\^\s*(\d+(?:\.\d+)?)/g, 'Math.pow($1,$2)');
   return expresion;

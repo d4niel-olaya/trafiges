@@ -105,8 +105,10 @@ class InformeController extends Controller
         $abogados = DB::table("abogados")->select("id","nombre","apellidos")->orderBy("nombre","asc")->get();
         $companias = DB::table("companias_seguros")->select("id","nombre")->orderBy("nombre","asc")->get();
         $tipos_informe = DB::table("tipos_informe")->select("id","nombre","precio")->orderBy("nombre","asc")->get();
-       
-        return view("informes.create", ["peritos" => $peritos, "abogados" => $abogados, "companias" => $companias, "tipos_informe" => $tipos_informe]);  
+       $formulas = DB::table("formulas_biomecanicas_base")->get();
+        return view("informes.create", ["peritos" => $peritos, "abogados" => $abogados, 
+        "companias" => $companias, "tipos_informe" => $tipos_informe,
+        "formulas" => $formulas]);  
     }
 
     /**
@@ -211,6 +213,44 @@ class InformeController extends Controller
             'updated_at' => now(),
         ]);
 
+       DB::table('resultados_biomecanicos')
+           // ->where('id_informe', $request->id_informe)
+            ->insert([
+                'id_informe'=> $id_informe,
+                'velocidad_v1' => $validatedData['resultadosBiomecanicos']['velocidad_v1'] ?? null,
+                'velocidad_v2' => $validatedData['resultadosBiomecanicos']['velocidad_v2'] ?? null,
+                'mom1' => $validatedData['resultadosBiomecanicos']['mom1'] ?? null,
+                'mom2' => $validatedData['resultadosBiomecanicos']['mom2'] ?? null,
+                'coeficiente_restitucion' => $validatedData['resultadosBiomecanicos']['coeficiente_restitucion'] ?? null,
+                'coeficiente_rozamiento' => $validatedData['resultadosBiomecanicos']['coeficiente_rozamiento'] ?? null,
+                'coeficiente_rozamiento_freno' => $validatedData['resultadosBiomecanicos']['coeficiente_rozamiento_freno'] ?? null,
+
+                'delta_v1' => $validatedData['resultadosBiomecanicos']['delta_v1'] ?? null,
+                'delta_v2' => $validatedData['resultadosBiomecanicos']['delta_v2'] ?? null,
+                'aceleracion_maxima' => $validatedData['resultadosBiomecanicos']['aceleracion_maxima'] ?? null,
+                'aceleracion_gravitatoria' => $validatedData['resultadosBiomecanicos']['aceleracion_gravitatoria'] ?? null,
+                'fuerza_inercia' => $validatedData['resultadosBiomecanicos']['fuerza_inercia'] ?? null,
+                'aumento_peso_cabeza' => $validatedData['resultadosBiomecanicos']['aumento_peso_cabeza'] ?? null,
+                'nic' => $validatedData['resultadosBiomecanicos']['nic'] ?? null,
+
+                'delta_v2_con_embrague' => $validatedData['resultadosBiomecanicos']['delta_v2_con_embrague'] ?? null,
+                'aceleracion_maxima_con_desplazamiento' => $validatedData['resultadosBiomecanicos']['aceleracion_maxima_con_desplazamiento'] ?? null,
+                'aceleracion_gravitatoria_con_desplazamiento' => $validatedData['resultadosBiomecanicos']['aceleracion_gravitatoria_con_desplazamiento'] ?? null,
+                'fuerza_inercia_con_desplazamiento' => $validatedData['resultadosBiomecanicos']['fuerza_inercia_con_desplazamiento'] ?? null,
+                'aumento_peso_cabeza_con_desplazamiento' => $validatedData['resultadosBiomecanicos']['aumento_peso_cabeza_con_desplazamiento'] ?? null,
+                'nic_sin_freno' => $validatedData['resultadosBiomecanicos']['nic_sin_freno'] ?? null,
+
+                'delta_v2_con_freno' => $validatedData['resultadosBiomecanicos']['delta_v2_con_freno'] ?? null,
+                'aceleracion_maxima_con_freno' => $validatedData['resultadosBiomecanicos']['aceleracion_maxima_con_freno'] ?? null,
+                'aceleracion_gravitatoria_con_freno' => $validatedData['resultadosBiomecanicos']['aceleracion_gravitatoria_con_freno'] ?? null,
+                'fuerza_inercia_con_freno' => $validatedData['resultadosBiomecanicos']['fuerza_inercia_con_freno'] ?? null,
+                'aumento_peso_cabeza_con_freno' => $validatedData['resultadosBiomecanicos']['aumento_peso_cabeza_con_freno'] ?? null,
+                'nic_con_freno' => $validatedData['resultadosBiomecanicos']['nic_con_freno'] ?? null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+
 
         foreach ($validatedData['ocupantes'] as $ocupante) {
             DB::table('informes_ocupantes')->insert([
@@ -303,6 +343,7 @@ class InformeController extends Controller
          ->where("pagos.informe_id","=", $id)->get();
         $totalPagos = DB::table("informes_tiposInformes")->where("id_informe","=", $id)->sum("precio");
         $formulas = DB::table("formulas_biomecanicas")->where("id_informe","=", $id)->get();
+        $resultados_biomecanicos = DB::table("resultados_biomecanicos")->where("id_informe","=", $id)->get();
         //return $informe;
         return view("informes.edit",["informe" => $informe, "ocupantes_conductor" => $ocupantes_conductor
                 , "ocupantes_copiloto" => $ocupantes_copiloto,
@@ -319,6 +360,7 @@ class InformeController extends Controller
                 "tipos_informes_asociados" => $tipos_informes_asociados,
                 "totalPagos" => $totalPagos,
                 "formulas" => $formulas,
+                "resultados_biomecanicos" => $resultados_biomecanicos
             ]);
     }
 
@@ -386,6 +428,40 @@ class InformeController extends Controller
             'vehiculo2' => $validatedData['vehiculo2'],
             'resultadosBiomecanicos' => $validatedData['resultadosBiomecanicos'],
         ]);
+
+        DB::table('resultados_biomecanicos')
+            ->where('id_informe', $validatedData['id'])
+            ->update([
+                'velocidad_v1' => $validatedData['resultadosBiomecanicos']['velocidad_v1'] ?? null,
+                'velocidad_v2' => $validatedData['resultadosBiomecanicos']['velocidad_v2'] ?? null,
+                'mom1' => $validatedData['resultadosBiomecanicos']['mom1'] ?? null,
+                'mom2' => $validatedData['resultadosBiomecanicos']['mom2'] ?? null,
+                'coeficiente_restitucion' => $validatedData['resultadosBiomecanicos']['coeficiente_restitucion'] ?? null,
+                'coeficiente_rozamiento' => $validatedData['resultadosBiomecanicos']['coeficiente_rozamiento'] ?? null,
+                'coeficiente_rozamiento_freno' => $validatedData['resultadosBiomecanicos']['coeficiente_rozamiento_freno'] ?? null,
+
+                'delta_v1' => $validatedData['resultadosBiomecanicos']['delta_v1'] ?? null,
+                'delta_v2' => $validatedData['resultadosBiomecanicos']['delta_v2'] ?? null,
+                'aceleracion_maxima' => $validatedData['resultadosBiomecanicos']['aceleracion_maxima'] ?? null,
+                'aceleracion_gravitatoria' => $validatedData['resultadosBiomecanicos']['aceleracion_gravitatoria'] ?? null,
+                'fuerza_inercia' => $validatedData['resultadosBiomecanicos']['fuerza_inercia'] ?? null,
+                'aumento_peso_cabeza' => $validatedData['resultadosBiomecanicos']['aumento_peso_cabeza'] ?? null,
+                'nic' => $validatedData['resultadosBiomecanicos']['nic'] ?? null,
+
+                'delta_v2_con_embrague' => $validatedData['resultadosBiomecanicos']['delta_v2_con_embrague'] ?? null,
+                'aceleracion_maxima_con_desplazamiento' => $validatedData['resultadosBiomecanicos']['aceleracion_maxima_con_desplazamiento'] ?? null,
+                'aceleracion_gravitatoria_con_desplazamiento' => $validatedData['resultadosBiomecanicos']['aceleracion_gravitatoria_con_desplazamiento'] ?? null,
+                'fuerza_inercia_con_desplazamiento' => $validatedData['resultadosBiomecanicos']['fuerza_inercia_con_desplazamiento'] ?? null,
+                'aumento_peso_cabeza_con_desplazamiento' => $validatedData['resultadosBiomecanicos']['aumento_peso_cabeza_con_desplazamiento'] ?? null,
+                'nic_sin_freno' => $validatedData['resultadosBiomecanicos']['nic_sin_freno'] ?? null,
+
+                'delta_v2_con_freno' => $validatedData['resultadosBiomecanicos']['delta_v2_con_freno'] ?? null,
+                'aceleracion_maxima_con_freno' => $validatedData['resultadosBiomecanicos']['aceleracion_maxima_con_freno'] ?? null,
+                'aceleracion_gravitatoria_con_freno' => $validatedData['resultadosBiomecanicos']['aceleracion_gravitatoria_con_freno'] ?? null,
+                'fuerza_inercia_con_freno' => $validatedData['resultadosBiomecanicos']['fuerza_inercia_con_freno'] ?? null,
+                'aumento_peso_cabeza_con_freno' => $validatedData['resultadosBiomecanicos']['aumento_peso_cabeza_con_freno'] ?? null,
+                'nic_con_freno' => $validatedData['resultadosBiomecanicos']['nic_con_freno'] ?? null,
+            ]);
     
         // Actualizar el informe en la base de datos
         DB::table('informes')
