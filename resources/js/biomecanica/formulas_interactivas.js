@@ -400,6 +400,7 @@ function editarContenidoDivFormula(id, formulaSinVariables,formulaConVariables, 
     console.error("No se encontró el div de la fórmula con ID:", id);
     return;
   }
+  formulaDiv.setAttribute("data-formula-expresion", formulaConVariables);
   formulaDiv.innerHTML = crearFormulaDiv({
     id,
     formulaSinVariables,
