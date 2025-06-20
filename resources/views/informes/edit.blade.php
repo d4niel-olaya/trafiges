@@ -369,7 +369,7 @@
                         <div class="py-6">
                             <div class="tab-content">
                                 {{-- {{$resultados_biomecanicos}} --}}
-                                @include("informes.partials.resultados_biomecanicos", ["resultados_biomecanicos" => $resultados_biomecanicos[0]]);
+                                @include("informes.partials.resultados_biomecanicos", ["resultados_biomecanicos" => $resultados_biomecanicos[0] ?? []]);
 
 
                                 <div class="space-y-8 hidden">

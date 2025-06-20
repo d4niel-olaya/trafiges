@@ -67,6 +67,7 @@ Route::middleware(['auth'])->group(function () {
 
      Route::middleware('role:administrador|perito')->group(function () {
             Route::post("/biomecanica/base", [BiomecanicaController::class, 'store_formula_base']);
+            Route::put("/biomecanica/base/{id}", [BiomecanicaController::class, 'update_formula_base']);
      });
 
     // 🔹 Documentación

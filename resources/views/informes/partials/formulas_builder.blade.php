@@ -1,7 +1,8 @@
 <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200 {{ request()->is('informes/create') ? 'hidden' : '' }}" >
-    <h3 class="text-lg font-semibold text-gray-900 mb-6">Crear Nueva Fórmula</h3>
+    <h3 class="text-lg font-semibold text-gray-900 mb-6" id="label-editor-formula">Crear Nueva Fórmula</h3>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="space-y-4">
+            <input type="hidden" id="fm-id" value="">
             <div><label class="block text-sm font-medium text-gray-700 mb-2">Nombre de la Fórmula</label><input type="text" placeholder="Ej: Fórmula del momento" id="fm-nombre" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value=""></div>
               <div><label class="block text-sm font-medium text-gray-700 mb-2">Campo de resultado biomecánico asociado</label>
                 <select  class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="campo_asociado">

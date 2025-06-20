@@ -329,13 +329,13 @@ function crearFormulaDiv({
                 <p class="text-sm text-gray-600 mt-1">${descripcion}</p>
             </div>
               <div class="flex gap-2">
-              <button class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors" title="Copiar fórmula"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy h-4 w-4">
+              <button class="hidden p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors" title="Copiar fórmula"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy h-4 w-4">
                                     <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
                                     <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-                                </svg></button><button class="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-100 rounded transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line h-4 w-4">
+                                </svg></button><button class="editar-formula p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-100 rounded transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line h-4 w-4">
                                     <path d="M12 20h9"></path>
                                     <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
-                                </svg></button><button class="p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 h-4 w-4">
+                                </svg></button><button class="hidden p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 h-4 w-4">
                                     <path d="M3 6h18"></path>
                                     <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
                                     <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
@@ -359,6 +359,58 @@ function crearFormulaDiv({
     return div;
 }
 
+
+
+function crearEventoEditarFormulasDiv()
+{
+    const formulasDiv = document.querySelectorAll('.formula');
+    formulasDiv.forEach(formulaDiv => {
+        const id = formulaDiv.getAttribute("data-formula-id");
+        const formulaSinVariables = formulaDiv.getAttribute("data-formula-expresion");
+        const campoDestino = formulaDiv.getAttribute("data-campo-destino");
+        const campoDestinoAlias = formulaDiv.getAttribute("data-campo-destino-alias");
+        const nombre = formulaDiv.querySelector('h4').innerText;
+        const descripcion = formulaDiv.querySelector('p').innerText;
+
+        crearEventoEditarFormula(formulaDiv, id, formulaSinVariables, campoDestino, campoDestinoAlias, nombre, descripcion);
+    });
+}
+
+function crearEventoEditarFormula(formulaDiv, id, formulaSinVariables, campoDestino, campoDestinoAlias, nombre, descripcion) {
+    const editarBtn = formulaDiv.querySelector('.editar-formula');
+    editarBtn.addEventListener('click', function() {
+        // Aquí puedes abrir un modal o formulario para editar la fórmula
+       // alert("Prueba");
+       document.getElementById("campo_asociado").disabled = true;
+        document.getElementById("fm-test").value = formulaSinVariables;
+        document.getElementById("fm-nombre").value = nombre;
+        document.getElementById("fm-descripcion").value = descripcion;
+        document.getElementById("campo_asociado").value = campoDestino;
+        document.getElementById("fm-id").value = id; // Asignar el ID de la fórmula para actualizar
+        document.getElementById("fm-test").focus();
+        document.getElementById("label-editor-formula").innerText = "Editar Fórmula Interactiva";
+        
+    });
+}
+
+
+function editarContenidoDivFormula(id, formulaSinVariables,formulaConVariables, campoDestino, campoDestinoAlias, nombre, descripcion) {
+  const formulaDiv = document.querySelector(`.formula[data-formula-id="${id}"]`);
+  if (!formulaDiv) {
+    console.error("No se encontró el div de la fórmula con ID:", id);
+    return;
+  }
+  formulaDiv.innerHTML = crearFormulaDiv({
+    id,
+    formulaSinVariables,
+    campoDestino,
+    campoDestinoAlias,
+    nombre,
+    descripcion,
+    formulaConVariables: formulaConVariables, // Aquí puedes usar la misma expresión o una modificada
+    resultado: document.getElementById(campoDestino)?.value || 0 // Asignar el valor actual del campo destino
+  }).innerHTML; // Usamos innerHTML para reemplazar el contenido del div
+}
 
 
 function reemplazarValoresFormulas(expresion) {
@@ -572,7 +624,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // })
 // console.log(valor.join("\n"));
     // Obtener todos los elementos con la clase 'formula-interactiva'
-
+   crearEventoEditarFormulasDiv();
     setearValoresAsociados();
     calculosExcel(); // Ejecutar los cálculos de ejemplo
     setearResultados(); // Setear los resultados iniciales de las fórmulas
@@ -658,23 +710,46 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
           let ruta = "/biomecanica"
+          let method = "POST";
           if(location.pathname == "/biomecanica")
           {
             ruta = "/biomecanica/base"; // Validación para usar una ruta u otra dependiendo si guarda la formula desde el informe o desde gestión biomecanica
           }
-          ajaxHandler.sendRequest(ruta , formData, 'POST', true, true, (response) => {
+
+          if(location.pathname == "/biomecanica" && document.getElementById("fm-id").value.trim() !== "" )
+          {
+             ruta = "/biomecanica/base/"+document.getElementById("fm-id").value.trim(); // Validación para usar una ruta u otra dependiendo si guarda la formula desde el informe o desde gestión biomecanica
+             method = "PUT"
+          }
+          
+          if(document.getElementById("fm-id").value.trim() !== "" &&  location.pathname != "/biomecanica" ) {
+            ruta = "/biomecanica/"+document.getElementById("fm-id").value.trim();
+            method = "PUT"; // Si el ID de la fórmula existe, se actualiza
+          }
+          ajaxHandler.sendRequest(ruta , formData, method, true, true, (response) => {
             console.log(response); // Manejar la respuesta del servidor
-            const divNuevo = crearFormulaDiv({
-                id: response.id,
-                formulaSinVariables: formData.formula_sin_variables,
-                campoDestino: formData.campo_destino,
-                campoDestinoAlias: formData.campo_destino_alias,
-                nombre: formData.nombre,
-                descripcion: formData.descripcion,
-                formulaConVariables: formData.formula_con_variables,
-                resultado: eval(formData.formula_sin_variables)
-            });
-            document.getElementById("formulas-interactivas").appendChild(divNuevo);
+            if(method == "POST"){
+              const divNuevo = crearFormulaDiv({
+                  id: response.id,
+                  formulaSinVariables: formData.formula_sin_variables,
+                  campoDestino: formData.campo_destino,
+                  campoDestinoAlias: formData.campo_destino_alias,
+                  nombre: formData.nombre,
+                  descripcion: formData.descripcion,
+                  formulaConVariables: formData.formula_con_variables,
+                  resultado: eval(formData.formula_sin_variables)
+              });
+              document.getElementById("formulas-interactivas").appendChild(divNuevo);
+            }else{
+              editarContenidoDivFormula(document.getElementById("fm-id").value.trim(), formData.formula_sin_variables, formData.formula_con_variables, formData.campo_destino, formData.campo_destino_alias, formData.nombre, formData.descripcion);
+            }
+            crearEventoEditarFormulasDiv();
+            document.getElementById("campo_asociado").disabled = false;
+            document.getElementById("fm-test").value = ""; // Limpiar el campo de prueba
+            document.getElementById("label-editor-formula").innerText = "Crear Fórmula Interactiva"; // Cambiar el título del editor
+            document.getElementById("fm-test").value = ""; // Limpiar el campo de prueba
+            document.getElementById("fm-nombre").value = ""; // Limpiar el campo de nombre
+            document.getElementById("fm-descripcion").value = ""; // Limpiar el campo de descripción
             setearResultados(); // Actualizar los resultados de las fórmulas
             //limpiarCamposFormulario('formularioInformes');
             

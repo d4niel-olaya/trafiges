@@ -152,15 +152,15 @@ class BiomecanicaController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $validated = $request->validate([
+            $validated = $request->validate([
             'id_informe'=> 'required|integer',
+            'formula_sin_variables' => 'required|string',
             'nombre' => 'required|string',
             'descripcion' => 'nullable|string',
-            'campos_sin_variables' => 'required|string',
-            'campos_con_variables' => 'required|string',
+            'formula_con_variables' => 'required|string',
             'campo_destino' => 'required|string',
-            'campo_destino_alias' => 'required|string',
             'campos_variables' => 'required|json',
+            'campo_destino_alias' => 'required|string',
             'parametros' => 'required|json',
             'esPlantilla' => 'nullable|boolean',
         ]);
@@ -168,19 +168,75 @@ class BiomecanicaController extends Controller
     $updated = DB::table('formulas_biomecanicas')
         ->where('id', $id)
         ->update([
-            'id_informe' => $validated['id_informe'],
+            'parametros' => $validated['parametros'],
+           // 'id_informe' => $validated['id_informe'],
             'nombre' => $validated['nombre'],
             'descripcion' => $validated['descripcion'] ?? null,
-            'campos_sin_variables' => $validated['campos_sin_variables'],
-            'campos_con_variables' => $validated['campos_con_variables'],
-            'campo_destino_alias' => $validated['campo_destino_alias'],
+            'formula_sin_variables' => $validated['formula_sin_variables'],
+            'formula_con_variables' => $validated['formula_con_variables'],
             'campo_destino' => $validated['campo_destino'],
             'campos_variables' => $validated['campos_variables'],
-            'parametros' => $validated['parametros'],
+            'campo_destino_alias' => $validated['campo_destino_alias'],
+            'esPlantilla' => $validated['esPlantilla'] ?? false,
+            //'created_at' => now(),
             'updated_at' => now(),
         ]);
 
     return response()->json(['success' => $updated > 0]);
+    }
+
+    public function update_formula_base(Request $request,$id)
+    {
+             $validated = $request->validate([
+           // 'id_informe'=> 'required|integer',
+            'formula_sin_variables' => 'required|string',
+            'nombre' => 'required|string',
+            'descripcion' => 'nullable|string',
+            'formula_con_variables' => 'required|string',
+            'campo_destino' => 'required|string',
+            'campos_variables' => 'required|json',
+            'campo_destino_alias' => 'required|string',
+            'parametros' => 'required|json',
+            'esPlantilla' => 'nullable|boolean',
+        ]);
+
+        // Obtener el id más alto de la tabla (último insertado)
+        $ultimoId = DB::table('formulas_biomecanicas_base')->max('id');
+        // $yaExiste = DB::table('formulas_biomecanicas_base')
+        //     //->where('id_informe', $validated['id_informe'])
+        //     ->where('campo_destino', $validated['campo_destino'])
+        //     ->exists();
+
+        // if ($yaExiste) {
+        //     return response()->json(["message" => 'Ya existe una fórmula asignada a '. $validated['campo_destino_alias']],422);
+        // }
+        // Si hay registros, elimina el de id más alto, si no, intenta eliminar el id 1
+        // if ($ultimoId) {
+        //     DB::table('formulas_biomecanicas')->where('id', $ultimoId)->delete();
+        // } else {
+        //     DB::table('formulas_biomecanicas')->where('id', 1)->delete();
+        // }
+
+        // Insertar el nuevo registro
+        $id = DB::table('formulas_biomecanicas_base')
+        ->where('id', $id)
+        ->update([
+            //'id' => $ultimoId ? $ultimoId : 1,
+            'parametros' => $validated['parametros'],
+           // 'id_informe' => $validated['id_informe'],
+            'nombre' => $validated['nombre'],
+            'descripcion' => $validated['descripcion'] ?? null,
+            'formula_sin_variables' => $validated['formula_sin_variables'],
+            'formula_con_variables' => $validated['formula_con_variables'],
+            'campo_destino' => $validated['campo_destino'],
+            'campos_variables' => $validated['campos_variables'],
+            'campo_destino_alias' => $validated['campo_destino_alias'],
+            'esPlantilla' => $validated['esPlantilla'] ?? false,
+            //'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return response()->json(['success' => true, 'id' => $id]);
     }
 
 
