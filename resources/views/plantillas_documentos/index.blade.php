@@ -28,6 +28,19 @@
             </div>
         @endif
 
+        @if ($errors->any())
+            <div class="p-4 bg-red-100 border border-red-300 text-red-800 rounded-md">
+                <ul class="list-disc list-inside">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        {{-- FIN ALERTAS --}}
+
+
+
         <div class="p-6">
             <div class="w-full">
                 <div class="border-b border-gray-200">
@@ -84,7 +97,7 @@
                                             <th class="px-4 py-2">Archivo</th>
                                             <th class="px-4 py-2">Tamaño</th>
                                             <th class="px-4 py-2">Fecha</th>
-                                            {{-- <th class="px-4 py-2">Acciones</th> --}}
+                                            <th class="px-4 py-2">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -93,9 +106,10 @@
                                                 <td class="px-4 py-2">{{ basename($archivo) }}</td>
                                                 <td class="px-4 py-2">{{ round(filesize($archivo) / 1048576, 2) }} MB</td>
                                                 <td class="px-4 py-2">{{ date('d/m/Y H:i:s', filemtime($archivo)) }}</td>
-                                                {{-- <td class="px-4 py-2">
-                                                    <a href="{{ route('backup.descargar', pathinfo(basename($archivo), PATHINFO_FILENAME)) }}" class="text-blue-600 hover:underline">Descargar</a>
-                                                </td> --}}
+                                                
+                                                <td class="px-4 py-2">
+                                                    <a href="{{ route('plantillas.descargar', pathinfo(basename($archivo), PATHINFO_FILENAME)) }}" class="text-blue-600 hover:underline">Descargar</a>
+                                                </td>
                                             </tr>
                                         @empty
                                             <tr>

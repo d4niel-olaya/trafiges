@@ -344,6 +344,7 @@ class InformeController extends Controller
         $totalPagos = DB::table("informes_tiposInformes")->where("id_informe","=", $id)->sum("precio");
         $formulas = DB::table("formulas_biomecanicas")->where("id_informe","=", $id)->get();
         $resultados_biomecanicos = DB::table("resultados_biomecanicos")->where("id_informe","=", $id)->get();
+        $plantillas = DB::table("plantillas")->select("id","titulo","descripcion")->orderBy("id","asc")->get();
         //return $informe;
         return view("informes.edit",["informe" => $informe, "ocupantes_conductor" => $ocupantes_conductor
                 , "ocupantes_copiloto" => $ocupantes_copiloto,
@@ -360,7 +361,8 @@ class InformeController extends Controller
                 "tipos_informes_asociados" => $tipos_informes_asociados,
                 "totalPagos" => $totalPagos,
                 "formulas" => $formulas,
-                "resultados_biomecanicos" => $resultados_biomecanicos
+                "resultados_biomecanicos" => $resultados_biomecanicos,
+                "plantillas" => $plantillas
             ]);
     }
 
@@ -402,6 +404,7 @@ class InformeController extends Controller
             'inclinacion_via' => 'nullable|string',
             'nombre_testigo' => 'nullable|string|max:100',
             'apellido_testigo' => 'nullable|string|max:100',
+            'plantilla_asociada' => 'nullable|integer',
         ]);
     
         // Convertir los datos de vehículos y resultados biomecánicos a JSON
@@ -490,6 +493,7 @@ class InformeController extends Controller
                 'inclinacion_via' => $validatedData['inclinacion_via'] ?? null,
                 'nombre_testigo' => $validatedData['nombre_testigo'] ?? null,
                 'apellido_testigo' => $validatedData['apellido_testigo'] ?? null,
+                'id_plantilla' => $validatedData['plantilla_asociada'] ?? null,
                 'datos' => $datosCompletos,
                 'updated_at' => now(),
             ]);

@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             inclinacion_via: document.querySelector('select[name="inclinacion_via"]')?.value || '',
             nombre_testigo: document.querySelector('input[name="nombre_testigo"]')?.value || '',
             apellido_testigo: document.querySelector('input[name="apellido_testigo"]')?.value || '',
+            plantilla_asociada: document.querySelector('select[name="plantilla_asociada"]').value || '',
             vehiculo1: {
                 matricula: document.querySelector('input[name="matricula-1"]').value,
                 marca: document.querySelector('input[name="marca-1"]').value,

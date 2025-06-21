@@ -26,8 +26,11 @@
                 <div class="border-b border-gray-200">
                     <nav class="flex overflow-x-auto -mb-px space-x-4 sm:space-x-8" aria-label="Tabs">
                         <button id="tab-datos-generales" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 active" data-tab="datos-generales-content">Calculadora</button>
-                        <button id="tab-datos-adicionales" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="datos-adicionales-content">Fórmulas Interactivas</button>
-                       
+                          @auth
+                            @if(Auth::user()->hasRole('administrador'))
+                                <button id="tab-datos-adicionales" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="datos-adicionales-content">Fórmulas Interactivas</button>
+                            @endif
+                        @endauth
                     </nav>
                 </div>
                 <div class="py-6 tab-content">

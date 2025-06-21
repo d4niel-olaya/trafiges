@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/informes/tipo_informe', [InformeController::class, 'asociarTipoInforme'])->name('informes.asociarTipoInforme')->middleware('role:administrador');
     // 🔹 Plantillas
     Route::resource('plantillas', PlantillaController::class)->middleware('role:administrador|perito');
-
+    Route::get('/plantillas/descargar/{archivo}', [PlantillaController::class, 'descargar'])->name('plantillas.descargar')->middleware('role:administrador|perito');
     // 🔹 Clientes
     Route::resource('clientes', ClienteController::class)->middleware('role:administrador|perito');
 

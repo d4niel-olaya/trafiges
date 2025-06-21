@@ -13,13 +13,37 @@ class WordExportController extends Controller
     {
         // Ruta de la plantilla
         $templatePath = resource_path('plantillas/VALORACIÓN BIOMECÁNICA CLÍNIC1.docx');
+
+        $id_plantilla = DB::table('informes')
+            ->where('id', $id_informe)
+            ->value('id_plantilla');
+        if (!$id_plantilla) {
+             $templatePath = resource_path('plantillas/VALORACIÓN BIOMECÁNICA CLÍNIC1.docx');
+        }else{
+            $plantilla = DB::table('plantillas')
+                ->select('ruta')
+                ->where('id', $id_plantilla)
+                ->first();
+            if (!$plantilla) {
+                return response()->json(['error' => 'Plantilla no encontrada.'], 404);
+            }
+            $ruta = $plantilla->ruta;
+            $templatePath = storage_path('app/public/' . $ruta);
+        }
  
         if (!file_exists($templatePath)) {
-            return response()->json(['error' => 'Plantilla no encontrada.'], 404);
+            return response()->json(['error' => 'Plantilla no encontrada.'. $templatePath], 404);
         }
 
         // Consulta de los datos
-        $datos = DB::select('CALL obtener_informe_con_ocupantes(?)', [$id_informe]);
+        $numero_informe = DB::table('informes')
+            ->select('numero_informe')
+            ->where('id', $id_informe)
+            ->value('numero_informe');
+        if (!$numero_informe) {
+            return response()->json(['error' => 'Informe no encontrado.'. $numero_informe], 404);
+        }
+        $datos = DB::select('CALL obtener_informe_con_ocupantes(?)', [$numero_informe]);
         $datos = $datos[0] ?? null;
         if (!$datos) {
             return response()->json(['error' => 'Informe no encontrado.'], 404);
@@ -41,7 +65,7 @@ class WordExportController extends Controller
         }
 
         // Guardar archivo Word
-        $outputPath = $folderPath . "/word_export_{$id_informe}.docx";
+        $outputPath = $folderPath . "/word_export_{$numero_informe}.docx";
         $templateProcessor->saveAs($outputPath);
         // Devolver archivo como descarga
         return response()->download($outputPath)->deleteFileAfterSend(true);

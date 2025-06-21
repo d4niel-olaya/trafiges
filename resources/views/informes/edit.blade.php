@@ -31,10 +31,15 @@
                         <button id="tab-datos-generales" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 active" data-tab="datos-generales-content">Datos Generales</button>
                         <button id="tab-vehiculos" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="vehiculos-content">Vehículos</button>
                         <button id="tab-biomecanica-vista" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="biomecanica-content">Biomecánica</button>
-                           <button id="tab-interactiva" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="interactiva-content">Formulas Biomecánicas</button>
+                        @auth
+                            @if(Auth::user()->hasRole('administrador'))
+                                <button id="tab-interactiva" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="interactiva-content">Formulas Biomecánicas</button>
+                            @endif
+                        @endauth
                         <button id="tab-ocupantes" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="ocupantes-content">Ocupantes</button>
                         <button id="tab-tipos-informes" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="tipos-informes-content">Tipos de informes</button>
                         <button id="tab-pagos" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="pagos-content">Cobros</button>
+                         <button id="tab-exportacion" class="tab-button flex-shrink-0 py-4 px-2 sm:px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ease-in-out border-sky-500 text-sky-600" aria-current="page" data-tab="exportacion-content">Asociar Plantilla</button>
                     </nav>
                 </div>
                 <div class="py-6 tab-content">
@@ -662,6 +667,10 @@
                                  @include('informes.partials.tipos_informes_facturacion', ["tiposInformes"=>$tipos_informe, "tipos_informes_asociados"=>$tipos_informes_asociados, "totalPagos"=>$totalPagos])
                             </div>
                         </div>
+                    </div>
+
+                    <div id="exportacion-content" class="tab-panel">
+                            @include("informes.partials.asociar_plantilla", ["plantillas"=>$plantillas])
                     </div>
                 </div>
             </div>
