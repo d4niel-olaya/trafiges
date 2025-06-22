@@ -87,7 +87,7 @@ class PlantillaController extends Controller
         $nombreArchivo = Str::slug($titulo) . '_' . time() . '.' . $extension;
 
         try {
-            $ruta = $archivo->storeAs('plantillas', $nombreArchivo, 'public');
+            $ruta = $archivo->storeAs('app/public/plantillas', $nombreArchivo, 'public');
 
             DB::table('plantillas')->insert([
                 'titulo' => $titulo,
