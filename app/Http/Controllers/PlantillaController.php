@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+
 class PlantillaController extends Controller
 {
     /**
@@ -15,20 +17,31 @@ class PlantillaController extends Controller
     public function index()
     {
         //}
-        $path = storage_path('app/public/plantillas');
-        $archivos = File::glob($path . '/*.docx');
-         // Actualizar la fecha de actualización de todas las plantillas
+        // $path = storage_path('app/private/plantillas');
+        // $archivos = File::glob($path . '/*.docx');
+        //  // Actualizar la fecha de actualización de todas las plantillas
 
-        return view("plantillas_documentos.index", compact('archivos'));
+        // return view("plantillas_documentos.index", compact('archivos'));
+        $archivos = DB::table('plantillas')->get();
+
+        // 2️⃣ (Opcional) Verifica que el archivo exista en el storage
+        $archivos = $archivos->map(function ($plantilla) {
+            $existe = Storage::disk('local')->exists($plantilla->ruta);
+            $plantilla->existe_archivo = $existe;
+            return $plantilla;
+        });
+
+        // 3️⃣ Envía a la vista
+        return view('plantillas_documentos.index', compact('archivos'));
     }
 
-     public function descargar($archivo)
+     public function descargar(string $archivo)
     {
-        $archivo .= '.docx';
-        $filePath = storage_path('app/public/plantillas') . "/$archivo";
+        //$archivo .= '.docx';
+        $filePath = storage_path('app/private/plantillas') . "/$archivo";
 
         if (!file_exists($filePath)) {
-            abort(404, "Archivo no encontrado.");
+            abort(422, "Archivo no encontrado.". "" . $filePath);
         }
 
         // // Crear nombre del archivo ZIP temporal
@@ -87,12 +100,14 @@ class PlantillaController extends Controller
         $nombreArchivo = Str::slug($titulo) . '_' . time() . '.' . $extension;
 
         try {
-            $ruta = $archivo->storeAs('app/public/plantillas', $nombreArchivo, 'public');
-
+            //$ruta = $archivo->storeAs('plantillas', $nombreArchivo);
+            Storage::disk('local')->put('plantillas/' . $nombreArchivo, $archivo->getContent());
+           
             DB::table('plantillas')->insert([
                 'titulo' => $titulo,
                 'descripcion' => $request->input('descripcion'),
-                'ruta' => $ruta,
+                'ruta' => "plantillas/$nombreArchivo",
+                "nombre_archivo" => $nombreArchivo,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

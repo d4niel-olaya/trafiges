@@ -94,8 +94,8 @@
                                 <table class="w-full text-sm text-left">
                                     <thead class="bg-gray-100 border-b">
                                         <tr>
+                                            <th class="px-4 py-2">Nombre Plantilla</th>
                                             <th class="px-4 py-2">Archivo</th>
-                                            <th class="px-4 py-2">Tamaño</th>
                                             <th class="px-4 py-2">Fecha</th>
                                             <th class="px-4 py-2">Acciones</th>
                                         </tr>
@@ -103,12 +103,12 @@
                                     <tbody>
                                         @forelse($archivos as $archivo)
                                             <tr class="border-b">
-                                                <td class="px-4 py-2">{{ basename($archivo) }}</td>
-                                                <td class="px-4 py-2">{{ round(filesize($archivo) / 1048576, 2) }} MB</td>
-                                                <td class="px-4 py-2">{{ date('d/m/Y H:i:s', filemtime($archivo)) }}</td>
+                                                <td class="px-4 py-2">{{ $archivo->titulo }}</td>
+                                                <td class="px-4 py-2">{{ $archivo->nombre_archivo}}</td>
+                                                <td class="px-4 py-2">{{ $archivo->created_at }}</td>
                                                 
                                                 <td class="px-4 py-2">
-                                                    <a href="{{ route('plantillas.descargar', pathinfo(basename($archivo), PATHINFO_FILENAME)) }}" class="text-blue-600 hover:underline">Descargar</a>
+                                                    <a href="{{ route('plantillas.descargar', $archivo->nombre_archivo ?? 'plantilla1.docx') }}" class="text-blue-600 hover:underline">Descargar</a>
                                                 </td>
                                             </tr>
                                         @empty
