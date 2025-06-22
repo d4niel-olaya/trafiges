@@ -84,7 +84,7 @@ class BackupController extends Controller
         }
 
         // Descargar el archivo zip
-        return response()->download($zipFilePath)->deleteFileAfterSend(true);
+        return response()->download($zipFilePath)->deleteFileAfterSend(false);
     }
 
     /**

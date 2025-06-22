@@ -25,11 +25,11 @@ class PlantillaController extends Controller
         $archivos = DB::table('plantillas')->get();
 
         // 2️⃣ (Opcional) Verifica que el archivo exista en el storage
-        $archivos = $archivos->map(function ($plantilla) {
-            $existe = Storage::disk('local')->exists($plantilla->ruta);
-            $plantilla->existe_archivo = $existe;
-            return $plantilla;
-        });
+        // $archivos = $archivos->map(function ($plantilla) {
+        //     $existe = Storage::disk('local')->exists($plantilla->ruta);
+        //     $plantilla->existe_archivo = $existe;
+        //     return $plantilla;
+        // });
 
         // 3️⃣ Envía a la vista
         return view('plantillas_documentos.index', compact('archivos'));
@@ -38,10 +38,10 @@ class PlantillaController extends Controller
      public function descargar(string $archivo)
     {
         //$archivo .= '.docx';
-        $filePath = storage_path('app/private/plantillas') . "/$archivo";
+        $filePath = storage_path('app/public/plantillas') . "/$archivo";
 
         if (!file_exists($filePath)) {
-            abort(422, "Archivo no encontrado.". "" . $filePath);
+            abort(404, "Archivo no encontrado.". "" . $filePath);
         }
 
         // // Crear nombre del archivo ZIP temporal
@@ -58,7 +58,7 @@ class PlantillaController extends Controller
         // }
 
         // Descargar el archivo zip
-        return response()->download($filePath)->deleteFileAfterSend(true);
+        return response()->download($filePath)->deleteFileAfterSend(false);
     }
 
     /**
@@ -101,12 +101,13 @@ class PlantillaController extends Controller
 
         try {
             //$ruta = $archivo->storeAs('plantillas', $nombreArchivo);
-            Storage::disk('local')->put('plantillas/' . $nombreArchivo, $archivo->getContent());
+               $ruta = $archivo->storeAs('plantillas', $nombreArchivo, 'public');
+            //Storage::disk('local')->put('plantillas/' . $nombreArchivo, $archivo->getContent());
            
             DB::table('plantillas')->insert([
                 'titulo' => $titulo,
                 'descripcion' => $request->input('descripcion'),
-                'ruta' => "plantillas/$nombreArchivo",
+                'ruta' => $ruta,
                 "nombre_archivo" => $nombreArchivo,
                 'created_at' => now(),
                 'updated_at' => now(),
