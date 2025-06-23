@@ -44,10 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('input[name="matricula-2"]').value = e.target.value;
     });
     // calculos biomecánicos
-    document.querySelector('input[name="tara-1"]').addEventListener('input',  CalcularMom1);
-    document.querySelector('input[name="mom-1"]').addEventListener('input', CalcularMom1);
-    document.querySelector('input[name="ocupantes-1"]').addEventListener('input', CalcularMom1);
-    document.querySelector('input[name="tara-2"]').addEventListener('input', CalcularMom2);
+    // document.querySelector('input[name="tara-1"]').addEventListener('input',  CalcularMom1);
+    // document.querySelector('input[name="mom-1"]').addEventListener('input', CalcularMom1);
+    // document.querySelector('input[name="ocupantes-1"]').addEventListener('input', CalcularMom1);
+    // document.querySelector('input[name="tara-2"]').addEventListener('input', CalcularMom2);
     document.querySelector('select[name="estado_via"]').addEventListener('change', toggleOtrosInput);
       // autocomplete de clientes
 

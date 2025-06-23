@@ -16,7 +16,7 @@
                         </option>
                         @endforeach
                     @else
-                    <option value="">No hay abogados asociados</option>
+                    <option value="">No hay plantillas asociadas</option>
                     @endif
                 </select>
             </div>

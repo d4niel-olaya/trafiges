@@ -10,7 +10,7 @@ import {toggleOtrosInput} from './informes/index.js';
 document.addEventListener('DOMContentLoaded', () => {
     //CalcularMom1();
     // CalcularMom2();
-      toggleOtrosInput()
+    toggleOtrosInput()
     
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const ajaxHandler = new AjaxHandler(csrfToken);
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // document.querySelector('input[name="mom-1"]').addEventListener('input', CalcularMom1);
     // document.querySelector('input[name="ocupantes-1"]').addEventListener('input', CalcularMom1);
     // document.querySelector('input[name="tara-2"]').addEventListener('input', CalcularMom2);
-    // document.querySelector('select[name="estado_via"]').addEventListener('change', toggleOtrosInput);
+     document.querySelector('select[name="estado_via"]').addEventListener('change', toggleOtrosInput);
      // autocomplete de clientes
 
      const $input = $("#nombreCliente");
