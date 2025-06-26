@@ -344,7 +344,9 @@ class InformeController extends Controller
         $totalPagos = DB::table("informes_tiposInformes")->where("id_informe","=", $id)->sum("precio");
         $formulas = DB::table("formulas_biomecanicas")->where("id_informe","=", $id)->get();
         $resultados_biomecanicos = DB::table("resultados_biomecanicos")->where("id_informe","=", $id)->get();
-        $plantillas = DB::table("plantillas")->select("id","titulo","descripcion")->orderBy("id","asc")->get();
+        $plantillas = DB::table("plantillas")->select("id","titulo","descripcion")->orderBy("id","asc")
+        ->where("activo","=",1)
+        ->get();
         //return $informe;
         return view("informes.edit",["informe" => $informe, "ocupantes_conductor" => $ocupantes_conductor
                 , "ocupantes_copiloto" => $ocupantes_copiloto,

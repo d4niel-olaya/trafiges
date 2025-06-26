@@ -22,7 +22,9 @@ class PlantillaController extends Controller
         //  // Actualizar la fecha de actualización de todas las plantillas
 
         // return view("plantillas_documentos.index", compact('archivos'));
-        $archivos = DB::table('plantillas')->get();
+        $archivos = DB::table('plantillas')
+        ->where('activo', 1)
+        ->get();
 
         // 2️⃣ (Opcional) Verifica que el archivo exista en el storage
         // $archivos = $archivos->map(function ($plantilla) {
@@ -139,9 +141,21 @@ class PlantillaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         //
+         $validated = $request->validate([
+            'id' => 'required|integer|exists:plantillas,id',
+         ]);
+
+         DB::table('plantillas')
+            ->where('id', $validated['id'])
+            ->update([
+                'activo' => 0,
+                'updated_at' => now(),
+            ]);
+
+        return response()->json(['success' => true, 'message' => 'Plantilla Eliminada correctamente.']);
     }
 
     /**

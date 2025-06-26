@@ -23,12 +23,15 @@ class WordExportController extends Controller
             $plantilla = DB::table('plantillas')
                 ->select('ruta')
                 ->where('id', $id_plantilla)
+                ->where('activo', 1)
                 ->first();
             if (!$plantilla) {
-                return response()->json(['error' => 'Plantilla no encontrada.'], 404);
+                $templatePath = resource_path('plantillas/VALORACIÓN BIOMECÁNICA CLÍNIC1.docx');
+            }else{
+
+                $ruta = $plantilla->ruta;
+                $templatePath = storage_path('app/public/' . $ruta);
             }
-            $ruta = $plantilla->ruta;
-            $templatePath = storage_path('app/public/' . $ruta);
         }
  
         if (!file_exists($templatePath)) {

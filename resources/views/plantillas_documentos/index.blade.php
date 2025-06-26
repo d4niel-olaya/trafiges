@@ -91,7 +91,7 @@
                      <div id="plantillas-content" class="tab-panel hidden">
                         <div class="tab-content">
                             <div class="overflow-auto">
-                                <table class="w-full text-sm text-left">
+                                <table class="w-full text-sm text-left" id="tabla-plantillas">
                                     <thead class="bg-gray-100 border-b">
                                         <tr>
                                             <th class="px-4 py-2">Nombre Plantilla</th>
@@ -102,13 +102,16 @@
                                     </thead>
                                     <tbody>
                                         @forelse($archivos as $archivo)
-                                            <tr class="border-b">
+                                            <tr class="border-b" data-id="{{$archivo->id}}">
+                                                
                                                 <td class="px-4 py-2">{{ $archivo->titulo }}</td>
                                                 <td class="px-4 py-2">{{ $archivo->nombre_archivo}}</td>
                                                 <td class="px-4 py-2">{{ $archivo->created_at }}</td>
                                                 
                                                 <td class="px-4 py-2">
                                                     <a href="{{ route('plantillas.descargar', $archivo->nombre_archivo ?? 'plantilla1.docx') }}" class="text-blue-600 hover:underline">Descargar</a>
+                                                    <br/>
+                                                    <button class="text-red-600 hover:underline EliminarPlantilla">Eliminar</button>
                                                 </td>
                                             </tr>
                                         @empty
@@ -126,7 +129,53 @@
                     <div id="datos-adicionales-content" class="tab-panel hidden">
                         <div class="tab-content">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-                                Aquí se asociaran los datos a las plantillas
+                                 <p>Para asociar datos a las plantillas debes escribir en el documento de Word las siguientes palabras clave (respetando las llaves y el formato):</p>
+                                 <br>
+                                 <br/>
+                                 
+                                <ul class="list-disc pl-5">
+                                    <li>${numero_informe} → Número del informe</li>
+                                    <li>${matricula} → Matrícula del vehículo</li>
+                                    <li>${fechaAccidente} → Fecha del accidente</li>
+
+                                    <li>${cliente_nombre} → Nombre del cliente</li>
+                                    <li>${cliente_apellidos} → Apellidos del cliente</li>
+                                    <li>${cliente_dni} → DNI del cliente</li>
+
+                                    <li>${abogado_nombre} → Nombre del abogado</li>
+                                    <li>${abogado_apellidos} → Apellidos del abogado</li>
+
+                                    <li>${perito_nombre} → Nombre del perito</li>
+                                    <li>${perito_apellidos} → Apellidos del perito</li>
+
+                                    <li>${compania_nombre} → Nombre de la compañía de seguros</li>
+
+                                    <li>${referido_nombre} → Nombre del referido</li>
+                                    <li>${referido_apellidos} → Apellidos del referido</li>
+
+                                    <li>${velocidad_v1} → Velocidad V1</li>
+                                    <li>${velocidad_v2} → Velocidad V2</li>
+
+                                    <li>${conductor_nombre} → Nombre del conductor</li>
+                                    <li>${conductor_apellidos} → Apellidos del conductor</li>
+                                    <li>${conductor_dni} → DNI del conductor</li>
+
+                                    <li>${copiloto_nombre} → Nombre del copiloto</li>
+                                    <li>${copiloto_apellidos} → Apellidos del copiloto</li>
+                                    <li>${copiloto_dni} → DNI del copiloto</li>
+
+                                    <li>${detras_copiloto_nombre} → Nombre del ocupante detrás del copiloto</li>
+                                    <li>${detras_copiloto_apellidos} → Apellidos del ocupante detrás del copiloto</li>
+                                    <li>${detras_copiloto_dni} → DNI del ocupante detrás del copiloto</li>
+
+                                    <li>${detras_3_nombre} → Nombre del ocupante detrás 3</li>
+                                    <li>${detras_3_apellidos} → Apellidos del ocupante detrás 3</li>
+                                    <li>${detras_3_dni} → DNI del ocupante detrás 3</li>
+
+                                    <li>${detras_4_nombre} → Nombre del ocupante detrás 4</li>
+                                    <li>${detras_4_apellidos} → Apellidos del ocupante detrás 4</li>
+                                    <li>${detras_4_dni} → DNI del ocupante detrás 4</li>
+                                </ul>
                                 {{-- <div class="mb-6">
                                     <label for="fechaAccidente" class="block text-sm font-medium text-gray-700 mb-2">Fecha del Accidente</label>
                                     <input type="date" id="fechaAccidente" name="fechaAccidente" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
@@ -192,12 +241,17 @@
         showTab('plantillas-subir-content');
 
 
+       
+
+
         
     });
+
  
 
 </script>
 @endsection
 @push("scripts")
+@vite('resources/js/plantillas/eliminar.js')
 {{-- @vite('resources/js/plantillas/upload.js') --}}
 @endpush

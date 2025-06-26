@@ -265,7 +265,30 @@ export function formularioAJson(divId) {
 
     // Retornar el objeto JSON
     return formData;
+
 }
+
+export function MostrarMensajeConfirmacion(title, message, confirmCallback) {
+    Swal.fire({
+        icon: 'question',
+        title: title || '¿Estás seguro?',
+        text: message || 'Por favor confirma la acción.',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, confirmar',
+        cancelButtonText: 'Cancelar',
+        customClass: {
+            confirmButton: 'bg-blue-600 text-white rounded-lg px-4 py-2 hover:bg-blue-700 focus:ring focus:ring-blue-500',
+            cancelButton: 'bg-gray-300 text-black rounded-lg px-4 py-2 hover:bg-gray-400 focus:ring focus:ring-gray-500'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if (typeof confirmCallback === 'function') {
+                confirmCallback();
+            }
+        }
+    });
+}
+
 
 export function inputsAJson(listaIds) {
     const formData = {};
