@@ -1,7 +1,7 @@
 <div x-data="{
         ocupantes: [],
         agregarOcupante() {
-            this.ocupantes.push({ peso: '' });
+            this.ocupantes.push({ peso: 0 });
         },
         eliminarOcupante(index) {
             this.ocupantes.splice(index, 1);
@@ -10,7 +10,7 @@
     x-init="
         let pesosInput = document.getElementById('pesos-ocupantes-vh1');
         try {
-            ocupantes = JSON.parse(pesosInput.value || '[]');
+            ocupantes = JSON.parse(pesosInput.value || '[{peso: 0}]');
         } catch (error) {
             ocupantes = [];
         }

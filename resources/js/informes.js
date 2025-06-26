@@ -4,7 +4,17 @@ import AjaxHandler from './utils.js';
 import {toggleOtrosInput} from './informes/index.js';
 
 
-
+function obtenerDatosOcupantes() {
+    const ocupantes = document.getElementById("pesos-ocupantes-vh1").value || "[{peso: 0}]";
+    const ocupantesArray = JSON.parse(ocupantes);
+    let contador = 0;
+    for(const ocupante of ocupantesArray) {
+        
+            contador+= parseFloat(ocupante.peso) || 0;
+        
+    }
+    return contador;
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -127,6 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 numOcupantes: parseInt(document.querySelector('input[name="ocupantes-1"]').value) || 0,
                 velocidad: parseFloat(document.querySelector('input[name="velocidad-1"]').value) || 0,
                 pesoOcupantes:document.getElementById("pesos-ocupantes-vh1").value || "[{peso: 0}]",
+                peso_ocupantes_numero:obtenerDatosOcupantes(),
+                taller:null,
+                companiaSeguros: null
             },
             vehiculo2: {
                 matricula: document.querySelector('input[name="matricula-2"]').value,

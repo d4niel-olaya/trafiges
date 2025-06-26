@@ -298,6 +298,38 @@ class InformeController extends Controller
                 'updated_at' => now(),
             ]);
         }
+
+          DB::table('datos_vehiculos')->insert([
+                'matricula' => $validatedData['vehiculo1']['matricula'] ?? null,
+                'marca' => $validatedData['vehiculo1']['marca'] ?? null,
+                'modelo' => $validatedData['vehiculo1']['modelo'] ?? null,
+                'color' => $validatedData['vehiculo1']['color'] ?? null,
+                'tara' => $validatedData['vehiculo1']['tara'] ?? null,
+                'numero_ocupantes' => $validatedData['vehiculo1']['numero_ocupantes'] ?? null,
+                'id_informe' => $id_informe,
+                'velocidad' => $validatedData['vehiculo1']['velocidad'] ?? null,
+                'pesoOcupantes' => $validatedData['vehiculo1']['pesoOcupantes'] ?? null,
+                'taller' => $validatedData['vehiculo1']['taller'] ?? null,
+                'peso_ocupantes_numero' => $validatedData['vehiculo1']['peso_ocupantes_numero'] ?? null,
+                'compania_seguros' => $validatedData['vehiculo1']['companiaSeguros'] ?? null,
+                'tipo_vehiculo' => 'vehiculo1'
+            ]);
+
+            DB::table('datos_vehiculos')->insert([
+                'matricula' => $validatedData['vehiculo2']['matricula'] ?? null,
+                'marca' => $validatedData['vehiculo2']['marca'] ?? null,
+                'modelo' => $validatedData['vehiculo2']['modelo'] ?? null,
+                'color' => $validatedData['vehiculo2']['color'] ?? null,
+                'tara' => $validatedData['vehiculo2']['tara'] ?? null,
+                'numero_ocupantes' => $validatedData['vehiculo2']['numero_ocupantes'] ?? null,
+                'id_informe' => $id_informe,
+                'velocidad' => $validatedData['vehiculo2']['velocidad'] ?? null,
+                'pesoOcupantes' => $validatedData['vehiculo2']['pesoOcupantes'] ?? null,
+                'taller' => $validatedData['vehiculo2']['taller'] ?? null,
+                'peso_ocupantes_numero' => $validatedData['vehiculo2']['peso_ocupantes_numero'] ?? null,
+                'compania_seguros' => $validatedData['vehiculo2']['companiaSeguros'] ?? null,
+                'tipo_vehiculo' => 'vehiculo2'
+            ]);
     
         // Retornar una respuesta JSON
         return response()->json(['message' => 'Informe creado correctamente', 'id' => $nuevoId]);
@@ -548,6 +580,41 @@ class InformeController extends Controller
                     'updated_at' => now(),
                 ]);
             }
+
+            DB::table('datos_vehiculos')->where('id_informe', $validatedData['id'])->delete();
+
+            DB::table('datos_vehiculos')->insert([
+                'matricula' => $validatedData['vehiculo1']['matricula'] ?? null,
+                'marca' => $validatedData['vehiculo1']['marca'] ?? null,
+                'modelo' => $validatedData['vehiculo1']['modelo'] ?? null,
+                'color' => $validatedData['vehiculo1']['color'] ?? null,
+                'tara' => $validatedData['vehiculo1']['tara'] ?? null,
+                'numero_ocupantes' => $validatedData['vehiculo1']['numero_ocupantes'] ?? null,
+                'id_informe' => $validatedData['id'],
+                'velocidad' => $validatedData['vehiculo1']['velocidad'] ?? null,
+                'pesoOcupantes' => $validatedData['vehiculo1']['pesoOcupantes'] ?? null,
+                'taller' => $validatedData['vehiculo1']['taller'] ?? null,
+                'peso_ocupantes_numero' => $validatedData['vehiculo1']['peso_ocupantes_numero'] ?? null,
+                'compania_seguros' => $validatedData['vehiculo1']['companiaSeguros'] ?? null,
+                'tipo_vehiculo' => 'vehiculo1'
+            ]);
+
+            DB::table('datos_vehiculos')->insert([
+                'matricula' => $validatedData['vehiculo2']['matricula'] ?? null,
+                'marca' => $validatedData['vehiculo2']['marca'] ?? null,
+                'modelo' => $validatedData['vehiculo2']['modelo'] ?? null,
+                'color' => $validatedData['vehiculo2']['color'] ?? null,
+                'tara' => $validatedData['vehiculo2']['tara'] ?? null,
+                'numero_ocupantes' => $validatedData['vehiculo2']['numero_ocupantes'] ?? null,
+                'id_informe' => $validatedData['id'],
+                'velocidad' => $validatedData['vehiculo2']['velocidad'] ?? null,
+                'pesoOcupantes' => $validatedData['vehiculo2']['pesoOcupantes'] ?? null,
+                'taller' => $validatedData['vehiculo2']['taller'] ?? null,
+                'peso_ocupantes_numero' => $validatedData['vehiculo2']['peso_ocupantes_numero'] ?? null,
+                'compania_seguros' => $validatedData['vehiculo2']['companiaSeguros'] ?? null,
+                'tipo_vehiculo' => 'vehiculo2'
+            ]);
+    
     
             //return response()->json(['message' => 'Informe actualizado correctamente', 'id' => $input['id']]);
            return response()->json(['message' => 'Informe actualizado correctamente', 'id']);
