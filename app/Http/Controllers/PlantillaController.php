@@ -25,7 +25,10 @@ class PlantillaController extends Controller
         $archivos = DB::table('plantillas')
         ->where('activo', 1)
         ->get();
+         $json = file_get_contents(storage_path('app/public/items.json'));
+        $items = json_decode($json, true);
 
+   
         // 2️⃣ (Opcional) Verifica que el archivo exista en el storage
         // $archivos = $archivos->map(function ($plantilla) {
         //     $existe = Storage::disk('local')->exists($plantilla->ruta);
@@ -34,7 +37,7 @@ class PlantillaController extends Controller
         // });
 
         // 3️⃣ Envía a la vista
-        return view('plantillas_documentos.index', compact('archivos'));
+        return view('plantillas_documentos.index', compact('archivos', 'items'));
     }
 
      public function descargar(string $archivo)

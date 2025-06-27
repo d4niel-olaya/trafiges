@@ -128,131 +128,16 @@
 
                     <div id="datos-adicionales-content" class="tab-panel hidden"> 
                     <div class="tab-content">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-                            <p>Para asociar datos a las plantillas debes escribir en el documento de Word las siguientes palabras clave (respetando las llaves y el formato):</p>
-                            <br><br/>
-                            <ul class="list-disc pl-5">
-                            <!-- INFORME -->
-                            <li>${numero_informe} → Número del informe</li>
-                            <li>${matricula} → Matrícula del vehículo principal</li>
-                            <li>${fechaAccidente} → Fecha del accidente</li>
-                            <li>${tipoColision} → Tipo de colisión</li>
-                            <li>${marcaVehiculo} → Marca del vehículo principal</li>
-                            <li>${modeloVehiculo} → Modelo del vehículo principal</li>
-                            <li>${anioVehiculo} → Año del vehículo principal</li>
-                            <li>${coordenadasGeograficas} → Coordenadas del accidente</li>
-                            <li>${fechaEntregaAbogado} → Fecha de entrega al abogado</li>
-                            <li>${fechaEntregaCliente} → Fecha de entrega al cliente</li>
-                            <li>${estado} → Estado del informe</li>
-                            <li>${meteorologia} → Condiciones meteorológicas</li>
-                            <li>${estado_via} → Estado de la vía</li>
-                            <li>${estado_via_otros} → Otros estados de la vía</li>
-                            <li>${inclinacion_via} → Inclinación de la vía</li>
-                            <li>${nombre_testigo} → Nombre del testigo</li>
-                            <li>${apellido_testigo} → Apellido del testigo</li>
+                        <div class="space-y-2">
+                             <p class="text-lg font-semibold text-gray-800 mb-6">Para asociar datos a las plantillas, debes escribir en el documento de Word las siguientes palabras clave (respetando las llaves y el formato):</p>
+                            @foreach ($items as $item)
+                                <div class="flex justify-between items-start bg-gray-50 p-4 border border-gray-200 rounded hover:bg-gray-100">
+                                    <div class="text-gray-700 font-medium">{{ $item['descripcion'] }}</div>
+                                    <code class="text-sm text-blue-600">{{ $item['item'] }}</code>
+                                </div>
+                            @endforeach
+                        </div>
 
-                            <!-- CLIENTE -->
-                            <li>${cliente_nombre} → Nombre del cliente</li>
-                            <li>${cliente_apellidos} → Apellidos del cliente</li>
-                            <li>${cliente_dni} → DNI del cliente</li>
-                            <li>${cliente_telefono} → Teléfono del cliente</li>
-                            <li>${cliente_email} → Email del cliente</li>
-                            <li>${cliente_direccion} → Dirección del cliente</li>
-                            <li>${cliente_fecha_nacimiento} → Fecha de nacimiento del cliente</li>
-                            <li>${cliente_poblacion} → Población del cliente</li>
-                            <li>${cliente_provincia} → Provincia del cliente</li>
-                            <li>${cliente_estatura} → Estatura del cliente</li>
-                            <li>${cliente_peso} → Peso del cliente</li>
-
-                            <!-- ABOGADO -->
-                            <li>${abogado_nombre} → Nombre del abogado</li>
-                            <li>${abogado_apellidos} → Apellidos del abogado</li>
-                            <li>${abogado_telefono} → Teléfono del abogado</li>
-                            <li>${abogado_email} → Email del abogado</li>
-                            <li>${abogado_despacho} → Despacho del abogado</li>
-                            <li>${abogado_direccion} → Dirección del abogado</li>
-                            <li>${abogado_poblacion} → Población del abogado</li>
-                            <li>${abogado_provincia} → Provincia del abogado</li>
-
-                            <!-- PERITO -->
-                            <li>${perito_nombre} → Nombre del perito</li>
-                            <li>${perito_apellidos} → Apellidos del perito</li>
-                            <li>${perito_telefono} → Teléfono del perito</li>
-                            <li>${perito_email} → Email del perito</li>
-                            <li>${perito_especialidad} → Especialidad del perito</li>
-                            <li>${perito_poblacion} → Población del perito</li>
-                            <li>${perito_provincia} → Provincia del perito</li>
-
-                            <!-- COMPAÑÍA DE SEGUROS -->
-                            <li>${compania_nombre} → Nombre de la compañía de seguros</li>
-                            <li>${compania_contacto} → Nombre del contacto</li>
-                            <li>${compania_telefono} → Teléfono</li>
-                            <li>${compania_email} → Email</li>
-                            <li>${compania_direccion} → Dirección</li>
-
-                            <!-- REFERIDO -->
-                            <li>${referido_nombre} → Nombre del referido</li>
-                            <li>${referido_apellidos} → Apellidos del referido</li>
-                            <li>${referido_empresa} → Empresa del referido</li>
-                            <li>${referido_telefono} → Teléfono del referido</li>
-                            <li>${referido_email} → Email del referido</li>
-                            <li>${referido_direccion} → Dirección del referido</li>
-
-                            <!-- RESULTADOS BIOMECÁNICOS -->
-                            <li>${velocidad_v1} → Velocidad del vehículo 1</li>
-                            <li>${velocidad_v2} → Velocidad del vehículo 2</li>
-                            <li>${delta_v1} → Delta V del vehículo 1</li>
-                            <li>${delta_v2} → Delta V del vehículo 2</li>
-                            <li>${aceleracion_maxima} → Aceleración máxima</li>
-                            <li>${aceleracion_gravitatoria} → Aceleración gravitatoria</li>
-                            <li>${fuerza_inercia} → Fuerza de inercia</li>
-                            <li>${aumento_peso_cabeza} → Aumento del peso de la cabeza</li>
-                            <li>${nic} → NIC (criterio de lesión cervical)</li>
-
-                            <!-- OCUPANTES -->
-                            <li>${conductor_nombre} → Nombre del conductor</li>
-                            <li>${conductor_apellidos} → Apellidos del conductor</li>
-                            <li>${conductor_dni} → DNI del conductor</li>
-
-                            <li>${copiloto_nombre} → Nombre del copiloto</li>
-                            <li>${copiloto_apellidos} → Apellidos del copiloto</li>
-                            <li>${copiloto_dni} → DNI del copiloto</li>
-
-                            <li>${detras_copiloto_nombre} → Nombre del ocupante detrás del copiloto</li>
-                            <li>${detras_copiloto_apellidos} → Apellidos del ocupante detrás del copiloto</li>
-                            <li>${detras_copiloto_dni} → DNI del ocupante detrás del copiloto</li>
-
-                            <li>${detras_conductor_nombre} → Nombre del ocupante detrás del conductor</li>
-                            <li>${detras_conductor_apellidos} → Apellidos del ocupante detrás del conductor</li>
-                            <li>${detras_conductor_dni} → DNI del ocupante detrás del conductor</li>
-
-                            <li>${detras_centro_nombre} → Nombre del ocupante en el centro trasero</li>
-                            <li>${detras_centro_apellidos} → Apellidos del ocupante en el centro trasero</li>
-                            <li>${detras_centro_dni} → DNI del ocupante en el centro trasero</li>
-
-                            <li>${detras_3_nombre} → Nombre del ocupante detrás 3</li>
-                            <li>${detras_3_apellidos} → Apellidos del ocupante detrás 3</li>
-                            <li>${detras_3_dni} → DNI del ocupante detrás 3</li>
-
-                            <li>${detras_4_nombre} → Nombre del ocupante detrás 4</li>
-                            <li>${detras_4_apellidos} → Apellidos del ocupante detrás 4</li>
-                            <li>${detras_4_dni} → DNI del ocupante detrás 4</li>
-
-                            <!-- VEHÍCULOS -->
-                            <li>${marca_vh1} → Marca del vehículo 1</li>
-                            <li>${modelo_vh1} → Modelo del vehículo 1</li>
-                            <li>${color_vh1} → Color del vehículo 1</li>
-                            <li>${tara_vh1} → Tara del vehículo 1</li>
-                            <li>${velocidad_vh1} → Velocidad del vehículo 1</li>
-                            <li>${peso_ocupantes_vh1} → Peso ocupantes del vehículo 1</li>
-
-                            <li>${marca_vh2} → Marca del vehículo 2</li>
-                            <li>${modelo_vh2} → Modelo del vehículo 2</li>
-                            <li>${color_vh2} → Color del vehículo 2</li>
-                            <li>${tara_vh2} → Tara del vehículo 2</li>
-                            <li>${velocidad_vh2} → Velocidad del vehículo 2</li>
-                            <li>${peso_ocupantes_vh2} → Peso ocupantes del vehículo 2</li>
-                        </ul>
                     </div>
                 </div>
             </div>
