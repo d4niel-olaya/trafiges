@@ -49,6 +49,27 @@
                 <input id="apellido_testigo" value="{{$apellido_testigo ?? '' }}" name="apellido_testigo" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white"/>
             </div>
         </div>
+        <div class="mb-6"><label for="direccion_testigo" class="block text-sm font-medium text-gray-700 mb-2">Direccion del testigo</label>
+            <div class="relative">
+                <input id="direccion_testigo" value="{{$direccion_testigo ?? '' }}" name="direccion_testigo" maxlength="100"  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white"/>
+            </div>
+        </div>
+        <div class="mb-6"><label for="poblacion_testigo" class="block text-sm font-medium text-gray-700 mb-2">Población del testigo</label>
+            <div class="relative">
+                <input id="poblacion_testigo" value="{{$poblacion_testigo ?? '' }}" name="poblacion_testigo"  maxlength="100"  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white"/>
+            </div>
+        </div>
+        <div class="mb-6"><label for="cp_testigo" class="block text-sm font-medium text-gray-700 mb-2">C.P del testigo</label>
+            <div class="relative">
+                <input id="cp_testigo" value="{{$cp_testigo ?? '' }}" name="cp_testigo" maxlength="100" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white"/>
+            </div>
+        </div>
+        <div class="mb-6"><label for="ciudad_testigo" class="block text-sm font-medium text-gray-700 mb-2">Ciudad del testigo</label>
+            <div class="relative">
+                <input id="ciudad_testigo" value="{{$ciudad_testigo ?? '' }}" name="ciudad_testigo"  maxlength="100" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 appearance-none bg-white"/>
+            </div>
+        </div>
+        
 
     </div>
 </div>

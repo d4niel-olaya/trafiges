@@ -217,12 +217,39 @@
                                  
 
                                 </div>
-                                @include('informes.partials.datos_relativos_via', ["meteorologia" => $informe[0]->meteorologia, "estado_via" => $informe[0]->estado_via, "inclinacion_via" => $informe[0]->inclinacion_via, "estado_via_otros" => $informe[0]->estado_via_otros, "nombre_testigo" => $informe[0]->nombre_testigo, "apellido_testigo" => $informe[0]->apellido_testigo])
+                                @include('informes.partials.datos_relativos_via', ["meteorologia" => $informe[0]->meteorologia, 
+                                "estado_via" => $informe[0]->estado_via, 
+                                "inclinacion_via" => $informe[0]->inclinacion_via,
+                                 "estado_via_otros" => $informe[0]->estado_via_otros,
+                                  "nombre_testigo" => $informe[0]->nombre_testigo, 
+                                  "apellido_testigo" => $informe[0]->apellido_testigo,
+                                  "direccion_testigo" => $informe[0]->direccion_testigo,
+                                  "poblacion_testigo" => $informe[0]->poblacion_testigo,
+                                  "cp_testigo" => $informe[0]->cp_testigo,
+                                  "ciudad_testigo" => $informe[0]->ciudad_testigo])
                             </div>
                         </div>
                     </div>
                     @php
                         $datosInforme = json_decode($informe[0]->datos);
+                        $clasesVehiculo = [
+                            'MVP' => 'MVP',
+                            'Bicicleta' => 'Bicicleta',
+                            'Peatón' => 'Peatón',
+                            'Ciclomotor' => 'Ciclomotor',
+                            'Motocicleta' => 'Motocicleta',
+                            'Turismo' => 'Turismo',
+                            'Furgoneta' => 'Furgoneta',
+                            'Camión' => 'Camión',
+                            'Autobús' => 'Autobús',
+                            'Grúa' => 'Grúa',
+                            'Cuatriciclo' => 'Cuatriciclo',
+                            'Triciclo' => 'Triciclo',
+                            'Tractor' => 'Tractor',
+                            'Remolque' => 'Remolque',
+                        ];
+                        $valorSeleccionado = $datosInforme->vehiculo1->clase ?? '';
+                        $valorSeleccionado2 = $datosInforme->vehiculo2->clase ?? '';
                     @endphp
                     <div id="vehiculos-content" class="tab-panel hidden">
                         <div class="tab-content">
@@ -230,7 +257,7 @@
                                 <div class="mb-8">
                                     <h3 class="text-lg font-medium text-gray-900 mb-6">Vehículo 1</h3>
                                     
-                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                                         <div class="mb-6"><label for="matricula-1" class="block text-sm font-medium text-gray-700 mb-2">Matrícula</label>
                                             <div class="relative"><input type="text" value="{{$datosInforme->vehiculo1->matricula}}" id="matricula-1" name="matricula-1" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value=""></div>
                                         </div>
@@ -240,8 +267,19 @@
                                         <div class="mb-6"><label for="modelo-1" class="block text-sm font-medium text-gray-700 mb-2">Modelo</label>
                                             <div class="relative"><input type="text" value="{{$datosInforme->vehiculo1->modelo}}" id="modelo-1" name="modelo-1" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value=""></div>
                                         </div>
+                                        <div class="mb-6">
+                                            <label for="clase-1" class="block text-sm font-medium text-gray-700 mb-2">Clase</label>
+                                            <div class="relative">
+                                                <select   id="clase-1" name="clase-1" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                                                    value="{{$datosInforme->vehiculo1->clase ?? '' }}">
+                                                    @foreach ($clasesVehiculo as $valor => $etiqueta)
+                                                        <option value="{{ $valor }}" @selected($valorSeleccionado === $valor)>{{ $etiqueta }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
                                         <div class="mb-6"><label for="color-1" class="block text-sm font-medium text-gray-700 mb-2">Color</label>
                                             <div class="relative">
                                                 <input type="text" id="color-1" name="color-1" 
@@ -254,6 +292,20 @@
                                                  name="velocidad-1" 
                                                  class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
                                                 value="{{$datosInforme->vehiculo1->velocidad}}"
+                                                 ></div>
+                                        </div>
+                                         <div class="mb-6"><label for="fecha_fabricacion-1" class="block text-sm font-medium text-gray-700 mb-2">Año de Fabricación</label>
+                                            <div class="relative"><input type="date" id="fecha_fabricacion-1"
+                                                 name="fecha_fabricacion-1" 
+                                                 class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                                                value="{{$datosInforme->vehiculo1->fecha_fabricacion ?? ''}}"
+                                                 ></div>
+                                        </div>
+                                         <div class="mb-6"><label for="danios-1" class="block text-sm font-medium text-gray-700 mb-2">Daños (€)</label>
+                                            <div class="relative"><input type="number"  step="0.01" id="danios-1"
+                                                 name="danios-1" 
+                                                 class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                                                value="{{floatval($datosInforme->vehiculo1->danios ?? 0 )}}"
                                                  ></div>
                                         </div>
                                     </div>
@@ -272,6 +324,7 @@
                                                  value="{{intval($datosInforme->resultadosBiomecanicos->mom1 ?? 0)}}"
                                                  ></div>
                                         </div>
+                                        
                                         <div class="mb-6"><label for="ocupantes-1" class="block text-sm font-medium text-gray-700 mb-2">Nº Ocupantes</label>
                                             <div class="relative"><input type="number" onkeypress="return false"
                                                 id="ocupantes-1" name="ocupantes-1" 
@@ -284,7 +337,7 @@
                                 </div>
                                 <div class="mb-8">
                                     <h3 class="text-lg font-medium text-gray-900 mb-6">Vehículo 2</h3>
-                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                                         <div class="mb-6"><label for="matricula-2" class="block text-sm font-medium text-gray-700 mb-2">Matrícula</label>
                                             <div class="relative"><input type="text" id="matricula-2" name="matricula-2" disabled
                                                  class="w-full rounded-md border border-gray-300 bg-gray-100 text-gray-500 py-2 px-3 shadow-inner cursor-not-allowed placeholder-gray-400" 
@@ -303,8 +356,18 @@
                                                 value="{{$datosInforme->vehiculo2->modelo}}">
                                             </div>
                                         </div>
+                                         <div class="mb-6"><label for="clase-2" class="block text-sm font-medium text-gray-700 mb-2">Clase</label>
+                                            <div class="relative">
+                                                <select   id="clase-2" name="clase-2" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                                                value="{{$datosInforme->vehiculo2->clase ?? '' }}">
+                                                   @foreach ($clasesVehiculo as $valor => $etiqueta)
+                                                    <option value="{{ $valor }}" @selected($valorSeleccionado2 === $valor)>{{ $etiqueta }}</option>
+                                                @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
                                         <div class="mb-6"><label for="color-2" class="block text-sm font-medium text-gray-700 mb-2">Color</label>
                                             <div class="relative"><input type="text"
                                                  id="color-2" name="color-2" 
@@ -316,6 +379,13 @@
                                                 id="velocidad-2" name="velocidad-2" 
                                                 class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" 
                                                 value="{{$datosInforme->vehiculo2->velocidad}}"></div>
+                                        </div>
+                                        <div class="mb-6"><label for="danios-2" class="block text-sm font-medium text-gray-700 mb-2">Daños (€)</label>
+                                            <div class="relative"><input type="number"  step="0.01" id="danios-2"
+                                                 name="danios-2" 
+                                                 class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                                                value="{{floatval($datosInforme->vehiculo2->danios ?? 0 )}}"
+                                                 ></div>
                                         </div>
                                     </div>
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
