@@ -256,7 +256,14 @@
                             <div>
                                 <div class="mb-8">
                                     <h3 class="text-lg font-medium text-gray-900 mb-6">Vehículo 1</h3>
-                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                          <div class="mb-6"><label for="nombre_conductor-1" class="block text-sm font-medium text-gray-700 mb-2">Nombre del conductor</label>
+                                            <div class="relative"><input type="text"   maxlength="200"  id="nombre_conductor-1" name="nombre_conductor-1" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="{{$datosInforme->vehiculo1->nombre_conductor ?? '' }}"></div>
+                                        </div>
+                                        <div class="mb-6"><label for="apellidos_conductor-1" class="block text-sm font-medium text-gray-700 mb-2">Apellidos del conductor</label>
+                                            <div class="relative"><input type="text"  maxlength="200"  id="apellidos_conductor-1" name="apellidos_conductor-1" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value="{{$datosInforme->vehiculo1->apellidos_conductor ?? ''}}"></div>
+                                        </div>
+                                     </div>
                                     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                                         <div class="mb-6"><label for="matricula-1" class="block text-sm font-medium text-gray-700 mb-2">Matrícula</label>
                                             <div class="relative"><input type="text" value="{{$datosInforme->vehiculo1->matricula}}" id="matricula-1" name="matricula-1" class="w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500" value=""></div>

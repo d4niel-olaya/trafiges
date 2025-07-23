@@ -131,6 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
             cp_testigo: document.querySelector('input[name="cp_testigo"]')?.value || '',
             poblacion_testigo: document.querySelector('input[name="poblacion_testigo"]')?.value || '',
             vehiculo1: {
+                nombre_conductor: document.querySelector('input[name="nombre_conductor-1"]').value,
+                apellidos_conductor: document.querySelector('input[name="apellidos_conductor-1"]').value,
                 matricula: document.querySelector('input[name="matricula-1"]').value,
                 marca: document.querySelector('input[name="marca-1"]').value,
                 modelo: document.querySelector('input[name="modelo-1"]').value,

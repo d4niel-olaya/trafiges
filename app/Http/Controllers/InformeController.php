@@ -179,7 +179,6 @@ class InformeController extends Controller
             'inclinacion_via' => $validatedData['inclinacion_via'] ?? null,
             'nombre_testigo' => $validatedData['nombre_testigo'] ?? null,
             'apellido_testigo' => $validatedData['apellido_testigo'] ?? null,
-            
             'vehiculo1' => $validatedData['vehiculo1'],
             'vehiculo2' => $validatedData['vehiculo2'],
             'resultadosBiomecanicos' => $validatedData['resultadosBiomecanicos'],
@@ -300,6 +299,10 @@ class InformeController extends Controller
                 'fecha_inicio_rhb' => $ocupante['fecha_inicio_rhb'] ?? null,
                 'fecha_fin_rhb' => $ocupante['fecha_fin_rhb'] ?? null,
                 'numero_sesiones' => $ocupante['numero_sesiones'] ?? null,
+                'fecha_urgencias' => $ocupante['fecha_urgencias'] ?? null,
+                'pruebas_diagnosticas_urgencias' => $ocupante['pruebas_diagnosticas_urgencias'] ?? null,
+                 'sexo_rhb' => $ocupante['sexo_rhb'] ?? null,
+                'pruebas_diagnosticas_rhb' => $ocupante['pruebas_diagnosticas_rhb'] ?? null,
                 'fecha_alta' => $ocupante['fecha_alta'] ?? null,
                 'secuelas' => $ocupante['secuelas'] ?? null,
                 'created_at' => now(),
@@ -322,6 +325,8 @@ class InformeController extends Controller
                 'taller' => $validatedData['vehiculo1']['taller'] ?? null,
                 'peso_ocupantes_numero' => $validatedData['vehiculo1']['peso_ocupantes_numero'] ?? null,
                 'compania_seguros' => $validatedData['vehiculo1']['companiaSeguros'] ?? null,
+                'nombre_conductor' => $validatedData['vehiculo1']['nombre_conductor'] ?? null,
+                'apellidos_conductor' => $validatedData['vehiculo1']['apellidos_conductor'] ?? null,
                 'tipo_vehiculo' => 'vehiculo1'
             ]);
 
@@ -594,6 +599,10 @@ class InformeController extends Controller
                     'fecha_inicio_rhb' => $ocupante['fecha_inicio_rhb'] ?? null,
                     'fecha_fin_rhb' => $ocupante['fecha_fin_rhb'] ?? null,
                     'numero_sesiones' => $ocupante['numero_sesiones'] ?? null,
+                    'fecha_urgencias' => $ocupante['fecha_urgencias'] ?? null,
+                    'pruebas_diagnosticas_urgencias' => $ocupante['pruebas_diagnosticas_urgencias'] ?? null,
+                    'sexo_rhb' => $ocupante['sexo_rhb'] ?? null,
+                    'pruebas_diagnosticas_rhb' => $ocupante['pruebas_diagnosticas_rhb'] ?? null,
                     'fecha_alta' => $ocupante['fecha_alta'] ?? null,
                     'secuelas' => $ocupante['secuelas'] ?? null,
                     'created_at' => now(),
@@ -619,6 +628,8 @@ class InformeController extends Controller
                 'taller' => $validatedData['vehiculo1']['taller'] ?? null,
                 'peso_ocupantes_numero' => $validatedData['vehiculo1']['peso_ocupantes_numero'] ?? null,
                 'compania_seguros' => $validatedData['vehiculo1']['companiaSeguros'] ?? null,
+                'nombre_conductor' => $validatedData['vehiculo1']['nombre_conductor'] ?? null,
+                'apellidos_conductor' => $validatedData['vehiculo1']['apellidos_conductor'] ?? null,
                 'tipo_vehiculo' => 'vehiculo1'
             ]);
 

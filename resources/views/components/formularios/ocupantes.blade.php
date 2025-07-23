@@ -188,6 +188,17 @@
                         <textarea  name="{{$tipo}}_juicio_urgencias" rows="4" placeholder="Juicio clínico de urgencias" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"></textarea>
                     </div>
                 </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700" for="hospital_urgencias">Fecha y hora Urgencias</label>
+                        <input  name="{{$tipo}}_fecha_urgencias" type="datetime-local" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700" for="juicio_urgencias">Pruebas Diagnosticas Urgencias</label>
+                        <textarea  name="{{$tipo}}_pruebas_diagnosticas_urgencias" rows="4"   placeholder="Pruebas Diagnosticas Urgencias" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"></textarea>
+                    </div>
+                </div>
             
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                     <div>
@@ -199,6 +210,22 @@
                         <textarea  name="{{$tipo}}_juicio_rhb" rows="4" placeholder="Juicio clínico RHB" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"></textarea>
                     </div>
                 </div>
+                
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700" for="hospital_urgencias">Sexo RHB</label>
+                        <select  name="{{$tipo}}_sexo_rhb" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
+                            <option value="MASCULINO">Masculino</option>
+                            <option value="FEMENINO">Femenino</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700" for="juicio_urgencias">Pruebas Diagnosticas RHB</label>
+                        <textarea  name="{{$tipo}}_pruebas_diagnosticas_rhb" rows="4"   placeholder="Pruebas Diagnosticas" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"></textarea>
+                    </div>
+                </div>
+            
             
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                     <div>
