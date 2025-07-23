@@ -223,10 +223,10 @@
                                  "estado_via_otros" => $informe[0]->estado_via_otros,
                                   "nombre_testigo" => $informe[0]->nombre_testigo, 
                                   "apellido_testigo" => $informe[0]->apellido_testigo,
-                                  "direccion_testigo" => $informe[0]->direccion_testigo,
-                                  "poblacion_testigo" => $informe[0]->poblacion_testigo,
-                                  "cp_testigo" => $informe[0]->cp_testigo,
-                                  "ciudad_testigo" => $informe[0]->ciudad_testigo])
+                                  "direccion" => $informe[0]->direccion,
+                                  "poblacion" => $informe[0]->poblacion,
+                                  "cp" => $informe[0]->cp,
+                                  "ciudad" => $informe[0]->ciudad])
                             </div>
                         </div>
                     </div>
