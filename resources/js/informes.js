@@ -130,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             direccion: document.querySelector('input[name="direccion"]')?.value || '',
             cp: document.querySelector('input[name="cp"]')?.value || '',
             poblacion: document.querySelector('input[name="poblacion"]')?.value || '',
+            plantilla_asociada: document.querySelector('select[name="plantilla_asociada"]')?.value || '',
             vehiculo1: {
                 nombre_conductor: document.querySelector('input[name="nombre_conductor-1"]').value,
                 apellidos_conductor: document.querySelector('input[name="apellidos_conductor-1"]').value,
